@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Extraction intermediates (raw IES/CSV dumps — not for distribution, regenerate locally)
+data-src/
+__pycache__/
+*.pyc
+
+# Tooling caches
+.serena/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

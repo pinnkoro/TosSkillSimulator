@@ -14,7 +14,7 @@ export const LANGS: { id: Lang; label: string }[] = [
 
 // UI 文言。ja/ko で同一のキー形を持つ（ko を typeof ja で縛って抜け漏れを型で防ぐ）。
 const ja = {
-  title: 'jTOS スキルシミュレータ',
+  title: 'ToS スキルシミュレータ',
   total: '合計',
   pt: 'pt',
   add: '追加',
@@ -48,7 +48,7 @@ const ja = {
 };
 
 const ko: typeof ja = {
-  title: 'jTOS 스킬 시뮬레이터',
+  title: 'ToS 스킬 시뮬레이터',
   total: '합계',
   pt: 'pt',
   add: '추가',

@@ -386,6 +386,8 @@ button.ghost {
   max-width: 82vw;
   max-height: min(60vh, 440px);
   overflow-y: auto;
+  /* ポップアップ端までスクロールしても背景ページに伝播させない。 */
+  overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
   gap: 8px;

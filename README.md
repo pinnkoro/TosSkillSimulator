@@ -16,7 +16,7 @@ npm run preview  # ビルド結果をローカル確認
 `main` ブランチへ push すると GitHub Actions (`.github/workflows/deploy.yml`) が
 自動でビルドし GitHub Pages へデプロイする。
 
-公開URL: https://ryuki-hayashi.github.io/TosSukillSimulator/
+公開URL: https://pinnkoro.github.io/TosSukillSimulator/
 
 ### 初回のみ必要な設定（GitHub 側）
 

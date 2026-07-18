@@ -32,7 +32,7 @@ export function baseJobOf(tree: TreeId): Job | undefined {
 export function advancedJobsOf(tree: TreeId): Job[] {
   return gameData.jobs
     .filter((j) => j.tree === tree && !j.isBase)
-    .sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name, 'ja'));
+    .sort((a, b) => a.rank - b.rank || a.name.ja.localeCompare(b.name.ja, 'ja'));
 }
 
 /** レベル L における値。L<=0 は 0。 */

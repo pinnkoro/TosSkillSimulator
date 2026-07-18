@@ -192,6 +192,14 @@ def main():
         return (ja_skill.get(ko) or ja_etc.get(ko) or ja_ui.get(ko)
                 or ja_item.get(ko) or ja_quest.get(ko) or ko)
 
+    # 多言語フィールド。IES 原文(韓国語)を ko に、TSV ジョイン結果を ja に格納する。
+    # 韓国語はジョインのキーそのものなので追加のデータ源は不要。
+    def loc_name(ko):
+        return {"ja": clean_name(ja(ko)), "ko": clean_name(ko)}
+
+    def loc_desc(ko):
+        return {"ja": clean(ja(ko)), "ko": clean(ko)}
+
     skill_by_cn = {s["ClassName"]: s for s in skills_rows}
 
     # --- スキル特性 (특성): ability.ies を SkillCategory==スキルClassName で紐付け ---
@@ -213,8 +221,8 @@ def main():
         # (クロスツリー版クラスの _Archer/_Scout/_Swordman 等)。各 className に紐付ける。
         attr = {
             "id": a["$ID"],
-            "name": clean_name(ja(name)),
-            "desc": clean(ja(a.get("Desc", ""))),
+            "name": loc_name(name),
+            "desc": loc_desc(a.get("Desc", "")),
             "icon": a.get("Icon", ""),
             "maxLevel": attr_maxlv.get(a["ClassName"], 1),
         }
@@ -237,8 +245,8 @@ def main():
             continue
         attr = {
             "id": a["$ID"],
-            "name": clean_name(ja(name)),
-            "desc": clean(ja(a.get("Desc", ""))),
+            "name": loc_name(name),
+            "desc": loc_desc(a.get("Desc", "")),
             "icon": a.get("Icon", ""),
             "maxLevel": attr_maxlv.get(a["ClassName"], 1),
         }
@@ -305,7 +313,7 @@ def main():
             skills_out[sid] = {
                 "id": sid,
                 "className": sk["ClassName"],
-                "name": clean_name(ja(sk.get("Name", ""))),
+                "name": loc_name(sk.get("Name", "")),
                 "icon": sk.get("Icon", ""),
                 "maxLevel": max_lv,
                 "unlockClassLevel": int(num(t.get("UnlockClassLevel"))),
@@ -320,7 +328,7 @@ def main():
                 "factor": {"base": round(f_base, 2), "perLevel": round(f_per, 2)},
                 "atkAdd": {"base": round(num(sk.get("SklAtkAdd")), 2),
                            "perLevel": round(num(sk.get("SklAtkAddByLevel")), 2)},
-                "description": clean(ja(sk.get("Caption", ""))),
+                "description": loc_desc(sk.get("Caption", "")),
                 "attributes": attrs_by_skill.get(sk["ClassName"], []),
             }
         # base(スターター) 判定: そのツリーで末尾 _1 のクラス (Char{n}_1)
@@ -328,7 +336,7 @@ def main():
         jobs_out.append({
             "id": j["$ID"],
             "className": cn,
-            "name": clean_name(ja(j.get("Name", ""))),
+            "name": loc_name(j.get("Name", "")),
             "engName": j.get("JobName", ""),
             "tree": tree_id,
             "isBase": is_base,
@@ -345,7 +353,9 @@ def main():
     trees_out = []
     for digit, (tid, tname) in TREES.items():
         base = next((j for j in jobs_out if j["tree"] == tid and j["isBase"]), None)
-        trees_out.append({"id": tid, "name": tname,
+        # 系統名 = base(スターター)ジョブの名前。韓国語も base 職から取れるので個別辞書は不要。
+        name = base["name"] if base else {"ja": tname, "ko": tname}
+        trees_out.append({"id": tid, "name": name,
                           "baseJobId": base["id"] if base else None})
 
     patch = None

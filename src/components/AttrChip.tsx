@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { SkillAttribute } from '../types';
 import { attrIconUrl } from '../lib/icons';
+import { useI18n } from '../lib/i18n';
 
 /** 特性チップ（アイコン＋ON/OFFトグル、ホバーで名前/説明）。スキル特性・クラス特性で共用。 */
 export function AttrChip({
@@ -12,7 +13,10 @@ export function AttrChip({
   on: boolean;
   onToggle: () => void;
 }) {
+  const { tl } = useI18n();
   const [failed, setFailed] = useState(false);
+  const name = tl(attr.name);
+  const desc = tl(attr.desc);
   return (
     <button
       type="button"
@@ -21,7 +25,7 @@ export function AttrChip({
       onClick={onToggle}
     >
       {failed || !attr.icon ? (
-        <span className="attr-fallback">{attr.name.slice(0, 1)}</span>
+        <span className="attr-fallback">{name.slice(0, 1)}</span>
       ) : (
         <img
           src={attrIconUrl(attr.icon)}
@@ -34,10 +38,10 @@ export function AttrChip({
       )}
       <span className="tip attr-tip">
         <span className="tip-title">
-          {attr.name}
+          {name}
           {attr.maxLevel > 1 && <span className="attr-max"> Lv{attr.maxLevel}</span>}
         </span>
-        {attr.desc && <span className="tip-desc">{attr.desc}</span>}
+        {desc && <span className="tip-desc">{desc}</span>}
       </span>
     </button>
   );

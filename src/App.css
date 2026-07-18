@@ -78,7 +78,10 @@ button.ghost {
   flex-wrap: wrap;
 }
 .tree-btn {
-  padding: 9px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px 7px 8px;
   font-weight: 500;
 }
 .tree-btn.selected {

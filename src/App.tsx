@@ -104,16 +104,20 @@ export default function App() {
       <section className="tree-select">
         <span className="section-label">系統</span>
         <div className="tree-buttons">
-          {treeList.map((t) => (
-            <button
-              type="button"
-              key={t.id}
-              className={`tree-btn${build.tree === t.id ? ' selected' : ''}`}
-              onClick={() => setBuild(selectTree(t.id as TreeId))}
-            >
-              {t.name}
-            </button>
-          ))}
+          {treeList.map((t) => {
+            const baseIcon = getJob(t.baseJobId)?.icon;
+            return (
+              <button
+                type="button"
+                key={t.id}
+                className={`tree-btn${build.tree === t.id ? ' selected' : ''}`}
+                onClick={() => setBuild(selectTree(t.id as TreeId))}
+              >
+                {baseIcon && <ClassIcon icon={baseIcon} />}
+                {t.name}
+              </button>
+            );
+          })}
         </div>
       </section>
 

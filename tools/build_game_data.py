@@ -78,6 +78,61 @@ def clean(text):
     return strip_codes((text or "").replace("{nl}", "\n")).strip()
 
 
+def load_skill_ratios():
+    """script/calc_property_skill.lua を解析し {SCR関数名: (base, perLevel)} を返す。
+    スキル説明の #{CaptionRatioN}# 等はこの Lua 関数が算出する。単純な線形式
+    (skill.Level*B / A+(skill.Level-1)*B / 定数 / 別関数への委譲) のみ対応。
+    キャラのステータス(INT/MNA 等)依存のものは静的計算不可なので None(除外)。"""
+    raw = read_raw("calc_property_skill.lua")
+    if not raw:
+        return {}
+    txt = raw.decode("utf-8", "replace")
+    bodies = {}
+    for ch in re.split(r"\nfunction ", txt):
+        m = re.match(r"(SCR_[A-Za-z0-9_]+)\s*\(\s*skill\s*\)(.*)", ch, re.S)
+        if m:
+            bodies[m.group(1)] = m.group(2)
+
+    stat = re.compile(r'TryGetProp\(\s*pc|GetAbility\(\s*pc|"(?:INT|MNA|STR|CON|DEX|SPR|LUK)"')
+    lin1 = re.compile(r'=\s*(-?\d+(?:\.\d+)?)\s*\+\s*\(\s*skill\.Level\s*-\s*1\s*\)\s*\*\s*(-?\d+(?:\.\d+)?)')
+    lin2 = re.compile(r'=\s*skill\.Level\s*\*\s*(-?\d+(?:\.\d+)?)')
+    lin3 = re.compile(r'=\s*(-?\d+(?:\.\d+)?)\s*\*\s*skill\.Level')
+    indir = re.compile(r'return\s+(SCR_[A-Za-z0-9_]+)\s*\(\s*skill\s*\)')
+    const = re.compile(r'value\s*=\s*(-?\d+(?:\.\d+)?)\s')
+
+    memo = {}
+
+    def parse(name, depth=0):
+        if name in memo:
+            return memo[name]
+        if depth > 4 or name not in bodies:
+            return None
+        memo[name] = None  # 再帰保護
+        body = bodies[name]
+        if stat.search(body):
+            return None
+        res = None
+        m = lin1.search(body)
+        if m:
+            res = (float(m.group(1)), float(m.group(2)))
+        elif lin2.search(body):
+            res = (float(lin2.search(body).group(1)),) * 2
+        elif lin3.search(body):
+            res = (float(lin3.search(body).group(1)),) * 2
+        else:
+            mi = indir.search(body)
+            if mi:
+                res = parse(mi.group(1), depth + 1)
+            elif "skill.Level" not in body:
+                mc = const.search(body)
+                if mc:
+                    res = (float(mc.group(1)), 0.0)
+        memo[name] = res
+        return res
+
+    return {n: parse(n) for n in bodies}
+
+
 def load_ability_maxlevels():
     """全 ability_<class>.ies を1パスで走査し (maxlv, purchasable) を返す。
       maxlv       : {特性ClassName: MaxLevel}
@@ -203,11 +258,25 @@ def main():
             continue
         tree_by_job.setdefault(job_cn, []).append((t, sk))
 
-    def skill_type(sk):
-        at = str(sk.get("AttackType") or "")
-        if num(sk.get("SklFactor")) > 0 or "Attack" in at:
-            return "attack"
-        return "buff"
+    skill_ratios = load_skill_ratios()
+    _COEF = ("SkillFactor", "CaptionRatio", "CaptionRatio2", "CaptionRatio3")
+
+    def factor_of(sk):
+        """スキルの表示係数 (base, perLevel, is_attack) を返す。
+        攻撃スキルは #{SkillFactor}#(=SklFactor 線形)。ヒール/バフ等は Caption2 が
+        参照する #{CaptionRatioN}# を Lua(calc_property_skill.lua)から解決する。"""
+        cap2 = sk.get("Caption2", "") or ""
+        tokens = re.findall(r"#\{(\w+)\}#", cap2)
+        prim = next((t for t in tokens if t in _COEF), None)
+        if prim == "SkillFactor":
+            return num(sk.get("SklFactor")), num(sk.get("SklFactorByLevel")), True
+        if prim in ("CaptionRatio", "CaptionRatio2", "CaptionRatio3"):
+            f = skill_ratios.get(sk.get(prim, ""))
+            if f:
+                return f[0], f[1], False
+            return 0.0, 0.0, False  # ステータス依存等で静的計算不可 → 非表示
+        base = num(sk.get("SklFactor"))
+        return base, num(sk.get("SklFactorByLevel")), base > 0
 
     skills_out = {}
     jobs_out = []
@@ -232,6 +301,7 @@ def main():
             if sid in skills_out:
                 continue
             max_lv = int(num(t.get("MaxLevel"))) or 1
+            f_base, f_per, f_atk = factor_of(sk)
             skills_out[sid] = {
                 "id": sid,
                 "className": sk["ClassName"],
@@ -239,7 +309,7 @@ def main():
                 "icon": sk.get("Icon", ""),
                 "maxLevel": max_lv,
                 "unlockClassLevel": int(num(t.get("UnlockClassLevel"))),
-                "type": skill_type(sk),
+                "type": "attack" if f_atk else "buff",
                 "element": sk.get("Attribute", "") or "",
                 "cooldown": int(num(sk.get("BasicCoolDown"))),
                 "overheat": int(num(sk.get("SklUseOverHeat"))),  # オーバーヒート回数
@@ -247,8 +317,7 @@ def main():
                 "aoeRatio": int(num(sk.get("SklSR"))),
                 "sp": {"base": round(num(sk.get("BasicSP")), 2),
                        "perLevel": round(num(sk.get("LvUpSpendSp")), 2)},
-                "factor": {"base": round(num(sk.get("SklFactor")), 2),
-                           "perLevel": round(num(sk.get("SklFactorByLevel")), 2)},
+                "factor": {"base": round(f_base, 2), "perLevel": round(f_per, 2)},
                 "atkAdd": {"base": round(num(sk.get("SklAtkAdd")), 2),
                            "perLevel": round(num(sk.get("SklAtkAddByLevel")), 2)},
                 "description": clean(ja(sk.get("Caption", ""))),

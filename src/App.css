@@ -123,27 +123,36 @@ button.ghost {
   border-color: var(--accent-border);
 }
 .slot-tag {
-  display: flex;
-  align-items: center;
-  gap: 6px;
   font-size: 11px;
   color: var(--text-dim);
   letter-spacing: 0.04em;
 }
-.slot-name {
+.slot-body {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+.slot-name {
   font-weight: 600;
   color: var(--text-h);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .class-icon {
+  width: 32px;
+  height: 32px;
   border-radius: 6px;
   background: var(--panel-2);
   flex: none;
 }
-.slot select {
-  width: 100%;
+.class-icon.placeholder {
+  border: 1px dashed var(--border);
+  background: transparent;
+}
+.slot-body select {
+  flex: 1;
+  min-width: 0;
   background: var(--panel-2);
   color: var(--text-h);
   border: 1px solid var(--border);

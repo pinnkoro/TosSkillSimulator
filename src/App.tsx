@@ -20,10 +20,10 @@ import './App.css';
 /** 枠ごとの上限ポイント（暫定・編集可能）。gihyeonofsoul 同様 max-sp を手動調整。 */
 const DEFAULT_BUDGET = 15;
 
-/** クラスアイコン。無い/失敗時は非表示。 */
+/** クラスアイコン。無い/失敗時は同サイズのプレースホルダで場所を保持（表示形式を統一）。 */
 function ClassIcon({ icon }: { icon: string }) {
   const [failed, setFailed] = useState(false);
-  if (failed || !icon) return null;
+  if (failed || !icon) return <span className="class-icon placeholder" />;
   return (
     <img
       className="class-icon"
@@ -135,35 +135,36 @@ export default function App() {
                 if (slot === 0) {
                   return (
                     <div key={slot} className="slot base">
-                      <span className="slot-tag">枠0 / base</span>
-                      <span className="slot-name">
-                        {job && <ClassIcon icon={job.icon} />}
-                        {job?.name ?? '—'}
-                      </span>
+                      <span className="slot-tag">枠0 · base</span>
+                      <div className="slot-body">
+                        <ClassIcon icon={job?.icon ?? ''} />
+                        <span className="slot-name">{job?.name ?? '—'}</span>
+                      </div>
                     </div>
                   );
                 }
                 const choices = jobChoicesFor(build, slot);
                 return (
                   <div key={slot} className={`slot${job ? ' filled' : ''}`}>
-                    <span className="slot-tag">
-                      {job && <ClassIcon icon={job.icon} />}枠{slot}
-                    </span>
-                    <select
-                      value={jobId ?? ''}
-                      onChange={(e) =>
-                        setBuild(
-                          setJob(build, slot, e.target.value ? Number(e.target.value) : null),
-                        )
-                      }
-                    >
-                      <option value="">— 選択 —</option>
-                      {choices.map((c) => (
-                        <option key={c.id} value={c.id}>
-                          {c.name}
-                        </option>
-                      ))}
-                    </select>
+                    <span className="slot-tag">枠{slot}</span>
+                    <div className="slot-body">
+                      <ClassIcon icon={job?.icon ?? ''} />
+                      <select
+                        value={jobId ?? ''}
+                        onChange={(e) =>
+                          setBuild(
+                            setJob(build, slot, e.target.value ? Number(e.target.value) : null),
+                          )
+                        }
+                      >
+                        <option value="">— 選択 —</option>
+                        {choices.map((c) => (
+                          <option key={c.id} value={c.id}>
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 );
               })}

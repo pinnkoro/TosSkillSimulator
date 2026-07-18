@@ -3,3 +3,4 @@ const BASE = import.meta.env.BASE_URL;
 
 export const skillIconUrl = (icon: string) => `${BASE}icons/skill/${icon}.png`;
 export const classIconUrl = (icon: string) => `${BASE}icons/class/${icon}.png`;
+export const attrIconUrl = (icon: string) => `${BASE}icons/attr/${icon}.png`;

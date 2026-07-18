@@ -11,6 +11,7 @@ import {
   selectedJobs,
   setJob,
   setLevel,
+  toggleAttr,
   treeList,
 } from './lib/build';
 import { SkillCard } from './components/SkillCard';
@@ -71,6 +72,7 @@ export default function App() {
     () => Object.values(build.levels).reduce((a, b) => a + b, 0),
     [build.levels],
   );
+  const selectedAttrs = useMemo(() => new Set(build.attrs), [build.attrs]);
 
   const share = async () => {
     const url = location.href;
@@ -208,6 +210,8 @@ export default function App() {
                           skill={skill}
                           level={build.levels[skill.id] ?? 0}
                           onChange={(lv) => setBuild(setLevel(build, skill.id, lv))}
+                          selectedAttrs={selectedAttrs}
+                          onToggleAttr={(aid) => setBuild(toggleAttr(build, aid))}
                         />
                       ))}
                   </div>

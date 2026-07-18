@@ -27,7 +27,9 @@ ROOT = os.path.join(os.path.dirname(__file__), "..")
 DATA = os.path.join(ROOT, "src", "data", "game-data.json")
 OUT_SKILL = os.path.join(ROOT, "public", "icons", "skill")
 OUT_CLASS = os.path.join(ROOT, "public", "icons", "class")
-SIZE = 64  # 出力アイコンの一辺(px)
+OUT_ATTR = os.path.join(ROOT, "public", "icons", "attr")
+SIZE = 64        # スキル/クラスアイコンの一辺(px)
+ATTR_SIZE = 40   # 特性アイコンの一辺(px、UIで小さく使うので控えめ)
 
 
 def build_index(png_prefixes, want_basenames, want_xml):
@@ -70,12 +72,29 @@ def extract_bytes(ent):
         return T._extract(f, do, comp, uncomp, rel, nv)
 
 
-def save_icon(img, out_path):
+def save_icon(img, out_path, size=SIZE):
     if img.mode not in ("RGBA", "RGB"):
         img = img.convert("RGBA")
-    img = img.resize((SIZE, SIZE), Image.LANCZOS)
+    img = img.resize((size, size), Image.LANCZOS)
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     img.save(out_path, "PNG", optimize=True)
+
+
+def crop_from_atlases(items, out_dir, atlas_cache, atlas_idx, size):
+    """items: [(out_name, (tga_lower, (x,y,w,h)))] を切り出して保存。(ok, missing)。"""
+    ok = 0
+    missing = []
+    for name, (tga, (x, y, w, h)) in items:
+        if tga not in atlas_cache:
+            ent = atlas_idx.get(tga)
+            if not ent:
+                missing.append(f"{name}(atlas {tga})")
+                continue
+            atlas_cache[tga] = Image.open(io.BytesIO(extract_bytes(ent))).convert("RGBA")
+        crop = atlas_cache[tga].crop((x, y, x + w, y + h))
+        save_icon(crop, os.path.join(out_dir, f"{name}.png"), size)
+        ok += 1
+    return ok, missing
 
 
 def parse_classicon(blob):
@@ -108,17 +127,21 @@ def main():
     gd = json.load(open(DATA, encoding="utf-8"))
     skill_icons = sorted({s["icon"] for s in gd["skills"].values() if s.get("icon")})
     class_icons = sorted({j["icon"] for j in gd["jobs"] if j.get("icon")})
-    print(f"needed: {len(skill_icons)} skill icons, {len(class_icons)} class icons")
+    attr_icons = sorted({a["icon"] for s in gd["skills"].values()
+                         for a in s.get("attributes", []) if a.get("icon")})
+    print(f"needed: {len(skill_icons)} skill, {len(class_icons)} class, "
+          f"{len(attr_icons)} attribute icons")
 
     want_xml = {"baseskinset/skillicon.xml", "baseskinset/classicon.xml"}
-    # クラスアトラスの basename はまだ不明なので、まず xml を取ってから2度目の走査…ではなく
-    # png_idx は icon/ 配下を丸ごと拾い、tga は下で classicon 解析後に個別 extract する。
     png_idx, _atlas, xml_ent = build_index(
         png_prefixes=("icon/skill/",),
         want_basenames=set(),
         want_xml=want_xml,
     )
-    skillicon = parse_skillicon(extract_bytes(xml_ent["baseskinset/skillicon.xml"]))
+    skillicon_blob = extract_bytes(xml_ent["baseskinset/skillicon.xml"])
+    skillicon = parse_skillicon(skillicon_blob)
+    # 特性アイコンは skillicon.xml の ability_* エントリがアトラス(tga)+imgrect を持つ。
+    skillrects = parse_classicon(skillicon_blob)   # {name小文字: (tga, rect)}
     classmap = parse_classicon(extract_bytes(xml_ent["baseskinset/classicon.xml"]))
 
     # ---- スキルアイコン ----
@@ -145,36 +168,27 @@ def main():
     if missing:
         print("  missing:", missing[:20])
 
-    # ---- クラスアイコン (アトラス切り出し) ----
-    atlas_needed = {classmap[n.lower()][0] for n in class_icons if n.lower() in classmap}
+    # ---- クラス + 特性アイコン (アトラス切り出し、アトラス走査は1回に集約) ----
+    class_items = [(n, classmap[n.lower()]) for n in class_icons if n.lower() in classmap]
+    attr_items = [(n, skillrects[n.lower()]) for n in attr_icons if n.lower() in skillrects]
+    class_no_map = [n for n in class_icons if n.lower() not in classmap]
+    attr_no_map = [n for n in attr_icons if n.lower() not in skillrects]
+
+    atlas_needed = {tga for _n, (tga, _r) in class_items + attr_items}
     _p, atlas_idx, _x = build_index(
         png_prefixes=(),
         want_basenames=atlas_needed,
         want_xml=set(),
     )
     atlas_cache = {}
-    cok = cmiss = 0
-    cmissing = []
-    for name in class_icons:
-        info = classmap.get(name.lower())
-        if not info:
-            cmiss += 1
-            cmissing.append(name)
-            continue
-        tga, (x, y, w, h) = info
-        if tga not in atlas_cache:
-            ent = atlas_idx.get(tga)
-            if not ent:
-                cmiss += 1
-                cmissing.append(f"{name}(atlas {tga})")
-                continue
-            atlas_cache[tga] = Image.open(io.BytesIO(extract_bytes(ent))).convert("RGBA")
-        crop = atlas_cache[tga].crop((x, y, x + w, y + h))
-        save_icon(crop, os.path.join(OUT_CLASS, f"{name}.png"))
-        cok += 1
-    print(f"class icons: {cok} written, {cmiss} missing")
-    if cmissing:
-        print("  missing:", cmissing[:20])
+    cok, cmiss = crop_from_atlases(class_items, OUT_CLASS, atlas_cache, atlas_idx, SIZE)
+    aok, amiss = crop_from_atlases(attr_items, OUT_ATTR, atlas_cache, atlas_idx, ATTR_SIZE)
+    print(f"class icons: {cok} written, {len(cmiss) + len(class_no_map)} missing")
+    if cmiss or class_no_map:
+        print("  missing:", (cmiss + class_no_map)[:20])
+    print(f"attribute icons: {aok} written, {len(amiss) + len(attr_no_map)} missing")
+    if amiss or attr_no_map:
+        print("  missing:", (amiss + attr_no_map)[:20])
 
 
 if __name__ == "__main__":

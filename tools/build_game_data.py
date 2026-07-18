@@ -148,6 +148,7 @@ def main():
         if not name:
             continue
         attrs_by_skill.setdefault(cat, []).append({
+            "id": a["$ID"],
             "name": clean_name(ja(name)),
             "desc": clean(ja(a.get("Desc", ""))),
             "icon": a.get("Icon", ""),

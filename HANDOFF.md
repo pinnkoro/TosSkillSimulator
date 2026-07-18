@@ -79,7 +79,8 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 - [x] `src/data/game-data.json`（133ジョブ/898スキル、特性1297件、aoeRatio/overheat）生成・コミット
 - [x] `src/types.ts` を現行スキーマに更新
 - [x] UI骨組み: 系統選択 → ジョブ4枠(枠0=base固定) → スキルにレベル振り → 集計 → URL(hash)共有
-- [x] スキルカード: アイコン・現在レベルの factor/+攻/SP/CD・overheat/AoE・**レベル別表**・**特性一覧**
+- [x] スキルカード: コンパクト表示（アイコン＋名前＋Lv常時）＋**ホバーで詳細ポップアップ**（factor/+攻/SP/CD・overheat/AoE・レベル別表・説明）
+- [x] 特性: **アイコンで常時表示・クリックでON/OFF・URL(hash `a=`)共有対象**。ホバーで名前/説明
 - [x] アイコン同梱（`extract_icons.py` → `public/icons/`、スキル769＋クラス114、64px）
 - [x] ビルド/lint 通過・コミット・push（自動デプロイ）
 
@@ -118,8 +119,8 @@ python tools/build_game_data.py   # -> src/data/game-data.json
       "atkAdd": { "base": 0,      "perLevel": 0 },      // 固定加算
       "description": "...",
       "attributes": [             // スキル特性 (ability.ies, SkillCategory==className で紐付け)
-        { "name": "強化", "desc": "...", "icon": "ability_...", "maxLevel": 100 }, ...
-      ]
+        { "id": 101001, "name": "強化", "desc": "...", "icon": "ability_...", "maxLevel": 100 }, ...
+      ]                           // id=ability の $ID。UI では ON/OFF トグル＋URL共有(hash の a=)
     }, ...
   }
 }
@@ -142,7 +143,7 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 | `tools/build_game_data.py` | IES+TSV 連結 → `src/data/game-data.json` 生成（特性含む） |
 | `tools/extract_icons.py` | アイコン抽出 → `public/icons/`（要 Pillow、ゲーム終了中に実行） |
 | `src/data/game-data.json` | **同梱データ（133ジョブ/898スキル、特性1297件）** |
-| `public/icons/{skill,class}/*.png` | **同梱アイコン（64px、スキル769＋クラス114）** |
+| `public/icons/{skill,class,attr}/*.png` | **同梱アイコン（スキル769/クラス114=64px、特性1243=40px）** |
 | `src/data/gameData.ts` | JSON読込＋索引（jobById/skillById 等） |
 | `src/lib/build.ts` | ビルド状態・URL(hash)エンコード/デコード・集計 |
 | `src/lib/icons.ts` | アイコンURLヘルパ（BASE_URL 対応） |

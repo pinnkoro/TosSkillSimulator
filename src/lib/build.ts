@@ -1,4 +1,5 @@
 // ビルド状態の生成・URL(hash)へのエンコード/デコード・集計。
+import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
 import type { BuildState, Job, TreeId } from '../types';
 import { advancedJobsOf, baseJobOf, getJob, getSkill, getTree, trees } from '../data/gameData';
 
@@ -130,8 +131,12 @@ export function setLevel(build: BuildState, skillId: number, level: number): Bui
 }
 
 // ---- URL (location.hash) シリアライズ ----
+// 内部形式は URLSearchParams の平文クエリ文字列。これを lz-string で圧縮して
+// hash に載せることで、スキル/特性が増えても URL が伸びにくいようにする。
+// 旧形式（平文クエリ = '=' を含む）もそのまま読めるよう後方互換を保つ。
 
-export function encodeBuild(build: BuildState): string {
+/** build → 平文クエリ文字列（圧縮前の内部表現）。 */
+function encodeQuery(build: BuildState): string {
   if (!build.tree) return '';
   const params = new URLSearchParams();
   params.set('t', build.tree);
@@ -147,9 +152,23 @@ export function encodeBuild(build: BuildState): string {
   return params.toString();
 }
 
+export function encodeBuild(build: BuildState): string {
+  const query = encodeQuery(build);
+  if (!query) return '';
+  return compressToEncodedURIComponent(query);
+}
+
 export function decodeBuild(hash: string): BuildState {
-  const clean = hash.replace(/^#/, '');
-  if (!clean) return emptyBuild();
+  const raw = hash.replace(/^#/, '');
+  if (!raw) return emptyBuild();
+  // '=' を含めば旧形式の平文クエリ。含まなければ lz-string 圧縮トークン。
+  // （compressToEncodedURIComponent の出力に '=' は現れない）
+  let clean = raw;
+  if (!raw.includes('=')) {
+    const decompressed = decompressFromEncodedURIComponent(raw);
+    if (!decompressed) return emptyBuild();
+    clean = decompressed;
+  }
   const params = new URLSearchParams(clean);
   const treeId = params.get('t') as TreeId | null;
   if (!treeId || !getTree(treeId)) return emptyBuild();

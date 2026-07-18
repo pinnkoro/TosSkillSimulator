@@ -442,6 +442,15 @@ button.ghost {
   color: var(--text-h);
   font-weight: 600;
 }
+.inexact {
+  color: var(--warn);
+  font-size: 11px;
+}
+.factor-note {
+  margin: 0;
+  font-size: 11px;
+  color: var(--warn);
+}
 
 .lv-table-wrap table {
   width: 100%;

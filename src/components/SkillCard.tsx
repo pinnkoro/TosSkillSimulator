@@ -108,10 +108,24 @@ export function SkillCard({ skill, level, onChange, selectedAttrs, onToggleAttr 
           {active && (
             <div className="skill-stats">
               {ui.curLv(level)}
-              {hasFactor && <span> {ui.factor} <b>{fmt(valueAt(skill.factor, level))}%</b></span>}
+              {hasFactor && (
+                <span>
+                  {' '}{ui.factor} <b>{fmt(valueAt(skill.factor, level))}%</b>
+                  {skill.factorKind === 'approx' && (
+                    <span className="inexact"> ({ui.factorApprox})</span>
+                  )}
+                </span>
+              )}
               {hasAtk && <span> {ui.atkAdd} <b>{fmt(valueAt(skill.atkAdd, level))}</b></span>}
               <span> {ui.sp} <b>{fmt(valueAt(skill.sp, level))}</b></span>
             </div>
+          )}
+
+          {skill.factorKind === 'approx' && (
+            <p className="factor-note">{ui.factorApproxNote}</p>
+          )}
+          {skill.factorKind === 'lua' && (
+            <p className="factor-note">{ui.factorLuaNote}</p>
           )}
 
           {tl(skill.description) && <p className="tip-desc">{tl(skill.description)}</p>}

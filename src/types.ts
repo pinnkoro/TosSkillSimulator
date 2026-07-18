@@ -46,6 +46,8 @@ export interface Skill {
   sp: LevelScaled;
   /** スキルファクター(攻撃力倍率%) */
   factor: LevelScaled;
+  /** factor の信頼度。'exact'=正確 / 'approx'=概算 / 'lua'=ゲーム内数式で未対応 / 'none'=係数なし */
+  factorKind: 'exact' | 'approx' | 'lua' | 'none';
   /** 固定攻撃力加算 */
   atkAdd: LevelScaled;
   description: Loc;

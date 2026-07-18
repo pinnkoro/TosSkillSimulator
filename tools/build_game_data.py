@@ -270,21 +270,30 @@ def main():
     _COEF = ("SkillFactor", "CaptionRatio", "CaptionRatio2", "CaptionRatio3")
 
     def factor_of(sk):
-        """スキルの表示係数 (base, perLevel, is_attack) を返す。
-        攻撃スキルは #{SkillFactor}#(=SklFactor 線形)。ヒール/バフ等は Caption2 が
-        参照する #{CaptionRatioN}# を Lua(calc_property_skill.lua)から解決する。"""
+        """スキルの表示係数 (base, perLevel, is_attack, kind) を返す。
+        kind:
+          'exact'  … #{SkillFactor}#(=SklFactor線形) か、Lua を解決できた正確な係数
+          'lua'    … Caption2 が #{CaptionRatioN}# を参照するが Lua を静的計算できない(未対応)
+          'approx' … 係数トークン無しだが SklFactor>0(概算値。正確な係数ではない)
+          'none'   … 係数なし
+        攻撃スキルは #{SkillFactor}#、ヒール/バフ等は #{CaptionRatioN}# を
+        Lua(calc_property_skill.lua)から解決する。"""
         cap2 = sk.get("Caption2", "") or ""
         tokens = re.findall(r"#\{(\w+)\}#", cap2)
         prim = next((t for t in tokens if t in _COEF), None)
         if prim == "SkillFactor":
-            return num(sk.get("SklFactor")), num(sk.get("SklFactorByLevel")), True
+            return num(sk.get("SklFactor")), num(sk.get("SklFactorByLevel")), True, "exact"
         if prim in ("CaptionRatio", "CaptionRatio2", "CaptionRatio3"):
             f = skill_ratios.get(sk.get(prim, ""))
             if f:
-                return f[0], f[1], False
-            return 0.0, 0.0, False  # ステータス依存等で静的計算不可 → 非表示
+                return f[0], f[1], False, "exact"
+            return 0.0, 0.0, False, "lua"  # 参照式を計算できない → 未対応
         base = num(sk.get("SklFactor"))
-        return base, num(sk.get("SklFactorByLevel")), base > 0
+        if base > 0:
+            # 係数トークン無しで SklFactor>0。ペインバリア等のバフに多く、値はプレースホルダ
+            # の可能性が高いので攻撃扱いにせず概算(approx)として印付きで出す。
+            return base, num(sk.get("SklFactorByLevel")), False, "approx"
+        return 0.0, 0.0, False, "none"
 
     skills_out = {}
     jobs_out = []
@@ -309,7 +318,7 @@ def main():
             if sid in skills_out:
                 continue
             max_lv = int(num(t.get("MaxLevel"))) or 1
-            f_base, f_per, f_atk = factor_of(sk)
+            f_base, f_per, f_atk, f_kind = factor_of(sk)
             skills_out[sid] = {
                 "id": sid,
                 "className": sk["ClassName"],
@@ -326,6 +335,7 @@ def main():
                 "sp": {"base": round(num(sk.get("BasicSP")), 2),
                        "perLevel": round(num(sk.get("LvUpSpendSp")), 2)},
                 "factor": {"base": round(f_base, 2), "perLevel": round(f_per, 2)},
+                "factorKind": f_kind,
                 "atkAdd": {"base": round(num(sk.get("SklAtkAdd")), 2),
                            "perLevel": round(num(sk.get("SklAtkAddByLevel")), 2)},
                 "description": loc_desc(sk.get("Caption", "")),

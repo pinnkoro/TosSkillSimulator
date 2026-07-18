@@ -1,4 +1,4 @@
-# TosSukillSimulator 引き継ぎドキュメント
+# TosSkillSimulator 引き継ぎドキュメント
 
 Tree of Savior（**jTOS / 日本サーバ**）のスキルシミュレータを GitHub Pages で公開するプロジェクト。
 このドキュメントは別環境で作業を継続するための現状まとめ。
@@ -15,9 +15,9 @@ Tree of Savior（**jTOS / 日本サーバ**）のスキルシミュレータを 
 
 ## 2. リポジトリ / GitHub アカウント設定
 
-- **ワークスペース**: `C:\Users\pinnk\Documents\TosSukillSimulator`
-- **リモート**: `https://github.com/pinnkoro/TosSukillSimulator`
-- **公開URL（GitHub Pages）**: https://pinnkoro.github.io/TosSukillSimulator/
+- **ワークスペース**: `C:\Users\pinnk\Documents\TosSkillSimulator`
+- **リモート**: `https://github.com/pinnkoro/TosSkillSimulator`
+- **公開URL（GitHub Pages）**: https://pinnkoro.github.io/TosSkillSimulator/
   - commit identity は**リポジトリローカル設定**: `pinnkoro <60339654+pinnkoro@users.noreply.github.com>`
   - 認証は gh をリポジトリローカルの credential helper に設定（`!gh auth git-credential`）、現在 active な個人アカウントで解決。
   - **グローバル設定（仕事用）は未変更。**
@@ -130,7 +130,7 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 | `tools/build_game_data.py` | IES+TSV 連結 → `src/data/game-data.json` 生成 |
 | `src/data/game-data.json` | **同梱データ（現行133ジョブ/898スキル）** |
 | `src/types.ts` | 型定義（**§5に合わせ要更新**） |
-| `vite.config.ts` | `base` は本番ビルド時のみ `/TosSukillSimulator/` |
+| `vite.config.ts` | `base` は本番ビルド時のみ `/TosSkillSimulator/` |
 | `.github/workflows/deploy.yml` | main push で Pages 自動デプロイ |
 
 ### 掃除すべき残骸（次の作業で削除推奨）

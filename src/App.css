@@ -333,8 +333,10 @@ button.ghost {
   pointer-events: none;
   transition: opacity 0.12s ease;
 }
+/* focus-visible はキーボード操作時のみ真になるため、マウスでクリックしても
+   フォーカス残りでツールチップが出っぱなしにならない。 */
 .has-tip:hover > .tip,
-.has-tip:focus-within > .tip {
+.has-tip:focus-visible > .tip {
   opacity: 1;
   visibility: visible;
 }

@@ -140,20 +140,26 @@ def main():
     attrs_by_skill = {}
     for a in ability_rows:
         cat = a.get("SkillCategory", "")
-        if not cat or cat not in skill_by_cn:
+        if not cat:
             continue
         if str(a.get("Hidden")) in ("YES", "1", "1.0"):
             continue
         name = a.get("Name")
         if not name:
             continue
-        attrs_by_skill.setdefault(cat, []).append({
+        # SkillCategory は ';' 区切りで複数スキルを指すことがある
+        # (クロスツリー版クラスの _Archer/_Scout/_Swordman 等)。各 className に紐付ける。
+        attr = {
             "id": a["$ID"],
             "name": clean_name(ja(name)),
             "desc": clean(ja(a.get("Desc", ""))),
             "icon": a.get("Icon", ""),
             "maxLevel": attr_maxlv.get(a["ClassName"], 1),
-        })
+        }
+        for cn in cat.split(";"):
+            cn = cn.strip()
+            if cn in skill_by_cn:
+                attrs_by_skill.setdefault(cn, []).append(attr)
 
     # --- skilltree: ジョブ ClassName -> [ {skill row + maxLevel + unlock} ] ---
     tree_by_job = {}

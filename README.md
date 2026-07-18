@@ -1,4 +1,4 @@
-# TosSukillSimulator
+# TosSkillSimulator
 
 ゲームのスキルシミュレータ。React + TypeScript + Vite で構築し、GitHub Pages で配信する。
 
@@ -16,7 +16,7 @@ npm run preview  # ビルド結果をローカル確認
 `main` ブランチへ push すると GitHub Actions (`.github/workflows/deploy.yml`) が
 自動でビルドし GitHub Pages へデプロイする。
 
-公開URL: https://pinnkoro.github.io/TosSukillSimulator/
+公開URL: https://pinnkoro.github.io/TosSkillSimulator/
 
 ### 初回のみ必要な設定（GitHub 側）
 
@@ -25,5 +25,5 @@ npm run preview  # ビルド結果をローカル確認
 
 ## 技術メモ
 
-- `vite.config.ts` の `base` は本番ビルド時のみ `/TosSukillSimulator/`（プロジェクトページのパス）。
+- `vite.config.ts` の `base` は本番ビルド時のみ `/TosSkillSimulator/`（プロジェクトページのパス）。
   ローカル開発では `/` を使う。

@@ -1,7 +1,8 @@
 // Tree of Savior スキルシミュレータの型定義。
-// game-data.json (tools/tos_extract.py 由来) の構造に対応する。
+// src/data/game-data.json（tools/build_game_data.py 由来）の実スキーマに対応する。
+// HANDOFF.md §5 参照。
 
-/** スキルの数値プロパティ (レベル別に算出するための係数) */
+/** スキルの数値プロパティ。レベル L の値 ≒ base + perLevel*(L-1)。 */
 export interface LevelScaled {
   base: number;
   perLevel: number;
@@ -11,15 +12,17 @@ export type SkillType = 'attack' | 'buff';
 
 export interface Skill {
   id: number;
+  className: string;
   name: string;
   icon: string;
   maxLevel: number;
+  unlockClassLevel: number;
   type: SkillType;
-  element: number;
-  overheat: number;
+  /** Attribute 文字列（'Melee' | 'Holy' | 'Fire' | ... | ''） */
+  element: string;
   /** クールタイム(ms) */
   cooldown: number;
-  unlockClassLevel: number;
+  overheat: number;
   /** SP消費 */
   sp: LevelScaled;
   /** スキルファクター(攻撃力倍率%) */
@@ -29,22 +32,24 @@ export interface Skill {
   description: string;
 }
 
-/** スキルツリー(スターター系統) */
+/** スキルツリー（スターター系統） */
 export type TreeId = 'warrior' | 'wizard' | 'archer' | 'cleric' | 'scout';
+
+export interface Tree {
+  id: TreeId;
+  name: string;
+  baseJobId: number;
+}
 
 export interface Job {
   id: number;
-  idName: string;
+  className: string;
   name: string;
+  engName: string;
   tree: TreeId;
-  treeName: string;
+  isBase: boolean;
   rank: number;
-  circleMax: number;
-  isStarter: boolean;
-  isHidden: boolean;
-  isSecret: boolean;
   icon: string;
-  description: string;
   skillIds: number[];
 }
 
@@ -55,15 +60,16 @@ export interface GameData {
     jobCount: number;
     skillCount: number;
   };
+  trees: Tree[];
   jobs: Job[];
   skills: Record<string, Skill>;
 }
 
-/** 1ビルドの状態。4つのジョブ枠と、スキルID→振ったレベルのマップ。 */
+/** 1ビルドの状態。系統・4つのジョブ枠・スキルID→振ったレベル。 */
 export interface BuildState {
   tree: TreeId | null;
-  /** 4枠。未選択は null。index 0 = スターター。 */
+  /** 4枠。未選択は null。index 0 = スターター(base)固定。 */
   jobs: (number | null)[];
-  /** skillId -> 振ったレベル */
+  /** skillId -> 振ったレベル(1以上のみ保持) */
   levels: Record<number, number>;
 }

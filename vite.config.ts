@@ -6,5 +6,5 @@ import react from '@vitejs/plugin-react'
 // ローカル開発 (npm run dev) では base は '/' で問題ないよう本番ビルド時のみ適用。
 export default defineConfig(({ command }) => ({
   plugins: [react()],
-  base: command === 'build' ? '/TosSukillSimulator/' : '/',
+  base: command === 'build' ? '/TosSkillSimulator/' : '/',
 }))

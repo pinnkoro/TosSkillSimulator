@@ -61,8 +61,21 @@ def num(v):
         return 0.0
 
 
+# TOS テキスト制御コード（フォントサイズ {s18}/{/s}、リセット {/}、色 {#RRGGBB}、画像 {img ...}）。
+# {nl}(改行) と #{...}#(数値プレースホルダ) は対象外。
+_CODE = re.compile(r"\{(?:s\d+|ds\d+|/s|/|#[0-9A-Fa-f]{3,8}|img\s[^}]*)\}")
+
+
+def strip_codes(text):
+    return _CODE.sub("", text or "")
+
+
+def clean_name(text):
+    return strip_codes(text or "").strip()
+
+
 def clean(text):
-    return (text or "").replace("{nl}", "\n").strip()
+    return strip_codes((text or "").replace("{nl}", "\n")).strip()
 
 
 def load_ability_maxlevels():
@@ -108,9 +121,15 @@ def main():
     tree_rows = T.read_table("skilltree.ies")[0]
     ja_skill = load_dict("skill.tsv")
     ja_etc = load_dict("etc.tsv")
+    # 一部の新クラス名(ラマ/ローグ等)は skill/etc に無く ui.tsv/item.tsv 側にある。
+    # 優先順は skill→etc→ui→item で、既存の一致は不変・欠落のみ補完。
+    ja_ui = load_dict("ui.tsv")
+    ja_item = load_dict("item.tsv")
+    ja_quest = load_dict("quest.tsv")
 
     def ja(ko):
-        return ja_skill.get(ko) or ja_etc.get(ko) or ko
+        return (ja_skill.get(ko) or ja_etc.get(ko) or ja_ui.get(ko)
+                or ja_item.get(ko) or ja_quest.get(ko) or ko)
 
     skill_by_cn = {s["ClassName"]: s for s in skills_rows}
 
@@ -129,7 +148,7 @@ def main():
         if not name:
             continue
         attrs_by_skill.setdefault(cat, []).append({
-            "name": ja(name),
+            "name": clean_name(ja(name)),
             "desc": clean(ja(a.get("Desc", ""))),
             "icon": a.get("Icon", ""),
             "maxLevel": attr_maxlv.get(a["ClassName"], 1),
@@ -178,7 +197,7 @@ def main():
             skills_out[sid] = {
                 "id": sid,
                 "className": sk["ClassName"],
-                "name": ja(sk.get("Name", "")),
+                "name": clean_name(ja(sk.get("Name", ""))),
                 "icon": sk.get("Icon", ""),
                 "maxLevel": max_lv,
                 "unlockClassLevel": int(num(t.get("UnlockClassLevel"))),
@@ -202,7 +221,7 @@ def main():
         jobs_out.append({
             "id": j["$ID"],
             "className": cn,
-            "name": ja(j.get("Name", "")),
+            "name": clean_name(ja(j.get("Name", ""))),
             "engName": j.get("JobName", ""),
             "tree": tree_id,
             "isBase": is_base,

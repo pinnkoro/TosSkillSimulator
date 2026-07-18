@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Skill } from '../types';
 import { valueAt } from '../data/gameData';
 import { skillIconUrl } from '../lib/icons';
@@ -46,18 +46,48 @@ export function SkillCard({ skill, level, onChange, selectedAttrs, onToggleAttr 
   const levels = Array.from({ length: skill.maxLevel }, (_, i) => i + 1);
   const cd = skill.cooldown / 1000;
 
-  return (
-    <div className={`skill-card${active ? ' active' : ''}`}>
-      {/* 常時: アイコン＋名前＋レベル。ホバーで詳細ポップアップ。 */}
-      <div className="skill-head has-tip" tabIndex={0}>
-        <SkillIcon skill={skill} />
-        <span className="skill-name">{skill.name}</span>
-        <span className="skill-lv">
-          <b>{level}</b>
-          <span className="lv-max">/{skill.maxLevel}</span>
-        </span>
+  // ポップアップ: ホバーで開き（ポップアップ内に入っても消えない）、クリックでピン留め。
+  const [hover, setHover] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const hideTimer = useRef<number | undefined>(undefined);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const open = hover || pinned;
 
-        <div className="tip skill-tip">
+  const show = () => {
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    setHover(true);
+  };
+  const hide = () => {
+    hideTimer.current = window.setTimeout(() => setHover(false), 150);
+  };
+
+  // ピン中は外側クリックで解除。
+  useEffect(() => {
+    if (!pinned) return;
+    const onDown = (e: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(e.target as Node)) setPinned(false);
+    };
+    document.addEventListener('mousedown', onDown);
+    return () => document.removeEventListener('mousedown', onDown);
+  }, [pinned]);
+
+  return (
+    <div className={`skill-card${active ? ' active' : ''}`} ref={cardRef}>
+      {/* 常時: アイコン＋名前＋レベル。ホバーで詳細ポップアップ、クリックでピン留め。 */}
+      <div className="skill-hover" onMouseEnter={show} onMouseLeave={hide}>
+        <div
+          className={`skill-head${pinned ? ' pinned' : ''}`}
+          onClick={() => setPinned((p) => !p)}
+        >
+          <SkillIcon skill={skill} />
+          <span className="skill-name">{skill.name}</span>
+          <span className="skill-lv">
+            <b>{level}</b>
+            <span className="lv-max">/{skill.maxLevel}</span>
+          </span>
+        </div>
+
+        <div className={`tip skill-tip${open ? ' open' : ''}`}>
           <span className="tip-title">{skill.name}</span>
           <div className="skill-meta">
             <span className={`tag type-${skill.type}`}>

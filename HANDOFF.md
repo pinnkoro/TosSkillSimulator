@@ -81,12 +81,13 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 - [x] UI骨組み: 系統選択 → ジョブ4枠(枠0=base固定) → スキルにレベル振り → 集計 → URL(hash)共有
 - [x] スキルカード: コンパクト表示（アイコン＋名前＋Lv常時）＋**ホバーで詳細ポップアップ**（factor/+攻/SP/CD・overheat/AoE・レベル別表・説明）
 - [x] 特性: **アイコンで常時表示・クリックでON/OFF・URL(hash `a=`)共有対象**。ホバーで名前/説明
+- [x] クラス特性（スキル非依存、ability.ies `SkillCategory=="All"`）をジョブ枠に表示・同様にトグル/共有
+- [x] スキルポイント上限: **base職15 / それ以降45 + 全職共有の追加プール20pt**（build.ts で頭打ち enforcement、topbar に「追加 n/20」）
 - [x] アイコン同梱（`extract_icons.py` → `public/icons/`、スキル769＋クラス114、64px）
 - [x] ビルド/lint 通過・コミット・push（自動デプロイ）
 
 ### 未完了 / 今後の候補
-- [ ] スキルポイント上限ルールの確定（現状はジョブ毎に編集可能な暫定 budget、デフォルト15）
-- [ ] 特性のレベル振り（現状は一覧表示のみ、ポイント計算には未算入）
+- [ ] 特性のレベル振り（現状は ON/OFF のみ。Lv100 等の段階は未対応）
 - [ ] バフ持続時間等、Lua(`SCR_*`)依存の説明文数値の完全再現（重いので保留）
 - [ ] game-data.json が JS バンドルに同梱され初期ロードが大きい（必要なら fetch 分離）
 
@@ -103,7 +104,8 @@ python tools/build_game_data.py   # -> src/data/game-data.json
   "jobs": [
     { "id": 1001, "className": "Char1_1", "name": "ソードマン", "engName": "Swordman",
       "tree": "warrior", "isBase": true, "rank": 1, "icon": "c_warrior_swordsman",
-      "skillIds": [10101, 10102, ...] }, ...
+      "skillIds": [10101, 10102, ...],
+      "attributes": [ ... ] }, ...   // クラス特性(スキル非依存)。ability.ies SkillCategory=="All"
   ],
   "skills": {
     "30005": {

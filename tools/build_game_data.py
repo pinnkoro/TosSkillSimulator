@@ -161,6 +161,31 @@ def main():
             if cn in skill_by_cn:
                 attrs_by_skill.setdefault(cn, []).append(attr)
 
+    # --- クラス特性 (スキル非依存): SkillCategory=="All" の行を Job(クラスClassName) で紐付け ---
+    # 武器の着用可能付与(「〜착용 가능」)は除外。(미사용)/(未使用) 表記も除外。
+    class_attrs_by_cn = {}
+    for a in ability_rows:
+        if a.get("SkillCategory", "") != "All":
+            continue
+        if str(a.get("Hidden")) in ("YES", "1", "1.0"):
+            continue
+        name = a.get("Name") or ""
+        if not name or name.startswith("(미사용)") or name.startswith("(未使用)"):
+            continue
+        if "착용 가능" in (a.get("Desc") or ""):
+            continue
+        attr = {
+            "id": a["$ID"],
+            "name": clean_name(ja(name)),
+            "desc": clean(ja(a.get("Desc", ""))),
+            "icon": a.get("Icon", ""),
+            "maxLevel": attr_maxlv.get(a["ClassName"], 1),
+        }
+        for cn in a.get("Job", "").split(";"):
+            cn = cn.strip()
+            if cn:
+                class_attrs_by_cn.setdefault(cn, []).append(attr)
+
     # --- skilltree: ジョブ ClassName -> [ {skill row + maxLevel + unlock} ] ---
     tree_by_job = {}
     for t in tree_rows:
@@ -235,6 +260,7 @@ def main():
             "rank": int(num(j.get("Rank"))),
             "icon": j.get("Icon", ""),
             "skillIds": skill_ids,
+            "attributes": class_attrs_by_cn.get(cn, []),
         })
 
     # スキルを持たないジョブは planner に不要なので落とす

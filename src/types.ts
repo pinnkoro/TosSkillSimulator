@@ -66,6 +66,8 @@ export interface Job {
   rank: number;
   icon: string;
   skillIds: number[];
+  /** クラス特性（スキル非依存。ability.ies の SkillCategory=="All" 由来） */
+  attributes: SkillAttribute[];
 }
 
 export interface GameData {

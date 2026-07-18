@@ -12,6 +12,8 @@ export type SkillType = 'attack' | 'buff';
 
 /** スキル特性（別途取得する強化。ability.ies 由来）。 */
 export interface SkillAttribute {
+  /** ability.ies の $ID（ビルド状態・URL共有の識別子） */
+  id: number;
   name: string;
   desc: string;
   icon: string;
@@ -78,11 +80,13 @@ export interface GameData {
   skills: Record<string, Skill>;
 }
 
-/** 1ビルドの状態。系統・4つのジョブ枠・スキルID→振ったレベル。 */
+/** 1ビルドの状態。系統・4つのジョブ枠・スキルID→振ったレベル・選択した特性ID。 */
 export interface BuildState {
   tree: TreeId | null;
   /** 4枠。未選択は null。index 0 = スターター(base)固定。 */
   jobs: (number | null)[];
   /** skillId -> 振ったレベル(1以上のみ保持) */
   levels: Record<number, number>;
+  /** ONにした特性IDの集合（ON/OFFのみ） */
+  attrs: number[];
 }

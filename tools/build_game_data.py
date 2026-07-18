@@ -274,7 +274,7 @@ def main():
         kind:
           'exact'  … #{SkillFactor}#(=SklFactor線形) か、Lua を解決できた正確な係数
           'lua'    … Caption2 が #{CaptionRatioN}# を参照するが Lua を静的計算できない(未対応)
-          'approx' … 係数トークン無しだが SklFactor>0(概算値。正確な係数ではない)
+          'approx' … 係数トークン無しだが SklFactor/ByLevel が非ゼロ(概算値。正確な係数ではない)
           'none'   … 係数なし
         攻撃スキルは #{SkillFactor}#、ヒール/バフ等は #{CaptionRatioN}# を
         Lua(calc_property_skill.lua)から解決する。"""
@@ -289,10 +289,13 @@ def main():
                 return f[0], f[1], False, "exact"
             return 0.0, 0.0, False, "lua"  # 参照式を計算できない → 未対応
         base = num(sk.get("SklFactor"))
-        if base > 0:
-            # 係数トークン無しで SklFactor>0。ペインバリア等のバフに多く、値はプレースホルダ
-            # の可能性が高いので攻撃扱いにせず概算(approx)として印付きで出す。
-            return base, num(sk.get("SklFactorByLevel")), False, "approx"
+        per = num(sk.get("SklFactorByLevel"))
+        if base > 0 or per > 0:
+            # 係数トークン無しで SklFactor/ByLevel が非ゼロ。ペインバリア等のバフに多く、値は
+            # プレースホルダの可能性が高いので攻撃扱いにせず概算(approx)として印付きで出す。
+            # base=0 だが per>0 のスキル(シャドウプール等)も概算表示。ここを base>0 のみで判定
+            # すると per のみの係数を落として非表示にしてしまう。
+            return base, per, False, "approx"
         return 0.0, 0.0, False, "none"
 
     skills_out = {}

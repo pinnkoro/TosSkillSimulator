@@ -1,0 +1,163 @@
+# TosSukillSimulator 引き継ぎドキュメント
+
+Tree of Savior（**jTOS / 日本サーバ**）のスキルシミュレータを GitHub Pages で公開するプロジェクト。
+このドキュメントは別環境で作業を継続するための現状まとめ。
+
+---
+
+## 1. プロジェクト概要
+
+- **目的**: jTOS のスキルシミュレータ（スターター系統選択 → ジョブ4枠 → スキルにポイント振り分け → SP/効果集計 → URL共有）を作り、GitHub Pages で配信する。
+- **参考元**: `jtos.gihyeonofsoul.com` のプランナー（保存ページが `C:\Users\pinnk\Downloads\Gihyeon of Soul_files`）。UI/データモデルの参考。ただしスキルの実数値は同サイトのサーバから fetch する方式で、保存ファイルには含まれない。
+- **技術スタック**: React + TypeScript + Vite（GitHub Pages は静的配信のみのため全てクライアントサイド）。
+
+---
+
+## 2. リポジトリ / GitHub アカウント設定
+
+- **ワークスペース**: `C:\Users\pinnk\Documents\TosSukillSimulator`
+- **リモート**: `https://github.com/pinnkoro/TosSukillSimulator`
+  - ※ユーザー名は当初 `ryuki-hayashi` → 途中で **`pinnkoro`** に変更された。ID は不変(60339654)。
+- **公開URL（GitHub Pages）**: https://pinnkoro.github.io/TosSukillSimulator/
+- **アカウント分離**（普段使いの仕事用 `ryuki-hayashi-edgex` とは別の個人アカウントで運用）:
+  - commit identity は**リポジトリローカル設定**: `pinnkoro <60339654+pinnkoro@users.noreply.github.com>`
+  - 認証は gh をリポジトリローカルの credential helper に設定（`!gh auth git-credential`）、現在 active な個人アカウントで解決。
+  - **グローバル設定（仕事用）は未変更。**
+  - push が弾かれたら gh の active が仕事用に切り替わっている可能性 → `gh auth switch -u ryuki-hayashi`（ラベルは旧名のまま＝個人アカウント）。
+- **デプロイ**: `.github/workflows/deploy.yml`（main push で自動ビルド＆Pages デプロイ）。Pages は「GitHub Actions」ソースで有効化済み。初回デプロイ成功済み。
+
+---
+
+## 3. データパイプライン（このプロジェクトの一番の肝）
+
+### 結論: 現行 jTOS データは「自分のゲームクライアントの IES から抽出」して同梱する
+
+検討した他ソースは全て不適だった:
+| ソース | 判定 |
+|---|---|
+| tos.guru (rjgtav/tos-database) | ❌ 2020年3月で更新停止。84ジョブのみで新クラス欠落 |
+| gihyeonofsoul（参考元）API | ❌ 直アクセスは 403（Cloudflare）。自動取得不可 |
+| SalmanTKhan/TreeOfSaviorDB | データJSONはリポジトリに無し（各自クライアントからパーサ生成方式）。ただし**純Pythonのipf/iesリーダーがフォーマット仕様の参考**になった |
+
+### ライセンスの前提（ユーザー了承済み）
+- IPF/IES のファイル**フォーマット**は事実仕様（自前実装OK）。
+- 抽出される**スキル/ジョブの実データとアイコンは © IMCGAMES CO., LTD.**。tos.guru/gihyeonofsoul 等の既存ファンツールと同じく「黙認されているファンプロジェクト」の立場でデータを同梱する、という方針をユーザーが選択済み。
+
+### クライアント
+- **jTOS は Steam 版**: `C:\Program Files (x86)\Steam\steamapps\common\Tree of Savior (Japanese Ver.)`
+- データは `data/*.ipf` と `patch/*.ipf`（番号が大きいほど新しく、後のパッチが上書き）。
+- ⚠️ **ゲーム(`Client_tos_x64`)起動中は IPF が排他ロックされ読めない。抽出前にゲームを終了すること。** Steam は起動したままでOK。
+
+### 抽出の仕組み（自前実装、`tools/`）
+- **`tools/tos_extract.py`**: IPF(footer/file-table/Pkware traditional暗号/deflate)と IES(ヘッダ/列定義/行、文字列は XOR 0x01)を解析する自前リーダー。全 ipf を patch 順に走査し、対象 `.ies` の最新版を取得。
+  - CLI: `python tools/tos_extract.py dump`（列確認）/ `python tools/tos_extract.py skill.ies`（JSON出力）
+- **`tools/build_game_data.py`**: 下記を連結して `src/data/game-data.json` を生成:
+  - `job.ies` … クラス定義（ClassName=`Char{tree}_{n}`, JobName, Icon, Rank, EnableJob）
+  - `skilltree.ies` … **ジョブ↔スキル対応 + スキルの MaxLevel / UnlockClassLevel**（ClassName `Char1_1_1` の末尾 `_N` を除くとジョブ ClassName、`SkillName` が skill.ies の ClassName）
+  - `skill.ies` … スキル数値（SklFactor, SklFactorByLevel, BasicSP, LvUpSpendSp, BasicCoolDown, AttackType, Attribute 等）
+  - `skill.tsv` / `etc.tsv` … **日本語化辞書**。IES の `Name` は**韓国語原文**なので、TSV（列: `[キー, 日本語, 韓国語]`）の**韓国語列→日本語列でジョイン**して日本語名にする。
+
+### 生成結果（現状コミット済みの `src/data/game-data.json`）
+- **133ジョブ / 898スキル**、patch 405062。gihyeonofsoul の133ジョブと一致。
+- 5系統（warrior/wizard/archer/cleric/scout）、各27前後、base(スターター)クラス = 各系統 `Char{n}_1`（Swordman1001, Wizard2001, Archer3001, Cleric4001, Scout5001）。
+- 日本語名・スキル説明入り。
+
+### 再生成手順（別環境でも同様）
+```bash
+# 1) jTOS クライアントを完全終了（Client_tos_x64 を落とす）
+# 2) tools/tos_extract.py の CLIENT_ROOT を環境のパスに合わせる
+python tools/build_game_data.py   # -> src/data/game-data.json
+```
+
+---
+
+## 4. 現状（完了 / 未完了）
+
+### 完了
+- [x] リポジトリ/アカウント/Pages/CI 構築、初回デプロイ成功
+- [x] データパイプライン確立（自前 IPF/IES 抽出 → 日本語化 → game-data.json 生成）
+- [x] `src/data/game-data.json`（現行133ジョブ/898スキル）生成・コミット
+- [x] `src/types.ts`（**旧スキーマのまま。§5参照で要更新**）
+
+### 未完了（次のタスク）
+- [ ] **`src/types.ts` を現行スキーマに更新**（下記の実データ構造に合わせる）
+- [ ] UI骨組み: スターター(系統)選択 → ジョブ4枠(枠0=base固定, 枠1-3=同系統から選択) → 各ジョブのスキルにレベル振り(0..maxLevel) → スキルポイント集計 → URL共有
+- [ ] スキルポイントの上限ルール確定（現行 jTOS の「クラスレベルごとの付与ポイント」を要確認。暫定はジョブ毎に編集可能な budget 入力にする＝gihyeonofsoul も max-sp を編集可能にしていた）
+- [ ] スキル tooltip（現在レベルの factor/SP/CD 表示）
+- [ ] ビルド確認・コミット・push
+
+---
+
+## 5. 実データのスキーマ（`src/data/game-data.json`）
+
+`src/types.ts` はこの構造に合わせて更新すること（現行の types.ts は初期の別スキーマなので古い）。
+
+```jsonc
+{
+  "meta": { "source": "jTOS client (extracted, 405062_001001.ipf)", "note": "...(c) IMCGAMES...", "jobCount": 133, "skillCount": 898 },
+  "trees": [ { "id": "warrior", "name": "ソードマン", "baseJobId": 1001 }, ... ],   // 5系統
+  "jobs": [
+    { "id": 1001, "className": "Char1_1", "name": "ソードマン", "engName": "Swordman",
+      "tree": "warrior", "isBase": true, "rank": 1, "icon": "c_warrior_swordsman",
+      "skillIds": [10101, 10102, ...] }, ...
+  ],
+  "skills": {
+    "30005": {
+      "id": 30005, "className": "Archer_ObliqueShot", "name": "オブリークショット",
+      "icon": "arch_obliquestance", "maxLevel": 5, "unlockClassLevel": 1,
+      "type": "attack",           // "attack" | "buff"
+      "element": "Melee",         // Attribute 文字列
+      "cooldown": 1000,           // ms
+      "overheat": 0,
+      "sp":     { "base": 11,     "perLevel": 0 },      // SP消費
+      "factor": { "base": 1754.5, "perLevel": 263.3 },  // スキルファクター%
+      "atkAdd": { "base": 0,      "perLevel": 0 },      // 固定加算
+      "description": "..."
+    }, ...
+  }
+}
+```
+
+レベル L のときの各値（UI で算出）:
+- SP消費 ≒ `sp.base + sp.perLevel*(L-1)`
+- スキルファクター ≒ `factor.base + factor.perLevel*(L-1)`
+- ※ゲーム内の厳密式は skill.ies の `CoolDown`/`SP` 列に JS コード文字列で入っているが重いので不採用。上記の線形近似で足りる（プランナー用途）。
+
+---
+
+## 6. 主要ファイル
+
+| パス | 役割 |
+|---|---|
+| `tools/tos_extract.py` | 自前 IPF/IES リーダー（CLIENT_ROOT を環境に合わせる） |
+| `tools/build_game_data.py` | IES+TSV 連結 → `src/data/game-data.json` 生成 |
+| `src/data/game-data.json` | **同梱データ（現行133ジョブ/898スキル）** |
+| `src/types.ts` | 型定義（**§5に合わせ要更新**） |
+| `vite.config.ts` | `base` は本番ビルド時のみ `/TosSukillSimulator/` |
+| `.github/workflows/deploy.yml` | main push で Pages 自動デプロイ |
+
+### 掃除すべき残骸（次の作業で削除推奨）
+- `data-src/`（tos.guru の旧CSV + 巨大な `skill.ies.json`(6.8MB)/`job.ies.json` 中間ダンプ）。**コミット不要**。`.gitignore` に追加 or 削除。
+- `scripts/build-data.mjs`（tos.guru CSV 用の旧変換。`build_game_data.py` に置き換わったので削除可）。
+
+---
+
+## 7. ハマりどころ / 環境メモ
+
+- **ゲーム起動中は IPF が読めない**（排他ロック）。抽出前に `Client_tos_x64` を終了。
+- **IES の Name は韓国語**。日本語化は skill.tsv/etc.tsv の韓国語→日本語ジョインが必須。
+- **アイコン**は IMC 著作物。`icon` フィールドは名前のみ保持。画像同梱は別途ライセンス判断が必要（現状は未同梱）。
+- Windows ホストはノートン360が HTTPS を MITM しており `curl` 等が TLS エラー（exit 35）になる。**サイト死活は curl でなくブラウザ or gh API で確認**。外部 HTTPS を叩く処理は WSL 推奨（IPF/IES 抽出は純ローカル処理なので host でOK）。
+- Python は python.org 版（`C:\Users\pinnk\AppData\Local\Python\bin\python.exe`, 3.14）。IPF/IES 抽出は標準ライブラリ(struct/zlib)のみで追加依存なし。
+
+---
+
+## 8. 次にやることの推奨順序
+
+1. `data-src/` と `scripts/build-data.mjs` を削除（or gitignore）。
+2. `src/types.ts` を §5 のスキーマに更新。
+3. データアクセス層（`src/data/gameData.ts`: json読み込み + jobById/skillById 索引）。
+4. ビルド状態 + URL エンコード/デコード（hash に系統・4ジョブ・スキルレベルを格納）。
+5. UI コンポーネント（系統選択 / ジョブ枠 / スキルカード(レベルステッパ) / 集計バー）。
+6. `npm run build` 確認 → コミット → push（自動デプロイ）。
+```

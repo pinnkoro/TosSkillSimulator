@@ -10,6 +10,14 @@ export interface LevelScaled {
 
 export type SkillType = 'attack' | 'buff';
 
+/** スキル特性（別途取得する強化。ability.ies 由来）。 */
+export interface SkillAttribute {
+  name: string;
+  desc: string;
+  icon: string;
+  maxLevel: number;
+}
+
 export interface Skill {
   id: number;
   className: string;
@@ -22,7 +30,10 @@ export interface Skill {
   element: string;
   /** クールタイム(ms) */
   cooldown: number;
+  /** オーバーヒート回数（0=なし） */
   overheat: number;
+  /** AoE攻撃比率。0以下は該当なし。 */
+  aoeRatio: number;
   /** SP消費 */
   sp: LevelScaled;
   /** スキルファクター(攻撃力倍率%) */
@@ -30,6 +41,8 @@ export interface Skill {
   /** 固定攻撃力加算 */
   atkAdd: LevelScaled;
   description: string;
+  /** スキル特性一覧 */
+  attributes: SkillAttribute[];
 }
 
 /** スキルツリー（スターター系統） */

@@ -76,15 +76,18 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 ### 完了
 - [x] リポジトリ/アカウント/Pages/CI 構築、初回デプロイ成功
 - [x] データパイプライン確立（自前 IPF/IES 抽出 → 日本語化 → game-data.json 生成）
-- [x] `src/data/game-data.json`（現行133ジョブ/898スキル）生成・コミット
-- [x] `src/types.ts`（**旧スキーマのまま。§5参照で要更新**）
+- [x] `src/data/game-data.json`（133ジョブ/898スキル、特性1297件、aoeRatio/overheat）生成・コミット
+- [x] `src/types.ts` を現行スキーマに更新
+- [x] UI骨組み: 系統選択 → ジョブ4枠(枠0=base固定) → スキルにレベル振り → 集計 → URL(hash)共有
+- [x] スキルカード: アイコン・現在レベルの factor/+攻/SP/CD・overheat/AoE・**レベル別表**・**特性一覧**
+- [x] アイコン同梱（`extract_icons.py` → `public/icons/`、スキル769＋クラス114、64px）
+- [x] ビルド/lint 通過・コミット・push（自動デプロイ）
 
-### 未完了（次のタスク）
-- [ ] **`src/types.ts` を現行スキーマに更新**（下記の実データ構造に合わせる）
-- [ ] UI骨組み: スターター(系統)選択 → ジョブ4枠(枠0=base固定, 枠1-3=同系統から選択) → 各ジョブのスキルにレベル振り(0..maxLevel) → スキルポイント集計 → URL共有
-- [ ] スキルポイントの上限ルール確定（現行 jTOS の「クラスレベルごとの付与ポイント」を要確認。暫定はジョブ毎に編集可能な budget 入力にする＝gihyeonofsoul も max-sp を編集可能にしていた）
-- [ ] スキル tooltip（現在レベルの factor/SP/CD 表示）
-- [ ] ビルド確認・コミット・push
+### 未完了 / 今後の候補
+- [ ] スキルポイント上限ルールの確定（現状はジョブ毎に編集可能な暫定 budget、デフォルト15）
+- [ ] 特性のレベル振り（現状は一覧表示のみ、ポイント計算には未算入）
+- [ ] バフ持続時間等、Lua(`SCR_*`)依存の説明文数値の完全再現（重いので保留）
+- [ ] game-data.json が JS バンドルに同梱され初期ロードが大きい（必要なら fetch 分離）
 
 ---
 
@@ -108,11 +111,15 @@ python tools/build_game_data.py   # -> src/data/game-data.json
       "type": "attack",           // "attack" | "buff"
       "element": "Melee",         // Attribute 文字列
       "cooldown": 1000,           // ms
-      "overheat": 0,
+      "overheat": 0,              // オーバーヒート回数 (SklUseOverHeat)
+      "aoeRatio": 10,             // AoE攻撃比率 (SklSR)。0以下は該当なし
       "sp":     { "base": 11,     "perLevel": 0 },      // SP消費
       "factor": { "base": 1754.5, "perLevel": 263.3 },  // スキルファクター%
       "atkAdd": { "base": 0,      "perLevel": 0 },      // 固定加算
-      "description": "..."
+      "description": "...",
+      "attributes": [             // スキル特性 (ability.ies, SkillCategory==className で紐付け)
+        { "name": "強化", "desc": "...", "icon": "ability_...", "maxLevel": 100 }, ...
+      ]
     }, ...
   }
 }
@@ -121,7 +128,9 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 レベル L のときの各値（UI で算出）:
 - SP消費 ≒ `sp.base + sp.perLevel*(L-1)`
 - スキルファクター ≒ `factor.base + factor.perLevel*(L-1)`
-- ※ゲーム内の厳密式は skill.ies の `CoolDown`/`SP` 列に JS コード文字列で入っているが重いので不採用。上記の線形近似で足りる（プランナー用途）。
+- 固定加算 ≒ `atkAdd.base + atkAdd.perLevel*(L-1)`
+- ※ゲーム内の厳密式は skill.ies の `CoolDown`/`SP` 列に Lua スクリプト名(`SCR_*`)で入っているが重いので不採用。上記の線形近似で足りる（プランナー用途）。バフ持続時間等の説明文中の数値も同 Lua 依存のため未評価。
+- `attributes` は 659/898 スキルに存在（計1297件）。名前/説明は skill.tsv で日本語化済み。
 
 ---
 
@@ -130,15 +139,27 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 | パス | 役割 |
 |---|---|
 | `tools/tos_extract.py` | 自前 IPF/IES リーダー（CLIENT_ROOT を環境に合わせる） |
-| `tools/build_game_data.py` | IES+TSV 連結 → `src/data/game-data.json` 生成 |
-| `src/data/game-data.json` | **同梱データ（現行133ジョブ/898スキル）** |
-| `src/types.ts` | 型定義（**§5に合わせ要更新**） |
+| `tools/build_game_data.py` | IES+TSV 連結 → `src/data/game-data.json` 生成（特性含む） |
+| `tools/extract_icons.py` | アイコン抽出 → `public/icons/`（要 Pillow、ゲーム終了中に実行） |
+| `src/data/game-data.json` | **同梱データ（133ジョブ/898スキル、特性1297件）** |
+| `public/icons/{skill,class}/*.png` | **同梱アイコン（64px、スキル769＋クラス114）** |
+| `src/data/gameData.ts` | JSON読込＋索引（jobById/skillById 等） |
+| `src/lib/build.ts` | ビルド状態・URL(hash)エンコード/デコード・集計 |
+| `src/lib/icons.ts` | アイコンURLヘルパ（BASE_URL 対応） |
+| `src/components/SkillCard.tsx` | スキルカード（アイコン/レベル別表/特性） |
+| `src/types.ts` | 型定義（§5準拠） |
 | `vite.config.ts` | `base` は本番ビルド時のみ `/TosSkillSimulator/` |
 | `.github/workflows/deploy.yml` | main push で Pages 自動デプロイ |
 
-### 掃除すべき残骸（次の作業で削除推奨）
-- `data-src/`（tos.guru の旧CSV + 巨大な `skill.ies.json`(6.8MB)/`job.ies.json` 中間ダンプ）。**コミット不要**。`.gitignore` に追加 or 削除。
-- `scripts/build-data.mjs`（tos.guru CSV 用の旧変換。`build_game_data.py` に置き換わったので削除可）。
+### アイコン再生成
+```bash
+# ゲーム終了中に。src/data/game-data.json が先に必要。
+python tools/extract_icons.py   # -> public/icons/skill,class/*.png (64px)
+```
+
+### 掃除すべき残骸
+- `data-src/`（tos.guru の旧CSV + 巨大な中間ダンプ）。gitignore 済み（未コミット）。
+- ~~`scripts/build-data.mjs`~~ 削除済み。
 
 ---
 
@@ -146,9 +167,10 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 
 - **ゲーム起動中は IPF が読めない**（排他ロック）。抽出前に `Client_tos_x64` を終了。
 - **IES の Name は韓国語**。日本語化は skill.tsv/etc.tsv の韓国語→日本語ジョインが必須。
-- **アイコン**は IMC 著作物。`icon` フィールドは名前のみ保持。画像同梱は別途ライセンス判断が必要（現状は未同梱）。
+- **アイコン**は IMC 著作物だが、データ本体と同じ「黙認ファンプロジェクト」の立場で同梱する方針（ユーザー了承済み）。スキルは `ui.ipf` 内の個別PNG(`icon/skill/<系統>/icon_<名前>.png`)、クラスは**アトラス** `icon/class_<系統>.tga` を `baseskinset/classicon.xml` の `imgrect` で切り出し。`extract_icons.py` が 64px に縮小して `public/icons/` へ出力。**要 Pillow**（抽出本体は標準ライブラリのみだが縮小/TGA切出しに使用）。⚠️ `job.ies` の Icon 名と classicon.xml の name は大小が食い違うので**大小無視で照合**。
 - Windows ホストはノートン360が HTTPS を MITM しており `curl` 等が TLS エラー（exit 35）になる。**サイト死活は curl でなくブラウザ or gh API で確認**。外部 HTTPS を叩く処理は WSL 推奨（IPF/IES 抽出は純ローカル処理なので host でOK）。
-- Python は python.org 版（`C:\Users\pinnk\AppData\Local\Python\bin\python.exe`, 3.14）。IPF/IES 抽出は標準ライブラリ(struct/zlib)のみで追加依存なし。
+- Python は python.org 版（3.14）。IPF/IES 抽出(`tos_extract.py`/`build_game_data.py`)は標準ライブラリ(struct/zlib)のみ。アイコン抽出(`extract_icons.py`)のみ **Pillow** に依存。
+- `read_table()` は呼ぶたび全 ipf を再スキャンするので、多数テーブルを読むときは 1 パスで newest-wins する（`build_game_data.py:load_ability_maxlevels` 参照）。忘れると ability_*.ies 120個で数分かかる。
 
 ---
 

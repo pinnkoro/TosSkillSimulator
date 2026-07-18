@@ -127,8 +127,12 @@ def main():
     gd = json.load(open(DATA, encoding="utf-8"))
     skill_icons = sorted({s["icon"] for s in gd["skills"].values() if s.get("icon")})
     class_icons = sorted({j["icon"] for j in gd["jobs"] if j.get("icon")})
-    attr_icons = sorted({a["icon"] for s in gd["skills"].values()
-                         for a in s.get("attributes", []) if a.get("icon")})
+    attr_icons = sorted(
+        {a["icon"] for s in gd["skills"].values()
+         for a in s.get("attributes", []) if a.get("icon")}
+        | {a["icon"] for j in gd["jobs"]
+           for a in j.get("attributes", []) if a.get("icon")}
+    )
     print(f"needed: {len(skill_icons)} skill, {len(class_icons)} class, "
           f"{len(attr_icons)} attribute icons")
 

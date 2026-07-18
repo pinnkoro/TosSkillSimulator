@@ -2,9 +2,12 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { TreeId } from './types';
 import { gameData, getJob } from './data/gameData';
 import {
+  BONUS_POOL,
+  bonusUsed,
   decodeBuild,
   emptyBuild,
   encodeBuild,
+  jobBudget,
   jobChoicesFor,
   pointsUsed,
   selectTree,
@@ -15,11 +18,9 @@ import {
   treeList,
 } from './lib/build';
 import { SkillCard } from './components/SkillCard';
+import { AttrChip } from './components/AttrChip';
 import { classIconUrl } from './lib/icons';
 import './App.css';
-
-/** 枠ごとの上限ポイント（暫定・編集可能）。gihyeonofsoul 同様 max-sp を手動調整。 */
-const DEFAULT_BUDGET = 15;
 
 /** クラスアイコン。無い/失敗時は同サイズのプレースホルダで場所を保持（表示形式を統一）。 */
 function ClassIcon({ icon }: { icon: string }) {
@@ -39,7 +40,6 @@ function ClassIcon({ icon }: { icon: string }) {
 
 export default function App() {
   const [build, setBuild] = useState(() => decodeBuild(location.hash));
-  const [budgets, setBudgets] = useState<Record<number, number>>({});
   const [copied, setCopied] = useState(false);
   const skipHash = useRef(false);
 
@@ -72,6 +72,7 @@ export default function App() {
     () => Object.values(build.levels).reduce((a, b) => a + b, 0),
     [build.levels],
   );
+  const bonus = bonusUsed(build);
   const selectedAttrs = useMemo(() => new Set(build.attrs), [build.attrs]);
 
   const share = async () => {
@@ -94,6 +95,11 @@ export default function App() {
         <h1>jTOS スキルシミュレータ</h1>
         <div className="topbar-actions">
           <span className="total">合計 {totalPoints} pt</span>
+          {build.tree && (
+            <span className={`bonus${bonus > BONUS_POOL ? ' over' : ''}`}>
+              追加 {bonus}/{BONUS_POOL}
+            </span>
+          )}
           <button type="button" onClick={share} disabled={!build.tree}>
             {copied ? 'コピーしました' : 'URLを共有'}
           </button>
@@ -176,7 +182,7 @@ export default function App() {
           <section className="skills">
             {jobs.map((job) => {
               const used = pointsUsed(build, job);
-              const budget = budgets[job.id] ?? DEFAULT_BUDGET;
+              const budget = jobBudget(job);
               const over = used > budget;
               return (
                 <div className="job-block" key={job.id}>
@@ -186,20 +192,26 @@ export default function App() {
                       <span className="job-eng">{job.engName}</span>
                     </h2>
                     <div className={`budget${over ? ' over' : ''}`}>
-                      <span>
-                        {used} /
-                      </span>
-                      <input
-                        type="number"
-                        min={0}
-                        value={budget}
-                        onChange={(e) =>
-                          setBudgets((b) => ({ ...b, [job.id]: Math.max(0, Number(e.target.value)) }))
-                        }
-                      />
-                      <span>pt</span>
+                      <b>{used}</b>
+                      <span>/ {budget} pt</span>
+                      {over && <span className="budget-bonus">(+{used - budget})</span>}
                     </div>
                   </div>
+                  {job.attributes.length > 0 && (
+                    <div className="class-attrs">
+                      <span className="section-label">クラス特性</span>
+                      <div className="attr-row">
+                        {job.attributes.map((a) => (
+                          <AttrChip
+                            key={a.id}
+                            attr={a}
+                            on={selectedAttrs.has(a.id)}
+                            onToggle={() => setBuild(toggleAttr(build, a.id))}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   <div className="skill-grid">
                     {job.skillIds
                       .map((sid) => gameData.skills[String(sid)])

@@ -35,10 +35,11 @@ function validSkillIds(build: BuildState): Set<number> {
   return valid;
 }
 
-/** 選択中ジョブのスキルが持つ特性IDの集合。 */
+/** 選択中ジョブのスキル特性＋クラス特性のIDの集合。 */
 function validAttrIds(build: BuildState): Set<number> {
   const valid = new Set<number>();
   for (const job of selectedJobs(build)) {
+    for (const a of job.attributes) valid.add(a.id);
     for (const sid of job.skillIds) {
       const sk = getSkill(sid);
       if (sk) for (const a of sk.attributes) valid.add(a.id);
@@ -75,19 +76,57 @@ export function toggleAttr(build: BuildState, attrId: number): BuildState {
   return { ...build, attrs };
 }
 
-export function setLevel(build: BuildState, skillId: number, level: number): BuildState {
-  const skill = getSkill(skillId);
-  const max = skill ? skill.maxLevel : 0;
-  const lv = Math.max(0, Math.min(max, level));
-  const levels = { ...build.levels };
-  if (lv <= 0) delete levels[skillId];
-  else levels[skillId] = lv;
-  return { ...build, levels };
+// ---- スキルポイント上限ルール ----
+// base職=15pt / それ以降=45pt を各職の基本枠とし、
+// さらに全職合計で BONUS_POOL(=20pt) まで基本枠を超えて追加できる。
+export const BASE_BUDGET = 15;
+export const ADV_BUDGET = 45;
+export const BONUS_POOL = 20;
+
+export function jobBudget(job: Job): number {
+  return job.isBase ? BASE_BUDGET : ADV_BUDGET;
 }
 
 /** ジョブに投じたスキルポイント合計（1レベル=1ポイント）。 */
 export function pointsUsed(build: BuildState, job: Job): number {
   return job.skillIds.reduce((sum, sid) => sum + (build.levels[sid] ?? 0), 0);
+}
+
+/** 全職が基本枠を超えて使っている合計（共有プールの消費量）。 */
+export function bonusUsed(build: BuildState): number {
+  return selectedJobs(build).reduce(
+    (sum, j) => sum + Math.max(0, pointsUsed(build, j) - jobBudget(j)),
+    0,
+  );
+}
+
+/** そのスキルを持つ選択中ジョブ。 */
+function ownerJob(build: BuildState, skillId: number): Job | undefined {
+  return selectedJobs(build).find((j) => j.skillIds.includes(skillId));
+}
+
+export function setLevel(build: BuildState, skillId: number, level: number): BuildState {
+  const skill = getSkill(skillId);
+  const max = skill ? skill.maxLevel : 0;
+  let lv = Math.max(0, Math.min(max, level));
+
+  // 上限ルール: レベルを上げる場合、共有プール(20pt)を超えないよう頭打ちにする。
+  const current = build.levels[skillId] ?? 0;
+  const job = ownerJob(build, skillId);
+  if (lv > current && job) {
+    const jobBud = jobBudget(job);
+    const curUsed = pointsUsed(build, job);
+    const otherBonus = bonusUsed(build) - Math.max(0, curUsed - jobBud);
+    const maxUsed = jobBud + (BONUS_POOL - otherBonus);
+    const newUsed = curUsed - current + lv;
+    if (newUsed > maxUsed) lv = lv - (newUsed - maxUsed);
+    lv = Math.max(current, lv);
+  }
+
+  const levels = { ...build.levels };
+  if (lv <= 0) delete levels[skillId];
+  else levels[skillId] = lv;
+  return { ...build, levels };
 }
 
 // ---- URL (location.hash) シリアライズ ----

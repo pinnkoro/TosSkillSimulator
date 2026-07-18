@@ -187,23 +187,42 @@ button.ghost {
 }
 .budget {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 5px;
   color: var(--text-dim);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.budget.over {
+.budget b {
+  font-size: 18px;
+  color: var(--accent);
+}
+.budget.over b {
   color: var(--warn);
 }
-.budget input {
-  width: 52px;
-  background: var(--panel-2);
-  color: var(--text-h);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 4px 6px;
-  text-align: right;
+.budget-bonus {
+  color: var(--warn);
+}
+
+/* topbar shared bonus pool */
+.bonus {
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+.bonus.over {
+  color: var(--warn);
+}
+
+/* class-level attributes row */
+.class-attrs {
+  margin-bottom: 14px;
+}
+.class-attrs .section-label {
+  margin-bottom: 6px;
+}
+.class-attrs .attr-row {
+  border-top: none;
+  padding-top: 0;
 }
 
 /* ---- skill grid ---- */

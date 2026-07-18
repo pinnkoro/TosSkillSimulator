@@ -14,10 +14,27 @@ import {
   treeList,
 } from './lib/build';
 import { SkillCard } from './components/SkillCard';
+import { classIconUrl } from './lib/icons';
 import './App.css';
 
 /** 枠ごとの上限ポイント（暫定・編集可能）。gihyeonofsoul 同様 max-sp を手動調整。 */
 const DEFAULT_BUDGET = 15;
+
+/** クラスアイコン。無い/失敗時は非表示。 */
+function ClassIcon({ icon }: { icon: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed || !icon) return null;
+  return (
+    <img
+      className="class-icon"
+      src={classIconUrl(icon)}
+      alt=""
+      width={32}
+      height={32}
+      onError={() => setFailed(true)}
+    />
+  );
+}
 
 export default function App() {
   const [build, setBuild] = useState(() => decodeBuild(location.hash));
@@ -115,14 +132,19 @@ export default function App() {
                   return (
                     <div key={slot} className="slot base">
                       <span className="slot-tag">枠0 / base</span>
-                      <span className="slot-name">{job?.name ?? '—'}</span>
+                      <span className="slot-name">
+                        {job && <ClassIcon icon={job.icon} />}
+                        {job?.name ?? '—'}
+                      </span>
                     </div>
                   );
                 }
                 const choices = jobChoicesFor(build, slot);
                 return (
                   <div key={slot} className={`slot${job ? ' filled' : ''}`}>
-                    <span className="slot-tag">枠{slot}</span>
+                    <span className="slot-tag">
+                      {job && <ClassIcon icon={job.icon} />}枠{slot}
+                    </span>
                     <select
                       value={jobId ?? ''}
                       onChange={(e) =>

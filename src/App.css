@@ -120,13 +120,24 @@ button.ghost {
   border-color: var(--accent-border);
 }
 .slot-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 11px;
   color: var(--text-dim);
   letter-spacing: 0.04em;
 }
 .slot-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 600;
   color: var(--text-h);
+}
+.class-icon {
+  border-radius: 6px;
+  background: var(--panel-2);
+  flex: none;
 }
 .slot select {
   width: 100%;
@@ -209,20 +220,32 @@ button.ghost {
 }
 .skill-badge {
   flex: none;
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
   display: grid;
   place-items: center;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 700;
   color: #12141a;
 }
-.type-attack {
+.skill-badge.type-attack {
   background: var(--attack);
 }
-.type-buff {
+.skill-badge.type-buff {
   background: var(--buff);
+}
+.skill-icon {
+  flex: none;
+  border-radius: 8px;
+  background: var(--panel-2);
+  border: 2px solid transparent;
+}
+.skill-icon.type-attack {
+  border-color: var(--attack);
+}
+.skill-icon.type-buff {
+  border-color: var(--buff);
 }
 .skill-title {
   flex: 1;
@@ -304,6 +327,82 @@ button.ghost {
   margin: 0;
   max-height: 4.5em;
   overflow: hidden;
+}
+
+/* ---- per-level table & attributes (details) ---- */
+.skill-card details {
+  border-top: 1px solid var(--border);
+  padding-top: 6px;
+}
+.skill-card summary {
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-dim);
+  user-select: none;
+  list-style-position: inside;
+}
+.skill-card summary:hover {
+  color: var(--accent);
+}
+.lv-table-wrap {
+  max-height: 220px;
+  overflow: auto;
+  margin-top: 6px;
+}
+.lv-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.lv-table th,
+.lv-table td {
+  padding: 2px 6px;
+  text-align: right;
+  border-bottom: 1px solid var(--border);
+}
+.lv-table th:first-child,
+.lv-table td:first-child {
+  text-align: left;
+}
+.lv-table th {
+  color: var(--text-dim);
+  font-weight: 500;
+  position: sticky;
+  top: 0;
+  background: var(--panel);
+}
+.lv-table tr.cur td {
+  color: var(--accent);
+  font-weight: 700;
+}
+.attrs ul {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.attrs li {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.attr-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+.attr-max {
+  color: var(--accent);
+  font-weight: 500;
+}
+.attr-desc {
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--text-dim);
+  white-space: pre-line;
 }
 
 /* ---- footer ---- */

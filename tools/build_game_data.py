@@ -13,6 +13,8 @@
 """
 import sys
 import os
+import re
+import glob
 import json
 
 sys.path.insert(0, os.path.dirname(__file__))
@@ -63,6 +65,42 @@ def clean(text):
     return (text or "").replace("{nl}", "\n").strip()
 
 
+def load_ability_maxlevels():
+    """全 ability_<class>.ies を1パスで走査し {特性ClassName: MaxLevel} を返す。
+    特性の名前/説明は ability.ies にあるが MaxLevel は各クラス別テーブルに入る。
+    (read_table を表ごとに呼ぶと ipf 全再スキャンで極端に遅いので newest-wins を自前で行う)"""
+    ipfs = glob.glob(os.path.join(T.CLIENT_ROOT, "data", "*.ipf")) + \
+        glob.glob(os.path.join(T.CLIENT_ROOT, "patch", "*.ipf"))
+    ipfs.sort(key=lambda p: (T._patch_rank(p), p))
+    pat = re.compile(r"^ability_[a-z0-9]+\.ies$")
+    latest = {}  # basename -> (path, entry, new_version)
+    for path in ipfs:
+        try:
+            with open(path, "rb") as f:
+                foot = T._find_footer(f)
+                if not foot:
+                    continue
+                fc, to, nv = foot
+                for rel, do, comp, uncomp in T._entries(f, fc, to):
+                    b = os.path.basename(rel).lower()
+                    if pat.match(b):
+                        latest[b] = (path, (rel, do, comp, uncomp), nv)
+        except Exception:
+            continue
+    out = {}
+    for _b, (path, (rel, do, comp, uncomp), nv) in latest.items():
+        try:
+            with open(path, "rb") as f:
+                blob = T._extract(f, do, comp, uncomp, rel, nv)
+            for r in T.parse_ies(blob):
+                ml = int(num(r.get("MaxLevel")))
+                if ml:
+                    out[r["ClassName"]] = ml
+        except Exception:
+            continue
+    return out
+
+
 def main():
     print("extracting tables ...")
     skills_rows = T.read_table("skill.ies")[0]
@@ -75,6 +113,27 @@ def main():
         return ja_skill.get(ko) or ja_etc.get(ko) or ko
 
     skill_by_cn = {s["ClassName"]: s for s in skills_rows}
+
+    # --- スキル特性 (특성): ability.ies を SkillCategory==スキルClassName で紐付け ---
+    print("extracting skill attributes ...")
+    ability_rows = T.read_table("ability.ies")[0]
+    attr_maxlv = load_ability_maxlevels()
+    attrs_by_skill = {}
+    for a in ability_rows:
+        cat = a.get("SkillCategory", "")
+        if not cat or cat not in skill_by_cn:
+            continue
+        if str(a.get("Hidden")) in ("YES", "1", "1.0"):
+            continue
+        name = a.get("Name")
+        if not name:
+            continue
+        attrs_by_skill.setdefault(cat, []).append({
+            "name": ja(name),
+            "desc": clean(ja(a.get("Desc", ""))),
+            "icon": a.get("Icon", ""),
+            "maxLevel": attr_maxlv.get(a["ClassName"], 1),
+        })
 
     # --- skilltree: ジョブ ClassName -> [ {skill row + maxLevel + unlock} ] ---
     tree_by_job = {}
@@ -126,7 +185,9 @@ def main():
                 "type": skill_type(sk),
                 "element": sk.get("Attribute", "") or "",
                 "cooldown": int(num(sk.get("BasicCoolDown"))),
-                "overheat": int(num(sk.get("SklUseOverHeat"))),
+                "overheat": int(num(sk.get("SklUseOverHeat"))),  # オーバーヒート回数
+                # AoE攻撃比率 (SklSR)。負値/0 は「該当なし」のセンチネルなので UI 側で除外。
+                "aoeRatio": int(num(sk.get("SklSR"))),
                 "sp": {"base": round(num(sk.get("BasicSP")), 2),
                        "perLevel": round(num(sk.get("LvUpSpendSp")), 2)},
                 "factor": {"base": round(num(sk.get("SklFactor")), 2),
@@ -134,6 +195,7 @@ def main():
                 "atkAdd": {"base": round(num(sk.get("SklAtkAdd")), 2),
                            "perLevel": round(num(sk.get("SklAtkAddByLevel")), 2)},
                 "description": clean(ja(sk.get("Caption", ""))),
+                "attributes": attrs_by_skill.get(sk["ClassName"], []),
             }
         # base(スターター) 判定: そのツリーで末尾 _1 のクラス (Char{n}_1)
         is_base = cn == f"Char{tree_digit}_1"

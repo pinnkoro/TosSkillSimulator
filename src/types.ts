@@ -10,12 +10,18 @@ export interface LevelScaled {
 
 export type SkillType = 'attack' | 'buff';
 
+/** 多言語テキスト。ja=日本語(TSVジョイン結果) / ko=韓国語(IES原文)。 */
+export interface Loc {
+  ja: string;
+  ko: string;
+}
+
 /** スキル特性（別途取得する強化。ability.ies 由来）。 */
 export interface SkillAttribute {
   /** ability.ies の $ID（ビルド状態・URL共有の識別子） */
   id: number;
-  name: string;
-  desc: string;
+  name: Loc;
+  desc: Loc;
   icon: string;
   maxLevel: number;
 }
@@ -23,7 +29,7 @@ export interface SkillAttribute {
 export interface Skill {
   id: number;
   className: string;
-  name: string;
+  name: Loc;
   icon: string;
   maxLevel: number;
   unlockClassLevel: number;
@@ -42,7 +48,7 @@ export interface Skill {
   factor: LevelScaled;
   /** 固定攻撃力加算 */
   atkAdd: LevelScaled;
-  description: string;
+  description: Loc;
   /** スキル特性一覧 */
   attributes: SkillAttribute[];
 }
@@ -52,14 +58,14 @@ export type TreeId = 'warrior' | 'wizard' | 'archer' | 'cleric' | 'scout';
 
 export interface Tree {
   id: TreeId;
-  name: string;
+  name: Loc;
   baseJobId: number;
 }
 
 export interface Job {
   id: number;
   className: string;
-  name: string;
+  name: Loc;
   engName: string;
   tree: TreeId;
   isBase: boolean;

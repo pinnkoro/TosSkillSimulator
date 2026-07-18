@@ -20,6 +20,7 @@ import {
 import { SkillCard } from './components/SkillCard';
 import { AttrChip } from './components/AttrChip';
 import { classIconUrl } from './lib/icons';
+import { LANGS, useI18n } from './lib/i18n';
 import './App.css';
 
 /** クラスアイコン。無い/失敗時は同サイズのプレースホルダで場所を保持（表示形式を統一）。 */
@@ -39,6 +40,7 @@ function ClassIcon({ icon }: { icon: string }) {
 }
 
 export default function App() {
+  const { ui, tl, lang, setLang } = useI18n();
   const [build, setBuild] = useState(() => decodeBuild(location.hash));
   const [copied, setCopied] = useState(false);
   const skipHash = useRef(false);
@@ -92,25 +94,38 @@ export default function App() {
   return (
     <div className="app">
       <header className="topbar">
-        <h1>jTOS スキルシミュレータ</h1>
+        <h1>{ui.title}</h1>
         <div className="topbar-actions">
-          <span className="total">合計 {totalPoints} pt</span>
+          <span className="total">{ui.total} {totalPoints} {ui.pt}</span>
           {build.tree && (
             <span className={`bonus${bonus > BONUS_POOL ? ' over' : ''}`}>
-              追加 {bonus}/{BONUS_POOL}
+              {ui.add} {bonus}/{BONUS_POOL}
             </span>
           )}
           <button type="button" onClick={share} disabled={!build.tree}>
-            {copied ? 'コピーしました' : 'URLを共有'}
+            {copied ? ui.copied : ui.share}
           </button>
           <button type="button" className="ghost" onClick={reset} disabled={!build.tree}>
-            リセット
+            {ui.reset}
           </button>
+          <div className="lang-select" role="group" aria-label={ui.langLabel}>
+            {LANGS.map((l) => (
+              <button
+                type="button"
+                key={l.id}
+                className={`lang-btn${lang === l.id ? ' selected' : ''}`}
+                aria-pressed={lang === l.id}
+                onClick={() => setLang(l.id)}
+              >
+                {l.label}
+              </button>
+            ))}
+          </div>
         </div>
       </header>
 
       <section className="tree-select">
-        <span className="section-label">系統</span>
+        <span className="section-label">{ui.tree}</span>
         <div className="tree-buttons">
           {treeList.map((t) => {
             const baseIcon = getJob(t.baseJobId)?.icon;
@@ -122,7 +137,7 @@ export default function App() {
                 onClick={() => setBuild(selectTree(t.id as TreeId))}
               >
                 {baseIcon && <ClassIcon icon={baseIcon} />}
-                {t.name}
+                {tl(t.name)}
               </button>
             );
           })}
@@ -130,23 +145,23 @@ export default function App() {
       </section>
 
       {!build.tree && (
-        <p className="hint">系統を選ぶとジョブとスキルが表示されます。</p>
+        <p className="hint">{ui.hint}</p>
       )}
 
       {build.tree && (
         <>
           <section className="job-slots">
-            <span className="section-label">ジョブ（枠0=スターター固定）</span>
+            <span className="section-label">{ui.jobsLabel}</span>
             <div className="slot-row">
               {build.jobs.map((jobId, slot) => {
                 const job = getJob(jobId);
                 if (slot === 0) {
                   return (
                     <div key={slot} className="slot base">
-                      <span className="slot-tag">枠0 · base</span>
+                      <span className="slot-tag">{ui.slot0}</span>
                       <div className="slot-body">
                         <ClassIcon icon={job?.icon ?? ''} />
-                        <span className="slot-name">{job?.name ?? '—'}</span>
+                        <span className="slot-name">{job ? tl(job.name) : '—'}</span>
                       </div>
                     </div>
                   );
@@ -154,7 +169,7 @@ export default function App() {
                 const choices = jobChoicesFor(build, slot);
                 return (
                   <div key={slot} className={`slot${job ? ' filled' : ''}`}>
-                    <span className="slot-tag">枠{slot}</span>
+                    <span className="slot-tag">{ui.slot(slot)}</span>
                     <div className="slot-body">
                       <ClassIcon icon={job?.icon ?? ''} />
                       <select
@@ -165,10 +180,10 @@ export default function App() {
                           )
                         }
                       >
-                        <option value="">— 選択 —</option>
+                        <option value="">{ui.choose}</option>
                         {choices.map((c) => (
                           <option key={c.id} value={c.id}>
-                            {c.name}
+                            {tl(c.name)}
                           </option>
                         ))}
                       </select>
@@ -188,18 +203,18 @@ export default function App() {
                 <div className="job-block" key={job.id}>
                   <div className="job-block-head">
                     <h2>
-                      {job.name}
+                      {tl(job.name)}
                       <span className="job-eng">{job.engName}</span>
                     </h2>
                     <div className={`budget${over ? ' over' : ''}`}>
                       <b>{used}</b>
-                      <span>/ {budget} pt</span>
+                      <span>/ {budget} {ui.pt}</span>
                       {over && <span className="budget-bonus">(+{used - budget})</span>}
                     </div>
                   </div>
                   {job.attributes.length > 0 && (
                     <div className="class-attrs">
-                      <span className="section-label">クラス特性</span>
+                      <span className="section-label">{ui.classAttrs}</span>
                       <div className="attr-row">
                         {job.attributes.map((a) => (
                           <AttrChip
@@ -235,7 +250,7 @@ export default function App() {
       )}
 
       <footer className="foot">
-        <span>{gameData.meta.jobCount}ジョブ / {gameData.meta.skillCount}スキル</span>
+        <span>{ui.footer(gameData.meta.jobCount, gameData.meta.skillCount)}</span>
         <span className="copyright">{gameData.meta.note}</span>
       </footer>
     </div>

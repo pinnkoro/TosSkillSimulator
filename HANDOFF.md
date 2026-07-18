@@ -132,7 +132,8 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 - SP消費 ≒ `sp.base + sp.perLevel*(L-1)`
 - スキルファクター ≒ `factor.base + factor.perLevel*(L-1)`
 - 固定加算 ≒ `atkAdd.base + atkAdd.perLevel*(L-1)`
-- ※ゲーム内の厳密式は skill.ies の `CoolDown`/`SP` 列に Lua スクリプト名(`SCR_*`)で入っているが重いので不採用。上記の線形近似で足りる（プランナー用途）。バフ持続時間等の説明文中の数値も同 Lua 依存のため未評価。
+- ※攻撃スキルの係数は `#{SkillFactor}#`(=SklFactor 線形)。ヒール/バフ等は `Caption2` が参照する `#{CaptionRatioN}#` を **`script/calc_property_skill.lua` の `SCR_*` 関数から解決**する（単純な線形式のみ、`build_game_data.py:load_skill_ratios`）。ステータス(INT/MNA)依存の値は静的計算不可のため 0(非表示)。`type` も Caption2 が `SkillFactor` を使うか否かで attack/buff を判定（SklFactor>0 だけの旧判定だとベアー等のバフが attack になる）。
+- ※CoolDown/SP 等その他の `SCR_*` 式は未評価（線形近似で足りる）。
 - `attributes` は 659/898 スキルに存在（計1297件）。名前/説明は skill.tsv で日本語化済み。
 
 ---

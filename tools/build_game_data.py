@@ -169,17 +169,16 @@ def main():
                 attrs_by_skill.setdefault(cn, []).append(attr)
 
     # --- クラス特性 (スキル非依存): SkillCategory=="All" の行を Job(クラスClassName) で紐付け ---
-    # 武器の着用可能付与(「〜착용 가능」)は除外。(미사용)/(未使用) 表記も除外。
+    # スキル特性と同基準で、現行取得可能(ability_<class>.ies 掲載=purchasable)のもののみ。
+    # これにより「最大バフ数アップ」「武器スワップ」等の汎用/旧特性は除外される。
     class_attrs_by_cn = {}
     for a in ability_rows:
         if a.get("SkillCategory", "") != "All":
             continue
-        if str(a.get("Hidden")) in ("YES", "1", "1.0"):
+        if a["ClassName"] not in purchasable:
             continue
         name = a.get("Name") or ""
-        if not name or name.startswith("(미사용)") or name.startswith("(未使用)"):
-            continue
-        if "착용 가능" in (a.get("Desc") or ""):
+        if not name:
             continue
         attr = {
             "id": a["$ID"],

@@ -79,8 +79,12 @@ def clean(text):
 
 
 def load_ability_maxlevels():
-    """全 ability_<class>.ies を1パスで走査し {特性ClassName: MaxLevel} を返す。
-    特性の名前/説明は ability.ies にあるが MaxLevel は各クラス別テーブルに入る。
+    """全 ability_<class>.ies を1パスで走査し (maxlv, purchasable) を返す。
+      maxlv       : {特性ClassName: MaxLevel}
+      purchasable : ability_<class>.ies に載る全 ClassName の集合
+                    (=各クラスで実際に取得可能な現行特性。ここに無い ability.ies 行は
+                     旧/未使用特性なので表示しない判定に使う)
+    特性の名前/説明は ability.ies にあるが、現行かどうか・MaxLevel は各クラス別テーブルが持つ。
     (read_table を表ごとに呼ぶと ipf 全再スキャンで極端に遅いので newest-wins を自前で行う)"""
     ipfs = glob.glob(os.path.join(T.CLIENT_ROOT, "data", "*.ipf")) + \
         glob.glob(os.path.join(T.CLIENT_ROOT, "patch", "*.ipf"))
@@ -101,17 +105,19 @@ def load_ability_maxlevels():
         except Exception:
             continue
     out = {}
+    purchasable = set()
     for _b, (path, (rel, do, comp, uncomp), nv) in latest.items():
         try:
             with open(path, "rb") as f:
                 blob = T._extract(f, do, comp, uncomp, rel, nv)
             for r in T.parse_ies(blob):
+                purchasable.add(r["ClassName"])
                 ml = int(num(r.get("MaxLevel")))
                 if ml:
                     out[r["ClassName"]] = ml
         except Exception:
             continue
-    return out
+    return out, purchasable
 
 
 def main():
@@ -136,13 +142,14 @@ def main():
     # --- スキル特性 (특성): ability.ies を SkillCategory==スキルClassName で紐付け ---
     print("extracting skill attributes ...")
     ability_rows = T.read_table("ability.ies")[0]
-    attr_maxlv = load_ability_maxlevels()
+    attr_maxlv, purchasable = load_ability_maxlevels()
     attrs_by_skill = {}
     for a in ability_rows:
         cat = a.get("SkillCategory", "")
         if not cat:
             continue
-        if str(a.get("Hidden")) in ("YES", "1", "1.0"):
+        # 現行特性のみ: ability_<class>.ies に載るものだけ (Hidden はアーツ等で立つが現行なので不採用)。
+        if a["ClassName"] not in purchasable:
             continue
         name = a.get("Name")
         if not name:

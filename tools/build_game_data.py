@@ -7,8 +7,10 @@
   skill.ies     … スキルの数値 (SklFactor, BasicSP, BasicCoolDown ...)
   skill.tsv     … スキル名/説明の日本語 (韓国語→日本語)
   etc.tsv       … クラス名などの日本語
+  ja_overrides.json … TSV 未収録で韓国語のまま残る説明の日本語補完(リポジトリ同梱)
 
 名前は IES が持つ韓国語原文を TSV(韓国語列→日本語列)でジョインして日本語化する。
+TSV に無く ja が韓国語のままになる分は ja_overrides.json で上書きする(再ビルド耐性)。
 抽出データは © IMCGAMES CO., LTD.
 """
 import sys
@@ -200,6 +202,35 @@ def main():
     def loc_desc(ko):
         return {"ja": clean(ja(ko)), "ko": clean(ko)}
 
+    # --- 日本語オーバーライド ---
+    # skill.tsv 等の対訳辞書に載らず、ja がクライアント原文(韓国語)のままになる
+    # 説明文を、リポジトリ同梱の tools/ja_overrides.json で補完する
+    # (新クラスなど TSV 未収録分)。辞書ジョイン後にこの値で ja を上書きするため、
+    # 再ビルドしても失われない。skills はスキル ClassName、attributes は特性 $ID をキーにする。
+    ov_path = os.path.join(os.path.dirname(__file__), "ja_overrides.json")
+    try:
+        with open(ov_path, encoding="utf-8") as f:
+            _ov = json.load(f)
+    except FileNotFoundError:
+        _ov = {}
+    ov_skills = _ov.get("skills", {})
+    ov_attrs = _ov.get("attributes", {})
+    ov_used = set()  # 実際に適用したキー。末尾で未使用(=陳腐化)を警告する。
+
+    def apply_skill_ov(className, desc):
+        o = ov_skills.get(className)
+        if o and o.get("description"):
+            desc["ja"] = o["description"]
+            ov_used.add("skill:" + className)
+        return desc
+
+    def apply_attr_ov(attr_id, desc):
+        o = ov_attrs.get(str(attr_id))
+        if o and o.get("desc"):
+            desc["ja"] = o["desc"]
+            ov_used.add("attr:" + str(attr_id))
+        return desc
+
     skill_by_cn = {s["ClassName"]: s for s in skills_rows}
 
     # --- スキル特性 (특성): ability.ies を SkillCategory==スキルClassName で紐付け ---
@@ -222,7 +253,7 @@ def main():
         attr = {
             "id": a["$ID"],
             "name": loc_name(name),
-            "desc": loc_desc(a.get("Desc", "")),
+            "desc": apply_attr_ov(a["$ID"], loc_desc(a.get("Desc", ""))),
             "icon": a.get("Icon", ""),
             "maxLevel": attr_maxlv.get(a["ClassName"], 1),
         }
@@ -246,7 +277,7 @@ def main():
         attr = {
             "id": a["$ID"],
             "name": loc_name(name),
-            "desc": loc_desc(a.get("Desc", "")),
+            "desc": apply_attr_ov(a["$ID"], loc_desc(a.get("Desc", ""))),
             "icon": a.get("Icon", ""),
             "maxLevel": attr_maxlv.get(a["ClassName"], 1),
         }
@@ -341,7 +372,8 @@ def main():
                 "factorKind": f_kind,
                 "atkAdd": {"base": round(num(sk.get("SklAtkAdd")), 2),
                            "perLevel": round(num(sk.get("SklAtkAddByLevel")), 2)},
-                "description": loc_desc(sk.get("Caption", "")),
+                "description": apply_skill_ov(
+                    sk["ClassName"], loc_desc(sk.get("Caption", ""))),
                 "attributes": attrs_by_skill.get(sk["ClassName"], []),
             }
         # base(スターター) 判定: そのツリーで末尾 _1 のクラス (Char{n}_1)
@@ -391,6 +423,44 @@ def main():
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
     print(f"game-data.json: {len(jobs_out)} jobs, {len(skills_out)} skills, patch={patch}")
+
+    # オーバーライドの健全性: 適用状況と、対象が消えた(陳腐化した)キーを報告する。
+    ov_total = len(ov_skills) + len(ov_attrs)
+    if ov_total:
+        print(f"ja overrides: {len(ov_used)}/{ov_total} applied")
+        stale = ([f"skill:{k}" for k in ov_skills if f"skill:{k}" not in ov_used]
+                 + [f"attr:{k}" for k in ov_attrs if f"attr:{k}" not in ov_used])
+        if stale:
+            print("  WARNING: unused override keys (TSV now covers them, or key "
+                  "no longer exists): " + ", ".join(stale))
+
+    # 韓国語の取りこぼし検出: 出力全体を再帰走査し、多言語フィールド({ja,ko})の
+    # ja にハングルが残る箇所を報告する。スキル説明・スキル特性・クラス特性・
+    # 各種 name（さらに将来追加されるフィールド）まで漏れなくカバーする。
+    # 1件でも残っていれば非ゼロ終了し、退行を CI 等で検知できるようにする。
+    _hangul = re.compile(r"[가-힣]")
+
+    def scan_ja(node, label, found):
+        if isinstance(node, dict):
+            if isinstance(node.get("ja"), str) and "ko" in node:
+                if _hangul.search(node["ja"]):
+                    found.append(label)
+            ctx = node.get("className") or node.get("id") or node.get("tree")
+            base = f"{label}>{ctx}" if ctx is not None else label
+            for k, v in node.items():
+                if isinstance(v, (dict, list)):
+                    scan_ja(v, f"{base}.{k}", found)
+        elif isinstance(node, list):
+            for item in node:
+                scan_ja(item, label, found)
+
+    leftover = []
+    scan_ja(out, "root", leftover)
+    if leftover:
+        uniq = sorted(set(leftover))
+        print(f"  ERROR: {len(uniq)} ja field(s) still contain Korean: "
+              + ", ".join(uniq))
+        sys.exit(1)
 
 
 if __name__ == "__main__":

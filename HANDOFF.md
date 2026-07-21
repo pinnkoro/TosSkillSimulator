@@ -82,7 +82,7 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 - [x] スキルカード: コンパクト表示（アイコン＋名前＋Lv常時）＋**ホバーで詳細ポップアップ**（factor/+攻/SP/CD・overheat/AoE・レベル別表・説明）
 - [x] 特性: **アイコンで常時表示・クリックでON/OFF・URL(hash `a=`)共有対象**。ホバーで名前/説明
 - [x] クラス特性（スキル非依存、ability.ies `SkillCategory=="All"`）をジョブ枠に表示・同様にトグル/共有
-- [x] スキルポイント上限: **base職15 / それ以降45 + 全職共有の追加プール20pt**（build.ts で頭打ち enforcement、topbar に「追加 n/20」）
+- [x] スキルポイント上限: **base職15 / それ以降45 + 全職共有の追加プール21pt**（build.ts で頭打ち enforcement、topbar に「追加 n/21」）
 - [x] アイコン同梱（`extract_icons.py` → `public/icons/`、スキル769＋クラス114、64px）
 - [x] ビルド/lint 通過・コミット・push（自動デプロイ）
 

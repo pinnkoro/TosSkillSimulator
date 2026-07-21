@@ -79,10 +79,10 @@ export function toggleAttr(build: BuildState, attrId: number): BuildState {
 
 // ---- スキルポイント上限ルール ----
 // base職=15pt / それ以降=45pt を各職の基本枠とし、
-// さらに全職合計で BONUS_POOL(=20pt) まで基本枠を超えて追加できる。
+// さらに全職合計で BONUS_POOL(=21pt) まで基本枠を超えて追加できる。
 export const BASE_BUDGET = 15;
 export const ADV_BUDGET = 45;
-export const BONUS_POOL = 20;
+export const BONUS_POOL = 21;
 
 export function jobBudget(job: Job): number {
   return job.isBase ? BASE_BUDGET : ADV_BUDGET;

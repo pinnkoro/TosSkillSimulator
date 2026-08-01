@@ -28,8 +28,20 @@ DATA = os.path.join(ROOT, "src", "data", "game-data.json")
 OUT_SKILL = os.path.join(ROOT, "public", "icons", "skill")
 OUT_CLASS = os.path.join(ROOT, "public", "icons", "class")
 OUT_ATTR = os.path.join(ROOT, "public", "icons", "attr")
+OUT_UI = os.path.join(ROOT, "public", "icons", "ui")
 SIZE = 64        # スキル/クラスアイコンの一辺(px)
 ATTR_SIZE = 40   # 特性アイコンの一辺(px、UIで小さく使うので控えめ)
+UI_SIZE = 48     # UI用アイコンの一辺(px)
+
+# スキルジェム（UIのトグル用）。系統ID -> ui.ipf の PNG 名。
+# 出力は public/icons/ui/skillgem_<系統>.png。
+GEM_ICONS = {
+    "warrior": "icon_item_sklgem_swordman.png",
+    "wizard": "icon_item_sklgem_wizerd.png",   # クライアント側の綴りが wizerd
+    "archer": "icon_item_sklgem_archer.png",
+    "cleric": "icon_item_sklgem_cleric.png",
+    "scout": "icon_item_sklgem_scout.png",
+}
 
 
 def build_index(png_prefixes, want_basenames, want_xml):
@@ -137,9 +149,9 @@ def main():
           f"{len(attr_icons)} attribute icons")
 
     want_xml = {"baseskinset/skillicon.xml", "baseskinset/classicon.xml"}
-    png_idx, _atlas, xml_ent = build_index(
+    png_idx, gem_idx, xml_ent = build_index(
         png_prefixes=("icon/skill/",),
-        want_basenames=set(),
+        want_basenames=set(GEM_ICONS.values()),
         want_xml=want_xml,
     )
     skillicon_blob = extract_bytes(xml_ent["baseskinset/skillicon.xml"])
@@ -171,6 +183,21 @@ def main():
     print(f"skill icons: {ok} written, {miss} missing")
     if missing:
         print("  missing:", missing[:20])
+
+    # ---- UI用: スキルジェム (系統ごと) ----
+    gok = []
+    gmiss = []
+    for tree, fname in GEM_ICONS.items():
+        ent = gem_idx.get(fname)
+        if not ent:
+            gmiss.append(fname)
+            continue
+        img = Image.open(io.BytesIO(extract_bytes(ent)))
+        save_icon(img, os.path.join(OUT_UI, f"skillgem_{tree}.png"), UI_SIZE)
+        gok.append(tree)
+    print(f"ui icons: {len(gok)} written, {len(gmiss)} missing")
+    if gmiss:
+        print("  missing:", gmiss)
 
     # ---- クラス + 特性アイコン (アトラス切り出し、アトラス走査は1回に集約) ----
     class_items = [(n, classmap[n.lower()]) for n in class_icons if n.lower() in classmap]

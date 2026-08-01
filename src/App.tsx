@@ -275,6 +275,7 @@ export default function App() {
                               gem={selectedGems.has(skill.id)}
                               gemFull={gemCount >= GEM_MAX}
                               onToggleGem={() => setBuild(toggleGem(build, skill.id))}
+                              tree={build.tree ?? ''}
                             />
                           ))}
                         </div>

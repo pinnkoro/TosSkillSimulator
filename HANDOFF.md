@@ -150,6 +150,7 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 | `tools/extract_icons.py` | アイコン抽出 → `public/icons/`（要 Pillow、ゲーム終了中に実行） |
 | `src/data/game-data.json` | **同梱データ（133ジョブ/898スキル、特性1297件）** |
 | `public/icons/{skill,class,attr}/*.png` | **同梱アイコン（スキル769/クラス114=64px、特性1243=40px）** |
+| `public/icons/ui/skillgem_<系統>.png` | スキルジェムのトグル用アイコン（`icon_item_sklgem_*` を48px化。wizard だけクライアント側の綴りが `wizerd`） |
 | `src/data/gameData.ts` | JSON読込＋索引（jobById/skillById 等） |
 | `src/lib/build.ts` | ビルド状態・URL(hash)エンコード/デコード・集計 |
 | `src/lib/icons.ts` | アイコンURLヘルパ（BASE_URL 対応） |

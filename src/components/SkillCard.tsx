@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Skill } from '../types';
 import { valueAt } from '../data/gameData';
-import { skillIconUrl } from '../lib/icons';
+import { gemIconUrl, skillIconUrl } from '../lib/icons';
 import { useI18n } from '../lib/i18n';
 import { AttrChip } from './AttrChip';
 
@@ -18,6 +18,8 @@ interface Props {
   /** ジェムの空き枠が無い（未装着のカードでは押せない） */
   gemFull: boolean;
   onToggleGem: () => void;
+  /** ジェムアイコンの系統（絵柄が系統ごとに違う） */
+  tree: string;
 }
 
 function fmt(n: number): string {
@@ -58,6 +60,7 @@ export function SkillCard({
   gem,
   gemFull,
   onToggleGem,
+  tree,
 }: Props) {
   const { ui, tl } = useI18n();
   const active = level > 0;
@@ -70,6 +73,7 @@ export function SkillCard({
   const cd = skill.cooldown / 1000;
   // ジェムを外すのはいつでも可。付けるのは Lv1以上＆空き枠があるときだけ。
   const gemDisabled = !gem && (!active || gemFull);
+  const [gemIconFailed, setGemIconFailed] = useState(false);
 
   // ポップアップ: ホバーで開き（ポップアップ内に入っても消えない）、クリックでピン留め。
   const [hover, setHover] = useState(false);
@@ -227,9 +231,21 @@ export function SkillCard({
           disabled={gemDisabled}
           onClick={onToggleGem}
         >
-          <span className="gem-mark" aria-hidden="true">
-            ◆
-          </span>
+          {gemIconFailed ? (
+            <span className="gem-mark" aria-hidden="true">
+              ◆
+            </span>
+          ) : (
+            <img
+              className="gem-icon"
+              src={gemIconUrl(tree)}
+              alt=""
+              loading="lazy"
+              width={24}
+              height={24}
+              onError={() => setGemIconFailed(true)}
+            />
+          )}
           <span className="gem-lv">+1</span>
           <span className="tip attr-tip">
             <span className="tip-title">{ui.gem}</span>

@@ -598,6 +598,16 @@ button.ghost {
 .gem-mark {
   font-size: 13px;
 }
+/* OFF のときは彩度を落としてグレー寄せ（特性チップと同じ見せ方） */
+.gem-icon {
+  display: block;
+  filter: grayscale(0.8);
+  transition: filter 0.12s;
+}
+.gem-toggle.on .gem-icon,
+.gem-toggle:hover:not(:disabled) .gem-icon {
+  filter: none;
+}
 .gem-lv {
   font-variant-numeric: tabular-nums;
   font-weight: 700;

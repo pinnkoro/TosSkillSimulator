@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Skill, TreeId } from './types';
-import { gameData, getJob } from './data/gameData';
+import { gameData, getJob, vaivoraOf } from './data/gameData';
 import {
   BONUS_POOL,
   EARRING_SLOTS,
@@ -257,6 +257,7 @@ export default function App() {
                           on={selectedVaivora.has(job.id)}
                           full={vaivoraCount >= VAIVORA_MAX}
                           onToggle={() => setBuild(toggleVaivora(build, job.id))}
+                          entries={vaivoraOf(job.id)}
                         />
                       )}
                     </h2>

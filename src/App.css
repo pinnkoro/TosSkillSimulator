@@ -726,6 +726,46 @@ button.ghost {
   border-color: var(--warn);
   background: rgba(255, 180, 84, 0.1);
 }
+/* バイボラの効果説明は長いので、幅を取って中でスクロールさせる。
+   .tip の子はホバー継続扱いなので pointer-events を戻せばスクロールできる。 */
+.vaivora-tip {
+  bottom: calc(100% + 6px);
+  left: 0;
+  width: 340px;
+  max-width: 84vw;
+  max-height: min(56vh, 420px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 400;
+  background: var(--panel-2);
+  border: 1px solid var(--accent-border);
+  border-radius: 10px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+}
+.has-tip:hover > .vaivora-tip {
+  pointer-events: auto;
+}
+.vaivora-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+.vaivora-name {
+  font-weight: 700;
+  color: var(--warn);
+  font-size: 12px;
+}
+.tip-desc.dim {
+  opacity: 0.65;
+  font-size: 11px;
+}
 
 /* ---- footer ---- */
 .foot {

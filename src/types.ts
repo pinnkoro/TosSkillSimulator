@@ -78,6 +78,21 @@ export interface Job {
   attributes: SkillAttribute[];
 }
 
+/** バイボラ(ビジョン)。クラスごとに1つ。tools/build_vaivora.py 由来。 */
+export interface Vaivora {
+  /** アイテムの ClassName（識別子） */
+  item: string;
+  /** 対象クラスの job.id */
+  jobId: number;
+  /** 効果キー（item_equip の AdditionalOption_1） */
+  key: string;
+  name: Loc;
+  /** 武器種（ClassType2。空のこともある） */
+  weapon: string;
+  /** 効果説明。クライアントから拾えなかった分は空文字。 */
+  desc: Loc;
+}
+
 export interface GameData {
   meta: {
     source: string;

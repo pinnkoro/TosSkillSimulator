@@ -335,6 +335,21 @@ button.ghost {
   color: var(--text-dim);
   margin-left: 1px;
 }
+/* 装備によるレベル補正。既定はイヤリング色、ジェム付きのカードはジェム色。 */
+.lv-boost {
+  color: var(--earring);
+  font-weight: 700;
+  font-size: 13px;
+  margin-left: 1px;
+}
+/* ジェムを付けたカードは Lv の数字とゲージ(スライダー)の色を変える。 */
+.skill-card.gem-on .skill-lv b,
+.skill-card.gem-on .lv-boost {
+  color: var(--gem);
+}
+.skill-card.gem-on .stepper input[type='range'] {
+  accent-color: var(--gem);
+}
 .tag {
   font-size: 11px;
   color: var(--text-dim);
@@ -475,6 +490,13 @@ button.ghost {
   color: var(--accent);
   font-weight: 700;
 }
+/* 装備補正でのみ届く、本来の maxLevel を超えた行 */
+.lv-table-wrap tr.over-max td {
+  color: var(--earring);
+}
+.skill-card.gem-on .lv-table-wrap tr.over-max td {
+  color: var(--gem);
+}
 
 /* ---- attribute chips (常時表示・ON/OFF) ---- */
 .attr-row {
@@ -541,6 +563,121 @@ button.ghost {
 .attr-max {
   color: var(--accent);
   font-weight: 500;
+}
+
+/* ---- 装備によるレベル補正: スキルジェム(カード右下) / イヤリング(クラス単位) ---- */
+.gem-toggle {
+  /* 特性チップと同じ行の右端に寄せる */
+  margin-left: auto;
+  height: 34px;
+  padding: 0 8px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 1;
+  opacity: 0.55;
+  transition: opacity 0.12s, border-color 0.12s, color 0.12s;
+}
+.gem-toggle:hover:not(:disabled) {
+  opacity: 1;
+}
+.gem-toggle:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+.gem-toggle.on {
+  opacity: 1;
+  color: var(--gem);
+  border-color: var(--gem);
+}
+.gem-mark {
+  font-size: 13px;
+}
+.gem-lv {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+/* 右端のチップなのでツールチップは右寄せで開く（画面外に出ないように） */
+.gem-toggle .attr-tip {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+/* 解放Lv段階ごとの段。イヤリングONの段は丸ごと着色して対象範囲を示す。 */
+.tier-block {
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 8px;
+  margin: 0 -8px 12px;
+}
+.tier-block.earring-on {
+  border-color: var(--earring-border);
+  background: var(--earring-bg);
+}
+.tier-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.tier-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+.tier-block.earring-on .tier-label {
+  color: var(--earring);
+}
+/* 段がONのときは中のスキル枠も同じ色に揃える（Lvを振っているカードが分かるよう残す） */
+.tier-block.earring-on .skill-card {
+  border-color: var(--earring-border);
+}
+.tier-block.earring-on .skill-card.active {
+  background: linear-gradient(var(--earring-bg), var(--panel));
+}
+
+.earring-slot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel-2);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.earring-slot.on {
+  border-color: var(--earring);
+  color: var(--text-h);
+}
+.earring-tag {
+  white-space: nowrap;
+}
+.earring-slot button {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+.earring-lv {
+  min-width: 22px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+.earring-slot.on .earring-lv {
+  color: var(--earring);
 }
 
 /* ---- footer ---- */

@@ -47,6 +47,16 @@ const ja = {
   lvDown: 'レベルを下げる',
   lvUp: 'レベルを上げる',
   langLabel: '言語',
+  gem: 'スキルジェム',
+  gemHint: 'このスキルを+1Lv（全クラス合計8個まで）',
+  earring: 'イヤリング',
+  earringHint: 'この段階のスキルすべてを+1〜+5Lv（全体で3枠まで）',
+  earringDown: 'イヤリングの+Lvを下げる',
+  earringUp: 'イヤリングの+Lvを上げる',
+  tierLabel: (n: number) => `Lv${n}〜`,
+  needLv1: 'Lv1以上のスキルにのみ装着できます',
+  noSlot: '空き枠がありません',
+  effLv: (n: number) => `装備込みLv${n}:`,
 };
 
 const ko: typeof ja = {
@@ -83,6 +93,16 @@ const ko: typeof ja = {
   lvDown: '레벨 감소',
   lvUp: '레벨 증가',
   langLabel: '언어',
+  gem: '스킬 젬',
+  gemHint: '이 스킬 +1Lv (전 클래스 합계 8개까지)',
+  earring: '귀걸이',
+  earringHint: '해당 단계의 모든 스킬 +1~+5Lv (전체 3슬롯까지)',
+  earringDown: '귀걸이 +Lv 감소',
+  earringUp: '귀걸이 +Lv 증가',
+  tierLabel: (n: number) => `Lv${n}~`,
+  needLv1: 'Lv1 이상인 스킬에만 장착할 수 있습니다',
+  noSlot: '남은 슬롯이 없습니다',
+  effLv: (n: number) => `장비 포함 Lv${n}:`,
 };
 
 export const DICT = { ja, ko };

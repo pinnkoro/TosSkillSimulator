@@ -1,16 +1,23 @@
 // ビルド状態の生成・URL(hash)へのエンコード/デコード・集計。
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
-import type { BuildState, Job, TreeId } from '../types';
+import type { BuildState, Job, Skill, TreeId } from '../types';
 import { advancedJobsOf, baseJobOf, getJob, getSkill, getTree, trees } from '../data/gameData';
 
 export function emptyBuild(): BuildState {
-  return { tree: null, jobs: [null, null, null, null], levels: {}, attrs: [] };
+  return { tree: null, jobs: [null, null, null, null], levels: {}, attrs: [], gems: [], earrings: {} };
 }
 
 /** 系統を選び直す。base(枠0)を固定し、枠1-3はクリア。 */
 export function selectTree(tree: TreeId): BuildState {
   const base = baseJobOf(tree);
-  return { tree, jobs: [base ? base.id : null, null, null, null], levels: {}, attrs: [] };
+  return {
+    tree,
+    jobs: [base ? base.id : null, null, null, null],
+    levels: {},
+    attrs: [],
+    gems: [],
+    earrings: {},
+  };
 }
 
 /** 現在ビルドで選択中のジョブ(枠順、未選択は除く)。 */
@@ -49,7 +56,7 @@ function validAttrIds(build: BuildState): Set<number> {
   return valid;
 }
 
-/** 選択ジョブに属さないレベル/特性を捨てる。 */
+/** 選択ジョブに属さないレベル/特性/装備補正を捨てる。 */
 function prune(build: BuildState): BuildState {
   const okSkills = validSkillIds(build);
   const levels: Record<number, number> = {};
@@ -59,7 +66,14 @@ function prune(build: BuildState): BuildState {
   }
   const okAttrs = validAttrIds(build);
   const attrs = build.attrs.filter((id) => okAttrs.has(id));
-  return { ...build, levels, attrs };
+  // ジェムは「Lv1以上振ってあるスキル」にだけ乗る。イヤリングは選択中クラスの枠だけ残す。
+  const gems = build.gems.filter((id) => (levels[id] ?? 0) > 0);
+  const okJobs = new Set(build.jobs.filter((id): id is number => id != null));
+  const earrings: Record<string, number> = {};
+  for (const [k, v] of Object.entries(build.earrings)) {
+    if (v > 0 && okJobs.has(Number(k.split('_')[0]))) earrings[k] = v;
+  }
+  return { ...build, levels, attrs, gems, earrings };
 }
 
 export function setJob(build: BuildState, slot: number, jobId: number | null): BuildState {
@@ -75,6 +89,96 @@ export function toggleAttr(build: BuildState, attrId: number): BuildState {
     ? build.attrs.filter((id) => id !== attrId)
     : [...build.attrs, attrId];
   return { ...build, attrs };
+}
+
+// ---- 装備によるスキルレベル補正（ポイント消費とは別枠） ----
+// スキルジェム: 1スキルにつき +1Lv。全クラス合計 GEM_MAX 個まで。
+// イヤリング  : クラスの解放Lv段階(1〜/16〜/31〜)単位で +1〜+EARRING_MAX Lv。
+//               その段階のスキル全部に効き、枠は全体で EARRING_SLOTS 個まで。
+// どちらも「Lv1以上振ってあるスキル」にのみ乗り、スキルの maxLevel は超えられる。
+export const GEM_MAX = 8;
+export const EARRING_SLOTS = 3;
+export const EARRING_MAX = 5;
+/** イヤリングの段階（＝スキルの解放クラスLvの区切り）。 */
+export const EARRING_TIERS = [1, 16, 31] as const;
+
+/** 解放クラスLv → イヤリングの段階。 */
+export function tierOf(unlockClassLevel: number): number {
+  if (unlockClassLevel >= 31) return 31;
+  if (unlockClassLevel >= 16) return 16;
+  return 1;
+}
+
+/** イヤリング枠のキー。 */
+export function earringKey(jobId: number, tier: number): string {
+  return `${jobId}_${tier}`;
+}
+
+/** ジョブのスキルを解放Lv段階ごとに分ける（空の段階は返さない）。 */
+export function skillTiers(job: Job): { tier: number; skills: Skill[] }[] {
+  return EARRING_TIERS.map((tier) => ({
+    tier: tier as number,
+    skills: job.skillIds
+      .map((sid) => getSkill(sid))
+      .filter((sk): sk is Skill => sk != null && tierOf(sk.unlockClassLevel) === tier),
+  })).filter((g) => g.skills.length > 0);
+}
+
+/** 使用中のジェム個数。 */
+export function gemsUsed(build: BuildState): number {
+  return build.gems.length;
+}
+
+/** 使用中のイヤリング枠数。 */
+export function earringsUsed(build: BuildState): number {
+  return Object.keys(build.earrings).length;
+}
+
+/** ジェムのON/OFF。OFF→ON は Lv1以上かつ空きがあるときのみ。 */
+export function toggleGem(build: BuildState, skillId: number): BuildState {
+  if (build.gems.includes(skillId)) {
+    return { ...build, gems: build.gems.filter((id) => id !== skillId) };
+  }
+  if ((build.levels[skillId] ?? 0) <= 0) return build;
+  if (gemsUsed(build) >= GEM_MAX) return build;
+  return { ...build, gems: [...build.gems, skillId] };
+}
+
+/** イヤリングの+Lvを設定（0で外す）。新規装着は空き枠があるときのみ。 */
+export function setEarring(
+  build: BuildState,
+  jobId: number,
+  tier: number,
+  level: number,
+): BuildState {
+  const key = earringKey(jobId, tier);
+  const next = Math.max(0, Math.min(EARRING_MAX, level));
+  const cur = build.earrings[key] ?? 0;
+  if (next === cur) return build;
+  const earrings = { ...build.earrings };
+  if (next <= 0) {
+    delete earrings[key];
+    return { ...build, earrings };
+  }
+  if (cur === 0 && earringsUsed(build) >= EARRING_SLOTS) return build;
+  earrings[key] = next;
+  return { ...build, earrings };
+}
+
+/** そのスキルの装備によるレベル補正（ジェム＋所属クラス段階のイヤリング）。 */
+export function bonusLevel(build: BuildState, skillId: number): number {
+  if ((build.levels[skillId] ?? 0) <= 0) return 0;
+  const gem = build.gems.includes(skillId) ? 1 : 0;
+  const skill = getSkill(skillId);
+  const job = ownerJob(build, skillId);
+  if (!skill || !job) return gem;
+  return gem + (build.earrings[earringKey(job.id, tierOf(skill.unlockClassLevel))] ?? 0);
+}
+
+/** 装備補正込みの実効レベル。 */
+export function effectiveLevel(build: BuildState, skillId: number): number {
+  const lv = build.levels[skillId] ?? 0;
+  return lv > 0 ? lv + bonusLevel(build, skillId) : 0;
 }
 
 // ---- スキルポイント上限ルール ----
@@ -127,6 +231,10 @@ export function setLevel(build: BuildState, skillId: number, level: number): Bui
   const levels = { ...build.levels };
   if (lv <= 0) delete levels[skillId];
   else levels[skillId] = lv;
+  // Lv0 に戻したスキルからはジェムも外す（枠を解放する）。
+  if (lv <= 0 && build.gems.includes(skillId)) {
+    return { ...build, levels, gems: build.gems.filter((id) => id !== skillId) };
+  }
   return { ...build, levels };
 }
 
@@ -149,6 +257,13 @@ function encodeQuery(build: BuildState): string {
     .join('.');
   if (lv) params.set('s', lv);
   if (build.attrs.length) params.set('a', build.attrs.join('.'));
+  if (build.gems.length) params.set('g', build.gems.join('.'));
+  // イヤリングは `jobId_tier-lv` を '.' 区切りで。
+  const ear = Object.entries(build.earrings)
+    .filter(([, v]) => v > 0)
+    .map(([k, v]) => `${k}-${v}`)
+    .join('.');
+  if (ear) params.set('e', ear);
   return params.toString();
 }
 
@@ -198,6 +313,28 @@ export function decodeBuild(hash: string): BuildState {
       .map(Number)
       .filter((id) => id > 0 && okAttrs.has(id));
     build = { ...build, attrs };
+  }
+  // ジェム/イヤリングは setter 経由で入れて、個数上限・Lv0スキルを弾く。
+  const gStr = params.get('g');
+  if (gStr) {
+    for (const tok of gStr.split('.')) {
+      const id = Number(tok);
+      if (id > 0) build = toggleGem(build, id);
+    }
+  }
+  const eStr = params.get('e');
+  if (eStr) {
+    for (const pair of eStr.split('.')) {
+      const [k, v] = pair.split('-');
+      const [jobStr, tierStr] = (k ?? '').split('_');
+      const jobId = Number(jobStr);
+      const tier = Number(tierStr);
+      const lv = Number(v);
+      if (jobId > 0 && EARRING_TIERS.includes(tier as 1 | 16 | 31) && lv > 0) {
+        build = setEarring(build, jobId, tier, lv);
+      }
+    }
+    build = prune(build);
   }
   return build;
 }

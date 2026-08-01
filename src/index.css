@@ -12,6 +12,11 @@
   --attack: #ff6b6b;
   --buff: #4dd4a8;
   --warn: #ffb454;
+  /* 装備によるレベル補正の色分け（ジェム=緑 / イヤリング=青） */
+  --gem: #4dd4a8;
+  --earring: #6fb3ff;
+  --earring-bg: rgba(111, 179, 255, 0.08);
+  --earring-border: rgba(111, 179, 255, 0.5);
 
   font: 15px/1.5 system-ui, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
   color-scheme: dark;

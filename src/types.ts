@@ -99,4 +99,11 @@ export interface BuildState {
   levels: Record<number, number>;
   /** ONにした特性IDの集合（ON/OFFのみ） */
   attrs: number[];
+  /** スキルジェムを付けたスキルID（各+1Lv、全クラス合計 GEM_MAX 個まで） */
+  gems: number[];
+  /**
+   * イヤリング。`${jobId}_${tier}` -> +Lv(1..EARRING_MAX)。
+   * tier は解放クラスLvの段階(1/16/31)で、その段階のスキル全部に効く。枠は EARRING_SLOTS 個まで。
+   */
+  earrings: Record<string, number>;
 }

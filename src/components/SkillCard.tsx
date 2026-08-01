@@ -11,6 +11,13 @@ interface Props {
   onChange: (level: number) => void;
   selectedAttrs: Set<number>;
   onToggleAttr: (attrId: number) => void;
+  /** 装備(ジェム＋イヤリング)によるレベル補正 */
+  bonus: number;
+  /** スキルジェム(+1Lv)が付いているか */
+  gem: boolean;
+  /** ジェムの空き枠が無い（未装着のカードでは押せない） */
+  gemFull: boolean;
+  onToggleGem: () => void;
 }
 
 function fmt(n: number): string {
@@ -41,13 +48,28 @@ function SkillIcon({ skill }: { skill: Skill }) {
   );
 }
 
-export function SkillCard({ skill, level, onChange, selectedAttrs, onToggleAttr }: Props) {
+export function SkillCard({
+  skill,
+  level,
+  bonus,
+  onChange,
+  selectedAttrs,
+  onToggleAttr,
+  gem,
+  gemFull,
+  onToggleGem,
+}: Props) {
   const { ui, tl } = useI18n();
   const active = level > 0;
   const hasAtk = skill.atkAdd.base !== 0 || skill.atkAdd.perLevel !== 0;
   const hasFactor = skill.factor.base !== 0 || skill.factor.perLevel !== 0;
-  const levels = Array.from({ length: skill.maxLevel }, (_, i) => i + 1);
+  // 装備補正込みの実効レベル。maxLevel を超えるので Lv表もそこまで伸ばす。
+  const effLevel = active ? level + bonus : 0;
+  const rows = Math.max(skill.maxLevel, effLevel);
+  const levels = Array.from({ length: rows }, (_, i) => i + 1);
   const cd = skill.cooldown / 1000;
+  // ジェムを外すのはいつでも可。付けるのは Lv1以上＆空き枠があるときだけ。
+  const gemDisabled = !gem && (!active || gemFull);
 
   // ポップアップ: ホバーで開き（ポップアップ内に入っても消えない）、クリックでピン留め。
   const [hover, setHover] = useState(false);
@@ -75,7 +97,10 @@ export function SkillCard({ skill, level, onChange, selectedAttrs, onToggleAttr 
   }, [pinned]);
 
   return (
-    <div className={`skill-card${active ? ' active' : ''}`} ref={cardRef}>
+    <div
+      className={`skill-card${active ? ' active' : ''}${gem && active ? ' gem-on' : ''}`}
+      ref={cardRef}
+    >
       {/* 常時: アイコン＋名前＋レベル。ホバーで詳細ポップアップ、クリックでピン留め。 */}
       <div className="skill-hover" onMouseEnter={show} onMouseLeave={hide}>
         <div
@@ -86,6 +111,7 @@ export function SkillCard({ skill, level, onChange, selectedAttrs, onToggleAttr 
           <span className="skill-name">{tl(skill.name)}</span>
           <span className="skill-lv">
             <b>{level}</b>
+            {bonus > 0 && active && <span className="lv-boost">+{bonus}</span>}
             <span className="lv-max">/{skill.maxLevel}</span>
           </span>
         </div>
@@ -107,10 +133,10 @@ export function SkillCard({ skill, level, onChange, selectedAttrs, onToggleAttr 
 
           {active && (
             <div className="skill-stats">
-              {ui.curLv(level)}
-              {hasFactor && <span> {ui.factor} <b>{fmt(valueAt(skill.factor, level))}%</b></span>}
-              {hasAtk && <span> {ui.atkAdd} <b>{fmt(valueAt(skill.atkAdd, level))}</b></span>}
-              <span> {ui.sp} <b>{fmt(valueAt(skill.sp, level))}</b></span>
+              {bonus > 0 ? ui.effLv(effLevel) : ui.curLv(level)}
+              {hasFactor && <span> {ui.factor} <b>{fmt(valueAt(skill.factor, effLevel))}%</b></span>}
+              {hasAtk && <span> {ui.atkAdd} <b>{fmt(valueAt(skill.atkAdd, effLevel))}</b></span>}
+              <span> {ui.sp} <b>{fmt(valueAt(skill.sp, effLevel))}</b></span>
             </div>
           )}
 
@@ -125,7 +151,7 @@ export function SkillCard({ skill, level, onChange, selectedAttrs, onToggleAttr 
 
           {tl(skill.description) && <p className="tip-desc">{tl(skill.description)}</p>}
 
-          {skill.maxLevel > 1 && (
+          {rows > 1 && (
             <div className="lv-table-wrap">
               <table>
                 <thead>
@@ -138,7 +164,12 @@ export function SkillCard({ skill, level, onChange, selectedAttrs, onToggleAttr 
                 </thead>
                 <tbody>
                   {levels.map((l) => (
-                    <tr key={l} className={l === level ? 'cur' : undefined}>
+                    <tr
+                      key={l}
+                      className={
+                        l === effLevel ? 'cur' : l > skill.maxLevel ? 'over-max' : undefined
+                      }
+                    >
                       <td>{l}</td>
                       {hasFactor && <td>{fmt(valueAt(skill.factor, l))}</td>}
                       {hasAtk && <td>{fmt(valueAt(skill.atkAdd, l))}</td>}
@@ -178,19 +209,37 @@ export function SkillCard({ skill, level, onChange, selectedAttrs, onToggleAttr 
         </button>
       </div>
 
-      {/* 常時表示の特性（クリックでON/OFF、共有対象） */}
-      {skill.attributes.length > 0 && (
-        <div className="attr-row">
-          {skill.attributes.map((a) => (
-            <AttrChip
-              key={a.id}
-              attr={a}
-              on={selectedAttrs.has(a.id)}
-              onToggle={() => onToggleAttr(a.id)}
-            />
-          ))}
-        </div>
-      )}
+      {/* 特性（クリックでON/OFF、共有対象）＋右下にスキルジェムのトグル */}
+      <div className="attr-row">
+        {skill.attributes.map((a) => (
+          <AttrChip
+            key={a.id}
+            attr={a}
+            on={selectedAttrs.has(a.id)}
+            onToggle={() => onToggleAttr(a.id)}
+          />
+        ))}
+        <button
+          type="button"
+          className={`gem-toggle has-tip${gem ? ' on' : ''}`}
+          aria-pressed={gem}
+          aria-label={ui.gem}
+          disabled={gemDisabled}
+          onClick={onToggleGem}
+        >
+          <span className="gem-mark" aria-hidden="true">
+            ◆
+          </span>
+          <span className="gem-lv">+1</span>
+          <span className="tip attr-tip">
+            <span className="tip-title">{ui.gem}</span>
+            <span className="tip-desc">
+              {ui.gemHint}
+              {gemDisabled && `\n${!active ? ui.needLv1 : ui.noSlot}`}
+            </span>
+          </span>
+        </button>
+      </div>
     </div>
   );
 }

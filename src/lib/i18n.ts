@@ -60,6 +60,7 @@ const ja = {
   vaivora: 'バイボラ',
   vaivoraHint: 'このクラスのバイボラを装備（同時に2クラスまで）',
   vaivoraNone: 'このクラス専用のバイボラはありません',
+  bonusFrom: '補正:',
   vaivoraNoDesc: '※ 効果テキストをクライアントから取得できませんでした',
 };
 
@@ -110,6 +111,7 @@ const ko: typeof ja = {
   vaivora: '바이보라',
   vaivoraHint: '이 클래스의 바이보라 장착 (동시에 2클래스까지)',
   vaivoraNone: '이 클래스 전용 바이보라가 없습니다',
+  bonusFrom: '보정:',
   vaivoraNoDesc: '※ 효과 텍스트를 클라이언트에서 가져오지 못했습니다',
 };
 

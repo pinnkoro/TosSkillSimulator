@@ -91,6 +91,11 @@ export interface Vaivora {
   weapon: string;
   /** 効果説明。クライアントから拾えなかった分は空文字。 */
   desc: Loc;
+  /**
+   * 効果説明から読み取ったスキルレベル上昇（skillId → +Lv）。
+   * 「○○の全てのスキルレベル▲1」「××スキルレベル▲3」等をスキルIDに解決したもの。
+   */
+  levelUps: Record<string, number>;
 }
 
 export interface GameData {

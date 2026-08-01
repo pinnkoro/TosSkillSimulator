@@ -139,6 +139,79 @@ def pick_desc(descs, eff, job, skills):
     return (best, len(cands)) if score(best) > 0 else (None, len(cands))
 
 
+# --- 効果説明からスキルレベル上昇を読む ---
+# 例: 「- ロデレロの全てのスキルレベル▲1」「- クロスカットスキルレベル▲3」
+#     「- 忍法 分身の術を除外した全てのシノビスキルレベル▲1」
+#     「- オラクルの全スキルレベル ▲1 (最大レベルが1のスキルは除く)」
+LEVELUP_RE = re.compile(r"^(?P<pre>.*?)スキル(?:の)?レベル\s*▲\s*(?P<n>\d+)\s*(?P<post>.*)$")
+ALL_RE = re.compile(r"^(?P<name>.+?)(?:の)?(?:全ての|すべての|全部の|全)$")
+EXCEPT_RE = re.compile(r"^(?P<ex>.+?)を(?:除外し|除い)た(?:全ての|すべての|全)?(?P<name>.*?)(?:の)?$")
+
+
+def norm(s):
+    """表記ゆれ（空白・記号・かっこ）を落とした照合用キー。"""
+    return re.sub(r"[\s・･\[\]「」【】（）().．]", "", s or "")
+
+
+def parse_levelups(desc_ja, job, gd):
+    """説明文 → {skillId: +Lv}。読めなかった行は (未解決リスト) として返す。"""
+    skills = {}
+    for sid in job["skillIds"]:
+        sk = gd["skills"].get(str(sid))
+        if sk:
+            skills[norm(sk["name"]["ja"])] = sk
+    jobs_by_name = {norm(j["name"]["ja"]): j for j in gd["jobs"]}
+
+    out = {}
+    unresolved = []
+    for line in desc_ja.split("\n"):
+        line = line.strip().lstrip("-").strip().replace("{", "").replace("}", "")
+        if "▲" not in line or "レベル" not in line:
+            continue
+        m = LEVELUP_RE.match(line)
+        if not m:
+            continue
+        plus = int(m.group("n"))
+        pre, post = m.group("pre").strip(), m.group("post")
+        drop_max1 = "最大レベルが1" in post
+
+        targets = None
+        mex = EXCEPT_RE.match(pre)
+        mall = ALL_RE.match(pre)
+        if mex and mex.group("name"):
+            cls = jobs_by_name.get(norm(mex.group("name")))
+            if cls:
+                ex = {norm(x) for x in re.split(r"[、,]", mex.group("ex"))}
+                targets = [sk for k, sk in skills.items() if k not in ex] \
+                    if cls["id"] == job["id"] else None
+        elif mall:
+            cls = jobs_by_name.get(norm(mall.group("name")))
+            if cls and cls["id"] == job["id"]:
+                targets = list(skills.values())
+            elif cls:
+                targets = [gd["skills"][str(s)] for s in cls["skillIds"]
+                           if str(s) in gd["skills"]]
+        if targets is None:
+            sk = skills.get(norm(pre.rstrip("の")))
+            if sk:
+                targets = [sk]
+        if targets is None:
+            # 「ケラウノスのスキルレベル▲1」のように「全て」が付かないクラス指定もある。
+            # スキル名と紛れないよう、スキルとして引けなかったときだけクラスとして見る。
+            cls = jobs_by_name.get(norm(pre.rstrip("の")))
+            if cls:
+                targets = [gd["skills"][str(s)] for s in cls["skillIds"]
+                           if str(s) in gd["skills"]]
+        if targets is None:
+            unresolved.append(line)
+            continue
+        for sk in targets:
+            if drop_max1 and sk["maxLevel"] <= 1:
+                continue
+            out[str(sk["id"])] = out.get(str(sk["id"]), 0) + plus
+    return out, unresolved
+
+
 def main():
     gd = json.load(open(GAME_DATA, encoding="utf-8"))
     by_eng = {j["engName"]: j for j in gd["jobs"]}
@@ -160,7 +233,7 @@ def main():
         override = json.load(open(OVERRIDE, encoding="utf-8"))
 
     out = []
-    no_job, no_desc, ambiguous = [], [], 0
+    no_job, no_desc, unresolved, ambiguous = [], [], [], 0
     for r in drops:
         m = VISION_RE.match(str(r.get("Name", "")).strip())
         if not m:
@@ -181,6 +254,8 @@ def main():
         desc_ko = ov.get("ko") or (d[1] if d else "")
         if not desc_ja:
             no_desc.append(eff)
+        level_ups, un = parse_levelups(desc_ja, job, gd)
+        unresolved += [(r["ClassName"], u) for u in un]
         out.append({
             "item": r["ClassName"],
             "jobId": job["id"],
@@ -188,6 +263,7 @@ def main():
             "name": {"ja": ja_names.get(eff, eff), "ko": f"바이보라 비전 - {eff}"},
             "weapon": mm.get("weapon", ""),
             "desc": {"ja": desc_ja, "ko": desc_ko},
+            "levelUps": level_ups,
         })
 
     out.sort(key=lambda e: (e["jobId"], e["item"]))
@@ -198,6 +274,11 @@ def main():
     print(f"  no class link: {len(no_job)} {no_job[:5]}")
     print(f"  no description: {len(no_desc)} {no_desc[:8]}")
     print(f"  (description picked among multiple candidates: {ambiguous})")
+    lifted = sum(1 for e in out if e["levelUps"])
+    print(f"  skill level-ups parsed: {lifted} entries, "
+          f"{len(unresolved)} lines unresolved")
+    for u in unresolved[:15]:
+        print("   ?", u[0], "|", u[1])
 
 
 if __name__ == "__main__":

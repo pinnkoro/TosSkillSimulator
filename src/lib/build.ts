@@ -1,7 +1,15 @@
 // ビルド状態の生成・URL(hash)へのエンコード/デコード・集計。
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
 import type { BuildState, Job, Skill, TreeId } from '../types';
-import { advancedJobsOf, baseJobOf, getJob, getSkill, getTree, trees } from '../data/gameData';
+import {
+  advancedJobsOf,
+  baseJobOf,
+  getJob,
+  getSkill,
+  getTree,
+  trees,
+  vaivoraOf,
+} from '../data/gameData';
 
 export function emptyBuild(): BuildState {
   return {
@@ -198,20 +206,54 @@ export function toggleVaivora(build: BuildState, jobId: number): BuildState {
   return { ...build, vaivora: [...build.vaivora, jobId] };
 }
 
-/** そのスキルの装備によるレベル補正（ジェム＋所属クラス段階のイヤリング）。 */
-export function bonusLevel(build: BuildState, skillId: number): number {
-  if ((build.levels[skillId] ?? 0) <= 0) return 0;
+/** 装備によるレベル補正の内訳。 */
+export interface LevelBonus {
+  gem: number;
+  earring: number;
+  vaivora: number;
+  total: number;
+}
+
+const NO_BONUS: LevelBonus = { gem: 0, earring: 0, vaivora: 0, total: 0 };
+
+/**
+ * そのスキルの装備によるレベル補正の内訳（ジェム / イヤリング / バイボラ）。
+ *
+ * 同じスキルを複数の選択中クラスが共有することがある（例: ソーサラーとネクロマンサー）。
+ * その場合どのクラスのイヤリングが効くかはカードを描画しているクラスで決まるので、
+ * jobId が渡されたらそれを使う。省略時のみ「そのスキルを持つ最初の選択ジョブ」に落とす。
+ *
+ * バイボラは levelUps がスキルIDに解決済みなので、ONにしているクラス全部から引く。
+ */
+export function bonusBreakdown(
+  build: BuildState,
+  skillId: number,
+  jobId?: number,
+): LevelBonus {
+  if ((build.levels[skillId] ?? 0) <= 0) return NO_BONUS;
   const gem = build.gems.includes(skillId) ? 1 : 0;
   const skill = getSkill(skillId);
-  const job = ownerJob(build, skillId);
-  if (!skill || !job) return gem;
-  return gem + (build.earrings[earringKey(job.id, tierOf(skill.unlockClassLevel))] ?? 0);
+  const job = jobId != null ? getJob(jobId) : ownerJob(build, skillId);
+  const earring =
+    skill && job
+      ? build.earrings[earringKey(job.id, tierOf(skill.unlockClassLevel))] ?? 0
+      : 0;
+  let vaivora = 0;
+  for (const id of build.vaivora) {
+    for (const v of vaivoraOf(id)) vaivora += v.levelUps[String(skillId)] ?? 0;
+  }
+  return { gem, earring, vaivora, total: gem + earring + vaivora };
+}
+
+/** 装備によるレベル補正の合計。 */
+export function bonusLevel(build: BuildState, skillId: number, jobId?: number): number {
+  return bonusBreakdown(build, skillId, jobId).total;
 }
 
 /** 装備補正込みの実効レベル。 */
-export function effectiveLevel(build: BuildState, skillId: number): number {
+export function effectiveLevel(build: BuildState, skillId: number, jobId?: number): number {
   const lv = build.levels[skillId] ?? 0;
-  return lv > 0 ? lv + bonusLevel(build, skillId) : 0;
+  return lv > 0 ? lv + bonusLevel(build, skillId, jobId) : 0;
 }
 
 // ---- スキルポイント上限ルール ----
@@ -349,11 +391,13 @@ export function decodeBuild(hash: string): BuildState {
     build = { ...build, attrs };
   }
   // ジェム/イヤリングは setter 経由で入れて、個数上限・Lv0スキルを弾く。
+  // toggle はON/OFFを反転するので、手編集URLで同じIDが並んでも消えないよう
+  // 「まだ付いていないものだけ」を対象にする。
   const gStr = params.get('g');
   if (gStr) {
     for (const tok of gStr.split('.')) {
       const id = Number(tok);
-      if (id > 0) build = toggleGem(build, id);
+      if (id > 0 && !build.gems.includes(id)) build = toggleGem(build, id);
     }
   }
   const eStr = params.get('e');
@@ -374,7 +418,7 @@ export function decodeBuild(hash: string): BuildState {
   if (vStr) {
     for (const tok of vStr.split('.')) {
       const id = Number(tok);
-      if (id > 0) build = toggleVaivora(build, id);
+      if (id > 0 && !build.vaivora.includes(id)) build = toggleVaivora(build, id);
     }
     build = prune(build);
   }

@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { Skill, TreeId } from './types';
+import type { Job, Skill, TreeId } from './types';
 import { gameData, getJob, vaivoraOf } from './data/gameData';
 import {
   BONUS_POOL,
   EARRING_SLOTS,
   GEM_MAX,
   VAIVORA_MAX,
-  bonusLevel,
+  bonusBreakdown,
   bonusUsed,
   decodeBuild,
   earringKey,
@@ -110,12 +110,14 @@ export default function App() {
 
   const reset = () => setBuild(emptyBuild());
 
-  const renderSkillCard = (skill: Skill) => (
+  // job は「そのカードを描画しているクラス」。同じスキルを 2 クラスが共有する場合
+  // （例: ソーサラー/ネクロマンサー）に、どちらのイヤリングが効くかを決めるのに要る。
+  const renderSkillCard = (skill: Skill, job: Job) => (
     <SkillCard
       key={skill.id}
       skill={skill}
       level={build.levels[skill.id] ?? 0}
-      bonus={bonusLevel(build, skill.id)}
+      bonus={bonusBreakdown(build, skill.id, job.id)}
       onChange={(lv) => setBuild(setLevel(build, skill.id, lv))}
       selectedAttrs={selectedAttrs}
       onToggleAttr={(aid) => setBuild(toggleAttr(build, aid))}
@@ -289,7 +291,7 @@ export default function App() {
                     <div className="skill-grid">
                       {skillTiers(job)
                         .flatMap((g) => g.skills)
-                        .map(renderSkillCard)}
+                        .map((s) => renderSkillCard(s, job))}
                     </div>
                   ) : (
                     skillTiers(job).map(({ tier, skills }) => {
@@ -304,7 +306,9 @@ export default function App() {
                               onChange={(lv) => setBuild(setEarring(build, job.id, tier, lv))}
                             />
                           </div>
-                          <div className="skill-grid">{skills.map(renderSkillCard)}</div>
+                          <div className="skill-grid">
+                            {skills.map((s) => renderSkillCard(s, job))}
+                          </div>
                         </div>
                       );
                     })

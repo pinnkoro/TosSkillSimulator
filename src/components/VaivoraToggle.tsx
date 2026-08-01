@@ -18,28 +18,31 @@ export function VaivoraToggle({ on, full, onToggle, entries }: Props) {
   const [failed, setFailed] = useState(false);
   const disabled = !on && full;
   return (
-    <button
-      type="button"
-      className={`vaivora-toggle has-tip${on ? ' on' : ''}`}
-      aria-pressed={on}
-      disabled={disabled}
-      onClick={onToggle}
-    >
-      {failed ? (
-        <span className="vaivora-mark" aria-hidden="true">
-          ✦
-        </span>
-      ) : (
-        <img
-          src={uiIconUrl('vaivora')}
-          alt=""
-          loading="lazy"
-          width={22}
-          height={22}
-          onError={() => setFailed(true)}
-        />
-      )}
-      <span>{ui.vaivora}</span>
+    // 枠なしで押せないときの理由も出すので、ツールチップは disabled にならない外側に持たせる。
+    <span className="vaivora-slot has-tip">
+      <button
+        type="button"
+        className={`vaivora-toggle${on ? ' on' : ''}`}
+        aria-pressed={on}
+        disabled={disabled}
+        onClick={onToggle}
+      >
+        {failed ? (
+          <span className="vaivora-mark" aria-hidden="true">
+            ✦
+          </span>
+        ) : (
+          <img
+            src={uiIconUrl('vaivora')}
+            alt=""
+            loading="lazy"
+            width={22}
+            height={22}
+            onError={() => setFailed(true)}
+          />
+        )}
+        <span>{ui.vaivora}</span>
+      </button>
       <span className="tip vaivora-tip">
         <span className="tip-title">{ui.vaivora}</span>
         <span className="tip-desc">
@@ -61,6 +64,6 @@ export function VaivoraToggle({ on, full, onToggle, entries }: Props) {
           <span className="tip-desc dim">{ui.vaivoraNone}</span>
         )}
       </span>
-    </button>
+    </span>
   );
 }

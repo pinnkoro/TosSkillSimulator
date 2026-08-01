@@ -457,6 +457,24 @@ button.ghost {
   color: var(--text-h);
   font-weight: 600;
 }
+/* レベル補正の内訳（どの装備で何Lv上がっているか） */
+.bonus-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.bonus-breakdown .from-gem {
+  color: var(--gem);
+}
+.bonus-breakdown .from-earring {
+  color: var(--earring);
+}
+.bonus-breakdown .from-vaivora {
+  color: var(--warn);
+}
+
 .factor-note {
   margin: 0;
   font-size: 11px;
@@ -566,9 +584,12 @@ button.ghost {
 }
 
 /* ---- 装備によるレベル補正: スキルジェム(カード右下) / イヤリング(クラス単位) ---- */
-.gem-toggle {
-  /* 特性チップと同じ行の右端に寄せる */
+.gem-slot {
+  /* 特性チップと同じ行の右端に寄せる（ツールチップの基準もこの要素） */
   margin-left: auto;
+  display: flex;
+}
+.gem-toggle {
   height: 34px;
   padding: 0 8px;
   border-radius: 7px;
@@ -613,7 +634,7 @@ button.ghost {
   font-weight: 700;
 }
 /* 右端のチップなのでツールチップは右寄せで開く（画面外に出ないように） */
-.gem-toggle .attr-tip {
+.gem-slot .attr-tip {
   left: auto;
   right: 0;
   transform: none;
@@ -690,7 +711,10 @@ button.ghost {
   color: var(--earring);
 }
 
-/* クラス見出しのバイボラトグル（上級職のみ） */
+/* クラス見出しのバイボラトグル（上級職のみ）。外側の .vaivora-slot がツールチップの基準。 */
+.vaivora-slot {
+  display: inline-flex;
+}
 .vaivora-toggle {
   display: inline-flex;
   align-items: center;

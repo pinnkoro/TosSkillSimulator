@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Skill } from '../types';
+import type { LevelBonus } from '../lib/build';
 import { valueAt } from '../data/gameData';
 import { gemIconUrl, skillIconUrl } from '../lib/icons';
 import { useI18n } from '../lib/i18n';
@@ -11,8 +12,8 @@ interface Props {
   onChange: (level: number) => void;
   selectedAttrs: Set<number>;
   onToggleAttr: (attrId: number) => void;
-  /** 装備(ジェム＋イヤリング)によるレベル補正 */
-  bonus: number;
+  /** 装備(ジェム/イヤリング/バイボラ)によるレベル補正の内訳 */
+  bonus: LevelBonus;
   /** スキルジェム(+1Lv)が付いているか */
   gem: boolean;
   /** ジェムの空き枠が無い（未装着のカードでは押せない） */
@@ -67,7 +68,7 @@ export function SkillCard({
   const hasAtk = skill.atkAdd.base !== 0 || skill.atkAdd.perLevel !== 0;
   const hasFactor = skill.factor.base !== 0 || skill.factor.perLevel !== 0;
   // 装備補正込みの実効レベル。maxLevel を超えるので Lv表もそこまで伸ばす。
-  const effLevel = active ? level + bonus : 0;
+  const effLevel = active ? level + bonus.total : 0;
   const rows = Math.max(skill.maxLevel, effLevel);
   const levels = Array.from({ length: rows }, (_, i) => i + 1);
   const cd = skill.cooldown / 1000;
@@ -115,7 +116,7 @@ export function SkillCard({
           <span className="skill-name">{tl(skill.name)}</span>
           <span className="skill-lv">
             <b>{level}</b>
-            {bonus > 0 && active && <span className="lv-boost">+{bonus}</span>}
+            {bonus.total > 0 && active && <span className="lv-boost">+{bonus.total}</span>}
             <span className="lv-max">/{skill.maxLevel}</span>
           </span>
         </div>
@@ -137,10 +138,24 @@ export function SkillCard({
 
           {active && (
             <div className="skill-stats">
-              {bonus > 0 ? ui.effLv(effLevel) : ui.curLv(level)}
+              {bonus.total > 0 ? ui.effLv(effLevel) : ui.curLv(level)}
               {hasFactor && <span> {ui.factor} <b>{fmt(valueAt(skill.factor, effLevel))}%</b></span>}
               {hasAtk && <span> {ui.atkAdd} <b>{fmt(valueAt(skill.atkAdd, effLevel))}</b></span>}
               <span> {ui.sp} <b>{fmt(valueAt(skill.sp, effLevel))}</b></span>
+            </div>
+          )}
+
+          {/* 補正の内訳。どの装備で何Lv上がっているかを追えるように出す。 */}
+          {active && bonus.total > 0 && (
+            <div className="bonus-breakdown">
+              {ui.bonusFrom}
+              {bonus.gem > 0 && <span className="from-gem">{ui.gem} +{bonus.gem}</span>}
+              {bonus.earring > 0 && (
+                <span className="from-earring">{ui.earring} +{bonus.earring}</span>
+              )}
+              {bonus.vaivora > 0 && (
+                <span className="from-vaivora">{ui.vaivora} +{bonus.vaivora}</span>
+              )}
             </div>
           )}
 
@@ -223,30 +238,34 @@ export function SkillCard({
             onToggle={() => onToggleAttr(a.id)}
           />
         ))}
-        <button
-          type="button"
-          className={`gem-toggle has-tip${gem ? ' on' : ''}`}
-          aria-pressed={gem}
-          aria-label={ui.gem}
-          disabled={gemDisabled}
-          onClick={onToggleGem}
-        >
-          {gemIconFailed ? (
-            <span className="gem-mark" aria-hidden="true">
-              ◆
-            </span>
-          ) : (
-            <img
-              className="gem-icon"
-              src={gemIconUrl(tree)}
-              alt=""
-              loading="lazy"
-              width={24}
-              height={24}
-              onError={() => setGemIconFailed(true)}
-            />
-          )}
-          <span className="gem-lv">+1</span>
+        {/* 押せない理由(Lv1未満/枠なし)を出すツールチップなので、
+            ホバーを受けない disabled ボタンではなく外側の要素に持たせる。 */}
+        <div className="gem-slot has-tip">
+          <button
+            type="button"
+            className={`gem-toggle${gem ? ' on' : ''}`}
+            aria-pressed={gem}
+            aria-label={ui.gem}
+            disabled={gemDisabled}
+            onClick={onToggleGem}
+          >
+            {gemIconFailed ? (
+              <span className="gem-mark" aria-hidden="true">
+                ◆
+              </span>
+            ) : (
+              <img
+                className="gem-icon"
+                src={gemIconUrl(tree)}
+                alt=""
+                loading="lazy"
+                width={24}
+                height={24}
+                onError={() => setGemIconFailed(true)}
+              />
+            )}
+            <span className="gem-lv">+1</span>
+          </button>
           <span className="tip attr-tip">
             <span className="tip-title">{ui.gem}</span>
             <span className="tip-desc">
@@ -254,7 +273,7 @@ export function SkillCard({
               {gemDisabled && `\n${!active ? ui.needLv1 : ui.noSlot}`}
             </span>
           </span>
-        </button>
+        </div>
       </div>
     </div>
   );

@@ -38,6 +38,15 @@ VISION_RE = re.compile(r"^바이보라\s*비전\s*-\s*(.+)$")
 NAME_RE = re.compile(r"^(?:\[Lv\d\]\s*)?바이보라\s+(.+?)\s*-\s*(.+)$")
 TSV_FILES = ("etc.tsv", "item.tsv", "ui.tsv", "skill.tsv")
 
+# 複数系統から選べる共通クラスは、系統ごとに別 jobId で「ボーンマンサー[W]」のように
+# 登録されている。[A]=Archer / [C]=Cleric / [T]=Scout / [S]=Swordman / [W]=Wizard。
+SUFFIX_RE = re.compile(r"\[[ACTSW]\]$")
+
+
+def strip_variant(name):
+    """「Bonemancer[W]」→「Bonemancer」。派生でなければそのまま。"""
+    return SUFFIX_RE.sub("", (name or "").strip())
+
 
 def load_tsv_rows():
     """全 TSV を newest-wins で読み、[(ja, ko)] を返す。"""
@@ -126,6 +135,13 @@ def pick_desc(descs, eff, job, skills):
     cands = [d for d in descs
              if ("{nl}" + eff) in d[2] or (eff + "{nl}") in d[2] or d[2].strip().startswith(eff)]
     if not cands:
+        # 共通クラス(複数系統)のバイボラは説明の見出しに効果名が出ず、
+        # 「- 본맨서 모든 스킬 레벨 ▲1」のようにクラス名で始まる。効果名で
+        # 引けないときだけ、クラス名を手掛かりにしたゆるい照合に落とす。
+        head = re.compile(strip_variant(job["name"]["ko"]).replace(" ", r"\s*")
+                          + r"\s*(?:의)?\s*모든\s*스킬\s*레벨")
+        cands = [d for d in descs if head.search(d[1])]
+    if not cands:
         return None, 0
     if len(cands) == 1:
         return cands[0], 1
@@ -161,6 +177,9 @@ def parse_levelups(desc_ja, job, gd):
         if sk:
             skills[norm(sk["name"]["ja"])] = sk
     jobs_by_name = {norm(j["name"]["ja"]): j for j in gd["jobs"]}
+    # 説明文では派生クラスも接尾辞なし（「ボーンマンサーの全てのスキルレベル▲1」）で
+    # 書かれるので、生成対象クラス自身の接尾辞なし表記でも引けるようにする。
+    jobs_by_name.setdefault(norm(strip_variant(job["name"]["ja"])), job)
 
     out = {}
     unresolved = []
@@ -215,6 +234,13 @@ def parse_levelups(desc_ja, job, gd):
 def main():
     gd = json.load(open(GAME_DATA, encoding="utf-8"))
     by_eng = {j["engName"]: j for j in gd["jobs"]}
+    # 共通クラスのバイボラは eliteequipdrop 側が接尾辞なしの JobName（"Bonemancer"）で
+    # 1行だけ持つ。その場合は同名の派生クラス全部に同じバイボラを割り当てる。
+    variants = {}
+    for j in gd["jobs"]:
+        base = strip_variant(j["engName"])
+        if base != j["engName"]:
+            variants.setdefault(base, []).append(j)
     skills = gd["skills"]
 
     got = T.read_table("eliteequipdrop.ies")
@@ -240,31 +266,37 @@ def main():
             continue
         eff = m.group(1).strip()
         eng = str(r.get("JobName", "")).strip()
-        job = by_eng.get(eng)
-        if not job:
+        jobs = [by_eng[eng]] if eng in by_eng else variants.get(eng, [])
+        if not jobs:
             # JobName が "All" や未知のクラス名(＝汎用バイボラ)はクラス紐付けなし
             no_job.append((eff, eng))
             continue
         mm = meta.get(eff, {})
-        d, n = pick_desc(descs, eff, job, skills)
-        if n > 1:
-            ambiguous += 1
         ov = override.get(r["ClassName"]) or {}
-        desc_ja = ov.get("ja") or (d[0] if d else "")
-        desc_ko = ov.get("ko") or (d[1] if d else "")
-        if not desc_ja:
-            no_desc.append(eff)
-        level_ups, un = parse_levelups(desc_ja, job, gd)
-        unresolved += [(r["ClassName"], u) for u in un]
-        out.append({
-            "item": r["ClassName"],
-            "jobId": job["id"],
-            "key": mm.get("opt", ""),
-            "name": {"ja": ja_names.get(eff, eff), "ko": f"바이보라 비전 - {eff}"},
-            "weapon": mm.get("weapon", ""),
-            "desc": {"ja": desc_ja, "ko": desc_ko},
-            "levelUps": level_ups,
-        })
+        for job in jobs:
+            # 説明の候補選びとスキルレベル上昇の解決はクラス依存なので派生ごとにやる。
+            d, n = pick_desc(descs, eff, job, skills)
+            if n > 1:
+                ambiguous += 1
+            # override は ja/ko を1組として扱う。ja だけ直したときに自動取得の
+            # (誤っている可能性がある) ko が残ると、KO 表示だけ古いままになる。
+            if ov:
+                desc_ja, desc_ko = ov.get("ja", ""), ov.get("ko", "")
+            else:
+                desc_ja, desc_ko = (d[0], d[1]) if d else ("", "")
+            if not desc_ja:
+                no_desc.append(eff)
+            level_ups, un = parse_levelups(desc_ja, job, gd)
+            unresolved += [(r["ClassName"], u) for u in un]
+            out.append({
+                "item": r["ClassName"],
+                "jobId": job["id"],
+                "key": mm.get("opt", ""),
+                "name": {"ja": ja_names.get(eff, eff), "ko": f"바이보라 비전 - {eff}"},
+                "weapon": mm.get("weapon", ""),
+                "desc": {"ja": desc_ja, "ko": desc_ko},
+                "levelUps": level_ups,
+            })
 
     out.sort(key=lambda e: (e["jobId"], e["item"]))
     json.dump({"entries": out}, open(OUT, "w", encoding="utf-8"),

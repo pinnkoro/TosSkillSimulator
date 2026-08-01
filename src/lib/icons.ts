@@ -4,5 +4,7 @@ const BASE = import.meta.env.BASE_URL;
 export const skillIconUrl = (icon: string) => `${BASE}icons/skill/${icon}.png`;
 export const classIconUrl = (icon: string) => `${BASE}icons/class/${icon}.png`;
 export const attrIconUrl = (icon: string) => `${BASE}icons/attr/${icon}.png`;
-/** スキルジェム(UIトグル用)。系統ごとに絵柄が違うので選択中の系統のものを使う。 */
-export const gemIconUrl = (tree: string) => `${BASE}icons/ui/skillgem_${tree}.png`;
+/** UIトグル用アイコン（public/icons/ui、tools/extract_icons.py の UI_ICONS 由来）。 */
+export const uiIconUrl = (name: string) => `${BASE}icons/ui/${name}.png`;
+/** スキルジェム。系統ごとに絵柄が違うので選択中の系統のものを使う。 */
+export const gemIconUrl = (tree: string) => uiIconUrl(`skillgem_${tree}`);

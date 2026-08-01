@@ -57,6 +57,8 @@ const ja = {
   needLv1: 'Lv1以上のスキルにのみ装着できます',
   noSlot: '空き枠がありません',
   effLv: (n: number) => `装備込みLv${n}:`,
+  vaivora: 'バイボラ',
+  vaivoraHint: 'このクラスのバイボラを装備（同時に2クラスまで）',
 };
 
 const ko: typeof ja = {
@@ -103,6 +105,8 @@ const ko: typeof ja = {
   needLv1: 'Lv1 이상인 스킬에만 장착할 수 있습니다',
   noSlot: '남은 슬롯이 없습니다',
   effLv: (n: number) => `장비 포함 Lv${n}:`,
+  vaivora: '바이보라',
+  vaivoraHint: '이 클래스의 바이보라 장착 (동시에 2클래스까지)',
 };
 
 export const DICT = { ja, ko };

@@ -82,7 +82,8 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 - [x] スキルポイント上限: **base職15 / それ以降45 + 全職共有の追加プール21pt**（build.ts で頭打ち enforcement、topbar に「追加 n/21」）
 - [x] 装備によるレベル補正（ポイント消費とは別枠、URL共有対象）:
   - **スキルジェム** … スキルカード右下のトグルで +1Lv。全クラス合計 **8個**まで。Lv1以上のスキルのみ。hash `g=`
-  - **イヤリング** … クラスの解放Lv段階(**Lv1〜/16〜/31〜**)単位で **+1〜+5Lv**。その段階のスキル全部に効く。枠はビルド全体で **3つ**まで。hash `e=`（`jobId_tier-lv`）
+  - **イヤリング** … クラスの解放Lv段階(**Lv1〜/16〜/31〜**)単位で **+1〜+5Lv**。その段階のスキル全部に効く。枠はビルド全体で **3つ**まで。**基礎職には無い**。hash `e=`（`jobId_tier-lv`）
+  - **バイボラ** … クラス単位のON/OFF。**基礎職には無く**、同時に **2クラス**まで。クラス見出しのトグル。hash `v=`（jobId）
   - スキル一覧は段階ごとの「段」(`.tier-block`)に分割し、各段の見出しにイヤリングのステッパを置く。ONの段は背景＋スキル枠を青系に着色して対象範囲を示す。
   - 実効Lv は maxLevel を超えられる（Lv表も超過分まで伸ばして表示）
   - 色分け: ジェム=緑 `--gem` / イヤリング=青 `--earring`（ジェム付きカードは Lv 数字とスライダーも緑）
@@ -150,7 +151,7 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 | `tools/extract_icons.py` | アイコン抽出 → `public/icons/`（要 Pillow、ゲーム終了中に実行） |
 | `src/data/game-data.json` | **同梱データ（133ジョブ/898スキル、特性1297件）** |
 | `public/icons/{skill,class,attr}/*.png` | **同梱アイコン（スキル769/クラス114=64px、特性1243=40px）** |
-| `public/icons/ui/skillgem_<系統>.png` | スキルジェムのトグル用アイコン（`icon_item_sklgem_*` を48px化。wizard だけクライアント側の綴りが `wizerd`） |
+| `public/icons/ui/*.png` | UIトグル用アイコン48px（`skillgem_<系統>`＝`icon_item_sklgem_*`。wizard だけクライアント側の綴りが `wizerd` / `vaivora`＝`icon_item_vibora_vision`）。`extract_icons.py` の `UI_ICONS` で定義 |
 | `src/data/gameData.ts` | JSON読込＋索引（jobById/skillById 等） |
 | `src/lib/build.ts` | ビルド状態・URL(hash)エンコード/デコード・集計 |
 | `src/lib/icons.ts` | アイコンURLヘルパ（BASE_URL 対応） |

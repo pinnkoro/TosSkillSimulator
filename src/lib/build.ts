@@ -4,7 +4,15 @@ import type { BuildState, Job, Skill, TreeId } from '../types';
 import { advancedJobsOf, baseJobOf, getJob, getSkill, getTree, trees } from '../data/gameData';
 
 export function emptyBuild(): BuildState {
-  return { tree: null, jobs: [null, null, null, null], levels: {}, attrs: [], gems: [], earrings: {} };
+  return {
+    tree: null,
+    jobs: [null, null, null, null],
+    levels: {},
+    attrs: [],
+    gems: [],
+    earrings: {},
+    vaivora: [],
+  };
 }
 
 /** 系統を選び直す。base(枠0)を固定し、枠1-3はクリア。 */
@@ -17,6 +25,7 @@ export function selectTree(tree: TreeId): BuildState {
     attrs: [],
     gems: [],
     earrings: {},
+    vaivora: [],
   };
 }
 
@@ -66,14 +75,18 @@ function prune(build: BuildState): BuildState {
   }
   const okAttrs = validAttrIds(build);
   const attrs = build.attrs.filter((id) => okAttrs.has(id));
-  // ジェムは「Lv1以上振ってあるスキル」にだけ乗る。イヤリングは選択中クラスの枠だけ残す。
+  // ジェムは「Lv1以上振ってあるスキル」にだけ乗る。
   const gems = build.gems.filter((id) => (levels[id] ?? 0) > 0);
-  const okJobs = new Set(build.jobs.filter((id): id is number => id != null));
+  // イヤリング/バイボラは選択中かつ基礎職でないクラスの分だけ残す。
+  const okJobs = new Set(
+    build.jobs.filter((id): id is number => id != null && getJob(id)?.isBase === false),
+  );
   const earrings: Record<string, number> = {};
   for (const [k, v] of Object.entries(build.earrings)) {
     if (v > 0 && okJobs.has(Number(k.split('_')[0]))) earrings[k] = v;
   }
-  return { ...build, levels, attrs, gems, earrings };
+  const vaivora = build.vaivora.filter((id) => okJobs.has(id));
+  return { ...build, levels, attrs, gems, earrings, vaivora };
 }
 
 export function setJob(build: BuildState, slot: number, jobId: number | null): BuildState {
@@ -144,13 +157,14 @@ export function toggleGem(build: BuildState, skillId: number): BuildState {
   return { ...build, gems: [...build.gems, skillId] };
 }
 
-/** イヤリングの+Lvを設定（0で外す）。新規装着は空き枠があるときのみ。 */
+/** イヤリングの+Lvを設定（0で外す）。基礎職には付けられず、新規装着は空き枠があるときのみ。 */
 export function setEarring(
   build: BuildState,
   jobId: number,
   tier: number,
   level: number,
 ): BuildState {
+  if (getJob(jobId)?.isBase !== false) return build;
   const key = earringKey(jobId, tier);
   const next = Math.max(0, Math.min(EARRING_MAX, level));
   const cur = build.earrings[key] ?? 0;
@@ -163,6 +177,25 @@ export function setEarring(
   if (cur === 0 && earringsUsed(build) >= EARRING_SLOTS) return build;
   earrings[key] = next;
   return { ...build, earrings };
+}
+
+// ---- バイボラ ----
+// クラス単位のON/OFF。基礎職には無く、同時に VAIVORA_MAX クラスまで。
+export const VAIVORA_MAX = 2;
+
+/** 使用中のバイボラ個数。 */
+export function vaivoraUsed(build: BuildState): number {
+  return build.vaivora.length;
+}
+
+/** バイボラのON/OFF。OFF→ON は上級職かつ空きがあるときのみ。 */
+export function toggleVaivora(build: BuildState, jobId: number): BuildState {
+  if (build.vaivora.includes(jobId)) {
+    return { ...build, vaivora: build.vaivora.filter((id) => id !== jobId) };
+  }
+  if (getJob(jobId)?.isBase !== false) return build;
+  if (vaivoraUsed(build) >= VAIVORA_MAX) return build;
+  return { ...build, vaivora: [...build.vaivora, jobId] };
 }
 
 /** そのスキルの装備によるレベル補正（ジェム＋所属クラス段階のイヤリング）。 */
@@ -264,6 +297,7 @@ function encodeQuery(build: BuildState): string {
     .map(([k, v]) => `${k}-${v}`)
     .join('.');
   if (ear) params.set('e', ear);
+  if (build.vaivora.length) params.set('v', build.vaivora.join('.'));
   return params.toString();
 }
 
@@ -333,6 +367,14 @@ export function decodeBuild(hash: string): BuildState {
       if (jobId > 0 && EARRING_TIERS.includes(tier as 1 | 16 | 31) && lv > 0) {
         build = setEarring(build, jobId, tier, lv);
       }
+    }
+    build = prune(build);
+  }
+  const vStr = params.get('v');
+  if (vStr) {
+    for (const tok of vStr.split('.')) {
+      const id = Number(tok);
+      if (id > 0) build = toggleVaivora(build, id);
     }
     build = prune(build);
   }

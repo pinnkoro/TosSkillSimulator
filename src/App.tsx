@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { TreeId } from './types';
+import type { Skill, TreeId } from './types';
 import { gameData, getJob } from './data/gameData';
 import {
   BONUS_POOL,
   EARRING_SLOTS,
   GEM_MAX,
+  VAIVORA_MAX,
   bonusLevel,
   bonusUsed,
   decodeBuild,
@@ -24,11 +25,14 @@ import {
   skillTiers,
   toggleAttr,
   toggleGem,
+  toggleVaivora,
   treeList,
+  vaivoraUsed,
 } from './lib/build';
 import { SkillCard } from './components/SkillCard';
 import { AttrChip } from './components/AttrChip';
 import { EarringControl } from './components/EarringControl';
+import { VaivoraToggle } from './components/VaivoraToggle';
 import { classIconUrl } from './lib/icons';
 import { LANGS, useI18n } from './lib/i18n';
 import './App.css';
@@ -89,6 +93,8 @@ export default function App() {
   const gemCount = gemsUsed(build);
   const earringCount = earringsUsed(build);
   const selectedGems = useMemo(() => new Set(build.gems), [build.gems]);
+  const vaivoraCount = vaivoraUsed(build);
+  const selectedVaivora = useMemo(() => new Set(build.vaivora), [build.vaivora]);
 
   const share = async () => {
     const url = location.href;
@@ -103,6 +109,22 @@ export default function App() {
   };
 
   const reset = () => setBuild(emptyBuild());
+
+  const renderSkillCard = (skill: Skill) => (
+    <SkillCard
+      key={skill.id}
+      skill={skill}
+      level={build.levels[skill.id] ?? 0}
+      bonus={bonusLevel(build, skill.id)}
+      onChange={(lv) => setBuild(setLevel(build, skill.id, lv))}
+      selectedAttrs={selectedAttrs}
+      onToggleAttr={(aid) => setBuild(toggleAttr(build, aid))}
+      gem={selectedGems.has(skill.id)}
+      gemFull={gemCount >= GEM_MAX}
+      onToggleGem={() => setBuild(toggleGem(build, skill.id))}
+      tree={build.tree ?? ''}
+    />
+  );
 
   return (
     <div className="app">
@@ -120,6 +142,9 @@ export default function App() {
               </span>
               <span className="bonus">
                 {ui.earring} {earringCount}/{EARRING_SLOTS}
+              </span>
+              <span className="bonus">
+                {ui.vaivora} {vaivoraCount}/{VAIVORA_MAX}
               </span>
             </>
           )}
@@ -226,6 +251,14 @@ export default function App() {
                     <h2>
                       {tl(job.name)}
                       <span className="job-eng">{job.engName}</span>
+                      {/* バイボラは上級職のみ。基礎職には存在しない。 */}
+                      {!job.isBase && (
+                        <VaivoraToggle
+                          on={selectedVaivora.has(job.id)}
+                          full={vaivoraCount >= VAIVORA_MAX}
+                          onToggle={() => setBuild(toggleVaivora(build, job.id))}
+                        />
+                      )}
                     </h2>
                     <div className={`budget${over ? ' over' : ''}`}>
                       <b>{used}</b>
@@ -248,40 +281,33 @@ export default function App() {
                       </div>
                     </div>
                   )}
-                  {/* 解放Lv段階(1〜/16〜/31〜)ごとの段。イヤリングは段単位で効くので、
-                      ONの段はまとめて背景・枠線を変えて対象範囲が一目で分かるようにする。 */}
-                  {skillTiers(job).map(({ tier, skills }) => {
-                    const ear = build.earrings[earringKey(job.id, tier)] ?? 0;
-                    return (
-                      <div className={`tier-block${ear > 0 ? ' earring-on' : ''}`} key={tier}>
-                        <div className="tier-head">
-                          <span className="tier-label">{ui.tierLabel(tier)}</span>
-                          <EarringControl
-                            level={ear}
-                            full={earringCount >= EARRING_SLOTS}
-                            onChange={(lv) => setBuild(setEarring(build, job.id, tier, lv))}
-                          />
-                        </div>
-                        <div className="skill-grid">
-                          {skills.map((skill) => (
-                            <SkillCard
-                              key={skill.id}
-                              skill={skill}
-                              level={build.levels[skill.id] ?? 0}
-                              bonus={bonusLevel(build, skill.id)}
-                              onChange={(lv) => setBuild(setLevel(build, skill.id, lv))}
-                              selectedAttrs={selectedAttrs}
-                              onToggleAttr={(aid) => setBuild(toggleAttr(build, aid))}
-                              gem={selectedGems.has(skill.id)}
-                              gemFull={gemCount >= GEM_MAX}
-                              onToggleGem={() => setBuild(toggleGem(build, skill.id))}
-                              tree={build.tree ?? ''}
+                  {/* 基礎職はイヤリング対象外なので段に分けず素のグリッド。
+                      上級職は解放Lv段階(1〜/16〜/31〜)ごとの段にし、イヤリングONの段は
+                      まとめて背景・枠線を変えて対象範囲が一目で分かるようにする。 */}
+                  {job.isBase ? (
+                    <div className="skill-grid">
+                      {skillTiers(job)
+                        .flatMap((g) => g.skills)
+                        .map(renderSkillCard)}
+                    </div>
+                  ) : (
+                    skillTiers(job).map(({ tier, skills }) => {
+                      const ear = build.earrings[earringKey(job.id, tier)] ?? 0;
+                      return (
+                        <div className={`tier-block${ear > 0 ? ' earring-on' : ''}`} key={tier}>
+                          <div className="tier-head">
+                            <span className="tier-label">{ui.tierLabel(tier)}</span>
+                            <EarringControl
+                              level={ear}
+                              full={earringCount >= EARRING_SLOTS}
+                              onChange={(lv) => setBuild(setEarring(build, job.id, tier, lv))}
                             />
-                          ))}
+                          </div>
+                          <div className="skill-grid">{skills.map(renderSkillCard)}</div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })
+                  )}
                 </div>
               );
             })}

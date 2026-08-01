@@ -690,6 +690,43 @@ button.ghost {
   color: var(--earring);
 }
 
+/* クラス見出しのバイボラトグル（上級職のみ） */
+.vaivora-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dim);
+  background: var(--panel-2);
+  opacity: 0.6;
+  transition: opacity 0.12s, border-color 0.12s, color 0.12s;
+}
+.vaivora-toggle img {
+  display: block;
+  filter: grayscale(0.85);
+  transition: filter 0.12s;
+}
+.vaivora-toggle:hover:not(:disabled) {
+  opacity: 1;
+}
+.vaivora-toggle:hover:not(:disabled) img,
+.vaivora-toggle.on img {
+  filter: none;
+}
+.vaivora-toggle:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.vaivora-toggle.on {
+  opacity: 1;
+  color: var(--warn);
+  border-color: var(--warn);
+  background: rgba(255, 180, 84, 0.1);
+}
+
 /* ---- footer ---- */
 .foot {
   margin-top: 48px;

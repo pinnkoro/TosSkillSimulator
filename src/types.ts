@@ -104,6 +104,9 @@ export interface BuildState {
   /**
    * イヤリング。`${jobId}_${tier}` -> +Lv(1..EARRING_MAX)。
    * tier は解放クラスLvの段階(1/16/31)で、その段階のスキル全部に効く。枠は EARRING_SLOTS 個まで。
+   * 基礎職(isBase)には付けられない。
    */
   earrings: Record<string, number>;
+  /** バイボラを装備したクラスのジョブID。基礎職は不可、VAIVORA_MAX 個まで。 */
+  vaivora: number[];
 }

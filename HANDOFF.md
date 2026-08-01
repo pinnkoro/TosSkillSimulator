@@ -180,7 +180,7 @@ python tools/extract_icons.py   # -> public/icons/skill,class/*.png (64px)
 - **ゲーム起動中は IPF が読めない**（排他ロック）。抽出前に `Client_tos_x64` を終了。
 - **IES の Name は韓国語**。日本語化は skill.tsv/etc.tsv の韓国語→日本語ジョインが必須。
 - **バイボラ→クラスの対応は `eliteequipdrop.ies` の `JobName`**（一覧111件・クラス英名）。item 側の `UseJob` は全部 `All`、`cabinet_weapon.ies` の `TabGroup` も全部 `VIBORA` なので使えない。ゲーム内の「バイボラ秘伝 - ○○(固有) - クラス名」表記は `item_cabinet/item_cabinet.lua` の `GET_ENABLE_EQUIP_JOB` がこの表を引いて組み立てている。
-  - **効果テキストは item から参照キーが辿れない**（`AdditionalOption_1` の値は item 表以外の全 IES に存在せず、＝サーバ側定義）。TSV(etc/item/ui/skill) 側に文面はあるので、「説明文の見出しに効果名が出る」ことを手掛かりに拾い、候補が複数なら当該クラスのスキル名との一致数で選んでいる。現状 97件中 21件は説明が拾えない → `tools/vaivora_desc.json` で手当てする。
+  - **効果テキストは item から参照キーが辿れない**（`AdditionalOption_1` の値は item 表以外の全 IES に存在せず、＝サーバ側定義）。TSV(etc/item/ui/skill) 側に文面はあるので、「説明文の見出しに効果名が出る」ことを手掛かりに拾い、候補が複数なら当該クラスのスキル名との一致数で選んでいる。拾えなかった21件はゲーム内ツールチップから `tools/vaivora_desc.json` に書き起こし済みで、現状97件すべてに説明がある。
 - **アイコン**は IMC 著作物だが、データ本体と同じ「黙認ファンプロジェクト」の立場で同梱する方針（ユーザー了承済み）。スキルは `ui.ipf` 内の個別PNG(`icon/skill/<系統>/icon_<名前>.png`)、クラスは**アトラス** `icon/class_<系統>.tga` を `baseskinset/classicon.xml` の `imgrect` で切り出し。`extract_icons.py` が 64px に縮小して `public/icons/` へ出力。**要 Pillow**（抽出本体は標準ライブラリのみだが縮小/TGA切出しに使用）。⚠️ `job.ies` の Icon 名と classicon.xml の name は大小が食い違うので**大小無視で照合**。
 - Windows ホストはノートン360が HTTPS を MITM しており `curl` 等が TLS エラー（exit 35）になる。**サイト死活は curl でなくブラウザ or gh API で確認**。外部 HTTPS を叩く処理は WSL 推奨（IPF/IES 抽出は純ローカル処理なので host でOK）。
 - Python は python.org 版（3.14）。IPF/IES 抽出(`tos_extract.py`/`build_game_data.py`)は標準ライブラリ(struct/zlib)のみ。アイコン抽出(`extract_icons.py`)のみ **Pillow** に依存。

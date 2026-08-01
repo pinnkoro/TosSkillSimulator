@@ -100,18 +100,24 @@ def index_ja_names(rows):
     return out
 
 
+def clean_desc(text):
+    """説明文の整形。上昇矢印の画像タグはゲーム内表記に合わせて ▲ にする
+    （strip_codes は {img ...} を落とすだけなので、その前に置き換える）。"""
+    return clean((text or "").replace("{img green_up_arrow 16 16}", "▲"))
+
+
 def desc_index(rows):
-    """効果説明らしき行を [(ja, ko)] で。箇条書き or スキルLv上昇矢印を含むもの。"""
+    """効果説明らしき行を [(ja, ko, 原文ko)] で。箇条書き or スキルLv上昇矢印を含むもの。"""
     out = []
     seen = set()
     for ja, ko in rows:
         if "green_up_arrow" not in ko and not ko.strip().startswith("-"):
             continue
-        k = clean(ko)
+        k = clean_desc(ko)
         if not k or k in seen:
             continue
         seen.add(k)
-        out.append((clean(ja), k, ko))
+        out.append((clean_desc(ja), k, ko))
     return out
 
 

@@ -227,21 +227,32 @@ export default function App() {
                     <span className="slot-tag">{ui.slot(slot)}</span>
                     <div className="slot-body">
                       <ClassIcon icon={job?.icon ?? ''} />
-                      <select
-                        value={jobId ?? ''}
-                        onChange={(e) =>
-                          setBuild(
-                            setJob(build, slot, e.target.value ? Number(e.target.value) : null),
-                          )
-                        }
-                      >
-                        <option value="">{ui.choose}</option>
-                        {choices.map((c) => (
-                          <option key={c.id} value={c.id}>
-                            {tl(c.name)}
-                          </option>
-                        ))}
-                      </select>
+                      {/* 一覧では英語名も出すが、選択後の表示は名前だけにしたい。
+                          native select は選択肢の文字列をそのまま閉じた状態にも出すので、
+                          選択済みのときは名前だけのラベルを不透明で上に重ねて隠す。 */}
+                      <div className="job-select">
+                        <select
+                          value={jobId ?? ''}
+                          onChange={(e) =>
+                            setBuild(
+                              setJob(build, slot, e.target.value ? Number(e.target.value) : null),
+                            )
+                          }
+                        >
+                          <option value="">{ui.choose}</option>
+                          {/* 並びが英語名基準なので、括弧書きで英語名も出して順番を追えるようにする。 */}
+                          {choices.map((c) => (
+                            <option key={c.id} value={c.id}>
+                              {`${tl(c.name)} (${c.engName})`}
+                            </option>
+                          ))}
+                        </select>
+                        {job && (
+                          <span className="job-select-label" aria-hidden="true">
+                            {tl(job.name)}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );

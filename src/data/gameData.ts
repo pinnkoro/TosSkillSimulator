@@ -42,11 +42,14 @@ export function baseJobOf(tree: TreeId): Job | undefined {
   return jobById.get(getTree(tree)!.baseJobId);
 }
 
-/** 系統に属する非baseジョブ（枠1-3の選択肢）。名前順。 */
+/**
+ * 系統に属する非baseジョブ（枠1-3の選択肢）。
+ * 並びは英語名基準（表示言語を切り替えても順番が変わらないように）。
+ */
 export function advancedJobsOf(tree: TreeId): Job[] {
   return gameData.jobs
     .filter((j) => j.tree === tree && !j.isBase)
-    .sort((a, b) => a.rank - b.rank || a.name.ja.localeCompare(b.name.ja, 'ja'));
+    .sort((a, b) => a.rank - b.rank || a.engName.localeCompare(b.engName, 'en'));
 }
 
 /** レベル L における値。L<=0 は 0。 */

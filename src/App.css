@@ -120,14 +120,17 @@ button.ghost {
 .job-slots {
   margin-bottom: 24px;
 }
+/* minmax(0, ...): 既定の 1fr は列が中身の min-content 未満に縮まない。
+   select の min-content は「一番長い選択肢」で決まるので、括弧書きの英語名の分だけ
+   列が広がってしまう。閉じた表示は名前だけなので、列は中身に引きずらせない。 */
 .slot-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
 }
 @media (max-width: 720px) {
   .slot-row {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 .slot {
@@ -176,6 +179,12 @@ button.ghost {
   border: 1px dashed var(--border);
   background: transparent;
 }
+.job-select {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+}
 .slot-body select {
   flex: 1;
   min-width: 0;
@@ -184,6 +193,29 @@ button.ghost {
   border: 1px solid var(--border);
   border-radius: 7px;
   padding: 7px 8px;
+}
+.slot-body select option {
+  color: var(--text-h);
+  background: var(--panel-2);
+}
+/* 選択済みの閉じた表示は上に重ねたラベル（名前のみ）に任せる。
+   select 自体を color: transparent にする手は、閉じた表示を「選択中 option の色」で
+   描く実装（Firefox や強制カラーモード）だと option の色指定に負けて透明にならず、
+   下の文字とラベルが重なって読めなくなる。ラベルを不透明にして覆う方が確実。
+   left/right は select のテキスト領域（border 1px + padding 8px 〜 矢印の手前）に合わせる。 */
+.job-select-label {
+  position: absolute;
+  left: 9px;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 3px 0;
+  background: var(--panel-2);
+  color: var(--text-h);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 /* ---- job block ---- */
@@ -335,16 +367,23 @@ button.ghost {
   color: var(--text-dim);
   margin-left: 1px;
 }
-/* 装備によるレベル補正。既定はイヤリング色、ジェム付きのカードはジェム色。 */
+/* 装備によるレベル補正。どの装備の分かが一目で分かるよう、出所ごとに色を分けて並べる。 */
 .lv-boost {
-  color: var(--earring);
   font-weight: 700;
   font-size: 13px;
   margin-left: 1px;
 }
+.lv-boost.from-gem {
+  color: var(--gem);
+}
+.lv-boost.from-earring {
+  color: var(--earring);
+}
+.lv-boost.from-vaivora {
+  color: var(--vaivora);
+}
 /* ジェムを付けたカードは Lv の数字とゲージ(スライダー)の色を変える。 */
-.skill-card.gem-on .skill-lv b,
-.skill-card.gem-on .lv-boost {
+.skill-card.gem-on .skill-lv b {
   color: var(--gem);
 }
 .skill-card.gem-on .stepper input[type='range'] {
@@ -472,7 +511,7 @@ button.ghost {
   color: var(--earring);
 }
 .bonus-breakdown .from-vaivora {
-  color: var(--warn);
+  color: var(--vaivora);
 }
 
 .factor-note {
@@ -749,9 +788,9 @@ button.ghost {
 }
 .vaivora-toggle.on {
   opacity: 1;
-  color: var(--warn);
-  border-color: var(--warn);
-  background: rgba(255, 180, 84, 0.1);
+  color: var(--vaivora);
+  border-color: var(--vaivora);
+  background: rgba(255, 210, 74, 0.1);
 }
 /* バイボラの段階(Lv1〜4)。装備中だけ出す。既定は最大で、下げられる。 */
 .vaivora-lv {
@@ -760,7 +799,7 @@ button.ghost {
   gap: 4px;
   margin-left: 5px;
   font-size: 12px;
-  color: var(--warn);
+  color: var(--vaivora);
   font-variant-numeric: tabular-nums;
 }
 .vaivora-lv .step {
@@ -776,8 +815,8 @@ button.ghost {
   color: var(--text-dim);
 }
 .vaivora-lv .step:hover:not(:disabled) {
-  color: var(--warn);
-  border-color: var(--warn);
+  color: var(--vaivora);
+  border-color: var(--vaivora);
 }
 .vaivora-lv .step:disabled {
   opacity: 0.3;
@@ -821,7 +860,7 @@ button.ghost {
 }
 .vaivora-name {
   font-weight: 700;
-  color: var(--warn);
+  color: var(--vaivora);
   font-size: 12px;
 }
 .tip-desc.dim {
@@ -853,7 +892,7 @@ button.ghost {
   font-weight: 400;
 }
 .vaivora-lv-table .cur {
-  color: var(--warn);
+  color: var(--vaivora);
   font-weight: 700;
 }
 

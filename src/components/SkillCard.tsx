@@ -116,7 +116,22 @@ export function SkillCard({
           <span className="skill-name">{tl(skill.name)}</span>
           <span className="skill-lv">
             <b>{level}</b>
-            {bonus.total > 0 && active && <span className="lv-boost">+{bonus.total}</span>}
+            {/* 補正は合算せず、出所ごとに色分けした +N を並べる（ジェム=緑/イヤリング=水色/バイボラ=黄）。 */}
+            {active && bonus.gem > 0 && (
+              <span className="lv-boost from-gem" title={ui.gem}>
+                +{bonus.gem}
+              </span>
+            )}
+            {active && bonus.earring > 0 && (
+              <span className="lv-boost from-earring" title={ui.earring}>
+                +{bonus.earring}
+              </span>
+            )}
+            {active && bonus.vaivora > 0 && (
+              <span className="lv-boost from-vaivora" title={ui.vaivora}>
+                +{bonus.vaivora}
+              </span>
+            )}
             <span className="lv-max">/{skill.maxLevel}</span>
           </span>
         </div>

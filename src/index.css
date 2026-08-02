@@ -12,9 +12,10 @@
   --attack: #ff6b6b;
   --buff: #4dd4a8;
   --warn: #ffb454;
-  /* 装備によるレベル補正の色分け（ジェム=緑 / イヤリング=青） */
+  /* 装備によるレベル補正の色分け（ジェム=緑 / イヤリング=水色 / バイボラ=黄） */
   --gem: #4dd4a8;
   --earring: #6fb3ff;
+  --vaivora: #ffd24a;
   --earring-bg: rgba(111, 179, 255, 0.08);
   --earring-border: rgba(111, 179, 255, 0.5);
 

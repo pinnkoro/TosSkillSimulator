@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import type { MouseEvent as ReactMouseEvent } from 'react';
 import type { Vaivora, VaivoraLevel } from '../types';
 import { VAIVORA_LV_MAX, VAIVORA_LV_MIN } from '../lib/build';
 import { uiIconUrl } from '../lib/icons';
@@ -48,9 +49,25 @@ export function VaivoraToggle({
     setHover(true);
   };
   const hide = () => {
+    // 予約済みのタイマーを消してから積む。消さないと blur と mouseleave が続いたとき
+    // 迷子のタイマーが残り、show で開き直した後に発火して勝手に閉じる。
+    if (hideTimer.current) clearTimeout(hideTimer.current);
     hideTimer.current = window.setTimeout(() => setHover(false), 150);
   };
   useEffect(() => () => clearTimeout(hideTimer.current), []);
+
+  // 端まで動かすと押したボタン自身が disabled になり、ブラウザがフォーカスを外す。
+  // そのままだと onBlur でポップアップが閉じるので、生き残る反対側へ先に移す。
+  const downRef = useRef<HTMLButtonElement>(null);
+  const upRef = useRef<HTMLButtonElement>(null);
+  const step = (e: ReactMouseEvent<HTMLButtonElement>, next: number) => {
+    const pressed = e.currentTarget;
+    const dies = next <= VAIVORA_LV_MIN || next >= VAIVORA_LV_MAX;
+    if (dies && document.activeElement === pressed) {
+      (next <= VAIVORA_LV_MIN ? upRef : downRef).current?.focus();
+    }
+    onLevelChange(next);
+  };
 
   return (
     // 枠なしで押せないときの理由も出すので、ツールチップは disabled にならない外側に持たせる。
@@ -62,7 +79,10 @@ export function VaivoraToggle({
       onFocus={(e) => {
         if (e.target.matches(':focus-visible')) show();
       }}
-      onBlur={hide}
+      // スロット内での移動（トグル⇄段階ボタン）では閉じない。
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) hide();
+      }}
     >
       <button
         type="button"
@@ -93,9 +113,10 @@ export function VaivoraToggle({
           <button
             type="button"
             className="step"
+            ref={downRef}
             aria-label={ui.vaivoraLvDown}
             disabled={level <= VAIVORA_LV_MIN}
-            onClick={() => onLevelChange(level - 1)}
+            onClick={(e) => step(e, level - 1)}
           >
             −
           </button>
@@ -103,9 +124,10 @@ export function VaivoraToggle({
           <button
             type="button"
             className="step"
+            ref={upRef}
             aria-label={ui.vaivoraLvUp}
             disabled={level >= VAIVORA_LV_MAX}
-            onClick={() => onLevelChange(level + 1)}
+            onClick={(e) => step(e, level + 1)}
           >
             ＋
           </button>

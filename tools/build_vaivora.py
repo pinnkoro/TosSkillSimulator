@@ -337,15 +337,22 @@ def build_levels(rows_by_lv, unknown):
             changed.append(f)
             if f not in STAT_FIELDS:
                 unknown.add(f)
+    # DefaultEqpSlot に LH と RH の両方があれば左右どちらにも入る。ただし短剣・盾・
+    # 拳銃のような元から片手/サブ用の装備は Lv1 から両方持っているので、それ自体は
+    # 「Lv による解放」ではない。Lv1 の状態を基準にして、増えた段階だけ true にする。
+    def both_hands(r):
+        slots = str(r.get("DefaultEqpSlot", "")).split()
+        return "LH" in slots and "RH" in slots
+
+    base_both = both_hands(rows_by_lv[lvs[0]])
     out = []
     for lv in lvs:
         r = rows_by_lv[lv]
-        slots = str(r.get("DefaultEqpSlot", "")).split()
         out.append({
             "level": lv,
             "useLv": num(r.get("UseLv")),
-            # Lv4 はサブ武器スロットにも入る（＝2本目として装備できる）。
-            "subSlot": "LH" in slots and "RH" in slots,
+            # この段階で新たにサブ武器スロットに入るようになった（＝2本目として装備できる）。
+            "subSlot": both_hands(r) and not base_both,
             # Lv4 だけ付く追加オプション。効果内容はクライアントに定義が無い。
             "bonusOption": str(r.get("AdditionalOption_2", "") or ""),
             "stats": {f: num(r.get(f)) for f in changed},

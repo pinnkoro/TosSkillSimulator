@@ -86,7 +86,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -98,7 +98,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 163,
@@ -110,7 +110,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 179,
@@ -122,7 +122,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "SawbladeShield_Lv4",
      "stats": {
       "STR": 179,
@@ -231,7 +231,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 248,
@@ -242,7 +242,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 273,
@@ -253,7 +253,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 300,
@@ -264,7 +264,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Wrath_Lv4",
      "stats": {
       "STR": 300,
@@ -435,7 +435,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 134,
@@ -447,7 +447,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 147,
@@ -459,7 +459,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 161,
@@ -471,7 +471,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "SlashSpace_Lv4",
      "stats": {
       "STR": 161,
@@ -506,7 +506,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -517,7 +517,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -528,7 +528,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -539,7 +539,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Arena_Lv4",
      "stats": {
       "STR": 180,
@@ -715,7 +715,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 248,
@@ -726,7 +726,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 273,
@@ -737,7 +737,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 300,
@@ -748,7 +748,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "AssembleOrders_Lv4",
      "stats": {
       "STR": 300,
@@ -923,7 +923,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -935,7 +935,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -947,7 +947,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -959,7 +959,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "ChillWind_Lv4",
      "stats": {
       "STR": 180,
@@ -1064,7 +1064,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 134,
@@ -1076,7 +1076,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 147,
@@ -1088,7 +1088,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 161,
@@ -1100,7 +1100,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Saber_Lv4",
      "stats": {
       "STR": 161,
@@ -1195,7 +1195,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 145,
@@ -1208,7 +1208,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 159,
@@ -1221,7 +1221,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 174,
@@ -1234,7 +1234,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "DobleAtaque_Lv4",
      "stats": {
       "STR": 174,
@@ -1573,7 +1573,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -1587,7 +1587,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -1601,7 +1601,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -1615,7 +1615,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Bonemancer_Lv4",
      "stats": {
       "STR": 180,
@@ -1655,7 +1655,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -1666,7 +1666,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -1677,7 +1677,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -1688,7 +1688,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Grimmark_Lv4",
      "stats": {
       "STR": 180,
@@ -1724,7 +1724,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -1736,7 +1736,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -1748,7 +1748,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -1760,7 +1760,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Escrimeur_Lv4",
      "stats": {
       "STR": 180,
@@ -1797,7 +1797,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -1809,7 +1809,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -1821,7 +1821,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -1833,7 +1833,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Commodore_Lv4",
      "stats": {
       "STR": 180,
@@ -3199,7 +3199,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -3213,7 +3213,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -3227,7 +3227,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -3241,7 +3241,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Bonemancer_Lv4",
      "stats": {
       "STR": 180,
@@ -3279,7 +3279,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -3291,7 +3291,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -3303,7 +3303,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -3315,7 +3315,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "AetherBlader_Lv4",
      "stats": {
       "STR": 180,
@@ -3352,7 +3352,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -3364,7 +3364,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -3376,7 +3376,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -3388,7 +3388,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Hermit_Lv4",
      "stats": {
       "STR": 180,
@@ -3425,7 +3425,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -3437,7 +3437,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -3449,7 +3449,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -3461,7 +3461,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Kneller_Lv4",
      "stats": {
       "STR": 180,
@@ -3497,7 +3497,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "INT": 149,
@@ -3509,7 +3509,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "INT": 164,
@@ -3521,7 +3521,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "INT": 180,
@@ -3533,7 +3533,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Incendiar_Lv4",
      "stats": {
       "INT": 180,
@@ -3569,7 +3569,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -3581,7 +3581,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -3593,7 +3593,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -3605,7 +3605,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Shardbringer_Lv4",
      "stats": {
       "STR": 180,
@@ -4890,7 +4890,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -4904,7 +4904,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -4918,7 +4918,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -4932,7 +4932,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Bonemancer_Lv4",
      "stats": {
       "STR": 180,
@@ -4971,7 +4971,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -4983,7 +4983,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -4995,7 +4995,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -5007,7 +5007,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "BlitzHunter_Lv4",
      "stats": {
       "STR": 180,
@@ -5044,7 +5044,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -5056,7 +5056,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -5068,7 +5068,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -5080,7 +5080,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Hermit_Lv4",
      "stats": {
       "STR": 180,
@@ -5118,7 +5118,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -5129,7 +5129,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -5140,7 +5140,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -5151,7 +5151,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Grimmark_Lv4",
      "stats": {
       "STR": 180,
@@ -5187,7 +5187,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -5199,7 +5199,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -5211,7 +5211,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -5223,7 +5223,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Commodore_Lv4",
      "stats": {
       "STR": 180,
@@ -5259,7 +5259,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -5271,7 +5271,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -5283,7 +5283,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -5295,7 +5295,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Sagitta_Lv4",
      "stats": {
       "STR": 180,
@@ -6755,7 +6755,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -6769,7 +6769,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -6783,7 +6783,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -6797,7 +6797,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Bonemancer_Lv4",
      "stats": {
       "STR": 180,
@@ -6835,7 +6835,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -6847,7 +6847,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -6859,7 +6859,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -6871,7 +6871,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "AetherBlader_Lv4",
      "stats": {
       "STR": 180,
@@ -6908,7 +6908,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -6920,7 +6920,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -6932,7 +6932,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -6944,7 +6944,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Hermit_Lv4",
      "stats": {
       "STR": 180,
@@ -6981,7 +6981,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -6993,7 +6993,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -7005,7 +7005,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -7017,7 +7017,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Kneller_Lv4",
      "stats": {
       "STR": 180,
@@ -7053,7 +7053,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -7065,7 +7065,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -7077,7 +7077,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -7089,7 +7089,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Shardbringer_Lv4",
      "stats": {
       "STR": 180,
@@ -7125,7 +7125,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -7137,7 +7137,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -7149,7 +7149,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -7161,7 +7161,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "SuddenDeath_Lv4",
      "stats": {
       "STR": 180,
@@ -7198,7 +7198,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -7210,7 +7210,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 163,
@@ -7222,7 +7222,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 179,
@@ -7234,7 +7234,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Sabotage_Lv4",
      "stats": {
       "STR": 179,
@@ -7263,7 +7263,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 142,
@@ -7275,7 +7275,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 156,
@@ -7287,7 +7287,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 171,
@@ -7299,7 +7299,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "CriticalEdge_Lv4",
      "stats": {
       "STR": 171,
@@ -7334,7 +7334,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 148,
@@ -7346,7 +7346,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 163,
@@ -7358,7 +7358,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -7370,7 +7370,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "ShadowClone_Lv4",
      "stats": {
       "STR": 180,
@@ -7399,7 +7399,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -7411,7 +7411,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 163,
@@ -7423,7 +7423,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 179,
@@ -7435,7 +7435,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "RapidGrowth_Lv4",
      "stats": {
       "STR": 179,
@@ -7471,7 +7471,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -7483,7 +7483,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 163,
@@ -7495,7 +7495,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 179,
@@ -7507,7 +7507,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Empowering_Lv4",
      "stats": {
       "STR": 179,
@@ -7543,7 +7543,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -7555,7 +7555,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 163,
@@ -7567,7 +7567,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 179,
@@ -7579,7 +7579,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Superstring_Lv4",
      "stats": {
       "STR": 179,
@@ -7616,7 +7616,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 148,
@@ -7628,7 +7628,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 163,
@@ -7640,7 +7640,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -7652,7 +7652,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "ThrowingKnife_Lv4",
      "stats": {
       "STR": 180,
@@ -7681,7 +7681,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 143,
@@ -7694,7 +7694,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 157,
@@ -7707,7 +7707,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 172,
@@ -7720,7 +7720,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "RenovateTrigger_Lv4",
      "stats": {
       "STR": 172,
@@ -7752,7 +7752,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 146,
@@ -7763,7 +7763,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 161,
@@ -7774,7 +7774,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 177,
@@ -7785,7 +7785,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "CryoliteBullet_Lv4",
      "stats": {
       "STR": 177,
@@ -7815,7 +7815,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 148,
@@ -7827,7 +7827,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 163,
@@ -7839,7 +7839,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -7851,7 +7851,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "CarpetBombing_Lv4",
      "stats": {
       "STR": 180,
@@ -7887,7 +7887,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 142,
@@ -7899,7 +7899,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 156,
@@ -7911,7 +7911,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 172,
@@ -7923,7 +7923,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "SpeedLoader_Lv4",
      "stats": {
       "STR": 172,
@@ -7955,7 +7955,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 148,
@@ -7966,7 +7966,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 163,
@@ -7977,7 +7977,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -7988,7 +7988,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "CurseDagger_Lv4",
      "stats": {
       "STR": 180,
@@ -8023,7 +8023,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -8035,7 +8035,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 163,
@@ -8047,7 +8047,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -8059,7 +8059,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "KnifeSpread_Lv4",
      "stats": {
       "STR": 180,
@@ -8095,7 +8095,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 145,
@@ -8107,7 +8107,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 159,
@@ -8119,7 +8119,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 174,
@@ -8131,7 +8131,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Carbine_Lv4",
      "stats": {
       "STR": 174,
@@ -8168,7 +8168,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -8180,7 +8180,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -8192,7 +8192,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -8204,7 +8204,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "LawOfTheJungle_Lv4",
      "stats": {
       "STR": 180,
@@ -8240,7 +8240,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -8252,7 +8252,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -8264,7 +8264,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -8276,7 +8276,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Sunset_Lv4",
      "stats": {
       "STR": 180,
@@ -8378,7 +8378,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -8390,7 +8390,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -8402,7 +8402,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -8414,7 +8414,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "BlitzHunter_Lv4",
      "stats": {
       "STR": 180,
@@ -8450,7 +8450,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -8462,7 +8462,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -8474,7 +8474,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -8486,7 +8486,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "AetherBlader_Lv4",
      "stats": {
       "STR": 180,
@@ -8524,7 +8524,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -8535,7 +8535,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -8546,7 +8546,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -8557,7 +8557,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Grimmark_Lv4",
      "stats": {
       "STR": 180,
@@ -8593,7 +8593,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -8605,7 +8605,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -8617,7 +8617,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -8629,7 +8629,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Kneller_Lv4",
      "stats": {
       "STR": 180,
@@ -8666,7 +8666,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -8678,7 +8678,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -8690,7 +8690,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -8702,7 +8702,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Commodore_Lv4",
      "stats": {
       "STR": 180,
@@ -8738,7 +8738,7 @@
     {
      "level": 1,
      "useLv": 430,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 149,
@@ -8750,7 +8750,7 @@
     {
      "level": 2,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 164,
@@ -8762,7 +8762,7 @@
     {
      "level": 3,
      "useLv": 450,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "",
      "stats": {
       "STR": 180,
@@ -8774,7 +8774,7 @@
     {
      "level": 4,
      "useLv": 460,
-     "subSlot": true,
+     "subSlot": false,
      "bonusOption": "Shardbringer_Lv4",
      "stats": {
       "STR": 180,

@@ -62,15 +62,20 @@ export default function App() {
   const [copied, setCopied] = useState(false);
   const skipHash = useRef(false);
 
+  // 現在のビルドを表す hash。更新履歴へのリンクにも同じものを載せて、戻ってきたときに復元する。
+  const buildHash = useMemo(() => {
+    const encoded = encodeBuild(build);
+    return encoded ? `#${encoded}` : '';
+  }, [build]);
+
   // build → URL hash（自分で書いた変更は skipHash で読み戻さない）。
   useEffect(() => {
-    const encoded = encodeBuild(build);
     skipHash.current = true;
-    const next = encoded ? `#${encoded}` : '';
+    const next = buildHash;
     if (next !== location.hash) {
       history.replaceState(null, '', next || location.pathname + location.search);
     }
-  }, [build]);
+  }, [buildHash]);
 
   // 戻る/進む・外部からの hash 変更に追従。
   useEffect(() => {
@@ -328,7 +333,7 @@ export default function App() {
 
       <footer className="foot">
         <span>{ui.footer(gameData.meta.jobCount, gameData.meta.skillCount)}</span>
-        <a className="page-link" href={changelogHref()}>
+        <a className="page-link" href={changelogHref(buildHash)}>
           {ui.changelog}
         </a>
         <span className="copyright">{gameData.meta.note}</span>

@@ -10,12 +10,15 @@ export function currentPage(): Page {
   return new URLSearchParams(location.search).get(PARAM) === 'changelog' ? 'changelog' : 'sim';
 }
 
-/** シミュレータ本体（= サイトのルート）への URL。 */
-export function homeHref(): string {
-  return import.meta.env.BASE_URL;
+/** シミュレータ本体（= サイトのルート）への URL。組み立て中のビルド(hash)は持ち回る。 */
+export function homeHref(hash: string = location.hash): string {
+  return `${import.meta.env.BASE_URL}${hash}`;
 }
 
-/** 更新履歴ページへの URL。 */
-export function changelogHref(): string {
-  return `${import.meta.env.BASE_URL}?${PARAM}=changelog`;
+/** 更新履歴ページへの URL。戻ってきたときに復元できるよう hash を持ち回る。
+ *
+ * hash を省くと現在の URL のものを使う。ビルド編集中の App からは、hash の書き戻しが
+ * effect（＝描画の後）なので location では 1 手遅れる。呼ぶ側で今の値を渡すこと。 */
+export function changelogHref(hash: string = location.hash): string {
+  return `${import.meta.env.BASE_URL}?${PARAM}=changelog${hash}`;
 }

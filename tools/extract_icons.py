@@ -44,6 +44,8 @@ UI_ICONS = {
     "skillgem_scout": "icon_item_sklgem_scout.png",
     # バイボラ（クラス別の絵柄は武器種ごとなので、汎用のバイボラビジョン紋章を使う）
     "vaivora": "icon_item_vibora_vision.png",
+    # イヤリング（スキル+Lv が付くのはガビヤのイヤリング）
+    "earring": "icon_item_gabijaearring.png",
 }
 
 

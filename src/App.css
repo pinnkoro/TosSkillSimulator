@@ -731,6 +731,16 @@ button.ghost {
 .earring-tag {
   white-space: nowrap;
 }
+/* 未装着のうちは沈ませ、装着すると発色させる（バイボラのトグルと同じ扱い）。 */
+.earring-icon {
+  display: block;
+  filter: grayscale(0.85);
+  transition: filter 0.12s;
+}
+.earring-slot:hover .earring-icon,
+.earring-slot.on .earring-icon {
+  filter: none;
+}
 .earring-slot button {
   width: 22px;
   height: 22px;

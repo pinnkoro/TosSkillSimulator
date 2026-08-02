@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { EARRING_MAX } from '../lib/build';
+import { uiIconUrl } from '../lib/icons';
 import { useI18n } from '../lib/i18n';
 
 interface Props {
@@ -15,10 +17,24 @@ interface Props {
  */
 export function EarringControl({ level, full, onChange }: Props) {
   const { ui } = useI18n();
+  // アイコンが取れない環境（抽出前など）では従来どおり文字で出す。
+  const [failed, setFailed] = useState(false);
   const canUp = level < EARRING_MAX && (level > 0 || !full);
   return (
     <div className={`earring-slot has-tip${level > 0 ? ' on' : ''}`}>
-      <span className="earring-tag">{ui.earring}</span>
+      {failed ? (
+        <span className="earring-tag">{ui.earring}</span>
+      ) : (
+        <img
+          className="earring-icon"
+          src={uiIconUrl('earring')}
+          alt={ui.earring}
+          loading="lazy"
+          width={20}
+          height={20}
+          onError={() => setFailed(true)}
+        />
+      )}
       <button
         type="button"
         aria-label={ui.earringDown}

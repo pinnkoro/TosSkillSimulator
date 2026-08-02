@@ -205,12 +205,15 @@ def pick_desc(descs, eff, job, skills):
              if str(s) in skills and skills[str(s)]["name"]["ko"]]
     names.append(job["name"]["ko"])
 
-    def score(d):
-        # スキル名の一致数が第一。旧文面は改名前のスキル名を使っていることが多く
-        # ここで落ちるが、文面だけ変わった改訂は同点になるので日付で決める。
-        return (sum(1 for n in names if n and n in d["ko"]), d["order"])
-    best = max(cands, key=score)
-    return (best, len(cands)) if score(best)[0] > 0 else (None, len(cands))
+    # 「そのクラスの話をしている文面」に絞ってから、最も新しい行を採る。
+    # 一致数の多い方を優先すると改訂を取り逃す: バイボラの改訂では
+    # 「<スキル>スキルレベル▲3」が「<クラス>の全スキルレベル▲1」に置き換わるため、
+    # 個別スキル名を並べた旧文面の方が必ず一致数で勝ってしまう。
+    # (例 이중표식 は 2020 年の「가이디드 샷 …」版が 2021 年の改訂版に勝っていた)
+    rel = [d for d in cands if any(n and n in d["ko"] for n in names)]
+    if not rel:
+        return None, len(cands)
+    return max(rel, key=lambda d: d["order"]), len(cands)
 
 
 # --- 効果説明からスキルレベル上昇を読む ---

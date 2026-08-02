@@ -4,6 +4,7 @@ import type { LevelBonus } from '../lib/build';
 import { valueAt } from '../data/gameData';
 import { gemIconUrl, skillIconUrl } from '../lib/icons';
 import { useI18n } from '../lib/i18n';
+import { useHoverTip, useTipPosition } from '../lib/tip';
 import { AttrChip } from './AttrChip';
 
 interface Props {
@@ -82,6 +83,10 @@ export function SkillCard({
   const hideTimer = useRef<number | undefined>(undefined);
   const cardRef = useRef<HTMLDivElement>(null);
   const open = hover || pinned;
+  // 位置はカードの左端に揃えつつ、画面からはみ出す分は寄せて収める。
+  const { anchorRef, tipRef } = useTipPosition<HTMLDivElement, HTMLDivElement>(open);
+  // ジェムの説明（押せない理由）は別のポップアップ。
+  const gemTip = useHoverTip<HTMLDivElement, HTMLSpanElement>({ align: 'center', maxHeight: 320 });
 
   const show = () => {
     if (hideTimer.current) clearTimeout(hideTimer.current);
@@ -107,7 +112,7 @@ export function SkillCard({
       ref={cardRef}
     >
       {/* 常時: アイコン＋名前＋レベル。ホバーで詳細ポップアップ、クリックでピン留め。 */}
-      <div className="skill-hover" onMouseEnter={show} onMouseLeave={hide}>
+      <div className="skill-hover" onMouseEnter={show} onMouseLeave={hide} ref={anchorRef}>
         <div
           className={`skill-head${pinned ? ' pinned' : ''}`}
           onClick={() => setPinned((p) => !p)}
@@ -136,7 +141,7 @@ export function SkillCard({
           </span>
         </div>
 
-        <div className={`tip skill-tip${open ? ' open' : ''}`}>
+        <div className={`tip skill-tip${open ? ' open' : ''}`} ref={tipRef}>
           <span className="tip-title">{tl(skill.name)}</span>
           <div className="skill-meta">
             <span className={`tag type-${skill.type}`}>
@@ -255,7 +260,7 @@ export function SkillCard({
         ))}
         {/* 押せない理由(Lv1未満/枠なし)を出すツールチップなので、
             ホバーを受けない disabled ボタンではなく外側の要素に持たせる。 */}
-        <div className="gem-slot has-tip">
+        <div className="gem-slot" {...gemTip.tipProps}>
           <button
             type="button"
             className={`gem-toggle${gem ? ' on' : ''}`}
@@ -281,7 +286,10 @@ export function SkillCard({
             )}
             <span className="gem-lv">+1</span>
           </button>
-          <span className="tip attr-tip">
+          <span
+            className={`tip attr-tip${gemTip.open ? ' open' : ''}`}
+            ref={gemTip.tipRef}
+          >
             <span className="tip-title">{ui.gem}</span>
             <span className="tip-desc">
               {ui.gemHint}

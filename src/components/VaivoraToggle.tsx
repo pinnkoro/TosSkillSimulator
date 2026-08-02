@@ -4,6 +4,7 @@ import type { Vaivora, VaivoraLevel } from '../types';
 import { VAIVORA_LV_MAX, VAIVORA_LV_MIN } from '../lib/build';
 import { uiIconUrl } from '../lib/icons';
 import { useI18n } from '../lib/i18n';
+import { useTipPosition } from '../lib/tip';
 
 interface Props {
   on: boolean;
@@ -56,6 +57,11 @@ export function VaivoraToggle({
   };
   useEffect(() => () => clearTimeout(hideTimer.current), []);
 
+  // 見出し行の途中にあるトグルが基準なので、340px の表はそのままだと右へはみ出す。
+  const { anchorRef, tipRef } = useTipPosition<HTMLSpanElement, HTMLSpanElement>(hover, {
+    maxHeight: 420,
+  });
+
   // 端まで動かすと押したボタン自身が disabled になり、ブラウザがフォーカスを外す。
   // そのままだと onBlur でポップアップが閉じるので、生き残る反対側へ先に移す。
   const downRef = useRef<HTMLButtonElement>(null);
@@ -73,6 +79,7 @@ export function VaivoraToggle({
     // 枠なしで押せないときの理由も出すので、ツールチップは disabled にならない外側に持たせる。
     <span
       className="vaivora-slot"
+      ref={anchorRef}
       onMouseEnter={show}
       onMouseLeave={hide}
       // キーボード操作時だけ開く（クリック後のフォーカス残りで出っぱなしにしない）。
@@ -133,7 +140,7 @@ export function VaivoraToggle({
           </button>
         </span>
       )}
-      <span className={`tip vaivora-tip${hover ? ' open' : ''}`}>
+      <span className={`tip vaivora-tip${hover ? ' open' : ''}`} ref={tipRef}>
         <span className="tip-title">{ui.vaivora}</span>
         <span className="tip-desc">
           {ui.vaivoraHint}

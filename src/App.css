@@ -302,9 +302,6 @@ button.ghost {
   border-color: var(--accent-border);
   background: linear-gradient(var(--accent-bg), var(--panel));
 }
-.skill-hover {
-  position: relative;
-}
 .skill-head {
   display: flex;
   align-items: center;
@@ -428,21 +425,18 @@ button.ghost {
 }
 
 /* ---- hover popup (tip) ---- */
-.has-tip {
-  position: relative;
-}
+/* 位置は useTipPosition が inline style で入れる（画面内に収めるため）。
+   position: fixed なのは、absolute だと閉じている間（visibility: hidden はレイアウトを
+   占有する）のはみ出しがページのスクロール範囲に入り、窓幅次第で横スクロールが出るため。 */
 .tip {
-  position: absolute;
+  position: fixed;
   z-index: 30;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.12s ease;
 }
-/* focus-visible はキーボード操作時のみ真になるため、マウスでクリックしても
-   フォーカス残りでツールチップが出っぱなしにならない。 */
-.has-tip:hover > .tip,
-.has-tip:focus-visible > .tip {
+.tip.open {
   opacity: 1;
   visibility: visible;
 }
@@ -458,13 +452,10 @@ button.ghost {
   white-space: pre-line;
 }
 
-/* ポップアップは上方向に開く（下のステッパ/特性を塞がない）。JS の .open で表示。 */
+/* 上方向に開く（下のステッパ/特性を塞がない）。表示は JS の .open、位置と幅/高さの
+   上限も JS が画面内に収まるように入れる。 */
 .skill-tip {
-  bottom: calc(100% + 6px);
-  left: 0;
   width: 300px;
-  max-width: 82vw;
-  max-height: min(60vh, 440px);
   overflow-y: auto;
   /* ポップアップ端までスクロールしても背景ページに伝播させない。 */
   overscroll-behavior: contain;
@@ -478,9 +469,8 @@ button.ghost {
   border-radius: 10px;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
 }
+/* 中がスクロールするポップアップだけマウスを受ける（表の閲覧用）。 */
 .skill-tip.open {
-  opacity: 1;
-  visibility: visible;
   pointer-events: auto;
 }
 .skill-meta {
@@ -563,6 +553,9 @@ button.ghost {
   border-top: 1px solid var(--border);
   padding-top: 8px;
 }
+/* OFF のときの沈ませ方（opacity/filter）はチップ本体ではなく中身に掛ける。
+   本体に filter を掛けると position: fixed の子（ツールチップ）の基準がここになり、
+   画面内に収める計算が効かなくなる。opacity も同じ理由で分けている（重ね順の分断も避ける）。 */
 .attr-chip {
   width: 34px;
   height: 34px;
@@ -572,21 +565,26 @@ button.ghost {
   background: var(--panel-2);
   display: grid;
   place-items: center;
+  transition: border-color 0.12s;
+}
+.attr-chip > img,
+.attr-chip > .attr-fallback {
   opacity: 0.45;
   filter: grayscale(0.7);
-  transition: opacity 0.12s, filter 0.12s, border-color 0.12s;
+  transition: opacity 0.12s, filter 0.12s;
 }
 .attr-chip img {
   display: block;
   border-radius: 5px;
 }
-.attr-chip:hover {
+.attr-chip:hover > img,
+.attr-chip:hover > .attr-fallback,
+.attr-chip.on > img,
+.attr-chip.on > .attr-fallback {
   opacity: 1;
   filter: none;
 }
 .attr-chip.on {
-  opacity: 1;
-  filter: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent-border);
 }
@@ -600,10 +598,12 @@ button.ghost {
   color: var(--text-dim);
 }
 .attr-tip {
-  bottom: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-50%);
   width: 220px;
+  /* 高さの上限は JS が画面の空きに合わせて入れる。上限に当たったとき、これが無いと
+     はみ出した文字がチップの上に重なって出る（枠外に描かれるだけで隠れない）。
+     ホバー専用で pointer-events: none なので中はスクロールできないが、
+     クランプされるのは説明が画面の半分より高いときだけ。 */
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -671,12 +671,6 @@ button.ghost {
 .gem-lv {
   font-variant-numeric: tabular-nums;
   font-weight: 700;
-}
-/* 右端のチップなのでツールチップは右寄せで開く（画面外に出ないように） */
-.gem-slot .attr-tip {
-  left: auto;
-  right: 0;
-  transform: none;
 }
 
 /* 解放Lv段階ごとの段。イヤリングONの段は丸ごと着色して対象範囲を示す。 */
@@ -762,8 +756,6 @@ button.ghost {
 
 /* クラス見出しのバイボラトグル（上級職のみ）。外側の .vaivora-slot がツールチップの基準。 */
 .vaivora-slot {
-  /* ポップアップ(.vaivora-tip)の位置基準。 */
-  position: relative;
   display: inline-flex;
   align-items: center;
 }
@@ -838,11 +830,7 @@ button.ghost {
    CSS の :hover だけだとトグルとポップアップの隙間で一度 hidden になり、
    ポップアップ側がマウスを受け取れずスクロールできない。 */
 .vaivora-tip {
-  bottom: calc(100% + 6px);
-  left: 0;
   width: 340px;
-  max-width: 84vw;
-  max-height: min(56vh, 420px);
   overflow-y: auto;
   overscroll-behavior: contain;
   display: flex;
@@ -857,8 +845,6 @@ button.ghost {
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
 }
 .vaivora-tip.open {
-  opacity: 1;
-  visibility: visible;
   pointer-events: auto;
 }
 .vaivora-entry {

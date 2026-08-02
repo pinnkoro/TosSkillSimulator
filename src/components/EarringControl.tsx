@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { EARRING_MAX } from '../lib/build';
 import { uiIconUrl } from '../lib/icons';
 import { useI18n } from '../lib/i18n';
+import { useHoverTip } from '../lib/tip';
 
 interface Props {
   /** 現在の+Lv(0=未装着) */
@@ -20,8 +21,12 @@ export function EarringControl({ level, full, onChange }: Props) {
   // アイコンが取れない環境（抽出前など）では従来どおり文字で出す。
   const [failed, setFailed] = useState(false);
   const canUp = level < EARRING_MAX && (level > 0 || !full);
+  const { open, tipProps, tipRef } = useHoverTip<HTMLDivElement, HTMLSpanElement>({
+    align: 'center',
+    maxHeight: 320,
+  });
   return (
-    <div className={`earring-slot has-tip${level > 0 ? ' on' : ''}`}>
+    <div className={`earring-slot${level > 0 ? ' on' : ''}`} {...tipProps}>
       {failed ? (
         <span className="earring-tag">{ui.earring}</span>
       ) : (
@@ -52,7 +57,7 @@ export function EarringControl({ level, full, onChange }: Props) {
       >
         +
       </button>
-      <span className="tip attr-tip">
+      <span className={`tip attr-tip${open ? ' open' : ''}`} ref={tipRef}>
         <span className="tip-title">{ui.earring}</span>
         <span className="tip-desc">
           {ui.earringHint}

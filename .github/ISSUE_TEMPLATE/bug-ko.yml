@@ -1,0 +1,41 @@
+name: 🐛 버그 신고 (한국어)
+description: 화면 깨짐, 조작 불가, 계산 오류 등
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: 무슨 일이 있었나요
+      description: 보이는 그대로 적어 주세요. 스크린샷이 있으면 큰 도움이 됩니다.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 재현 방법
+      placeholder: |
+        1. 계열 "소드맨" 선택
+        2. 1번 슬롯에 "하이랜더" 배치
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대한 동작
+    validations:
+      required: true
+  - type: input
+    id: build-url
+    attributes:
+      label: 빌드 공유 URL
+      description: "URL 공유" 버튼으로 나오는 URL. 있으면 같은 상태를 재현할 수 있습니다.
+      placeholder: https://pinnkoro.github.io/TosSkillSimulator/#...
+  - type: input
+    id: env
+    attributes:
+      label: 환경
+      description: 브라우저와 버전, OS, 표시 언어 (日本語 / 한국어)
+      placeholder: Firefox 140 / Windows 11 / 한국어
+    validations:
+      required: true

@@ -37,7 +37,7 @@ import { EarringControl } from './components/EarringControl';
 import { VaivoraToggle } from './components/VaivoraToggle';
 import { classIconUrl } from './lib/icons';
 import { LANGS, useI18n } from './lib/i18n';
-import { changelogHref } from './lib/routes';
+import { REPO_URL, changelogHref } from './lib/routes';
 import './App.css';
 
 /** クラスアイコン。無い/失敗時は同サイズのプレースホルダで場所を保持（表示形式を統一）。 */
@@ -344,9 +344,19 @@ export default function App() {
 
       <footer className="foot">
         <span>{ui.footer(gameData.meta.jobCount, gameData.meta.skillCount)}</span>
-        <a className="page-link" href={changelogHref(buildHash)}>
-          {ui.changelog}
-        </a>
+        <span className="foot-links">
+          <a className="page-link" href={changelogHref(buildHash)}>
+            {ui.changelog}
+          </a>
+          <a
+            className="page-link"
+            href={REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+        </span>
         <span className="copyright">{gameData.meta.note}</span>
       </footer>
     </div>

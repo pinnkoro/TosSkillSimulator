@@ -1,0 +1,6 @@
+# テンプレートに当てはまらない話題もあるので、白紙 issue は残しておく。
+blank_issues_enabled: true
+contact_links:
+  - name: 更新履歴 / Changelog / 업데이트 내역
+    url: https://pinnkoro.github.io/TosSkillSimulator/?p=changelog
+    about: 報告の前に、既に修正済みでないか確認できます / Check whether it is already fixed / 이미 수정되었는지 확인할 수 있습니다

@@ -1,0 +1,35 @@
+name: 📊 データの誤り（日本語）
+description: スキル・ジョブ・バイボラの値や名前がゲーム内と違う
+labels: [data]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        データはゲームクライアントの IES から自動抽出しています。
+        アプリの挙動ではなく「値そのものが違う」ときはこちらへ。
+  - type: input
+    id: target
+    attributes:
+      label: 対象
+      description: クラス名 / スキル名（分かれば日本語と英語の両方）
+      placeholder: ハイランダー / Cartar Stroke
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: 現在の表示
+      description: このサイトで出ている値
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: 正しい値
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: 根拠
+      description: ゲーム内のスクリーンショット、公式パッチノートの該当箇所など

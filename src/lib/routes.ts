@@ -5,6 +5,9 @@ export type Page = 'sim' | 'changelog';
 
 const PARAM = 'p';
 
+/** ソースコード（フッターから開く）。 */
+export const REPO_URL = 'https://github.com/pinnkoro/TosSkillSimulator';
+
 /** 現在の URL からページを判定。未知の値はシミュレータ扱い。 */
 export function currentPage(): Page {
   return new URLSearchParams(location.search).get(PARAM) === 'changelog' ? 'changelog' : 'sim';

@@ -909,7 +909,13 @@ button.ghost {
   color: var(--text-dim);
 }
 
-/* ページ間リンク（フッターの更新履歴 / 更新履歴の戻る）。 */
+/* フッター中央のリンク群。space-between で散らばらないよう1ブロックにまとめる。 */
+.foot-links {
+  display: flex;
+  gap: 12px;
+}
+
+/* ページ間リンク（フッターの更新履歴 / 更新履歴の戻る / GitHub）。 */
 .page-link {
   color: var(--text-dim);
   text-decoration: none;

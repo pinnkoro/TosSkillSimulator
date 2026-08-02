@@ -1,0 +1,22 @@
+name: ✨ Feature request (English)
+description: Something you would like added, or a rough edge worth smoothing
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to do, and what makes it awkward today?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What you would like instead
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives / extra context
+      description: How other simulators solve it, links, anything else useful

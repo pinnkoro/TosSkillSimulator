@@ -1,0 +1,34 @@
+name: 📊 Wrong game data (English)
+description: A skill, class or Vaivora value or name differs from the game
+labels: [data]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The data is extracted automatically from the game client's IES files.
+        Use this template when the *value itself* is wrong, rather than the app's behaviour.
+  - type: input
+    id: target
+    attributes:
+      label: What it is about
+      description: Class / skill name (both English and the in-game locale name if you have it)
+      placeholder: Highlander / Cartar Stroke
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What this site shows
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: What it should be
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source
+      description: In-game screenshot, the relevant part of an official patch note, etc.

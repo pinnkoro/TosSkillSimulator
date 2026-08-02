@@ -1,6 +1,6 @@
 import { CHANGELOG } from '../data/changelog';
 import { LANGS, useI18n } from '../lib/i18n';
-import { homeHref } from '../lib/routes';
+import { REPO_URL, homeHref } from '../lib/routes';
 
 /** 更新履歴ページ。ビルド状態を持たないので hash とは無関係に描画する。 */
 export function ChangelogPage() {
@@ -46,6 +46,9 @@ export function ChangelogPage() {
       <footer className="foot">
         <a className="page-link" href={homeHref()}>
           ← {ui.backToSim}
+        </a>
+        <a className="page-link" href={REPO_URL} target="_blank" rel="noopener noreferrer">
+          GitHub
         </a>
       </footer>
     </div>

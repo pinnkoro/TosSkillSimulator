@@ -1,0 +1,41 @@
+name: 🐛 バグ報告（日本語）
+description: 表示崩れ・操作できない・計算がおかしいなどの不具合
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: 何が起きたか
+      description: 見たままを書いてください。スクリーンショットがあると助かります。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      placeholder: |
+        1. 系統「ソードマン」を選ぶ
+        2. 枠1 に「ハイランダー」を入れる
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待した動作
+    validations:
+      required: true
+  - type: input
+    id: build-url
+    attributes:
+      label: ビルドの共有 URL
+      description: 「URLを共有」ボタンで出る URL。これがあると同じ状態を再現できます。
+      placeholder: https://pinnkoro.github.io/TosSkillSimulator/#...
+  - type: input
+    id: env
+    attributes:
+      label: 環境
+      description: ブラウザとバージョン、OS、表示言語（日本語/한국어）
+      placeholder: Firefox 140 / Windows 11 / 日本語
+    validations:
+      required: true

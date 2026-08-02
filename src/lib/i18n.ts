@@ -69,6 +69,9 @@ const ja = {
   vaivoraUseLv: '装備Lv',
   vaivoraSubSlot: 'サブ武器スロット装着可',
   vaivoraBonusOption: (k: string) => `Lv4追加オプション: ${k}（効果はクライアント未収録）`,
+  changelog: '更新履歴',
+  changelogTitle: '更新履歴',
+  backToSim: 'シミュレータに戻る',
 };
 
 const ko: typeof ja = {
@@ -127,6 +130,9 @@ const ko: typeof ja = {
   vaivoraUseLv: '착용 레벨',
   vaivoraSubSlot: '보조 무기 슬롯 장착 가능',
   vaivoraBonusOption: (k: string) => `Lv4 추가 옵션: ${k} (효과는 클라이언트에 없음)`,
+  changelog: '업데이트 내역',
+  changelogTitle: '업데이트 내역',
+  backToSim: '시뮬레이터로 돌아가기',
 };
 
 export const DICT = { ja, ko };

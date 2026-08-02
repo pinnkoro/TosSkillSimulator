@@ -19,7 +19,7 @@ export function emptyBuild(): BuildState {
     attrs: [],
     gems: [],
     earrings: {},
-    vaivora: [],
+    vaivora: {},
   };
 }
 
@@ -33,7 +33,7 @@ export function selectTree(tree: TreeId): BuildState {
     attrs: [],
     gems: [],
     earrings: {},
-    vaivora: [],
+    vaivora: {},
   };
 }
 
@@ -93,7 +93,10 @@ function prune(build: BuildState): BuildState {
   for (const [k, v] of Object.entries(build.earrings)) {
     if (v > 0 && okJobs.has(Number(k.split('_')[0]))) earrings[k] = v;
   }
-  const vaivora = build.vaivora.filter((id) => okJobs.has(id));
+  const vaivora: Record<number, number> = {};
+  for (const [k, v] of Object.entries(build.vaivora)) {
+    if (v > 0 && okJobs.has(Number(k))) vaivora[Number(k)] = v;
+  }
   return { ...build, levels, attrs, gems, earrings, vaivora };
 }
 
@@ -189,21 +192,46 @@ export function setEarring(
 
 // ---- バイボラ ----
 // クラス単位のON/OFF。基礎職には無く、同時に VAIVORA_MAX クラスまで。
+// バイボラ自体に Lv1〜4 の強化段階があるが、スキルレベル上昇は段階に依らず同じで、
+// 段階で変わるのは装備Lvとステータス（と Lv4 のサブ武器スロット可否）だけ。
+// なので段階はスキル計算には効かず、表示用に保持する。装着時は最大段階から始める。
 export const VAIVORA_MAX = 2;
+export const VAIVORA_LV_MIN = 1;
+export const VAIVORA_LV_MAX = 4;
 
 /** 使用中のバイボラ個数。 */
 export function vaivoraUsed(build: BuildState): number {
-  return build.vaivora.length;
+  return Object.keys(build.vaivora).length;
 }
 
-/** バイボラのON/OFF。OFF→ON は上級職かつ空きがあるときのみ。 */
+/** そのクラスで装備中のバイボラの段階（未装備は 0）。 */
+export function vaivoraLevelOf(build: BuildState, jobId: number): number {
+  return build.vaivora[jobId] ?? 0;
+}
+
+/** バイボラのON/OFF。OFF→ON は上級職かつ空きがあるときのみ（Lv は最大から）。 */
 export function toggleVaivora(build: BuildState, jobId: number): BuildState {
-  if (build.vaivora.includes(jobId)) {
-    return { ...build, vaivora: build.vaivora.filter((id) => id !== jobId) };
+  const vaivora = { ...build.vaivora };
+  if (vaivora[jobId]) {
+    delete vaivora[jobId];
+    return { ...build, vaivora };
   }
   if (getJob(jobId)?.isBase !== false) return build;
   if (vaivoraUsed(build) >= VAIVORA_MAX) return build;
-  return { ...build, vaivora: [...build.vaivora, jobId] };
+  vaivora[jobId] = VAIVORA_LV_MAX;
+  return { ...build, vaivora };
+}
+
+/** 装備中バイボラの段階を変える。装備していないクラスには効かない。 */
+export function setVaivoraLevel(
+  build: BuildState,
+  jobId: number,
+  level: number,
+): BuildState {
+  if (!build.vaivora[jobId]) return build;
+  const lv = Math.max(VAIVORA_LV_MIN, Math.min(VAIVORA_LV_MAX, level));
+  if (lv === build.vaivora[jobId]) return build;
+  return { ...build, vaivora: { ...build.vaivora, [jobId]: lv } };
 }
 
 /** 装備によるレベル補正の内訳。 */
@@ -238,9 +266,10 @@ export function bonusBreakdown(
     skill && job
       ? build.earrings[earringKey(job.id, tierOf(skill.unlockClassLevel))] ?? 0
       : 0;
+  // バイボラの強化段階(Lv1〜4)は levelUps に影響しないので、装着の有無だけを見る。
   let vaivora = 0;
-  for (const id of build.vaivora) {
-    for (const v of vaivoraOf(id)) vaivora += v.levelUps[String(skillId)] ?? 0;
+  for (const id of Object.keys(build.vaivora)) {
+    for (const v of vaivoraOf(Number(id))) vaivora += v.levelUps[String(skillId)] ?? 0;
   }
   return { gem, earring, vaivora, total: gem + earring + vaivora };
 }
@@ -339,7 +368,12 @@ function encodeQuery(build: BuildState): string {
     .map(([k, v]) => `${k}-${v}`)
     .join('.');
   if (ear) params.set('e', ear);
-  if (build.vaivora.length) params.set('v', build.vaivora.join('.'));
+  // バイボラは `jobId-lv` を '.' 区切りで。段階を持たない旧URL(`jobId` のみ)も読める。
+  const vai = Object.entries(build.vaivora)
+    .filter(([, v]) => v > 0)
+    .map(([k, v]) => `${k}-${v}`)
+    .join('.');
+  if (vai) params.set('v', vai);
   return params.toString();
 }
 
@@ -417,8 +451,13 @@ export function decodeBuild(hash: string): BuildState {
   const vStr = params.get('v');
   if (vStr) {
     for (const tok of vStr.split('.')) {
-      const id = Number(tok);
-      if (id > 0 && !build.vaivora.includes(id)) build = toggleVaivora(build, id);
+      // 段階を持たない旧URLは `jobId` だけ。その場合は最大段階として読む。
+      const [jobStr, lvStr] = tok.split('-');
+      const id = Number(jobStr);
+      if (id <= 0 || build.vaivora[id]) continue;
+      build = toggleVaivora(build, id);
+      const lv = Number(lvStr);
+      if (lv > 0) build = setVaivoraLevel(build, id, lv);
     }
     build = prune(build);
   }

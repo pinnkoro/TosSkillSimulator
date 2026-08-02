@@ -62,6 +62,13 @@ const ja = {
   vaivoraNone: 'このクラス専用のバイボラはありません',
   bonusFrom: '補正:',
   vaivoraNoDesc: '※ 効果テキストをクライアントから取得できませんでした',
+  vaivoraLv: (n: number) => `Lv${n}`,
+  vaivoraLvDown: 'バイボラの段階を下げる',
+  vaivoraLvUp: 'バイボラの段階を上げる',
+  vaivoraLvNote: 'スキルレベル上昇は段階に依らず同じ。変わるのは装備Lvとステータス。',
+  vaivoraUseLv: '装備Lv',
+  vaivoraSubSlot: 'サブ武器スロット装着可',
+  vaivoraBonusOption: (k: string) => `Lv4追加オプション: ${k}（効果はクライアント未収録）`,
 };
 
 const ko: typeof ja = {
@@ -113,9 +120,43 @@ const ko: typeof ja = {
   vaivoraNone: '이 클래스 전용 바이보라가 없습니다',
   bonusFrom: '보정:',
   vaivoraNoDesc: '※ 효과 텍스트를 클라이언트에서 가져오지 못했습니다',
+  vaivoraLv: (n: number) => `Lv${n}`,
+  vaivoraLvDown: '바이보라 단계 감소',
+  vaivoraLvUp: '바이보라 단계 증가',
+  vaivoraLvNote: '스킬 레벨 상승은 단계와 무관하게 동일. 달라지는 것은 착용 레벨과 스탯.',
+  vaivoraUseLv: '착용 레벨',
+  vaivoraSubSlot: '보조 무기 슬롯 장착 가능',
+  vaivoraBonusOption: (k: string) => `Lv4 추가 옵션: ${k} (효과는 클라이언트에 없음)`,
 };
 
 export const DICT = { ja, ko };
+
+/**
+ * バイボラのステータス表示名（キーは item_equip.ies のフィールド名）。
+ * ゲーム内表記が確実なものだけ載せ、載っていないキーは IES 名のまま出す
+ * （tools/build_vaivora.py が「stats shown by raw IES key」として報告する）。
+ */
+const STAT_LABELS: Record<string, Loc> = {
+  STR: { ja: '力', ko: '힘' },
+  CON: { ja: '体力', ko: '체력' },
+  INT: { ja: '知能', ko: '지능' },
+  MNA: { ja: '精神', ko: '정신' },
+  DEX: { ja: '敏捷', ko: '민첩' },
+  ALLSTAT: { ja: '全ステータス', ko: '모든 스탯' },
+  ADD_HR: { ja: '命中', ko: '명중' },
+  ADD_DR: { ja: '回避', ko: '회피' },
+  CRTHR: { ja: 'クリティカル発生', ko: '치명타 발생' },
+  CRTDR: { ja: 'クリティカル抵抗', ko: '치명타 저항' },
+  CRTATK: { ja: 'クリティカル攻撃力', ko: '치명타 공격력' },
+  CRTMATK: { ja: 'クリティカル魔法攻撃力', ko: '치명타 마법 공격력' },
+  BLK: { ja: 'ブロック', ko: '블록' },
+  BLK_BREAK: { ja: 'ブロック貫通', ko: '블록 관통' },
+};
+
+/** ステータスキーの表示名（未収録キーはそのまま返す）。 */
+export function statLabel(key: string, lang: Lang): string {
+  return STAT_LABELS[key]?.[lang] ?? key;
+}
 
 export const STORAGE_KEY = 'tos-lang';
 
@@ -136,9 +177,10 @@ export interface LangCtx {
 
 export const LangContext = createContext<LangCtx>({ lang: 'ja', setLang: () => {} });
 
-/** 現在言語・切替関数・UI辞書(ui)・データ翻訳(tl) をまとめて返す。 */
+/** 現在言語・切替関数・UI辞書(ui)・データ翻訳(tl)・ステータス名(sl) をまとめて返す。 */
 export function useI18n() {
   const { lang, setLang } = useContext(LangContext);
   const tl = (o: Loc | undefined): string => (o ? o[lang] || o.ja : '');
-  return { lang, setLang, ui: DICT[lang], tl };
+  const sl = (key: string): string => statLabel(key, lang);
+  return { lang, setLang, ui: DICT[lang], tl, sl };
 }

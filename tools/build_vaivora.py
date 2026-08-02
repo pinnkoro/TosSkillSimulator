@@ -8,7 +8,16 @@
   item_equip*.ies    … 効果キー(AdditionalOption_1) と武器種(ClassType2)
   etc.tsv 等         … 日本語名と効果説明。item からの参照キーが無いので、
                        「説明文中に効果名が見出しとして出る」ことを手掛かりに拾い、
-                       候補が複数あるときは当該クラスのスキル名との一致数で選ぶ。
+                       候補が複数あるときは当該クラスのスキル名との一致数で選び、
+                       それでも並ぶときは TSV キーの日付が新しい方を採る。
+                       (TSV には旧パッチの文面も残っているため。例「デュアルソード」は
+                        スキル改名前の "カーターストローク" 版が3つ併存している)
+
+バイボラは Lv1〜4 まであり、item_equip 側に `<ClassName>_Lv2..4` として入っている。
+差分は装備Lvとステータスのみで、AdditionalOption_1(＝スキルレベル上昇を含む効果キー)は
+4段階とも同一。よって levelUps は Lv非依存で、レベル別には stats だけを持つ。
+Lv4 だけ DefaultEqpSlot にサブ武器スロットが増え、AdditionalOption_2 が付く
+（この追加オプションの効果はクライアント内の .ies に定義が無く、内容は取得不能）。
 
 説明が拾えない/誤っている分は tools/vaivora_desc.json で上書きできる。
 形式: {"<アイテムClassName>": {"ja": "...", "ko": "..."}}
@@ -23,6 +32,7 @@ import re
 import sys
 import glob
 import json
+import collections
 
 sys.path.insert(0, os.path.dirname(__file__))
 import tos_extract as T  # noqa: E402
@@ -36,11 +46,44 @@ OUT = os.path.join(ROOT, "src", "data", "vaivora.json")
 # 「바이보라 비전 - <効果名>」/「바이보라 <武器> - <効果名>」(Lv表記は無視)
 VISION_RE = re.compile(r"^바이보라\s*비전\s*-\s*(.+)$")
 NAME_RE = re.compile(r"^(?:\[Lv\d\]\s*)?바이보라\s+(.+?)\s*-\s*(.+)$")
+JA_LV_RE = re.compile(r"^\s*\[Lv\d\]\s*")
 TSV_FILES = ("etc.tsv", "item.tsv", "ui.tsv", "skill.tsv")
 
 # 複数系統から選べる共通クラスは、系統ごとに別 jobId で「ボーンマンサー[W]」のように
 # 登録されている。[A]=Archer / [C]=Cleric / [T]=Scout / [S]=Swordman / [W]=Wizard。
 SUFFIX_RE = re.compile(r"\[[ACTSW]\]$")
+
+# TSV の行キー（例 "ETC_20221011_069761"）。日付が新しいほど新しい文面。
+TSV_KEY_RE = re.compile(r"_(\d{8})_(\d+)$")
+
+# バイボラのレベル別アイテム（"<base>_Lv2"）。接尾辞が無ければ Lv1。
+ITEM_LV_RE = re.compile(r"^(.*)_Lv(\d)$")
+
+# レベル別に出力するステータス。ゲーム内表記が確実なものだけ並べ、
+# ここに無いフィールドは IES のキー名のまま UI に出す（誤訳を出すよりマシ）。
+STAT_FIELDS = [
+    "STR", "CON", "INT", "MNA", "DEX", "ALLSTAT",
+    "ADD_HR", "ADD_DR", "CRTHR", "CRTDR", "CRTATK", "CRTMATK",
+    "BLK", "BLK_BREAK",
+]
+# ステータスではない（レベル差分に出てきても無視する）フィールド。
+NON_STAT_FIELDS = {
+    "$ID", "ClassID", "ClassName", "Name", "Desc", "NumberArg1", "UseLv",
+    "AdditionalOption_1", "AdditionalOption_2", "DefaultEqpSlot",
+    "ExtractProperty", "EvolvedItemLv", "ExchangeGroup", "DesigncutColor",
+    "DungeonEnterType", "CustomOptDescFunc", "EquipActionType", "EquipXpGroup",
+    "BlowSoundType", "FileName", "AttachType", "DBLHand", "EqpType",
+    "LHandSkill", "WeaponTrailEffect", "BriquetingAble", "ItemType",
+    "MergeClass2", "MergeClass3", "MergeTable3", "Script", "Usable",
+    "PreCheckScp", "ClientScp", "JobGrade", "JobOnly", "StringArg2",
+    "EnchantItemRank", "EnchantItemRankCount", "LifeTime_Limitcheck",
+}
+
+
+def row_order(key):
+    """TSV 行キー → 新しいほど大きい並び順キー。"""
+    m = TSV_KEY_RE.search(key or "")
+    return (int(m.group(1)), int(m.group(2))) if m else (0, 0)
 
 
 def strip_variant(name):
@@ -49,7 +92,7 @@ def strip_variant(name):
 
 
 def load_tsv_rows():
-    """全 TSV を newest-wins で読み、[(ja, ko)] を返す。"""
+    """全 TSV を newest-wins で読み、[(行キー, ja, ko)] を返す。"""
     ipfs = glob.glob(os.path.join(T.CLIENT_ROOT, "data", "*.ipf")) + \
         glob.glob(os.path.join(T.CLIENT_ROOT, "patch", "*.ipf"))
     ipfs.sort(key=lambda p: (T._patch_rank(p), p))
@@ -78,7 +121,7 @@ def load_tsv_rows():
         for line in blob.decode("utf-8", "replace").split("\n"):
             c = line.rstrip("\r").split("\t")
             if len(c) > 2 and c[2]:
-                rows.append((c[1], c[2]))
+                rows.append((c[0], c[1], c[2]))
     return rows
 
 
@@ -100,13 +143,19 @@ def item_meta():
 
 
 def index_ja_names(rows):
-    """効果名(ko) -> 日本語のバイボラ名(「バイボラ<武器> - <効果>」)。"""
+    """効果名(ko) -> 日本語のバイボラ名(「バイボラ<武器> - <効果>」)。同名は新しい行を採る。"""
     out = {}
-    for ja, ko in rows:
+    for key, ja, ko in rows:
         m = NAME_RE.match(ko.strip())
-        if m:
-            out.setdefault(m.group(2).strip(), clean_name(ja))
-    return out
+        if not m:
+            continue
+        eff = m.group(2).strip()
+        order = row_order(key)
+        if eff not in out or order > out[eff][0]:
+            # ja 側にも「[Lv4]バイボラ秘伝 - …」の段階表記が付くので落とす
+            # （レベルは name ではなく levels[] で持つ）。
+            out[eff] = (order, JA_LV_RE.sub("", clean_name(ja)).strip())
+    return {k: v[1] for k, v in out.items()}
 
 
 def clean_desc(text):
@@ -116,31 +165,38 @@ def clean_desc(text):
 
 
 def desc_index(rows):
-    """効果説明らしき行を [(ja, ko, 原文ko)] で。箇条書き or スキルLv上昇矢印を含むもの。"""
-    out = []
-    seen = set()
-    for ja, ko in rows:
+    """効果説明らしき行を [{order, ja, ko, raw}] で。箇条書き or スキルLv上昇矢印を含むもの。
+
+    同文(ko)が複数行あるときは新しい行に寄せる。日本語だけ差し替えられた行が
+    あるので、古い方を採ると ja が旧文面のまま残る。"""
+    best = {}
+    for key, ja, ko in rows:
         if "green_up_arrow" not in ko and not ko.strip().startswith("-"):
             continue
         k = clean_desc(ko)
-        if not k or k in seen:
+        if not k:
             continue
-        seen.add(k)
-        out.append((clean_desc(ja), k, ko))
-    return out
+        order = row_order(key)
+        cur = best.get(k)
+        if cur is None or order > cur["order"]:
+            best[k] = {"order": order, "ja": clean_desc(ja), "ko": k, "raw": ko}
+    return list(best.values())
 
 
 def pick_desc(descs, eff, job, skills):
-    """効果名を見出しに含む説明のうち、そのクラスのスキル名と最も合うものを選ぶ。"""
+    """効果名を見出しに含む説明のうち、そのクラスのスキル名と最も合うものを選ぶ。
+
+    TSV には旧パッチの文面も残っているので、同点の候補は新しい行を採る。"""
     cands = [d for d in descs
-             if ("{nl}" + eff) in d[2] or (eff + "{nl}") in d[2] or d[2].strip().startswith(eff)]
+             if ("{nl}" + eff) in d["raw"] or (eff + "{nl}") in d["raw"]
+             or d["raw"].strip().startswith(eff)]
     if not cands:
         # 共通クラス(複数系統)のバイボラは説明の見出しに効果名が出ず、
         # 「- 본맨서 모든 스킬 레벨 ▲1」のようにクラス名で始まる。効果名で
         # 引けないときだけ、クラス名を手掛かりにしたゆるい照合に落とす。
         head = re.compile(strip_variant(job["name"]["ko"]).replace(" ", r"\s*")
                           + r"\s*(?:의)?\s*모든\s*스킬\s*레벨")
-        cands = [d for d in descs if head.search(d[1])]
+        cands = [d for d in descs if head.search(d["ko"])]
     if not cands:
         return None, 0
     if len(cands) == 1:
@@ -150,9 +206,11 @@ def pick_desc(descs, eff, job, skills):
     names.append(job["name"]["ko"])
 
     def score(d):
-        return sum(1 for n in names if n and n in d[1])
+        # スキル名の一致数が第一。旧文面は改名前のスキル名を使っていることが多く
+        # ここで落ちるが、文面だけ変わった改訂は同点になるので日付で決める。
+        return (sum(1 for n in names if n and n in d["ko"]), d["order"])
     best = max(cands, key=score)
-    return (best, len(cands)) if score(best) > 0 else (None, len(cands))
+    return (best, len(cands)) if score(best)[0] > 0 else (None, len(cands))
 
 
 # --- 効果説明からスキルレベル上昇を読む ---
@@ -161,7 +219,10 @@ def pick_desc(descs, eff, job, skills):
 #     「- オラクルの全スキルレベル ▲1 (最大レベルが1のスキルは除く)」
 LEVELUP_RE = re.compile(r"^(?P<pre>.*?)スキル(?:の)?レベル\s*▲\s*(?P<n>\d+)\s*(?P<post>.*)$")
 ALL_RE = re.compile(r"^(?P<name>.+?)(?:の)?(?:全ての|すべての|全部の|全)$")
-EXCEPT_RE = re.compile(r"^(?P<ex>.+?)を(?:除外し|除い)た(?:全ての|すべての|全)?(?P<name>.*?)(?:の)?$")
+EXCEPT_RE = re.compile(
+    r"^(?P<ex>.+?)を(?:除外した|除いた|除く)(?:全ての|すべての|全)?(?P<name>.*?)(?:の)?$")
+# 箇条書きの先頭記号。全角ハイフンやダッシュで書かれた行もある。
+BULLET = "-－−–—"
 
 
 def norm(s):
@@ -184,7 +245,7 @@ def parse_levelups(desc_ja, job, gd):
     out = {}
     unresolved = []
     for line in desc_ja.split("\n"):
-        line = line.strip().lstrip("-").strip().replace("{", "").replace("}", "")
+        line = line.strip().lstrip(BULLET).strip().replace("{", "").replace("}", "")
         if "▲" not in line or "レベル" not in line:
             continue
         m = LEVELUP_RE.match(line)
@@ -231,6 +292,67 @@ def parse_levelups(desc_ja, job, gd):
     return out, unresolved
 
 
+def num(v):
+    """IES のセル → 数値（空・非数値は 0）。"""
+    try:
+        f = float(v)
+    except (TypeError, ValueError):
+        return 0
+    return int(f) if f == int(f) else f
+
+
+def level_rows():
+    """バイボラの基本 ClassName -> {レベル: item_equip の行}。
+
+    PVP 版(PVP_ 接頭辞)は別枠なので除く。"""
+    out = {}
+    for tbl in ("item_equip.ies", "item_equip_ep12.ies"):
+        got = T.read_table(tbl)
+        if not got:
+            continue
+        for r in got[0]:
+            cn = str(r.get("ClassName", ""))
+            if "바이보라" not in str(r.get("Name", "")) or cn.startswith("PVP_"):
+                continue
+            m = ITEM_LV_RE.match(cn)
+            base, lv = (m.group(1), int(m.group(2))) if m else (cn, 1)
+            out.setdefault(base, {})[lv] = r
+    return out
+
+
+def build_levels(rows_by_lv, unknown):
+    """{レベル: 行} → 出力用のレベル一覧。stats はレベル間で差がある項目だけ。
+
+    全レベル同値のステータスは「Lvによる違い」ではないので落とす。
+    STAT_FIELDS に無いキーは unknown に積んで、握り潰さず build 時に報告する。"""
+    lvs = sorted(rows_by_lv)
+    if not lvs:
+        return []
+    changed = []
+    for f in STAT_FIELDS + sorted(set(rows_by_lv[lvs[0]]) - set(STAT_FIELDS)):
+        if f in NON_STAT_FIELDS or f not in rows_by_lv[lvs[0]]:
+            continue
+        vals = {num(rows_by_lv[lv].get(f)) for lv in lvs}
+        if len(vals) > 1 and vals != {0}:
+            changed.append(f)
+            if f not in STAT_FIELDS:
+                unknown.add(f)
+    out = []
+    for lv in lvs:
+        r = rows_by_lv[lv]
+        slots = str(r.get("DefaultEqpSlot", "")).split()
+        out.append({
+            "level": lv,
+            "useLv": num(r.get("UseLv")),
+            # Lv4 はサブ武器スロットにも入る（＝2本目として装備できる）。
+            "subSlot": "LH" in slots and "RH" in slots,
+            # Lv4 だけ付く追加オプション。効果内容はクライアントに定義が無い。
+            "bonusOption": str(r.get("AdditionalOption_2", "") or ""),
+            "stats": {f: num(r.get(f)) for f in changed},
+        })
+    return out
+
+
 def main():
     gd = json.load(open(GAME_DATA, encoding="utf-8"))
     by_eng = {j["engName"]: j for j in gd["jobs"]}
@@ -254,6 +376,9 @@ def main():
     ja_names = index_ja_names(rows)
     descs = desc_index(rows)
     meta = item_meta()
+    by_lv = level_rows()
+    unknown_stats = set()
+    no_levels = []
     override = {}
     if os.path.exists(OVERRIDE):
         override = json.load(open(OVERRIDE, encoding="utf-8"))
@@ -273,6 +398,9 @@ def main():
             continue
         mm = meta.get(eff, {})
         ov = override.get(r["ClassName"]) or {}
+        levels = build_levels(by_lv.get(r["ClassName"], {}), unknown_stats)
+        if not levels:
+            no_levels.append(r["ClassName"])
         for job in jobs:
             # 説明の候補選びとスキルレベル上昇の解決はクラス依存なので派生ごとにやる。
             d, n = pick_desc(descs, eff, job, skills)
@@ -283,7 +411,7 @@ def main():
             if ov:
                 desc_ja, desc_ko = ov.get("ja", ""), ov.get("ko", "")
             else:
-                desc_ja, desc_ko = (d[0], d[1]) if d else ("", "")
+                desc_ja, desc_ko = (d["ja"], d["ko"]) if d else ("", "")
             if not desc_ja:
                 no_desc.append(eff)
             level_ups, un = parse_levelups(desc_ja, job, gd)
@@ -296,6 +424,7 @@ def main():
                 "weapon": mm.get("weapon", ""),
                 "desc": {"ja": desc_ja, "ko": desc_ko},
                 "levelUps": level_ups,
+                "levels": levels,
             })
 
     out.sort(key=lambda e: (e["jobId"], e["item"]))
@@ -306,6 +435,13 @@ def main():
     print(f"  no class link: {len(no_job)} {no_job[:5]}")
     print(f"  no description: {len(no_desc)} {no_desc[:8]}")
     print(f"  (description picked among multiple candidates: {ambiguous})")
+    lv_counts = collections.Counter(len(e["levels"]) for e in out)
+    print(f"  levels per entry: {dict(sorted(lv_counts.items()))}")
+    if no_levels:
+        print(f"  ! no item_equip row: {len(no_levels)} {no_levels[:5]}")
+    if unknown_stats:
+        # STAT_FIELDS 外だがレベル間で差があるもの。UI では IES のキー名のまま出る。
+        print(f"  stats shown by raw IES key: {sorted(unknown_stats)}")
     lifted = sum(1 for e in out if e["levelUps"])
     print(f"  skill level-ups parsed: {lifted} entries, "
           f"{len(unresolved)} lines unresolved")

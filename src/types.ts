@@ -78,6 +78,30 @@ export interface Job {
   attributes: SkillAttribute[];
 }
 
+/**
+ * バイボラの段階(Lv1〜4)。同じバイボラの強化段階で、item_equip の
+ * `<ClassName>_Lv2..4` 由来。効果キー(AdditionalOption_1)は4段階とも同じなので
+ * スキルレベル上昇(levelUps)は段階に依らず、ここではステータス差だけを持つ。
+ */
+export interface VaivoraLevel {
+  /** 1〜4 */
+  level: number;
+  /** 装備可能キャラクターLv */
+  useLv: number;
+  /** サブ武器スロットにも装着できるか（Lv4のみ true） */
+  subSlot: boolean;
+  /**
+   * Lv4 で増える追加オプションのキー（AdditionalOption_2）。
+   * 効果内容はクライアント内の .ies に定義が無く取得できないため、キーのみ。
+   */
+  bonusOption: string;
+  /**
+   * 段階間で差があるステータスのみ（IES のフィールド名 -> 値）。
+   * 全段階で同値の項目は「Lvによる違い」ではないので入らない。
+   */
+  stats: Record<string, number>;
+}
+
 /** バイボラ(ビジョン)。クラスごとに1つ。tools/build_vaivora.py 由来。 */
 export interface Vaivora {
   /** アイテムの ClassName（識別子） */
@@ -96,6 +120,8 @@ export interface Vaivora {
    * 「○○の全てのスキルレベル▲1」「××スキルレベル▲3」等をスキルIDに解決したもの。
    */
   levelUps: Record<string, number>;
+  /** 強化段階(Lv1〜4)。レベル昇順。 */
+  levels: VaivoraLevel[];
 }
 
 export interface GameData {
@@ -127,6 +153,9 @@ export interface BuildState {
    * 基礎職(isBase)には付けられない。
    */
   earrings: Record<string, number>;
-  /** バイボラを装備したクラスのジョブID。基礎職は不可、VAIVORA_MAX 個まで。 */
-  vaivora: number[];
+  /**
+   * バイボラ。jobId -> 装備している段階(1..VAIVORA_LV_MAX)。
+   * 基礎職には付けられず、VAIVORA_MAX クラスまで。既定は最大段階。
+   */
+  vaivora: Record<number, number>;
 }

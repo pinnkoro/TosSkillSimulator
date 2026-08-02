@@ -713,7 +713,10 @@ button.ghost {
 
 /* クラス見出しのバイボラトグル（上級職のみ）。外側の .vaivora-slot がツールチップの基準。 */
 .vaivora-slot {
+  /* ポップアップ(.vaivora-tip)の位置基準。 */
+  position: relative;
   display: inline-flex;
+  align-items: center;
 }
 .vaivora-toggle {
   display: inline-flex;
@@ -750,8 +753,41 @@ button.ghost {
   border-color: var(--warn);
   background: rgba(255, 180, 84, 0.1);
 }
-/* バイボラの効果説明は長いので、幅を取って中でスクロールさせる。
-   .tip の子はホバー継続扱いなので pointer-events を戻せばスクロールできる。 */
+/* バイボラの段階(Lv1〜4)。装備中だけ出す。既定は最大で、下げられる。 */
+.vaivora-lv {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 5px;
+  font-size: 12px;
+  color: var(--warn);
+  font-variant-numeric: tabular-nums;
+}
+.vaivora-lv .step {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: var(--panel-2);
+  color: var(--text-dim);
+}
+.vaivora-lv .step:hover:not(:disabled) {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+.vaivora-lv .step:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* バイボラの効果説明と段階の表は長いので、幅を取って中でスクロールさせる。
+   表示は :hover ではなく JS の .open で持つ（スキルカードと同じ）。
+   CSS の :hover だけだとトグルとポップアップの隙間で一度 hidden になり、
+   ポップアップ側がマウスを受け取れずスクロールできない。 */
 .vaivora-tip {
   bottom: calc(100% + 6px);
   left: 0;
@@ -771,7 +807,9 @@ button.ghost {
   border-radius: 10px;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
 }
-.has-tip:hover > .vaivora-tip {
+.vaivora-tip.open {
+  opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 .vaivora-entry {
@@ -789,6 +827,34 @@ button.ghost {
 .tip-desc.dim {
   opacity: 0.65;
   font-size: 11px;
+}
+/* 段階ごとのステータス差。装備中の段階の列だけ強調する。 */
+.vaivora-lv-table {
+  border-collapse: collapse;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+.vaivora-lv-table th,
+.vaivora-lv-table td {
+  padding: 2px 6px;
+  text-align: right;
+  white-space: nowrap;
+  border-top: 1px solid var(--border);
+}
+.vaivora-lv-table thead th {
+  border-top: 0;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+.vaivora-lv-table tbody th {
+  text-align: left;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+.vaivora-lv-table .cur {
+  color: var(--warn);
+  font-weight: 700;
 }
 
 /* ---- footer ---- */

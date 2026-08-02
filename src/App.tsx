@@ -22,11 +22,13 @@ import {
   setEarring,
   setJob,
   setLevel,
+  setVaivoraLevel,
   skillTiers,
   toggleAttr,
   toggleGem,
   toggleVaivora,
   treeList,
+  vaivoraLevelOf,
   vaivoraUsed,
 } from './lib/build';
 import { SkillCard } from './components/SkillCard';
@@ -94,7 +96,6 @@ export default function App() {
   const earringCount = earringsUsed(build);
   const selectedGems = useMemo(() => new Set(build.gems), [build.gems]);
   const vaivoraCount = vaivoraUsed(build);
-  const selectedVaivora = useMemo(() => new Set(build.vaivora), [build.vaivora]);
 
   const share = async () => {
     const url = location.href;
@@ -256,9 +257,13 @@ export default function App() {
                       {/* バイボラは上級職のみ。基礎職には存在しない。 */}
                       {!job.isBase && (
                         <VaivoraToggle
-                          on={selectedVaivora.has(job.id)}
+                          on={vaivoraLevelOf(build, job.id) > 0}
                           full={vaivoraCount >= VAIVORA_MAX}
                           onToggle={() => setBuild(toggleVaivora(build, job.id))}
+                          level={vaivoraLevelOf(build, job.id)}
+                          onLevelChange={(lv) =>
+                            setBuild(setVaivoraLevel(build, job.id, lv))
+                          }
                           entries={vaivoraOf(job.id)}
                         />
                       )}

@@ -83,7 +83,8 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 - [x] 装備によるレベル補正（ポイント消費とは別枠、URL共有対象）:
   - **スキルジェム** … スキルカード右下のトグルで +1Lv。全クラス合計 **8個**まで。Lv1以上のスキルのみ。hash `g=`
   - **イヤリング** … クラスの解放Lv段階(**Lv1〜/16〜/31〜**)単位で **+1〜+5Lv**。その段階のスキル全部に効く。枠はビルド全体で **3つ**まで。**基礎職には無い**。hash `e=`（`jobId_tier-lv`）
-  - **バイボラ** … クラス単位のON/OFF。**基礎職には無く**、同時に **2クラス**まで。クラス見出しのトグル。hash `v=`（jobId）。ホバーでそのクラスのバイボラ名と効果を表示（`src/data/vaivora.json`）
+  - **バイボラ** … クラス単位のON/OFF。**基礎職には無く**、同時に **2クラス**まで。クラス見出しのトグル。hash `v=`（`jobId-lv`。段階を持たない旧形式 `jobId` も最大段階として読める）。ホバーでそのクラスのバイボラ名と効果を表示（`src/data/vaivora.json`）
+  - バイボラには **Lv1〜4 の強化段階**がある（装備時は Lv4 から始まり、ステッパで下げられる）。**段階はスキルレベル上昇に影響しない**（効果キー `AdditionalOption_1` が4段階とも同じ）。変わるのは装備Lv・ステータスと、Lv4 のサブ武器スロット装着可否。ツールチップに段階ごとの差分表を出す。Lv4 で付く `AdditionalOption_2` は**クライアント内の全 .ies に定義が無く**（サーバ側）、キー名しか出せない
   - バイボラの効果説明にある**スキルレベル上昇はスキル表に反映される**。`build_vaivora.py:parse_levelups` が説明文（「○○の全てのスキルレベル▲1」「××スキルレベル▲3」「△△を除外した全ての○○スキルレベル▲1」「(最大レベルが1のスキルは除く)」）をスキルIDに解決して `levelUps` に格納し、UI は `bonusBreakdown()` でジェム/イヤリングと合算する。
   - スキルカードには補正の**内訳**（ジェム/イヤリング/バイボラ）を色分けして表示
   - スキル一覧は段階ごとの「段」(`.tier-block`)に分割し、各段の見出しにイヤリングのステッパを置く。ONの段は背景＋スキル枠を青系に着色して対象範囲を示す。
@@ -153,7 +154,7 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 | `tools/extract_icons.py` | アイコン抽出 → `public/icons/`（要 Pillow、ゲーム終了中に実行） |
 | `tools/build_vaivora.py` | バイボラ抽出 → `src/data/vaivora.json`（ゲーム終了中に実行） |
 | `tools/vaivora_desc.json` | 効果説明の手動上書き（任意。`{"<アイテムClassName>": {"ja","ko"}}`） |
-| `src/data/vaivora.json` | **バイボラ（97件＝97クラス）**。名前/効果/武器種/対象jobId |
+| `src/data/vaivora.json` | **バイボラ（123件＝123クラス）**。名前/効果/武器種/対象jobId/段階(Lv1〜4)ごとの装備Lv・ステータス |
 | `src/data/game-data.json` | **同梱データ（133ジョブ/898スキル、特性1297件）** |
 | `public/icons/{skill,class,attr}/*.png` | **同梱アイコン（スキル769/クラス114=64px、特性1243=40px）** |
 | `public/icons/ui/*.png` | UIトグル用アイコン48px（`skillgem_<系統>`＝`icon_item_sklgem_*`。wizard だけクライアント側の綴りが `wizerd` / `vaivora`＝`icon_item_vibora_vision`）。`extract_icons.py` の `UI_ICONS` で定義 |
@@ -182,7 +183,9 @@ python tools/extract_icons.py   # -> public/icons/skill,class/*.png (64px)
 - **ゲーム起動中は IPF が読めない**（排他ロック）。抽出前に `Client_tos_x64` を終了。
 - **IES の Name は韓国語**。日本語化は skill.tsv/etc.tsv の韓国語→日本語ジョインが必須。
 - **バイボラ→クラスの対応は `eliteequipdrop.ies` の `JobName`**（一覧111件・クラス英名）。item 側の `UseJob` は全部 `All`、`cabinet_weapon.ies` の `TabGroup` も全部 `VIBORA` なので使えない。ゲーム内の「バイボラ秘伝 - ○○(固有) - クラス名」表記は `item_cabinet/item_cabinet.lua` の `GET_ENABLE_EQUIP_JOB` がこの表を引いて組み立てている。
-  - **効果テキストは item から参照キーが辿れない**（`AdditionalOption_1` の値は item 表以外の全 IES に存在せず、＝サーバ側定義）。TSV(etc/item/ui/skill) 側に文面はあるので、「説明文の見出しに効果名が出る」ことを手掛かりに拾い、候補が複数なら当該クラスのスキル名との一致数で選んでいる。拾えなかった21件はゲーム内ツールチップから `tools/vaivora_desc.json` に書き起こし済みで、現状97件すべてに説明がある。
+  - **効果テキストは item から参照キーが辿れない**（`AdditionalOption_1` の値は item 表以外の全 IES に存在せず、＝サーバ側定義）。TSV(etc/item/ui/skill) 側に文面はあるので、「説明文の見出しに効果名が出る」ことを手掛かりに拾い、候補が複数なら当該クラスのスキル名との一致数で選んでいる。拾えなかった21件はゲーム内ツールチップから `tools/vaivora_desc.json` に書き起こし済みで、現状123件すべてに説明がある。
+  - **TSV には旧パッチの文面が残る**（例「デュアルソード」はスキル改名前の "カーターストローク" 版を含め4版が併存）。同点の候補は**行キーの日付**（`ETC_20221011_069761` の `20221011`）が新しい方を採る。名前の索引も同様に newest-wins。
+  - **段階(Lv1〜4)は `item_equip_ep12.ies` の `<ClassName>_Lv2..4`**。`AdditionalOption_1` は4段階とも同じなので `levelUps` は段階非依存。差分は `UseLv` とステータス、Lv4 の `DefaultEqpSlot: LH RH`（サブ武器スロット可）と `AdditionalOption_2`。この追加オプションは .ies 2066 表を全部パースして値検索しても item_equip 以外に定義が無く、**効果内容は取得不能**。
 - **アイコン**は IMC 著作物だが、データ本体と同じ「黙認ファンプロジェクト」の立場で同梱する方針（ユーザー了承済み）。スキルは `ui.ipf` 内の個別PNG(`icon/skill/<系統>/icon_<名前>.png`)、クラスは**アトラス** `icon/class_<系統>.tga` を `baseskinset/classicon.xml` の `imgrect` で切り出し。`extract_icons.py` が 64px に縮小して `public/icons/` へ出力。**要 Pillow**（抽出本体は標準ライブラリのみだが縮小/TGA切出しに使用）。⚠️ `job.ies` の Icon 名と classicon.xml の name は大小が食い違うので**大小無視で照合**。
 - Windows ホストはノートン360が HTTPS を MITM しており `curl` 等が TLS エラー（exit 35）になる。**サイト死活は curl でなくブラウザ or gh API で確認**。外部 HTTPS を叩く処理は WSL 推奨（IPF/IES 抽出は純ローカル処理なので host でOK）。
 - Python は python.org 版（3.14）。IPF/IES 抽出(`tos_extract.py`/`build_game_data.py`)は標準ライブラリ(struct/zlib)のみ。アイコン抽出(`extract_icons.py`)のみ **Pillow** に依存。

@@ -5,18 +5,68 @@
    "jobId": 1002,
    "key": "DualSword",
    "name": {
-    "ja": "バイボラグレートソード - デュアルソード",
+    "ja": "バイボラ秘伝 - デュアルソード",
     "ko": "바이보라 비전 - 듀얼소드"
    },
    "weapon": "Sword",
    "desc": {
-    "ja": "- クロスカットスキルレベル▲3\n - スカイライナースキルレベル▲2\n - クロスガードブロック確率アップ効果▲100%\n \nデュアルソード\n - クロスガード発動中3秒間バフを活性化\n - バフ適用中にクロスガードの最大維持時間を3秒に変更\n - バフ適用中一般解除可能なすべての状態異常抵抗\n - バフ適用中にブロック成功時[反転斬り]が発動\n \n反転斬り\n - 正面方向200距離以内の敵の攻撃により発動\n [魔法陣]、[範囲継続型]スキルには発動不可\n - 攻撃者に突進\n - 現在レベルのクロスカット係数*200%を4回に分けて打撃",
-    "ko": "- 크로스컷 스킬 레벨▲3\n  - 스카이라이너 스킬 레벨▲2\n  - 크로스 가드 블록 확률 증가 효과▲100%\n \n듀얼소드\n - 크로스 가드 시전 중 3초 동안 버프 활성화\n - 버프 중 크로스 가드 최대 유지시간 3초로 변경\n - 버프 중 일반 해제 가능한 모든 상태이상 저항\n - 버프 중 블록 성공 시 [반전베기] 시전\n \n반전베기\n - 정면 방향 200 거리 이내 적의 공격으로 발동\n   [마법진], [범위 지속형] 스킬에 발동 불가\n - 공격자에게 돌진\n - 현재 레벨의 크로스컷 스킬 계수 * 200%를 총 4회로 나눠 타격"
+    "ja": "- クロスカットスキルレベル▲3\n - スカイライナースキルレベル▲2\n - クロスガードブロック確率アップ効果▲100%\n \nデュアルソード\n - クロスガード発動中3秒間バフを活性化\n - バフ適用中にクロスガードの最大維持時間を3秒に変更\n - バフ適用中一般解除可能なすべての状態異常抵抗\n - バフ適用中にブロック成功時[反転斬り]が発動\n \n反転斬り\n - 正面方向200距離以内の敵の攻撃により発動\n [魔法陣]、[範囲継続型]スキルには発動不可\n - 攻撃者に突進\n - 現在レベルのクロスカット係数×200%を4回に分けて打撃",
+    "ko": "- 크로스컷 스킬 레벨▲3\n  - 스카이라이너 스킬 레벨▲2\n  - 크로스 가드 블록 확률 증가 효과▲100%\n \n듀얼소드\n - 크로스 가드 시전 중 3초 동안 버프 활성화\n - 버프 중 크로스 가드 최대 유지시간 3초로 변경\n - 버프 중 일반 해제 가능한 모든 상태이상 저항\n - 버프 중 블록 성공 시 [반전베기] 시전\n \n반전베기\n - 정면 방향 200 거리 이내 적의 공격으로 발동\n   [마법진], [범위 지속형] 스킬에 발동 불가\n - 공격자에게 돌진\n - 현재 레벨의 크로스컷 스킬 계수 x 200%를 총 4회로 나눠 타격"
    },
    "levelUps": {
     "10208": 3,
     "10207": 2
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 143,
+      "CON": 108,
+      "ALLSTAT": 0,
+      "BLK": 496
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 157,
+      "CON": 118,
+      "ALLSTAT": 16,
+      "BLK": 545
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 172,
+      "CON": 129,
+      "ALLSTAT": 32,
+      "BLK": 599
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "DualSword_Lv4",
+     "stats": {
+      "STR": 172,
+      "CON": 129,
+      "ALLSTAT": 32,
+      "BLK": 599
+     }
+    }
+   ]
   },
   {
    "item": "SWD04_126_5",
@@ -31,14 +81,64 @@
     "ja": "- 力 ▲149\n- クリティカル発生 ▲480\n- 打ダメージアップ ▲996\n\nセレイテッドシールド\n- シールドロブ的中時、対象に[セレイテッドウーンド]、[セレイテッドウーンド：移動速度ダウン]デバフを4秒間付与\n- [セレイテッドウーンド]デバフ対象がシールドロブで攻撃された時、デバフ持続時間4秒追加\n- [セレイテッドウーンド]：1秒ごとにシールドロブで与えたダメージの25%の分、追加ダメージを与える\n- [セレイテッドウーンド：移動速度ダウン]：移動速度20ダウン",
     "ko": ""
    },
-   "levelUps": {}
+   "levelUps": {},
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 480,
+      "Strike": 996
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 163,
+      "ALLSTAT": 16,
+      "CRTHR": 528,
+      "Strike": 1095
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "CRTHR": 580,
+      "Strike": 1205
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "SawbladeShield_Lv4",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "CRTHR": 580,
+      "Strike": 1205
+     }
+    }
+   ]
   },
   {
    "item": "SPR04_127_1",
    "jobId": 1004,
    "key": "Javelin",
    "name": {
-    "ja": "バイボラスピア - ジャベリン",
+    "ja": "バイボラ秘伝 - ジャベリン",
     "ko": "바이보라 비전 - 자벨린"
    },
    "weapon": "Spear",
@@ -54,7 +154,57 @@
     "10307": 1,
     "10303": 1,
     "10301": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 142,
+      "ALLSTAT": 0,
+      "CRTHR": 495,
+      "Aries": 990
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 156,
+      "ALLSTAT": 16,
+      "CRTHR": 545,
+      "Aries": 1089
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "Aries": 1198
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Javelin_Lv4",
+     "stats": {
+      "STR": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "Aries": 1198
+     }
+    }
+   ]
   },
   {
    "item": "SWD04_126_8",
@@ -76,20 +226,66 @@
     "10405": 1,
     "10406": 1,
     "10408": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 248,
+      "ALLSTAT": 0,
+      "CRTATK": 1285
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 273,
+      "ALLSTAT": 16,
+      "CRTATK": 1413
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 300,
+      "ALLSTAT": 32,
+      "CRTATK": 1554
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Wrath_Lv4",
+     "stats": {
+      "STR": 300,
+      "ALLSTAT": 32,
+      "CRTATK": 1554
+     }
+    }
+   ]
   },
   {
    "item": "TSP04_128_2",
    "jobId": 1007,
    "key": "OneManRush",
    "name": {
-    "ja": "バイボラパイク - 一騎当千",
+    "ja": "バイボラ秘伝 - 一騎当千",
     "ko": "바이보라 비전 - 일기당천"
    },
    "weapon": "Spear",
    "desc": {
-    "ja": "- カタフラクトの全てのスキルレベル▲1\n - ラッシュスキルの範囲▲100%\n \n一騎当千\n - ラッシュスキルのチャネリング3秒後、追加打撃を2回実行(斬属性)\n - 追加打撃1回につき5回打撃\n - スキル係数は現在のレベルのラッシュと同様\n - 追加攻撃広域攻撃比率20\n \n追加攻撃はチャネリング/キャスティングとして判定されない。",
-    "ko": "- 캐터프랙트 모든 스킬 레벨▲1\n  - 돌격 스킬 범위▲100%\n \n일기당천\n - 돌격 채널링 3초 후 추가 공격 2회 시전(베기 속성)\n - 추가 공격 1회 당 5회 타격\n - 스킬 계수 현재 레벨의 돌격과 동일\n - 추가 공격 광역 공격 비율 20\n \n추가 공격은 채널링/캐스팅으로 판정되지 않음"
+    "ja": "- カタフラクトの全てのスキルレベル▲1\n - ラッシュスキルの範囲▲100%\n \n一騎当千\n - ラッシュスキルのチャネリング3秒後、追加打撃を2回実行(斬属性)\n - 追加打撃ごとに5回打撃\n - スキル係数は、現在のレベルのラッシュによる打撃1回あたりのスキル係数と同様\n - 追加攻撃広域攻撃比率20\n \n追加攻撃はチャネリング/キャスティングとして判定されない。",
+    "ko": "- 캐터프랙트 모든 스킬 레벨▲1\n  - 돌격 스킬 범위▲100%\n \n일기당천\n - 돌격 채널링 3초 후 추가 공격 2회 시전(베기 속성)\n - 추가 공격 1회 당 5회 타격\n - 스킬 계수는 현재 레벨의 돌격 1회 타격 스킬 계수와 동일\n - 추가 공격 광역 공격 비율 20\n \n추가 공격은 채널링/캐스팅으로 판정되지 않음"
    },
    "levelUps": {
     "10601": 1,
@@ -99,24 +295,120 @@
     "10605": 1,
     "10603": 1,
     "10606": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 143,
+      "ALLSTAT": 0,
+      "CRTATK": 1238
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 157,
+      "ALLSTAT": 16,
+      "CRTATK": 1361
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 172,
+      "ALLSTAT": 32,
+      "CRTATK": 1497
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "OneManRush_Lv4",
+     "stats": {
+      "STR": 172,
+      "ALLSTAT": 32,
+      "CRTATK": 1497
+     }
+    }
+   ]
   },
   {
    "item": "TSW04_126_2",
    "jobId": 1009,
    "key": "ExplosionEdge",
    "name": {
-    "ja": "バイボラグレートソード - ウエッジブラスト",
+    "ja": "バイボラ秘伝 - ウエッジブラスト",
     "ko": "바이보라 비전 - 쐐기폭파"
    },
    "weapon": "Sword",
    "desc": {
-    "ja": "- パニッシュスキルのレベル▲3\n \nウエッジブラスト\n - パニッシュスキルのクールタイムを20秒に変更\n - パニッシュの属性を斬属性に変更\n - パニッシュスキルのキャスティングタイム1秒に変更\n - パニッシュスキルのノックダウン対象判定を削除及びターゲットになった敵へ移動機能削除\n - パニッシュが5連打に変更\n - パニッシュが自分の周辺の敵多数にダメージを与える\n - 最大対象数30",
-    "ko": "- 퍼니시 스킬 레벨 ▲3\n \n쐐기폭파\n - 퍼니시 재사용 대기시간 20초로 변경\n - 퍼니시 베기 속성으로 변경\n - 퍼니시 캐스팅 시간 1초로 변경\n - 퍼니시 넉다운 대상 판정 및 타겟된 적에게 이동 기능 삭제\n - 퍼니시 5연타로 변경\n - 퍼니시가 자신 주변 다수의 적에게 피해를 줌\n - 최대 대상 수 30"
+    "ja": "- パニッシュスキルのレベル▲3\n \nウエッジブラスト\n - パニッシュスキルのクールタイムを20秒に変更\n - パニッシュの属性を斬属性に変更\n - パニッシュスキルのキャスティングタイム1秒に変更\n - パニッシュスキルのノックダウン対象判定を削除及びターゲットになった敵へ移動機能削除\n - パニッシュが4連打に変更\n - パニッシュが自分の周辺の敵多数にダメージを与える\n - 最大対象数10",
+    "ko": "- 퍼니시 스킬 레벨 ▲3\n \n쐐기폭파\n - 퍼니시 재사용 대기시간 20초로 변경\n - 퍼니시 베기 속성으로 변경\n - 퍼니시 캐스팅 시간 1초로 변경\n - 퍼니시 넉다운 대상 판정 및 타겟된 적에게 이동 기능 삭제\n - 퍼니시 4연타로 변경\n - 퍼니시가 자신 주변 다수의 적에게 피해를 줌\n - 최대 대상 수 10"
    },
    "levelUps": {
     "11004": 3
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 148,
+      "ALLSTAT": 0,
+      "CRTATK": 1238,
+      "Slash": 986
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 162,
+      "ALLSTAT": 16,
+      "CRTATK": 1361,
+      "Slash": 1084
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 178,
+      "ALLSTAT": 32,
+      "CRTATK": 1497,
+      "Slash": 1192
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "ExplosionEdge_Lv4",
+     "stats": {
+      "STR": 178,
+      "ALLSTAT": 32,
+      "CRTATK": 1497,
+      "Slash": 1192
+     }
+    }
+   ]
   },
   {
    "item": "SWD04_126_1",
@@ -128,8 +420,8 @@
    },
    "weapon": "Sword",
    "desc": {
-    "ja": "- ロデレロの全てのスキルレベル▲1\n - モンタノのスキルレベル{▲2\n \nエスクード・エスパーダ\n - モンタノの使用時に前方の敵20人に[エスクード・エスパーダ]追加打撃\n - 打撃に当たった敵は3秒間[アンバランス]デバフにかかる(ボスモンスターは除く)\n - (スキル係数は現在のレベルのモンタノと同様)",
-    "ko": "- 로델레로 모든 스킬 레벨▲1\n  - 몬타노 스킬 레벨▲2\n  \n에스쿠도 에스파다\n  - 몬타노 시전 시 전방의 적 20명에게 [에스쿠도 에스파다] 추가 타격\n  - 타격에 맞은 적은 3초동안 [언밸런스] 디버프에 걸림 (보스 몬스터 제외)\n  - (스킬 계수 현재 레벨 몬타노와 동일)"
+    "ja": "- ロデレロの全スキルレベル▲1\n - モンタノのスキルレベル{▲2\n \nエスクード・エスパーダ\n - モンタノ使用時、追加で前方の敵20人に[エスクード・エスパーダ]追加打撃\n - 打撃に当たった敵は3秒間[アンバランス]デバフにかかる(ボスモンスターは除く)\n - (スキル係数と打撃数は現レベルのモンタノのと同様)",
+    "ko": "- 로델레로 모든 스킬 레벨▲1\n  - 몬타노 스킬 레벨▲2\n  \n에스쿠도 에스파다\n  - 몬타노 시전 시 추가로 전방의 적 20명에게 몬타노 스킬로 추가 타격\n  - 타격에 맞은 적은 3초동안 [언밸런스] 디버프에 걸림 (보스 몬스터 제외)\n  - (스킬 계수,타격 수, 현재 레벨 몬타노와 동일)"
    },
    "levelUps": {
     "10502": 3,
@@ -138,7 +430,57 @@
     "10505": 1,
     "10508": 1,
     "10506": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 134,
+      "ALLSTAT": 0,
+      "CRTHR": 447,
+      "ADD_IRON": 992
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 147,
+      "ALLSTAT": 16,
+      "CRTHR": 491,
+      "ADD_IRON": 1091
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 161,
+      "ALLSTAT": 32,
+      "CRTHR": 540,
+      "ADD_IRON": 1200
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "SlashSpace_Lv4",
+     "stats": {
+      "STR": 161,
+      "ALLSTAT": 32,
+      "CRTHR": 540,
+      "ADD_IRON": 1200
+     }
+    }
+   ]
   },
   {
    "item": "SWD04_126_7",
@@ -159,14 +501,60 @@
     "11304": 1,
     "11307": 1,
     "11308": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 447
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 491
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 540
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Arena_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 540
+     }
+    }
+   ]
   },
   {
    "item": "RAP04_124",
    "jobId": 1014,
    "key": "Reventador",
    "name": {
-    "ja": "[Lv2]バイボラレイピア - レベンタドル",
+    "ja": "バイボラ秘伝 - レベンタドル",
     "ko": "바이보라 비전 - 레벤타도르"
    },
    "weapon": "Sword",
@@ -182,20 +570,66 @@
     "11108": 1,
     "11110": 1,
     "11111": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 134,
+      "CRTHR": 490,
+      "Aries": 990
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 147,
+      "CRTHR": 539,
+      "Aries": 1089
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 161,
+      "CRTHR": 593,
+      "Aries": 1198
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Reventador_Lv4",
+     "stats": {
+      "STR": 161,
+      "CRTHR": 593,
+      "Aries": 1198
+     }
+    }
+   ]
   },
   {
    "item": "TSP04_128",
    "jobId": 1015,
    "key": "Halberd",
    "name": {
-    "ja": "[Lv2]バイボラパイク - 鉾",
+    "ja": "バイボラ秘伝 - 鉾",
     "ko": "바이보라 비전 - 미늘창"
    },
    "weapon": "Spear",
    "desc": {
-    "ja": "- ドラグーンの全てのスキルレベル▲1\n \n鉾\n - ドラグーンヘルメット着用中、大型、ボスモンスターに与える最終ダメージが15%アップ\n - ボスモンスターにディスローンが命中すると5秒間デバフ付与\nデバフ対象から自身が受けるダメージ15%ダウン",
-    "ko": "- 드라군 모든 스킬 레벨 ▲1\n \n미늘창\n - 드라군 헬멧 착용 중 대형, 보스 몬스터에게 주는 최종 대미지 15% 증가\n -  보스 몬스터에게 디쓰론 명중시 5초간 디버프 부여\n디버프 대상에게 자신이 받는 대미지 15% 감소"
+    "ja": "- ドラグーンの全スキルレベル▲1\n \n鉾\n - ドラグーンのスキルが、大型・ボスモンスターに与える最終ダメージが15%アップ\n - ボスモンスターにディスローンが命中すると5秒間デバフ付与\nデバフ対象から自身が受けるダメージ15%ダウン",
+    "ko": "- 드라군 모든 스킬 레벨 ▲1\n \n미늘창\n - 드라군 스킬이 대형, 보스 몬스터에게 주는 최종 대미지 15% 증가\n -  보스 몬스터에게 디쓰론 명중시 5초간 디버프 부여\n디버프 대상에게 자신이 받는 대미지 15% 감소"
    },
    "levelUps": {
     "11401": 1,
@@ -206,7 +640,53 @@
     "11408": 1,
     "11409": 1,
     "11407": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 148,
+      "CRTHR": 493,
+      "ADD_BOSS_ATK": 966
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 162,
+      "CRTHR": 542,
+      "ADD_BOSS_ATK": 1062
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 178,
+      "CRTHR": 596,
+      "ADD_BOSS_ATK": 1168
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Halberd_Lv4",
+     "stats": {
+      "STR": 178,
+      "CRTHR": 596,
+      "ADD_BOSS_ATK": 1168
+     }
+    }
+   ]
   },
   {
    "item": "SWD04_126_9",
@@ -230,14 +710,60 @@
     "11505": 1,
     "11518": 1,
     "11515": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 248,
+      "ALLSTAT": 0,
+      "CRTATK": 1285
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 273,
+      "ALLSTAT": 16,
+      "CRTATK": 1413
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 300,
+      "ALLSTAT": 32,
+      "CRTATK": 1554
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "AssembleOrders_Lv4",
+     "stats": {
+      "STR": 300,
+      "ALLSTAT": 32,
+      "CRTATK": 1554
+     }
+    }
+   ]
   },
   {
    "item": "TSP04_128_1",
    "jobId": 1017,
    "key": "Grind",
    "name": {
-    "ja": "バイボラパイク - 粉砕",
+    "ja": "バイボラ秘伝 - 粉砕",
     "ko": "바이보라 비전 - 분쇄"
    },
    "weapon": "Spear",
@@ -247,20 +773,70 @@
    },
    "levelUps": {
     "11605": 3
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 145,
+      "ALLSTAT": 0,
+      "CRTHR": 496,
+      "ADD_MIDDLESIZE": 992
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 159,
+      "ALLSTAT": 16,
+      "CRTHR": 545,
+      "ADD_MIDDLESIZE": 1091
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 174,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "ADD_MIDDLESIZE": 1200
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Grind_Lv4",
+     "stats": {
+      "STR": 174,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "ADD_MIDDLESIZE": 1200
+     }
+    }
+   ]
   },
   {
    "item": "RAP04_124_1",
    "jobId": 1018,
    "key": "Banderilla",
    "name": {
-    "ja": "バイボラレイピア - バンデリラ",
+    "ja": "バイボラ秘伝 - バンデリラ",
     "ko": "바이보라 비전 - 반데릴라"
    },
    "weapon": "Sword",
    "desc": {
-    "ja": "- マタドールの全てのスキルレベル▲1\n - Oleスキルのクールタイム10秒短縮\n - カポーテスキルのクールタイム10秒短縮\n \nバンデリラ\n - Ole、カポーテスキルを使用したときにバフを1重複\n(バフ持続時間5秒、最大3重複)\n - バフ中に150範囲内でボスモンスター又は敵キャラクターが攻撃スキルを使用すると、[刺突状態]デバフを付与\n - 発動時にバフを1重複消費\n \n刺突状態\n - 1秒ごとに突き属性の持続ダメージ\n (スキル係数はパソドブレスキルの現在レベルの20%)\n - デバフの重複ごとに持続ダメージ打撃数▲1\n - デバフ対象から自分が受けるダメージが重複ごとに12%ダウン\n - デバフ重複ごとに移動速度4ダウン\n - 持続時間10秒、最大3重複\n \n[刺突状態]の対象がキャラクターのときには重複ごとに槍に刺さるエフェクト効果",
-    "ko": "- 마타도르 모든 스킬 레벨 ▲1\n  - 올레 재사용 대기시간 10초 감소\n  - 카포티 재사용 대기시간 10초 감소\n \n반데릴라\n  - 올레, 카포티 스킬 시전 시 버프 1중첩\n(버프 지속시간 5초, 최대 3중첩)\n - 버프 중 150 범위 내에서 보스 몬스터 혹은 적 캐릭터가 공격 스킬 사용 시 [꿰어짐] 디버프 부여\n - 발동 시 버프 1중첩 소모\n \n꿰어짐\n - 1초 마다 찌르기 속성 지속 대미지\n  (스킬 계수 현재 레벨 파소 도블레의 20%)\n - 디버프 중첩 당 지속 대미지 타격 수▲1\n - 디버프 대상에게 자신이 받는 피해 중첩 당 12% 감소\n - 디버프 중첩 당 이동속도 4 감소\n - 지속시간 10초, 최대 3중첩\n \n꿰어짐 대상이 캐릭터일 경우 중첩 마다 창을 꽂는 이펙트 효과"
+    "ja": "- マタドールの全てのスキルレベル▲1\n - Oleスキルのクールタイム10秒短縮\n - カポーテスキルのクールタイム10秒短縮\n \nバンデリラ\n - Ole、カポーテスキルを使用したときにバフを1重複\n(バフ持続時間5秒、最大3重複)\n - バフ中に150範囲内でボスモンスター又は敵キャラクターが攻撃スキルを使用すると、[刺突状態]デバフを付与\n - 発動時にバフを1重複消費\n \n刺突状態\n - 1秒ごとに突き属性の持続ダメージ\n (スキル係数はパソドブレスキルの現在レベルの20%)\n - デバフの重複ごとに持続ダメージ打撃数▲1\n - デバフ対象から自分が受けるダメージが重複ごとに6%ダウン\n - デバフ重複ごとに移動速度4ダウン\n - 持続時間10秒、最大3重複\n \n刺突状態の対象がキャラクターのときには重複ごとに槍に刺さるエフェクト効果",
+    "ko": "- 마타도르 모든 스킬 레벨 ▲1\n  - 올레 재사용 대기시간 10초 감소\n  - 카포티 재사용 대기시간 10초 감소\n \n반데릴라\n - 올레, 카포티 스킬 시전 시 버프 1중첩\n(버프 지속시간 5초, 최대 3중첩)\n - 버프 중 150 범위 내에서 보스 몬스터 혹은 적 캐릭터가 공격 스킬 사용 시 [꿰어짐] 디버프 부여\n - 발동 시 버프 1중첩 소모\n \n꿰어짐\n - 1초 마다 찌르기 속성 지속 대미지\n  (스킬 계수 현재 레벨 파소 도블레의 20%)\n - 디버프 중첩당 지속 대미지 타격 수▲1\n - 디버프 대상에게 자신이 받는 피해 중첩당 6% 감소\n - 디버프 중첩당 이동속도 4 감소\n - 지속시간 10초, 최대 3중첩\n \n꿰어짐 대상이 캐릭터일 경우 중첩 마다 창을 꽂는 이펙트 효과"
    },
    "levelUps": {
     "11701": 1,
@@ -270,20 +846,70 @@
     "11705": 1,
     "11706": 1,
     "11707": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 134,
+      "ALLSTAT": 0,
+      "CRTHR": 490,
+      "CRTATK": 1238
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 147,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "CRTATK": 1361
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 161,
+      "ALLSTAT": 32,
+      "CRTHR": 598,
+      "CRTATK": 1497
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Banderilla_Lv4",
+     "stats": {
+      "STR": 161,
+      "ALLSTAT": 32,
+      "CRTHR": 598,
+      "CRTATK": 1497
+     }
+    }
+   ]
   },
   {
    "item": "SWD04_126_4",
    "jobId": 1019,
    "key": "ChillWind",
    "name": {
-    "ja": "バイボラソード- ボレアス",
+    "ja": "バイボラ秘伝- ボレアス",
     "ko": "바이보라 비전 - 삭풍"
    },
    "weapon": "Sword",
    "desc": {
-    "ja": "- ムエタイの全てのスキルレベル▲1\n \nボレアス\n - ムエタイ攻撃スキルを使用するとボレアスバフが1重複(持続時間30秒)\n - バフが8重複の時にラムムアイを使用すると、[パヤカルーン]を使用\n \nパヤカルーン\n - 前方範囲の敵に10連打打ち属性ダメージ\n(パヤカルーンの総和スキル係数ムエタイ全ての攻撃スキルの合計)\n - 広域攻撃比率30\n - 使用中に受けるダメージ70%ダウン及びノックバック・ノックダウン免疫",
-    "ko": "- 낙무아이 모든 스킬 레벨▲1\n \n삭풍\n - 낙무아이 공격 스킬 시전 시 삭풍 버프 1 중첩 (지속시간 30초)\n - 버프 8 중첩일 때 람무아이 시전 시 [파야카룬] 시전\n \n파야카룬\n - 전방 범위 적들에게 10 연타 때리기 대미지\n(파야카룬 총 스킬 계수 낙무아이 모든 공격 스킬의 합)\n - 광역 공격 비율 30\n - 시전 중 받는 피해 70% 감소 및 넉백,넉다운 면역"
+    "ja": "- ムエタイの全てのスキルレベル▲1\n \nボレアス\n - ムエタイ攻撃スキルを使用するとボレアスバフが1重複(持続時間30秒)\n - バフ12重複の時にラムムアイを使用すると、[パヤカルーン]を使用\n \nパヤカルーン\n - 前方範囲の敵に10連打打ち属性ダメージ\n(パヤカルーンの総和スキル係数ムエタイ全ての攻撃スキルの合計)\n - 広域攻撃比率10\n - 使用中に受けるダメージ70%ダウン＆ノックバック・ノックダウン免疫",
+    "ko": "- 낙무아이 모든 스킬 레벨▲1\n \n삭풍\n - 낙무아이 공격 스킬 시전 시 삭풍 버프 1 중첩 (지속시간 30초)\n - 버프 12 중첩일 때 람무아이 시전 시 [파야카룬] 시전\n \n파야카룬\n - 전방 범위 적들에게 10 연타 때리기 대미지\n(파야카룬 총 스킬 계수 낙무아이 모든 공격 스킬의 합)\n - 광역 공격 비율 10\n - 시전 중 받는 피해 70% 감소 및 넉백,넉다운 면역"
    },
    "levelUps": {
     "11801": 1,
@@ -292,14 +918,64 @@
     "11804": 1,
     "11803": 1,
     "11806": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 480,
+      "Strike": 996
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 528,
+      "Strike": 1095
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 580,
+      "Strike": 1205
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "ChillWind_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 580,
+      "Strike": 1205
+     }
+    }
+   ]
   },
   {
    "item": "SPR04_127",
    "jobId": 1020,
    "key": "Retiarii_ThrowNet",
    "name": {
-    "ja": "[Lv2]バイボラスピア - 投網発射装置",
+    "ja": "バイボラ秘伝 - 投網発射装置",
     "ko": "바이보라 비전 - 투망 발사장치"
    },
    "weapon": "Spear",
@@ -315,20 +991,66 @@
     "11905": 1,
     "11906": 1,
     "11908": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 145,
+      "CRTATK": 1375,
+      "ADD_LEATHER": 980
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 160,
+      "CRTATK": 1513,
+      "ADD_LEATHER": 1078
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 176,
+      "CRTATK": 1664,
+      "ADD_LEATHER": 1185
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Retiarii_ThrowNet_Lv4",
+     "stats": {
+      "STR": 176,
+      "CRTATK": 1664,
+      "ADD_LEATHER": 1185
+     }
+    }
+   ]
   },
   {
    "item": "SWD04_126_2",
    "jobId": 1021,
    "key": "Saber",
    "name": {
-    "ja": "バイボラソード - 騎兵刀",
+    "ja": "バイボラ秘伝 - 騎兵刀",
     "ko": "바이보라 비전 - 기병도"
    },
    "weapon": "Sword",
    "desc": {
-    "ja": "- ハッカペルの全てのスキルレベル▲1\n \n騎兵刀\n - ハッカペルの継続時間▲5秒\n - スカルプグニンスキルダメージ▲100%\n - グラインドカッタースキルダメージ▲100%",
-    "ko": "- 하카펠 모든 스킬 레벨▲1\n \n기병도\n - 하카 펠레 지속시간▲5초\n - 스칼푸그닝 스킬 대미지▲100%\n - 그라인드 커터 스킬 대미지▲100%"
+    "ja": "- ハッカペルの全てのスキルレベル▲1\n \n騎兵刀\n - スカルプグニンスキルダメージ▲100%\n - グラインドカッタースキルダメージ▲100%",
+    "ko": "- 하카펠 모든 스킬 레벨▲1\n \n기병도\n - 스칼푸그닝 스킬 대미지▲100%\n - 그라인드 커터 스킬 대미지▲100%"
    },
    "levelUps": {
     "12001": 1,
@@ -337,24 +1059,120 @@
     "12002": 1,
     "12006": 1,
     "12007": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 134,
+      "ALLSTAT": 0,
+      "CRTHR": 490,
+      "Slash": 992
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 147,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "Slash": 1091
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 161,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "Slash": 1200
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Saber_Lv4",
+     "stats": {
+      "STR": 161,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "Slash": 1200
+     }
+    }
+   ]
   },
   {
    "item": "TSW04_126",
    "jobId": 1022,
    "key": "BlossomBlader_BlossomSlash",
    "name": {
-    "ja": "[Lv2]バイボラグレートソード - 華山剣法",
+    "ja": "バイボラ秘伝 - 華山剣法",
     "ko": "바이보라 비전 - 화산검법"
    },
    "weapon": "Sword",
    "desc": {
-    "ja": "- 梅斬りのスキルレベル▲ 2\n  - 梅斬りのクールタイム10秒ダウン\n \n華山剣法\n - 梅斬りで1体の対象ではなく周囲の最大4体の対象に順番にダメージを与える",
-    "ko": "- 매화 베기 스킬 레벨 ▲ 2\n  - 매화 베기 재사용 대기시간 10초 감소\n \n화산검법\n - 매화 베기가 한 대상이 아닌 주변 최대 4명의 대상에게 순차적으로 대미지를 입힘"
+    "ja": "- 梅斬りスキルレベル▲ 2\n - 梅斬りクールタイム15秒短縮\n \n華山剣法\n - 梅斬りが対象1人ではなく周辺の最大4人を対象に順次的にダメージを与える",
+    "ko": "- 매화 베기 스킬 레벨 ▲ 2\n  - 매화 베기 재사용 대기시간 15초 감소\n \n화산검법\n - 매화 베기가 한 대상이 아닌 주변 최대 4명의 대상에게 순차적으로 대미지를 입힘"
    },
    "levelUps": {
     "12105": 2
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 143,
+      "CRTHR": 490,
+      "CRTATK": 1238
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 157,
+      "CRTHR": 539,
+      "CRTATK": 1361
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 172,
+      "CRTHR": 592,
+      "CRTATK": 1497
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "BlossomBlader_BlossomSlash_Lv4",
+     "stats": {
+      "STR": 172,
+      "CRTHR": 592,
+      "CRTATK": 1497
+     }
+    }
+   ]
   },
   {
    "item": "SWD04_126_6",
@@ -372,7 +1190,61 @@
    "levelUps": {
     "12204": 3,
     "12203": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 145,
+      "CON": 108,
+      "ALLSTAT": 0,
+      "ADD_MIDDLESIZE": 988,
+      "MSTA": 10
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 159,
+      "CON": 118,
+      "ALLSTAT": 16,
+      "ADD_MIDDLESIZE": 1086,
+      "MSTA": 11
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 174,
+      "CON": 129,
+      "ALLSTAT": 32,
+      "ADD_MIDDLESIZE": 1194,
+      "MSTA": 12
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "DobleAtaque_Lv4",
+     "stats": {
+      "STR": 174,
+      "CON": 129,
+      "ALLSTAT": 32,
+      "ADD_MIDDLESIZE": 1194,
+      "MSTA": 12
+     }
+    }
+   ]
   },
   {
    "item": "TSP04_128_3",
@@ -384,8 +1256,8 @@
    },
    "weapon": "Spear",
    "desc": {
-    "ja": "神戟の全スキルレベル▲1\n \n竜虎相搏\n - [態勢転換]で選択した属性に応じて、持続強化効果を付与\n - 態勢【速】：突属性スキルのダメージ10%アップ\n - 態勢【広】：斬属性スキルのダメージ10%アップ",
-    "ko": "- 신극 모든 스킬 레벨 ▲1\n \n용호상박\n - [태세 전환]으로 선택된 태세에 따른 지속 강화 효과 부여\n - [속] 태세: 찌르기 스킬 대미지 10% 증가\n - [광] 태세: 베기 스킬 대미지 10% 증가"
+    "ja": "神戟の全スキルレベル▲1\n \n竜虎相搏\n - [態勢転換]で選択した属性に応じて、持続強化効果を付与\n - 態勢【速】：突属性スキルのダメージ▲10%\n - 態勢【広】：斬属性スキルのダメージ▲10%",
+    "ko": "- 신극 모든 스킬 레벨 ▲1\n \n용호상박\n - [태세 전환]으로 선택된 태세에 따른 지속 강화 효과 부여\n - [속] 태세: 찌르기 스킬 대미지 ▲10%\n - [광] 태세: 베기 스킬 대미지 ▲10%"
    },
    "levelUps": {
     "12301": 1,
@@ -395,7 +1267,57 @@
     "12305": 1,
     "12306": 1,
     "12307": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 148,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "ADD_BOSS_ATK": 966
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 162,
+      "ALLSTAT": 16,
+      "CRTHR": 542,
+      "ADD_BOSS_ATK": 1062
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 178,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "ADD_BOSS_ATK": 1168
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "DragonAndTiger_Lv4",
+     "stats": {
+      "STR": 178,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "ADD_BOSS_ATK": 1168
+     }
+    }
+   ]
   },
   {
    "item": "TSP04_129_1",
@@ -418,7 +1340,61 @@
     "12324": 1,
     "12325": 1,
     "12326": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 142,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "Aries": 986,
+      "Strike": 986
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 156,
+      "ALLSTAT": 16,
+      "CRTHR": 542,
+      "Aries": 1084,
+      "Strike": 1084
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "Aries": 1192,
+      "Strike": 1192
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "PowerOfGod_Lv4",
+     "stats": {
+      "STR": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "Aries": 1192,
+      "Strike": 1192
+     }
+    }
+   ]
   },
   {
    "item": "TSW04_127_1",
@@ -440,7 +1416,57 @@
     "12330": 1,
     "12331": 1,
     "12332": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 144,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "Slash": 986
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 156,
+      "ALLSTAT": 16,
+      "CRTHR": 493,
+      "Slash": 1084
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "Slash": 1192
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Vanquish_Lv4",
+     "stats": {
+      "STR": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "Slash": 1192
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_120_1",
@@ -462,7 +1488,65 @@
     "12335": 1,
     "12336": 1,
     "12337": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 144,
+      "INT": 144,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "Magic_Holy_Atk": 986,
+      "Strike": 986
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 156,
+      "INT": 156,
+      "ALLSTAT": 16,
+      "CRTHR": 493,
+      "Magic_Holy_Atk": 1084,
+      "Strike": 1084
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 171,
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Sledger_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    }
+   ]
   },
   {
    "item": "TSW04_128_1",
@@ -484,7 +1568,65 @@
     "12342": 1,
     "12343": 1,
     "12344": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "CRTATK": 1280,
+      "CRTMATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "CRTATK": 1408,
+      "CRTMATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "CRTATK": 1548,
+      "CRTMATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Bonemancer_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "CRTATK": 1548,
+      "CRTMATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_132_1",
@@ -508,7 +1650,53 @@
     "12348": 1,
     "12349": 1,
     "12350": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Grimmark_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_134_1",
@@ -531,7 +1719,57 @@
     "12357": 1,
     "12358": 1,
     "12359": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "DEX": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "DEX": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Escrimeur_Lv4",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_135_1",
@@ -554,24 +1792,124 @@
     "12364": 1,
     "12365": 1,
     "12366": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "DEX": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "DEX": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Commodore_Lv4",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129_2",
    "jobId": 2002,
    "key": "FireBolt",
    "name": {
-    "ja": "バイボラスタッフ－炎雷",
+    "ja": "バイボラ秘伝 - 炎雷",
     "ko": "바이보라 비전 - 불벼락"
    },
    "weapon": "Staff",
    "desc": {
-    "ja": "- ファイアピラーのスキルレベル▲2\n - ファイアピラースキルダメージ▲100%\n \n炎雷\n - ファイアピラー周辺のランダム位置に隕石を落下\n - 隕石落下周期0.5秒\n - 隕石はファイアピラーと同一のスキルとして判定",
-    "ko": "- 파이어 필라 스킬 레벨▲2\n  - 파이어 필라 스킬 대미지▲100%\n \n불벼락\n - 파이어 필라 주변 무작위 위치에 운석 낙하\n - 운석 낙하 주기 0.5초\n - 운석은 파이어 필라와 동일한 스킬로 판정"
+    "ja": "- ファイアピラーのスキルレベル▲2\n - ファイアピラースキルダメージ▲100%\n \n炎雷\n - ファイアピラー周辺に隕石が落下(落下位置はランダム)\n - 隕石落下の周期はファイアピラーの打撃周期と同様\n - 隕石はファイアピラーと同スキルとして判定",
+    "ko": "- 파이어 필라 스킬 레벨▲2\n  - 파이어 필라 스킬 대미지▲100%\n \n불벼락\n - 파이어 필라 주변 무작위 적의 위치에 운석 낙하\n - 운석 낙하 주기는 파이어 필라 타격 주기와 동일\n - 운석은 파이어 필라와 동일한 스킬로 판정"
    },
    "levelUps": {
     "20105": 2
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 134,
+      "MNA": 134,
+      "ALLSTAT": 0,
+      "CRTHR": 496
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 147,
+      "MNA": 147,
+      "ALLSTAT": 16,
+      "CRTHR": 545
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 161,
+      "MNA": 161,
+      "ALLSTAT": 32,
+      "CRTHR": 600
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "FireBolt_Lv4",
+     "stats": {
+      "INT": 161,
+      "MNA": 161,
+      "ALLSTAT": 32,
+      "CRTHR": 600
+     }
+    }
+   ]
   },
   {
    "item": "STF04_127_2",
@@ -588,20 +1926,70 @@
    },
    "levelUps": {
     "20208": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 140,
+      "ALLSTAT": 0,
+      "CRTHR": 490,
+      "Magic_Ice_Atk": 1885
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 154,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "Magic_Ice_Atk": 2074
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 169,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "Magic_Ice_Atk": 2281
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "IceDrops_Lv4",
+     "stats": {
+      "INT": 169,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "Magic_Ice_Atk": 2281
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129_3",
    "jobId": 2004,
    "key": "DeflectGravitation",
    "name": {
-    "ja": "バイボラスタッフ - 偏向引力",
+    "ja": "バイボラ秘伝 - 偏向引力",
     "ko": "바이보라 비전 - 편향인력"
    },
    "weapon": "Staff",
    "desc": {
-    "ja": "- サイコキノの全てのスキルレベル▲1\n \n偏向引力\n - グラビティポールスキルを使用中、ノックバックやノックダウンに免疫\n - グラビティポールスキルを使用中に1秒ごとに扇形範囲を打撃\n(現在レベルのグラビティポールスキル係数50%のダメージ)\n - 対象がモンスターの場合、打撃ごとに引き寄せられる\n - グラビティポールスキルのチャネリングが終了すると、円形の範囲に追加打撃\n(現在レベルのグラビティポールスキル係数で5回打撃)\n - 最大対象数20\n \n偏向引力はチャネリングとして判定されない。",
-    "ko": "- 사이코키노 모든 스킬 레벨▲1\n \n편향인력\n - 그라비티 폴 시전 중 넉백, 넉다운 면역\n - 그라비티 폴 시전 중 1초 마다 부채꼴 범위 타격\n(현재 레벨의 그라비티 폴 스킬 계수 50%로 피해)\n - 대상이 몬스터면 매 타격 마다 조금씩 끌어당김\n - 그라비티폴 채널링 종료 시 원형 범위 추가 타격\n(현재 레벨의 그라비티 폴 스킬 계수로 5회 타격)\n - 최대 대상 수 20\n \n편향인력은 채널링으로 판정되지 않음"
+    "ja": "- サイコキノの全てのスキルレベル▲1\n \n偏向引力\n - グラビティポールスキルを使用中、ノックバックやノックダウンに免疫\n - グラビティポールスキルを使用中に1秒ごとに扇形範囲を打撃\n(現在レベルのグラビティポールスキル係数50%のダメージ)\n - 対象がモンスターの場合、打撃ごとに引き寄せられる\n - グラビティポールスキルのチャネリングが終了すると、円形の範囲に追加打撃\n(現在レベルのグラビティポールスキル係数で5回打撃)\n - 最大対象数20",
+    "ko": "- 사이코키노 모든 스킬 레벨▲1\n \n편향인력\n - 그라비티 폴 시전 중 넉백, 넉다운 면역\n - 그라비티 폴 시전 중 1초 마다 부채꼴 범위 타격\n(현재 레벨의 그라비티 폴 스킬 계수 50%로 피해)\n - 대상이 몬스터면 매 타격 마다 조금씩 끌어당김\n - 그라비티폴 채널링 종료 시 원형 범위 추가 타격\n(현재 레벨의 그라비티 폴 스킬 계수로 5회 타격)\n - 최대 대상 수 20"
    },
    "levelUps": {
     "20301": 1,
@@ -610,14 +1998,64 @@
     "20308": 1,
     "20306": 1,
     "20307": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 134,
+      "ALLSTAT": 0,
+      "CRTHR": 496,
+      "Magic_Soul_Atk": 992
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 147,
+      "ALLSTAT": 16,
+      "CRTHR": 545,
+      "Magic_Soul_Atk": 1091
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 161,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "Magic_Soul_Atk": 1200
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "DeflectGravitation_Lv4",
+     "stats": {
+      "INT": 161,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "Magic_Soul_Atk": 1200
+     }
+    }
+   ]
   },
   {
    "item": "STF04_127_1",
    "jobId": 2006,
    "key": "WickedDesire",
    "name": {
-    "ja": "バイボラロード - 思念",
+    "ja": "バイボラ秘伝 - 思念",
     "ko": "바이보라 비전 - 사념"
    },
    "weapon": "Staff",
@@ -637,22 +2075,120 @@
     "20704": 1,
     "20710": 1,
     "20709": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 140,
+      "MNA": 150,
+      "ALLSTAT": 0,
+      "ADD_MATK": 590
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 154,
+      "MNA": 165,
+      "ALLSTAT": 16,
+      "ADD_MATK": 649
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 169,
+      "MNA": 181,
+      "ALLSTAT": 32,
+      "ADD_MATK": 714
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "WickedDesire_Lv4",
+     "stats": {
+      "INT": 169,
+      "MNA": 181,
+      "ALLSTAT": 32,
+      "ADD_MATK": 714
+     }
+    }
+   ]
   },
   {
    "item": "STF04_127",
    "jobId": 2008,
    "key": "TimeRush",
    "name": {
-    "ja": "[Lv2]バイボラロッド - タイムラッシュ",
+    "ja": "バイボラ秘伝 - タイムラッシュ",
     "ko": "바이보라 비전 - 타임러시"
    },
    "weapon": "Staff",
    "desc": {
-    "ja": "タイムラッシュ\n－クイックキャスト持続中クイックキャストスキルレベル* 3%分だけ与えるダメージアップ\n－タイムフォワード適用スキル▲2",
-    "ko": "타임러시\n - 퀵 캐스트 지속 중 퀵 캐스트 스킬 레벨 * 3%만큼 주는 대미지 증가\n  - 타임 포워드 적용 스킬▲2"
+    "ja": "- クイックキャストスキルレベル▲2\n \nタイムラッシュ\n - クイックキャスト継続中にクイックキャストスキルレベル * 3.5%の分だけ与えるダメージアップ\n - タイムフォワード適用スキル▲2",
+    "ko": "- 퀵 캐스트 스킬 레벨▲2\n \n타임러시\n - 퀵 캐스트 지속 중 퀵 캐스트 스킬 레벨 * 3.5%만큼 주는 대미지 증가\n  - 타임 포워드 적용 스킬▲2"
    },
-   "levelUps": {}
+   "levelUps": {
+    "20808": 2
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 149,
+      "MNA": 148,
+      "CRTHR": 488
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 164,
+      "MNA": 163,
+      "CRTHR": 537
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 180,
+      "MNA": 179,
+      "CRTHR": 590
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "TimeRush_Lv4",
+     "stats": {
+      "INT": 180,
+      "MNA": 179,
+      "CRTHR": 590
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129_7",
@@ -671,20 +2207,70 @@
     "20909": 1,
     "20911": 1,
     "20912": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 140,
+      "MNA": 140,
+      "ALLSTAT": 0,
+      "CRTHR": 493
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 154,
+      "MNA": 154,
+      "ALLSTAT": 16,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 169,
+      "MNA": 169,
+      "ALLSTAT": 32,
+      "CRTHR": 596
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Immortal_Lv4",
+     "stats": {
+      "INT": 169,
+      "MNA": 169,
+      "ALLSTAT": 32,
+      "CRTHR": 596
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129_6",
    "jobId": 2011,
    "key": "Extinction",
    "name": {
-    "ja": "バイボラスタッフ - 殲滅",
+    "ja": "バイボラ秘伝 - 殲滅",
     "ko": "바이보라 비전 - 섬멸"
    },
    "weapon": "Staff",
    "desc": {
-    "ja": "- エレメンタリストの全てのスキルレベル▲1\n - エレメンタバーストスキルに殲滅効果追加\n \n殲滅\n - エレメンタバースト詠唱時、前方に殲滅光線発射\n - 最大対象数20、打撃数3\n - 同様の対象に重複打撃不可能\n - 属性はスキルレベルの合計が最も高い属性に決定される\n \nスキルレベル合計\n - 炎 : ファイアクロー + メテオ\n - 氷 : ヘイル + ブリザードストーム\n - 雷 : エレクトロキュート + ライトニングオーブ \n(投資したスキルポイントのみ計算)\n \n殲滅はキャスティングとして判定されない",
-    "ko": "- 엘리멘탈리스트 모든 스킬 레벨 ▲1\n  - 엘리멘탈 버스트 스킬에 섬멸 효과 추가\n \n섬멸\n - 엘리멘탈 버스트 시전 시 전방에 섬멸 광선 발사\n - 최대 대상 수 20, 타격 수 3\n - 같은 대상에게 중복 타격 불가능\n - 속성은 스킬 레벨 합이 제일 높은 속성으로 결정 됨\n \n스킬 레벨 합\n - 불 : 파이어 클러 + 메테오\n - 얼음 : 헤일 + 블리자드 스톰\n - 전기 : 일렉트로큐트 + 라이트닝 오브\n(투자한 스킬 포인트만 계산)\n \n섬멸은 캐스팅으로 판정되지 않음"
+    "ja": "- エレメンタリストの全てのスキルレベル▲1\n - エレメンタバーストスキルに殲滅効果追加\n \n殲滅\n - エレメンタバースト詠唱時、前方に殲滅光線発射\n - 最大対象数20、打撃数6\n - 同様の対象に重複打撃不可能\n - 属性はスキルレベルの合計が最も高い属性に決まる\n \nスキルレベル合計\n - 炎 : ファイアクロー + メテオ\n - 氷 : ヘイル + ブリザードストーム\n - 雷 : エレクトロキュート + ライトニングオーブ \n(投資したスキルポイントのみ計算)",
+    "ko": "- 엘리멘탈리스트 모든 스킬 레벨 ▲1\n  - 엘리멘탈 버스트 스킬에 섬멸 효과 추가\n \n섬멸\n - 엘리멘탈 버스트 시전 시 전방에 섬멸 광선 발사\n - 최대 대상 수 20, 타격 수 6\n - 같은 대상에게 중복 타격 불가능\n - 속성은 스킬 레벨 합이 제일 높은 속성으로 결정 됨\n \n스킬 레벨 합\n - 불 : 파이어 클러 + 메테오\n - 얼음 : 헤일 + 블리자드 스톰\n - 전기 : 일렉트로큐트 + 라이트닝 오브\n(투자한 스킬 포인트만 계산)"
    },
    "levelUps": {
     "20601": 1,
@@ -694,20 +2280,78 @@
     "20611": 1,
     "20602": 1,
     "20605": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 140,
+      "ALLSTAT": 0,
+      "CRTHR": 486,
+      "Magic_Fire_Atk": 353,
+      "Magic_Ice_Atk": 353,
+      "Magic_Lightning_Atk": 353
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 154,
+      "ALLSTAT": 16,
+      "CRTHR": 534,
+      "Magic_Fire_Atk": 388,
+      "Magic_Ice_Atk": 388,
+      "Magic_Lightning_Atk": 388
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 169,
+      "ALLSTAT": 32,
+      "CRTHR": 587,
+      "Magic_Fire_Atk": 426,
+      "Magic_Ice_Atk": 426,
+      "Magic_Lightning_Atk": 426
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Extinction_Lv4",
+     "stats": {
+      "INT": 169,
+      "ALLSTAT": 32,
+      "CRTHR": 587,
+      "Magic_Fire_Atk": 426,
+      "Magic_Ice_Atk": 426,
+      "Magic_Lightning_Atk": 426
+     }
+    }
+   ]
   },
   {
    "item": "STF04_127_4",
    "jobId": 2014,
    "key": "Distortion",
    "name": {
-    "ja": "バイボラロッド - 歪曲",
+    "ja": "バイボラ秘伝 - 歪曲",
     "ko": "바이보라 비전 - 왜곡"
    },
    "weapon": "Staff",
    "desc": {
-    "ja": "- セージの全てのスキルレベル▲1\n - ホールオブダークネス詠唱時、指定範囲内の敵の最大10人に[空間歪曲]デバフ10秒付与\n \n歪曲\n - マイクロディメンションを使用するたび、400範囲内の[空間歪曲]デバフ対象に無属性魔法ダメージ\n(現在レベルのホールオブダークネスの35%)\n \n歪曲はキャスティングとして判定されない",
-    "ko": "- 세이지 모든 스킬 레벨 ▲1\n  - 홀 오브 다크니스 시전 시 지정 범위 내 적 최대 10명에게 [공간 왜곡] 디버프 10초부여\n \n왜곡\n - 마이크로 디멘션을 사용할 때마다 400범위 내 [공간 왜곡] 디버프 대상에게 무속성 마법 피해\n(현재 레벨의 홀 오브 다크니스의 35%)\n \n왜곡은 캐스팅으로 판정되지 않음"
+    "ja": "- セージの全てのスキルレベル▲1\n - ホールオブダークネス詠唱時、指定範囲内の敵の最大10人に[空間歪曲]デバフ10秒付与\n \n歪曲\n - マイクロディメンションを使用するたび、400範囲内の[空間歪曲]デバフ対象に無属性魔法ダメージ\n(現在レベルのホールオブダークネスの35%を6回に分けて打撃)\n \n歪曲はキャスティングとして判定されない",
+    "ko": "- 세이지 모든 스킬 레벨 ▲1\n  - 홀 오브 다크니스 시전 시 지정 범위 내 적 최대 10명에게 [공간 왜곡] 디버프 10초부여\n \n왜곡\n - 마이크로 디멘션을 사용할 때마다 400범위 내 [공간 왜곡] 디버프 대상에게 무속성 마법 피해\n(현재 레벨의 홀 오브 다크니스의 35%를 6회에 나눠서 타격)\n \n왜곡은 캐스팅으로 판정되지 않음"
    },
    "levelUps": {
     "21401": 1,
@@ -718,7 +2362,57 @@
     "21409": 1,
     "21410": 1,
     "21411": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 148,
+      "ALLSTAT": 0,
+      "CRTHR": 485,
+      "Magic_Melee_Atk": 995
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 162,
+      "ALLSTAT": 16,
+      "CRTHR": 533,
+      "Magic_Melee_Atk": 1094
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 178,
+      "ALLSTAT": 32,
+      "CRTHR": 586,
+      "Magic_Melee_Atk": 1203
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Distortion_Lv4",
+     "stats": {
+      "INT": 178,
+      "ALLSTAT": 32,
+      "CRTHR": 586,
+      "Magic_Melee_Atk": 1203
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129_8",
@@ -741,7 +2435,57 @@
     "21201": 1,
     "21204": 1,
     "21208": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 146,
+      "ALLSTAT": 0,
+      "CRTHR": 496,
+      "Magic_Dark_Atk": 992
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 160,
+      "ALLSTAT": 16,
+      "CRTHR": 545,
+      "Magic_Dark_Atk": 1091
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 176,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "Magic_Dark_Atk": 1200
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Demonische_Lv4",
+     "stats": {
+      "INT": 176,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "Magic_Dark_Atk": 1200
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129_11",
@@ -756,20 +2500,70 @@
     "ja": "- 魔法攻撃力 ▲590\n- 知能 ▲140\n- 精神 ▲150\n\n血蝶\n- [カースオブブラッド]バフ中、自身の周辺に[血蝶領域]を生成\n- [血蝶領域]の範囲内にいる敵は、2秒毎に[ウンガドゥンディ]の打撃1回あたりのスキル係数分のダメージを受ける。ダメージを与えると最大HPの1%を回復する\n- 詠唱者の攻撃で敵が[血蝶領域]で死亡すると、習得したフェザーフットスキルのクールタイムが1秒短縮",
     "ko": ""
    },
-   "levelUps": {}
+   "levelUps": {},
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 140,
+      "MNA": 150,
+      "ALLSTAT": 0,
+      "ADD_MATK": 590
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 154,
+      "MNA": 165,
+      "ALLSTAT": 16,
+      "ADD_MATK": 649
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 169,
+      "MNA": 181,
+      "ALLSTAT": 32,
+      "ADD_MATK": 714
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "BloodButterfly_Lv4",
+     "stats": {
+      "INT": 169,
+      "MNA": 181,
+      "ALLSTAT": 32,
+      "ADD_MATK": 714
+     }
+    }
+   ]
   },
   {
    "item": "STF04_127_3",
    "jobId": 2017,
    "key": "AwakeningRune",
    "name": {
-    "ja": "バイボラロッド - 覚醒のルーン",
+    "ja": "バイボラ秘伝 - 覚醒のルーン",
     "ko": "바이보라 비전 - 각성의 룬"
    },
    "weapon": "Staff",
    "desc": {
-    "ja": "- ルーンキャスターの全てのスキルレベル▲1\n \n覚醒のルーン\n - [ルーンキャスター：キャスティング]バフの最大重複が5に変更\n - [ルーンキャスター：キャスティング]の重複ごとにルーンキャスタースキルで与えるダメージ▲20%\n - [ルーンキャスター：キャスティング]が5重複のとき、[隕石のルーン]スキルを使用すると[ルーンキャスター：キャスティング]を3重複消費して\n[隕石のルーン]スキルのクールタイムを初期化。",
-    "ko": "- 룬 캐스터 모든 스킬 레벨▲1\n \n각성의 룬\n - [룬캐스터: 캐스팅] 버프 최대 중첩 5로 변경\n - [룬캐스터: 캐스팅] 중첩당 룬 캐스터 스킬로 주는 대미지▲20%\n - [룬캐스터 : 캐스팅] 5 중첩 일 때, 돌의 룬 시전 시 [룬캐스터 : 캐스팅]을 3 중첩 소모하고\n 돌의 룬 스킬 재사용 대기시간 초기화"
+    "ja": "- ルーンキャスターの全スキルレベル▲1\n \n覚醒のルーン\n - [ルーンキャスター：キャスティング]バフの最大重複が5に変化\n - [ルーンキャスター：キャスティング]バフのうち、ルーンキャスタースキルで与えるダメージ▲100%\n - [ルーンキャスター：キャスティング]の重複が5になると、[ルーンキャスター：キャスティング]の重複を3消費して「隕石のルーン」のクールタイムをリセット",
+    "ko": "- 룬 캐스터 모든 스킬 레벨▲1\n \n각성의 룬\n - [룬캐스터: 캐스팅] 버프 최대 중첩 5로 변경\n - [룬캐스터: 캐스팅] 버프중 룬 캐스터 스킬로 주는 대미지▲100%\n - [룬캐스터 : 캐스팅] 5 중첩에 도달하면 [룬캐스터 : 캐스팅]을 3 중첩 소모하고 [돌의 룬]의 재사용 대기시간이 초기화 됩니다."
    },
    "levelUps": {
     "21302": 1,
@@ -780,31 +2574,131 @@
     "21306": 1,
     "21307": 1,
     "21308": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 148,
+      "ALLSTAT": 0,
+      "CRTHR": 490,
+      "CRTMATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 163,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "CRTMATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 179,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "CRTMATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "AwakeningRune_Lv4",
+     "stats": {
+      "INT": 179,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "CRTMATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129_1",
    "jobId": 2019,
    "key": "DiffuseReflection",
    "name": {
-    "ja": "バイボラスタッフ - 拡散投影",
+    "ja": "バイボラ秘伝 - 拡散投影",
     "ko": "바이보라 비전 - 확산투영"
    },
    "weapon": "Staff",
    "desc": {
-    "ja": "- シャドウソーンスキルレベル▲2\n - シャドウソーン連打数▲1\n - シャドウソーンクールタイム5秒減少\n \n拡散投影\n - シャドウソーンが対象周辺最大5名にダメージを与える。",
-    "ko": "- 섀도우 쏜 스킬 레벨▲2\n  - 섀도우 쏜 연타 수▲1\n  - 섀도우 쏜 재사용 대기시간 5초 감소\n \n확산투영\n - 섀도우 쏜이 대상 주변 최대 5명에게 피해를 줌"
+    "ja": "- シャドウソーンスキルレベル▲2\n - シャドウソーン連打数▲1\n \n 拡散投影\n - シャドウソーンが対象周辺最大5名にダメージを与える",
+    "ko": "- 섀도우 쏜 스킬 레벨▲2\n  - 섀도우 쏜 연타 수▲1\n \n확산투영\n - 섀도우 쏜이 대상 주변 최대 5명에게 피해를 줌"
    },
    "levelUps": {
     "21601": 2
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 146,
+      "ALLSTAT": 0,
+      "CRTMATK": 1238,
+      "ADD_CLOTH": 992
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 160,
+      "ALLSTAT": 16,
+      "CRTMATK": 1361,
+      "ADD_CLOTH": 1091
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 176,
+      "ALLSTAT": 32,
+      "CRTMATK": 1497,
+      "ADD_CLOTH": 1200
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "DiffuseReflection_Lv4",
+     "stats": {
+      "INT": 176,
+      "ALLSTAT": 32,
+      "CRTMATK": 1497,
+      "ADD_CLOTH": 1200
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129_5",
    "jobId": 2020,
    "key": "RedTigerNail",
    "name": {
-    "ja": "バイボラスタッフ - 赤虎爪",
+    "ja": "バイボラ秘伝 - 赤虎爪",
     "ko": "바이보라 비전 - 적호조"
    },
    "weapon": "Staff",
@@ -814,7 +2708,57 @@
    },
    "levelUps": {
     "21609": 3
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 142,
+      "ALLSTAT": 0,
+      "CRTHR": 490,
+      "BLK_BREAK": 480
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 156,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "BLK_BREAK": 528
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "BLK_BREAK": 580
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "RedTigerNail_Lv4",
+     "stats": {
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "BLK_BREAK": 580
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129_10",
@@ -826,8 +2770,8 @@
    },
    "weapon": "Staff",
    "desc": {
-    "ja": "- タオイストの全スキルレベル ▲1\n - タオイストの1ランクスキルに覚醒効果を適用\n \nヴィジラントチャーム\n * フレイムラディエーション： 打撃回数が2倍増加\n * クリーピングデス：範囲拡大、打撃数が2倍\n * ディバインパニッシュメント： [ディバインパニッシュメント：範囲拡大]が常時適用、キャスティングに比例して最大ダメージを常時適用、打撃数が2連打になる\n - ヴィジラントチャームの効果が発動すると、発動したスキルのクールタイムの分だけスキルの覚醒効果を維持\n \n覚醒効果を維持している間、他のスキルの覚醒効果は発動しない",
-    "ko": "- 도사 모든 스킬 레벨 ▲1\n  - 도사 1랭크 스킬에 각성부 효과 적용\n \n각성부\n   * 멸화부 : 타격 수 2배로 적용\n   * 파사부 : 범위 증가, 타격 수 2배로 적용\n   * 천형부 : 대풍참 상시 발동, 캐스팅 비례 대미지 최대로 상시 적용, 타수 2연타로 적용\n  - 각성부 효과 발동 시 해당 스킬의 재사용 대기 시간만큼 각성 효과 유지\n \n각성 효과가 유지 되는동안 다른 스킬의 각성 효과는 발동 되지 않음"
+    "ja": "- タオイストの全スキルレベル ▲1\n - タオイストの1ランクスキルに覚醒効果を適用\n \nヴィジラントチャーム\n * フレイムラディエーション： 打撃回数が2倍増加\n * クリーピングデス：範囲拡大、打撃数が2倍\n * ディバインパニッシュメント： [ディバインパニッシュメント：範囲拡大]が常時適用、キャスティングに比例してダメージ最大を常時適用、打撃数が2倍になる\n - ヴィジラントチャームの効果が発動すると、発動したスキルのクールタイムの分だけスキルの覚醒効果を維持\n \n覚醒効果を維持している間、他のスキルの覚醒効果は発動しない",
+    "ko": "- 도사 모든 스킬 레벨 ▲1\n  - 도사 1랭크 스킬에 각성부 효과 적용\n \n각성부\n   * 멸화부 : 타격 수 2배로 적용\n   * 파사부 : 범위 증가, 타격 수 2배로 적용\n   * 천형부 : 대풍참 상시 발동, 캐스팅 비례 대미지 최대로 상시 적용, 타수 2배로 적용\n  - 각성부 효과 발동 시 해당 스킬의 재사용 대기 시간만큼 각성 효과 유지\n \n각성 효과가 유지 되는동안 다른 스킬의 각성 효과는 발동 되지 않음"
    },
    "levelUps": {
     "21811": 1,
@@ -837,14 +2781,60 @@
     "21806": 1,
     "21808": 1,
     "21809": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 246,
+      "ALLSTAT": 0,
+      "CRTHR": 490
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 270,
+      "ALLSTAT": 16,
+      "CRTHR": 545
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 295,
+      "ALLSTAT": 32,
+      "CRTHR": 600
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "ArousalCharm_Lv4",
+     "stats": {
+      "INT": 295,
+      "ALLSTAT": 32,
+      "CRTHR": 600
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129_4",
    "jobId": 2022,
    "key": "LewaAdvent",
    "name": {
-    "ja": "バイボラスタッフ - アドベント・ロア",
+    "ja": "バイボラ秘伝 - アドベント・ロア",
     "ko": "바이보라 비전 - 르와 강림"
    },
    "weapon": "Staff",
@@ -854,24 +2844,120 @@
    },
    "levelUps": {
     "21708": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 140,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "Magic_Dark_Atk": 992
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 154,
+      "ALLSTAT": 16,
+      "CRTHR": 542,
+      "Magic_Dark_Atk": 1091
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 169,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "Magic_Dark_Atk": 1200
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "LewaAdvent_Lv4",
+     "stats": {
+      "INT": 169,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "Magic_Dark_Atk": 1200
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129",
    "jobId": 2023,
    "key": "StoneSlinger",
    "name": {
-    "ja": "[Lv2]バイボラスタッフ - 投石器",
+    "ja": "バイボラ秘伝 - 投石器",
     "ko": "바이보라 비전 - 무릿매"
    },
    "weapon": "Staff",
    "desc": {
-    "ja": "- ストーンシャワースキルレベル▲2\n \n投石器\n - サンドブラストがクリティカル的中すると現在レベルのストーンシャワーを使用\n - クリティカルでない場合にはサンドブラスト的中時に15%の確率でストーンシャワーを使用",
-    "ko": "- 스톤 샤워 스킬 레벨 ▲2\n \n무릿매\n - 샌드 블래스트 치명타 적중 시 현재 레벨의 스톤 샤워 시전\n - 치명타가 아닐 때, 샌드 블래스트 적중 시 15% 확률로 스톤 샤워 시전"
+    "ja": "- ストーンシャワースキルレベル▲2\n \n投石器\n - サンドブラスト命中時、50%の確率でストーンシャワー(現在のレベル)を発動",
+    "ko": "- 스톤 샤워 스킬 레벨 ▲2\n \n무릿매\n - 샌드 블래스트 적중 시 50% 확률로 현재 레벨의 스톤 샤워 시전"
    },
    "levelUps": {
     "21903": 2
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 134,
+      "CRTHR": 458,
+      "Magic_Earth_Atk": 894
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 147,
+      "CRTHR": 503,
+      "Magic_Earth_Atk": 983
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 161,
+      "CRTHR": 553,
+      "Magic_Earth_Atk": 1081
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "StoneSlinger_Lv4",
+     "stats": {
+      "INT": 161,
+      "CRTHR": 553,
+      "Magic_Earth_Atk": 1081
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129_9",
@@ -883,8 +2969,8 @@
    },
    "weapon": "Staff",
    "desc": {
-    "ja": "- ケラウノスのスキルレベル ▲1\n - ライトニングスピアの[電流]デバフ消去効果を削除\n \nエレクトリックフロー\n - 現在ターゲット中の敵を中心に5人(体)に、ライトニングスピアを追加発射\n - 追加発射分のライトニングスピアは単体のみを攻撃",
-    "ko": "- 케라우노스 스킬 레벨 ▲1\n  - 라이트닝 스피어 [전류] 디버프 제거 효과 삭제\n \n일렉트릭 플로우\n  - 현재 타겟 중인 적 중심으로 5명에게 추가 라이트닝 스피어 발사\n  - 추가로 발사되는 라이트닝 스피어는 하나의 대상만 공격"
+    "ja": "- ケラウノスの全スキルレベル ▲1\n - ライトニングスピアの[電流]デバフ消去効果を削除\n \nエレクトリックフロー\n - 現在ターゲット中の敵を中心に5人(体)に、ライトニングスピアを追加発射\n - 追加発射分のライトニングスピアは単体のみを攻撃",
+    "ko": "- 케라우노스 모든 스킬 레벨 ▲1\n  - 라이트닝 스피어 [전류] 디버프 제거 효과 삭제\n \n일렉트릭 플로우\n  - 현재 타겟 중인 적 중심으로 5명에게 추가 라이트닝 스피어 발사\n  - 추가로 발사되는 라이트닝 스피어는 하나의 대상만 공격"
    },
    "levelUps": {
     "22002": 1,
@@ -894,7 +2980,57 @@
     "22006": 1,
     "22007": 1,
     "22008": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 146,
+      "ALLSTAT": 0,
+      "CRTHR": 495,
+      "Magic_Lightning_Atk": 1059
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 160,
+      "ALLSTAT": 16,
+      "CRTHR": 545,
+      "Magic_Lightning_Atk": 1165
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 176,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "Magic_Lightning_Atk": 1271
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "ElectricFlow_Lv4",
+     "stats": {
+      "INT": 176,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "Magic_Lightning_Atk": 1271
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_129_12",
@@ -917,7 +3053,61 @@
     "22014": 1,
     "22015": 1,
     "22012": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 490,
+      "CRTMATK": 1280,
+      "Magic_Melee_Atk": 986
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 159,
+      "ALLSTAT": 16,
+      "CRTHR": 525,
+      "CRTMATK": 1369,
+      "Magic_Melee_Atk": 1084
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 170,
+      "ALLSTAT": 32,
+      "CRTHR": 560,
+      "CRTMATK": 1458,
+      "Magic_Melee_Atk": 1192
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Dream_Lv4",
+     "stats": {
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "CRTMATK": 1548,
+      "Magic_Melee_Atk": 1192
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_127_1",
@@ -932,7 +3122,57 @@
     "ja": "- 知能 ▲250\n- クリティカル発生 ▲1,200\n- 命中 ▲1,200\n- 魔法クリティカル攻撃力 ▲3,000\n\nプロトコル：T8CY\n※ [入力・ピュリフィケーション]スキル使用時、地面が再び爆発して最終ダメージ50%分の追加ダメージを与えます。",
     "ko": ""
    },
-   "levelUps": {}
+   "levelUps": {},
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 250,
+      "ADD_HR": 1200,
+      "CRTHR": 1200,
+      "CRTMATK": 3000
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 275,
+      "ADD_HR": 1320,
+      "CRTHR": 1320,
+      "CRTMATK": 3300
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 330,
+      "ADD_HR": 1584,
+      "CRTHR": 1584,
+      "CRTMATK": 3960
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "ParticleAccel_Lv4",
+     "stats": {
+      "INT": 396,
+      "ADD_HR": 1900,
+      "CRTHR": 1900,
+      "CRTMATK": 4752
+     }
+    }
+   ]
   },
   {
    "item": "TSW04_128_1",
@@ -954,7 +3194,65 @@
     "22204": 1,
     "22205": 1,
     "22206": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "CRTATK": 1280,
+      "CRTMATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "CRTATK": 1408,
+      "CRTMATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "CRTATK": 1548,
+      "CRTMATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Bonemancer_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "CRTATK": 1548,
+      "CRTMATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_130_1",
@@ -976,7 +3274,57 @@
     "22304": 1,
     "22305": 1,
     "22306": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "AetherBlader_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_131_1",
@@ -999,7 +3347,57 @@
     "22405": 1,
     "22406": 1,
     "22407": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Hermit_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_133_1",
@@ -1022,7 +3420,57 @@
     "22505": 1,
     "22506": 1,
     "22507": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Kneller_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_136_1",
@@ -1044,7 +3492,57 @@
     "22604": 1,
     "22605": 1,
     "22606": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "INT": 149,
+      "MNA": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "INT": 164,
+      "MNA": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "INT": 180,
+      "MNA": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Incendiar_Lv4",
+     "stats": {
+      "INT": 180,
+      "MNA": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_137_1",
@@ -1066,7 +3564,57 @@
     "22704": 1,
     "22705": 1,
     "22706": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Shardbringer_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TBW04_126_6",
@@ -1090,14 +3638,64 @@
     "30412": 1,
     "30409": 1,
     "30404": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 490,
+      "CRTATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 163,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "CRTATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "CRTATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Fancier_Lv4",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "CRTATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "BOW04_126_1",
    "jobId": 3003,
    "key": "ClusterShot",
    "name": {
-    "ja": "バイボラクロスボウ - クラスターボム",
+    "ja": "バイボラ秘伝 - クラスターボム",
     "ko": "바이보라 비전 - 집속탄"
    },
    "weapon": "Bow",
@@ -1113,7 +3711,57 @@
     "30207": 1,
     "30206": 1,
     "30209": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 495,
+      "CRTATK": 1238
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 544,
+      "CRTATK": 1361
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 598,
+      "CRTATK": 1497
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "ClusterShot_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 598,
+      "CRTATK": 1497
+     }
+    }
+   ]
   },
   {
    "item": "TBW04_126_5",
@@ -1135,7 +3783,57 @@
     "30103": 1,
     "30111": 1,
     "30112": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 490,
+      "CRTATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 163,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "CRTATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "CRTATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Tempest_Lv4",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "CRTATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "BOW04_126_2",
@@ -1158,7 +3856,57 @@
     "30306": 1,
     "30311": 1,
     "30308": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 495,
+      "CRTATK": 1238
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 544,
+      "CRTATK": 1361
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 598,
+      "CRTATK": 1497
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Annihilation_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 598,
+      "CRTATK": 1497
+     }
+    }
+   ]
   },
   {
    "item": "TBW04_126_3",
@@ -1176,14 +3924,64 @@
    "levelUps": {
     "30504": 3,
     "30506": 2
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 140,
+      "ALLSTAT": 0,
+      "ADD_MIDDLESIZE": 1232,
+      "Add_Damage_Atk": 1232
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 154,
+      "ALLSTAT": 16,
+      "ADD_MIDDLESIZE": 1355,
+      "Add_Damage_Atk": 1355
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 169,
+      "ALLSTAT": 32,
+      "ADD_MIDDLESIZE": 1490,
+      "Add_Damage_Atk": 1490
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "AwfulPoison_Lv4",
+     "stats": {
+      "STR": 169,
+      "ALLSTAT": 32,
+      "ADD_MIDDLESIZE": 1490,
+      "Add_Damage_Atk": 1490
+     }
+    }
+   ]
   },
   {
    "item": "TBW04_126",
    "jobId": 3011,
    "key": "ReinforceString",
    "name": {
-    "ja": "[Lv2]バイボラボウ - 弓弦強化",
+    "ja": "バイボラ秘伝 - 弓弦強化",
     "ko": "바이보라 비전 - 시위 강화"
    },
    "weapon": "Bow",
@@ -1198,7 +3996,49 @@
     "30804": 1,
     "30806": 1,
     "30809": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 145,
+      "CRTHR": 486
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 159,
+      "CRTHR": 534
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 174,
+      "CRTHR": 587
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "ReinforceString_Lv4",
+     "stats": {
+      "STR": 174,
+      "CRTHR": 587
+     }
+    }
+   ]
   },
   {
    "item": "TBW04_126_2",
@@ -1210,20 +4050,70 @@
    },
    "weapon": "Bow",
    "desc": {
-    "ja": "- フェーザントスキルレベル▲2\n - ソニックストライクスキルレベル ▲1\n \nホークハンティング\n - フェーザント使用時、鷹5羽が飛んできて該当地点を攻撃\n - 5秒間の間、鷹1羽ごとに2回攻撃\n(スキル係数、現在レバルのフェーザントの20%、最大10連打)\n -",
-    "ko": "- 멍텅구 스킬 레벨 ▲2\n  - 음속타 스킬 레벨 ▲1\n \n매 사냥\n - 멍텅구 사용 시 매 5마리가 날아와 해당 지점을 공격\n - 5초동안 매 한 마리당 총 2회 공격\n(스킬 계수, 현재 레벨의 멍텅구의 20%, 최대 10연타)\n -"
+    "ja": "- フェーザントスキルレベル▲2\n - ソニックストライクスキルレベル ▲1\n \nホークハンティング\n - フェーザント使用時、鷹5羽が飛んできて該当地点を攻撃\n - 5秒間の間、鷹1羽ごとに2回攻撃\n(スキル係数、現在のレベルの、フェーザントによる打撃1回あたりの10%、最大10連打)\n -",
+    "ko": "- 멍텅구 스킬 레벨 ▲2\n  - 음속타 스킬 레벨 ▲1\n \n매 사냥\n - 멍텅구 사용 시 매 5마리가 날아와 해당 지점을 공격\n - 5초동안 매 한 마리당 총 2회 공격\n(스킬 계수, 현재 레벨의 멍텅구 1회 타격당 스킬 계수의 10%, 최대 10연타)\n -"
    },
    "levelUps": {
     "31005": 2,
     "31008": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 140,
+      "ALLSTAT": 0,
+      "ADD_KLAIDA": 986,
+      "ADD_WIDLING": 986
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 154,
+      "ALLSTAT": 16,
+      "ADD_KLAIDA": 1084,
+      "ADD_WIDLING": 1084
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 169,
+      "ALLSTAT": 32,
+      "ADD_KLAIDA": 1192,
+      "ADD_WIDLING": 1192
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Hawking_Lv4",
+     "stats": {
+      "STR": 169,
+      "ALLSTAT": 32,
+      "ADD_KLAIDA": 1192,
+      "ADD_WIDLING": 1192
+     }
+    }
+   ]
   },
   {
    "item": "CAN04_118",
    "jobId": 3015,
    "key": "CamnonHold",
    "name": {
-    "ja": "[Lv2]バイボラ秘伝 - エアバースト",
+    "ja": "バイボラ秘伝 - エアバースト",
     "ko": "바이보라 비전 - 에어버스트"
    },
    "weapon": "Gun",
@@ -1238,31 +4128,124 @@
     "31105": 1,
     "31107": 1,
     "31108": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 148,
+      "ADD_MINATK": 1780
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 162,
+      "ADD_MINATK": 1958
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 178,
+      "ADD_MINATK": 2154
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "CamnonHold_Lv4",
+     "stats": {
+      "STR": 178,
+      "ADD_MINATK": 2154
+     }
+    }
+   ]
   },
   {
    "item": "MUS04_118",
    "jobId": 3016,
    "key": "PiercingShell",
    "name": {
-    "ja": "[Lv2]バイボラマスキャット - 徹甲弾",
+    "ja": "バイボラ秘伝 - 徹甲弾",
     "ko": "바이보라 비전 - 철갑탄"
    },
    "weapon": "Gun",
    "desc": {
-    "ja": "- ヘッドショットスキルレベル▲3\n - スナイプスキルレベル▲1\n \n徹甲弾\n - 自身のブロック貫通と相手のブロックの差分、スナイプのダメージアップ\n(10差分毎に1%アップ、最大 100% / PVE時に40%追加、最大140%)",
-    "ko": "- 헤드샷 스킬 레벨 ▲3\n  - 스나이프 스킬 레벨 ▲1\n \n철갑탄\n - 자신의 블록 관통과 상대의 블록 차이만큼 스나이프의 대미지 증가\n(10차이 당 1% 증가, 최대 100% / PVE 시 40% 추가, 최대 140%)"
+    "ja": "- マスケティアの全スキルレベル▲1\n \n徹甲弾\n - 全マスケティア攻撃スキルと通常攻撃を行うと、相手の防御力を15%無視\n(相手がキャラクターだった場合、防御力無視が20%適用)",
+    "ko": "- 머스킷티어 모든 스킬 레벨 ▲1\n \n철갑탄\n - 모든 머스킷티어 공격 스킬 및 일반 공격 시 상대 방어력을 15% 무시\n(상대가 캐릭터일 경우 방어력 무시 20%로 적용)"
    },
    "levelUps": {
+    "31201": 1,
+    "31204": 1,
+    "31210": 1,
+    "31211": 1,
+    "31207": 1,
     "31203": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 134,
+      "BLK_BREAK": 496,
+      "ADD_MAXATK": 1025
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 147,
+      "BLK_BREAK": 545,
+      "ADD_MAXATK": 1128
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 161,
+      "BLK_BREAK": 600,
+      "ADD_MAXATK": 1240
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "PiercingShell_Lv4",
+     "stats": {
+      "STR": 161,
+      "BLK_BREAK": 600,
+      "ADD_MAXATK": 1240
+     }
+    }
+   ]
   },
   {
    "item": "TBW04_126_1",
    "jobId": 3017,
    "key": "OrbitalArrow",
    "name": {
-    "ja": "バイボラボウ - 軌道矢",
+    "ja": "バイボラ秘伝 - 軌道矢",
     "ko": "바이보라 비전 - 궤도화살"
    },
    "weapon": "Bow",
@@ -1277,31 +4260,127 @@
     "31408": 1,
     "31405": 1,
     "31409": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 145,
+      "ALLSTAT": 0,
+      "CRTATK": 1285
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 159,
+      "ALLSTAT": 16,
+      "CRTATK": 1413
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 174,
+      "ALLSTAT": 32,
+      "CRTATK": 1554
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "OrbitalArrow_Lv4",
+     "stats": {
+      "STR": 174,
+      "ALLSTAT": 32,
+      "CRTATK": 1554
+     }
+    }
+   ]
   },
   {
    "item": "CAN04_118_1",
    "jobId": 3101,
    "key": "CenterFire",
    "name": {
-    "ja": "バイボラキャノン - センター・ファイヤー",
+    "ja": "バイボラ秘伝 - センター・ファイヤー",
     "ko": "바이보라 비전 - 센터파이어"
    },
    "weapon": "Gun",
    "desc": {
-    "ja": "- ボンバーメントスキルレベル▲ 3\n \nセンター・ファイヤー\n - 対象にボンバーメントスキルを使用すると1回追加で発射\n(スキル係数は現在レベルボンバーメントスキルの30%、連打数5)\n - 追加で使用されたボンバーメントはメインターゲット一人のみを打撃",
-    "ko": "- 익스플로전 스킬 레벨 ▲ 3\n \n센터파이어\n - 대상에게 익스플로전 시전 시 1회 추가 발사\n(스킬 계수 현재 레벨 익스플로전의 30%, 연타 수 5)\n - 추가 시전 된 익스플로전은 주 대상 1명에게만 피해"
+    "ja": "- ボンバーメントスキルレベル▲ 3\n \nセンター・ファイヤー\n - 対象にボンバーメントスキルを使用すると1回追加で発射\n(スキル係数は現在のレベルのボンバーメントの60%、連打数5)\n - 追加で使用されたボンバーメントはメインターゲット一人のみを打撃",
+    "ko": "- 익스플로전 스킬 레벨 ▲ 3\n \n센터파이어\n - 대상에게 익스플로전 시전 시 1회 추가 발사\n(스킬 계수 현재 레벨 익스플로전의 60%, 연타 수 5)\n - 추가 시전 된 익스플로전은 주 대상 1명에게만 피해"
    },
    "levelUps": {
     "31802": 3
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 148,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "CRTATK": 1238
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 162,
+      "ALLSTAT": 16,
+      "CRTHR": 542,
+      "CRTATK": 1361
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 178,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "CRTATK": 1497
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "CenterFire_Lv4",
+     "stats": {
+      "STR": 178,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "CRTATK": 1497
+     }
+    }
+   ]
   },
   {
    "item": "MUS04_118_1",
    "jobId": 3102,
    "key": "TripleStepsSingleShot",
    "name": {
-    "ja": "バイボラマスケット - 三歩放砲",
+    "ja": "バイボラ秘伝 - 三歩放砲",
     "ko": "바이보라 비전 - 삼보방포"
    },
    "weapon": "Gun",
@@ -1316,37 +4395,129 @@
     "31904": 1,
     "31905": 1,
     "31906": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 146,
+      "ALLSTAT": 0,
+      "CRTHR": 493
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 160,
+      "ALLSTAT": 16,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 176,
+      "ALLSTAT": 32,
+      "CRTHR": 596
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "TripleStepsSingleShot_Lv4",
+     "stats": {
+      "STR": 176,
+      "ALLSTAT": 32,
+      "CRTHR": 596
+     }
+    }
+   ]
   },
   {
    "item": "BOW04_126",
    "jobId": 3103,
    "key": "DoubleMarking",
    "name": {
-    "ja": "[Lv2]バイボラクロスボウ - 二重標的",
+    "ja": "バイボラ秘伝 - 二重標的",
     "ko": "바이보라 비전 - 이중표식"
    },
    "weapon": "Bow",
    "desc": {
-    "ja": "- ガイデッドショットのスキルレベル▲ 2\n \n二重印\n - ガイデッドショット命中時、5秒間デバフ付与\n - デバフ対象にアバリスタースキル攻撃時、20%の確率で誘導矢を2発発射",
-    "ko": "- 가이디드 샷 스킬 레벨 ▲ 2\n \n이중표식\n - 가이디드 샷 명중시 5초간 디버프 부여\n - 디버프 대상에게 아발리스터 스킬 공격시 20% 확률로 유도 화살 2발 발사"
+    "ja": "- ガイデッドショットスキルレベル▲ 3\n \n二重標的\n - ガイデッドショット命中時に5秒間デバフ付与\n - デバフ対象にアバリスタースキル攻撃時、20%の 確率で誘導矢を2発発射",
+    "ko": "- 가이디드 샷 스킬 레벨 ▲ 3\n \n이중표식\n - 가이디드 샷 명중시 5초간 디버프 부여\n - 디버프 대상에게 아발리스터 스킬 공격시 20% 확률로 유도 화살 2발 발사"
    },
    "levelUps": {
-    "32002": 2
-   }
+    "32002": 3
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 135,
+      "CRTHR": 480,
+      "ADD_MIDDLESIZE": 990
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "CRTHR": 528,
+      "ADD_MIDDLESIZE": 1089
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "CRTHR": 580,
+      "ADD_MIDDLESIZE": 1198
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "DoubleMarking_Lv4",
+     "stats": {
+      "STR": 164,
+      "CRTHR": 580,
+      "ADD_MIDDLESIZE": 1198
+     }
+    }
+   ]
   },
   {
    "item": "MUS04_118_2",
    "jobId": 3104,
    "key": "LeverAction",
    "name": {
-    "ja": "バイボラマスケット - レバー・アクション",
+    "ja": "バイボラ秘伝 - レバー・アクション",
     "ko": "바이보라 비전 - 레버액션"
    },
    "weapon": "Gun",
    "desc": {
-    "ja": "- アークィバスの全てのスキルレベル▲1\n \nレバー・アクション\n - プリシジョンファイヤーの発射速度2倍\n - [クリーンヒット]バフ最大重複数を10に変更",
-    "ko": "- 아퀴버지어 모든 스킬 레벨▲1\n \n레버액션\n - 프리시전 파이어 발사 속도 2배\n - [클린 힛] 버프 최대 중첩 수 10 으로 변경"
+    "ja": "アークィバスの全スキルレベル{▲1\n \nレバー・アクション\n - プリシジョンファイヤーの発射速度2倍",
+    "ko": "- 아퀴버지어 모든 스킬 레벨▲1\n \n레버액션\n - 프리시전 파이어 발사 속도 2배"
    },
    "levelUps": {
     "32101": 1,
@@ -1355,7 +4526,57 @@
     "32105": 1,
     "32106": 1,
     "32107": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 146,
+      "ALLSTAT": 0,
+      "ADD_HR": 496,
+      "CRTHR": 493
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 160,
+      "ALLSTAT": 16,
+      "ADD_HR": 545,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 176,
+      "ALLSTAT": 32,
+      "ADD_HR": 599,
+      "CRTHR": 596
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "LeverAction_Lv4",
+     "stats": {
+      "STR": 176,
+      "ALLSTAT": 32,
+      "ADD_HR": 599,
+      "CRTHR": 596
+     }
+    }
+   ]
   },
   {
    "item": "TBW04_126_4",
@@ -1377,7 +4598,57 @@
     "32204": 1,
     "32205": 1,
     "32206": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 144,
+      "ALLSTAT": 0,
+      "ADD_HR": 496,
+      "CRTHR": 490
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 158,
+      "ALLSTAT": 16,
+      "ADD_HR": 545,
+      "CRTHR": 539
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 174,
+      "ALLSTAT": 32,
+      "ADD_HR": 599,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "AncientArchery_Lv4",
+     "stats": {
+      "STR": 174,
+      "ALLSTAT": 32,
+      "ADD_HR": 599,
+      "CRTHR": 592
+     }
+    }
+   ]
   },
   {
    "item": "TBW04_126_7",
@@ -1389,8 +4660,8 @@
    },
    "weapon": "Bow",
    "desc": {
-    "ja": "- エンジニアの全スキルレベル ▲1\n \n最大出力\n *全タレットの持続時間20%増加\n *キングメカのクールタイム10秒短縮",
-    "ko": "- 엔지니어 모든 스킬 레벨 ▲1\n \n최대 출력\n  *모든 터렛의 지속시간 20% 증가\n  *킹메카의 쿨타임 10초 감소"
+    "ja": "- エンジニアの全スキルレベル ▲1\n \n最大出力\n *全タレットの持続時間▲20%\n *キングメカのクールタイム10秒短縮",
+    "ko": "- 엔지니어 모든 스킬 레벨 ▲1\n \n최대 출력\n  *모든 터렛의 지속시간 ▲20%\n  *킹메카의 쿨타임 10초 감소"
    },
    "levelUps": {
     "32208": 1,
@@ -1401,7 +4672,61 @@
     "32214": 1,
     "32215": 1,
     "32213": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "ADD_HR": 490,
+      "CRTHR": 493,
+      "CRTATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 165,
+      "ALLSTAT": 16,
+      "ADD_HR": 541,
+      "CRTHR": 542,
+      "CRTATK": 1414
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "ADD_HR": 592,
+      "CRTHR": 593,
+      "CRTATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "MaxPower_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "ADD_HR": 592,
+      "CRTHR": 593,
+      "CRTATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "TBW04_126_8",
@@ -1423,7 +4748,57 @@
     "32221": 1,
     "32222": 1,
     "32223": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 144,
+      "ALLSTAT": 0,
+      "ADD_HR": 496,
+      "CRTHR": 490
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 158,
+      "ALLSTAT": 16,
+      "ADD_HR": 545,
+      "CRTHR": 539
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 174,
+      "ALLSTAT": 32,
+      "ADD_HR": 599,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Recharge_Lv4",
+     "stats": {
+      "STR": 174,
+      "ALLSTAT": 32,
+      "ADD_HR": 599,
+      "CRTHR": 592
+     }
+    }
+   ]
   },
   {
    "item": "MUS04_127_1",
@@ -1438,7 +4813,57 @@
     "ja": "- 力 ▲250\n- クリティカル発生 ▲1,200\n- 物理クリティカル攻撃力 ▲3,000\n- 命中 ▲1,200\n\nプロトコル：T8CY\n※ [入力・ピュリフィケーション]スキル使用時、地面が再び爆発して最終ダメージ50%分の追加ダメージを与えます。",
     "ko": ""
    },
-   "levelUps": {}
+   "levelUps": {},
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 250,
+      "ADD_HR": 1200,
+      "CRTHR": 1200,
+      "CRTATK": 3000
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 275,
+      "ADD_HR": 1320,
+      "CRTHR": 1320,
+      "CRTATK": 3300
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 330,
+      "ADD_HR": 1584,
+      "CRTHR": 1584,
+      "CRTATK": 3960
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "ParticleAccel_Lv4",
+     "stats": {
+      "STR": 396,
+      "ADD_HR": 1900,
+      "CRTHR": 1900,
+      "CRTATK": 4752
+     }
+    }
+   ]
   },
   {
    "item": "TSW04_128_1",
@@ -1460,7 +4885,65 @@
     "32235": 1,
     "32236": 1,
     "32237": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "CRTATK": 1280,
+      "CRTMATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "CRTATK": 1408,
+      "CRTMATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "CRTATK": 1548,
+      "CRTMATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Bonemancer_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "CRTATK": 1548,
+      "CRTMATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "BOW04_127_1",
@@ -1472,8 +4955,8 @@
    },
    "weapon": "",
    "desc": {
-    "ja": "- ブリッツハンターの全スキルレベル▲1\n \n{@st66d} - ボルトストライクの最終ダメージ▲30%\n{@st66d} - ボルトチェインの最終ダメージ▲30%\n{@st66d} - テンペストショットの最終ダメージ▲30%",
-    "ko": "- 블리츠 헌터 모든 스킬 레벨 ▲1\n \n{@st66d} - 볼트 스트라이크 최종 대미지 ▲30%\n{@st66d} - 볼트 체인 최종 대미지 ▲30%\n{@st66d} - 템페스트 샷 최종 대미지 ▲30%"
+    "ja": "- ブリッツハンターの全スキルレベル▲1\n \n{@st66d} - ボルトストライクの最終ダメージ▲10%\n{@st66d} - ボルトチェインの最終ダメージ▲10%\n{@st66d} - テンペストショットの最終ダメージ▲10%",
+    "ko": "- 블리츠 헌터 모든 스킬 레벨 ▲1\n \n{@st66d} - 볼트 스트라이크 최종 대미지 ▲10%\n{@st66d} - 볼트 체인 최종 대미지 ▲10%\n{@st66d} - 템페스트 샷 최종 대미지 ▲10%"
    },
    "levelUps": {
     "32238": 1,
@@ -1483,7 +4966,57 @@
     "32242": 1,
     "32243": 1,
     "32244": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "DEX": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "DEX": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "BlitzHunter_Lv4",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_131_1",
@@ -1506,7 +5039,57 @@
     "32250": 1,
     "32251": 1,
     "32252": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Hermit_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_132_1",
@@ -1530,7 +5113,53 @@
     "32256": 1,
     "32257": 1,
     "32258": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Grimmark_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_135_1",
@@ -1553,7 +5182,57 @@
     "32265": 1,
     "32266": 1,
     "32267": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "DEX": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "DEX": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Commodore_Lv4",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_138_1",
@@ -1575,37 +5254,133 @@
     "32271": 1,
     "32272": 1,
     "32273": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "DEX": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "DEX": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Sagitta_Lv4",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "MAC04_129",
    "jobId": 4002,
    "key": "MassHealFreeze",
    "name": {
-    "ja": "[Lv2]バイボラメイス - マスヒール：冷却",
+    "ja": "バイボラ秘伝 - マスヒール：冷却",
     "ko": "바이보라 비전 - 매스 힐: 냉각"
    },
    "weapon": "Mace",
    "desc": {
-    "ja": "- マスヒールのスキルレベル▲1 \n \nマスヒール：冷却\n-  マスヒール使用時、[ヒール：過負荷]重複に応じて\nマスヒールのクールタイムダウン\n - 過負荷1重複につき1秒ダウン\n - マスヒール使用時、[ヒール：過負荷]重複すべて解除",
-    "ko": "- 매스 힐 스킬 레벨▲1 \n \n매스 힐: 냉각\n-  매스 힐 사용시 [힐: 과부화] 중첩에 따라\n매스 힐 재사용 대기시간 감소\n - 과부화 중첩당 1초 감소\n - 매스 힐 사용 시 [힐: 과부화] 중첩 모두 제거"
+    "ja": "－マスヒールスキルレベル▲1 \n \nマスヒール：冷却\n－マスヒール使用時[ヒール：過負荷]の重複数によって\nマスヒールのクールタイムがダウン\n－過負荷重複数ごとに1秒減少\n－マスヒール使用時[ヒール:過負荷]重複数すべて除去",
+    "ko": "- 매스 힐 스킬 레벨▲1 \n \n매스 힐: 냉각\n-  매스 힐 사용시 [힐: 과부하] 중첩에 따라\n매스 힐 재사용 대기시간 감소\n - 과부하 중첩당 1초 감소\n - 매스 힐 사용 시 [힐: 과부하] 중첩 모두 제거"
    },
    "levelUps": {
     "40209": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "MNA": 148,
+      "MSP": 990,
+      "RSP": 490
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "MNA": 163,
+      "MSP": 1089,
+      "RSP": 539
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "MNA": 179,
+      "MSP": 1198,
+      "RSP": 593
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "MassHealFreeze_Lv4",
+     "stats": {
+      "MNA": 179,
+      "MSP": 1198,
+      "RSP": 593
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_118_6",
    "jobId": 4003,
    "key": "DivineShock",
    "name": {
-    "ja": "バイボラグレートメイス - 聖雷",
+    "ja": "バイボラ秘伝 - 聖雷",
     "ko": "바이보라 비전 - 성뢰"
    },
    "weapon": "Mace",
    "desc": {
-    "ja": "- クリヴィスの全てのスキルレベル▲1\n - 装着時[光輝]デバフの最大重複が60に変更\n \n聖雷\n - ザイバスが命中すると、対象に[光輝]デバフ5重複を付与\n - [光輝]デバフ重複が51以上の敵を攻撃時すると効果発動\n - スキル係数の現在レベルのパイエティの150%\n - 連打数4\n - 効果発動時、対象のデバフ重複50を消費",
-    "ko": "- 크리비 모든 스킬 레벨 ▲1\n  - 장착 시 [광휘] 디버프의 최대 중첩이 60으로 변경 \n \n성뢰\n - 자이바스 명중 시 대상에게 [광휘] 디버프 5중첩 부여\n - [광휘] 디버프 중첩이 51이상인 적을 공격 시 효과 발동\n - 스킬 계수 현재 레벨의 파이어티의 150%\n - 연타 수 4\n - 효과 발동 시 대상의 디버프 중첩 50 소모"
+    "ja": "- クリヴィスの全てのスキルレベル▲1\n - 装着時[光輝]デバフの最大重複が60に変更\n \n聖雷\n - ザイバスが命中すると、対象に[光輝]デバフ5重複を付与\n - [光輝]デバフ重複が51以上の敵を攻撃時すると効果発動\n - スキル係数は現在のレベルの、パイエティに打撃1回あたりの150%\n - 連打数4\n - 効果発動時、対象のデバフ重複50を消費",
+    "ko": "- 크리비 모든 스킬 레벨 ▲1\n  - 장착 시 [광휘] 디버프의 최대 중첩이 60으로 변경 \n \n성뢰\n - 자이바스 명중 시 대상에게 [광휘] 디버프 5중첩 부여\n - [광휘] 디버프 중첩이 51이상인 적을 공격 시 효과 발동\n - 스킬 계수 현재 레벨의 파이어티 1회 타격당 스킬계수의 150%\n - 연타 수 4\n - 효과 발동 시 대상의 디버프 중첩 50 소모"
    },
    "levelUps": {
     "40101": 1,
@@ -1614,7 +5389,61 @@
     "40103": 1,
     "40105": 1,
     "40106": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 140,
+      "INT": 140,
+      "ALLSTAT": 0,
+      "ADD_HR": 480,
+      "CRTHR": 490
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 154,
+      "INT": 154,
+      "ALLSTAT": 16,
+      "ADD_HR": 528,
+      "CRTHR": 539
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 169,
+      "INT": 169,
+      "ALLSTAT": 32,
+      "ADD_HR": 580,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "DivineShock_Lv4",
+     "stats": {
+      "STR": 169,
+      "INT": 169,
+      "ALLSTAT": 32,
+      "ADD_HR": 580,
+      "CRTHR": 592
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_118_10",
@@ -1637,7 +5466,69 @@
     "40904": 1,
     "40911": 1,
     "40908": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 142,
+      "INT": 142,
+      "ALLSTAT": 0,
+      "CRTATK": 1238,
+      "CRTMATK": 1238,
+      "Magic_Holy_Atk": 986,
+      "Strike": 986
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 156,
+      "INT": 156,
+      "ALLSTAT": 16,
+      "CRTATK": 1361,
+      "CRTMATK": 1361,
+      "Magic_Holy_Atk": 1084,
+      "Strike": 1084
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 171,
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTATK": 1497,
+      "CRTMATK": 1497,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "SouloftheForest_Lv4",
+     "stats": {
+      "STR": 171,
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTATK": 1497,
+      "CRTMATK": 1497,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_118_4",
@@ -1652,7 +5543,65 @@
     "ja": "- 力 ▲143\n- 知能 ▲143\n- クリティカル発生 ▲496\n- 物理クリティカル攻撃力 ▲1,238\n- 魔法クリティカル攻撃力 ▲1,238\n\nアグニ\n- アニラを発動すると前方へ火炎を噴き出し、敵達に10秒間[アグニ：火炎]デバフを付与\n\n[アグニ：火炎]\n- 1秒ごとに、アニラで受けた合計ダメージの10%分の持続ダメージを負う\n- デバフ詠唱者から受けるダメージが20%アップ",
     "ko": ""
    },
-   "levelUps": {}
+   "levelUps": {},
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 143,
+      "INT": 143,
+      "ALLSTAT": 0,
+      "CRTHR": 496,
+      "CRTATK": 1238,
+      "CRTMATK": 1238
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 157,
+      "INT": 157,
+      "ALLSTAT": 16,
+      "CRTHR": 545,
+      "CRTATK": 1361,
+      "CRTMATK": 1361
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 172,
+      "INT": 172,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "CRTATK": 1497,
+      "CRTMATK": 1497
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Agni_Lv4",
+     "stats": {
+      "STR": 172,
+      "INT": 172,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "CRTATK": 1497,
+      "CRTMATK": 1497
+     }
+    }
+   ]
   },
   {
    "item": "MAC04_129_3",
@@ -1675,7 +5624,57 @@
     "40403": 1,
     "40406": 1,
     "40407": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "CON": 100,
+      "MNA": 149,
+      "ALLSTAT": 0,
+      "MSP": 990
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "CON": 110,
+      "MNA": 163,
+      "ALLSTAT": 16,
+      "MSP": 1089
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "CON": 121,
+      "MNA": 179,
+      "ALLSTAT": 32,
+      "MSP": 1197
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "MemoryLeap_Lv4",
+     "stats": {
+      "CON": 121,
+      "MNA": 179,
+      "ALLSTAT": 32,
+      "MSP": 1331
+     }
+    }
+   ]
   },
   {
    "item": "MAC04_129_4",
@@ -1696,20 +5695,70 @@
     "41013": 1,
     "41011": 1,
     "41012": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "MNA": 149,
+      "ALLSTAT": 0,
+      "MSP": 990,
+      "RSP": 490
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "MNA": 163,
+      "ALLSTAT": 16,
+      "MSP": 1089,
+      "RSP": 539
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "MNA": 179,
+      "ALLSTAT": 32,
+      "MSP": 1197,
+      "RSP": 593
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Aura_Lv4",
+     "stats": {
+      "MNA": 179,
+      "ALLSTAT": 32,
+      "MSP": 1331,
+      "RSP": 593
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_118_5",
    "jobId": 4009,
    "key": "ShakeFoot",
    "name": {
-    "ja": "バイボラグレートメイス - 震脚",
+    "ja": "バイボラ秘伝 - 震脚",
     "ko": "바이보라 비전 - 진각"
    },
    "weapon": "Mace",
    "desc": {
-    "ja": "- モンクの全てのスキルレベル▲1\n - 装着してから3秒後に[震脚]効果が発動\n \n震脚\n - モンクのスキルで攻撃すると、自分の周辺の範囲100にいる敵へ打属性の打撃\nクールタイム5秒\n - [金鐘罩：解放]バフ中はクールタイムが2秒短縮\n - スキル係数は、双鎖功(現在のレベル)の20%\n -対象数15、連打数2\n - 対象が単体だった場合、2倍のダメージを与える[震脚：極]が発動",
-    "ko": "- 몽크 모든 스킬 레벨 ▲1\n  - 장착 후 3초 후부터 [진각] 효과 발동\n \n진각\n - 몽크 스킬로 공격 시 자신 주변 100범위의 적에게 때리기 속성으로 타격\n - 재사용 대기시간 5초\n - [금종조 : 해방] 버프 중에는 재사용 대기시간 2초 감소\n - 스킬 계수, 현재 레벨의 쌍쇄공의 20%\n - 대상 수 15, 연타 수 2\n - 단일 대상일 경우 2배의 대미지를 입히는 [진각 : 극]이 시전 됨"
+    "ja": "- モンクの全てのスキルレベル▲1\n - 装着してから3秒後に[震脚]効果が発動\n \n震脚\n - モンクのスキルで攻撃すると、自分の周辺の範囲100にいる敵を攻撃\nクールタイム5秒\n - [金鐘罩]バフ中はクールタイムが2秒短縮\n - スキル係数：双鎖功の最大持続時間の係数の合計20%×2打\n - 対象数15\n - 対象が単体だった場合、2倍のダメージを与える[震脚：極]が発動\n \n震脚の効果は、持続ダメージを与えるデバフによって発動することはない",
+    "ko": "- 몽크 모든 스킬 레벨 ▲1\n  - 장착 후 3초 후부터 [진각] 효과 발동\n \n진각\n - 몽크 스킬로 공격 시 자신 주변 100범위의 적을 공격\n - 재사용 대기시간 5초\n - [금종조] 버프 중에는 재사용 대기시간 2초 감소\n - 스킬 계수: 쌍쇄공 최대 지속시간 계수 총합에 20% x 2타\n - 대상 수 15\n - 단일 대상일 경우 2배의 대미지를 입히는 [진각 : 극]이 시전 됨\n \n진각 효과는 지속 피해를 주는 디버프로 인해 발동되지 않음"
    },
    "levelUps": {
     "40701": 1,
@@ -1720,7 +5769,65 @@
     "40707": 1,
     "40706": 1,
     "40708": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 142,
+      "INT": 142,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "Magic_Holy_Atk": 986,
+      "Strike": 986
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 156,
+      "INT": 156,
+      "ALLSTAT": 16,
+      "CRTHR": 542,
+      "Magic_Holy_Atk": 1084,
+      "Strike": 1084
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 171,
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "ShakeFoot_Lv4",
+     "stats": {
+      "STR": 171,
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    }
+   ]
   },
   {
    "item": "MAC04_129_2",
@@ -1742,14 +5849,64 @@
     "40608": 1,
     "40609": 1,
     "40606": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "CON": 120,
+      "MNA": 145,
+      "ALLSTAT": 0,
+      "BLK": 485
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "CON": 132,
+      "MNA": 159,
+      "ALLSTAT": 16,
+      "BLK": 533
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "CON": 145,
+      "MNA": 174,
+      "ALLSTAT": 32,
+      "BLK": 586
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "ProtectionGrace_Lv4",
+     "stats": {
+      "CON": 145,
+      "MNA": 174,
+      "ALLSTAT": 32,
+      "BLK": 586
+     }
+    }
+   ]
   },
   {
    "item": "MAC04_129_1",
    "jobId": 4012,
    "key": "SacredArmor",
    "name": {
-    "ja": "バイボラメイス - 神聖武具",
+    "ja": "バイボラ秘伝 - 神聖武具",
     "ko": "바이보라 비전 - 신성무구"
    },
    "weapon": "Mace",
@@ -1757,14 +5914,72 @@
     "ja": "神聖武具\n - 追加ダメージは能力値100ごとにビナシオスキル係数の0.2%の分最終アップ(最大100%アップ)\n - ビナシオバフ中に基本攻撃範囲▲100%",
     "ko": "신성무구\n - 추가 대미지 능력치 100당 비나시오 스킬 계수 0.2% 최종 증가 (최대 100% 증가)\n - 비나시오 버프 중 기본 공격 범위▲100%"
    },
-   "levelUps": {}
+   "levelUps": {},
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 120,
+      "INT": 120,
+      "MNA": 120,
+      "DEX": 120,
+      "ALLSTAT": 0,
+      "Add_Damage_Atk": 1500
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 132,
+      "INT": 132,
+      "MNA": 132,
+      "DEX": 132,
+      "ALLSTAT": 16,
+      "Add_Damage_Atk": 1650
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 145,
+      "INT": 145,
+      "MNA": 145,
+      "DEX": 145,
+      "ALLSTAT": 32,
+      "Add_Damage_Atk": 1815
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "SacredArmor_Lv4",
+     "stats": {
+      "STR": 145,
+      "INT": 145,
+      "MNA": 145,
+      "DEX": 145,
+      "ALLSTAT": 32,
+      "Add_Damage_Atk": 1815
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_118_3",
    "jobId": 4014,
    "key": "Necrosis",
    "name": {
-    "ja": "バイボラグレートメイス - 壊死",
+    "ja": "バイボラ秘伝 - 壊死",
     "ko": "바이보라 비전 - 괴사"
    },
    "weapon": "Mace",
@@ -1774,7 +5989,65 @@
    },
    "levelUps": {
     "41102": 3
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 147,
+      "INT": 147,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "CRTATK": 1238,
+      "CRTMATK": 1238
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 161,
+      "INT": 161,
+      "ALLSTAT": 16,
+      "CRTHR": 542,
+      "CRTATK": 1361,
+      "CRTMATK": 1361
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 177,
+      "INT": 177,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "CRTATK": 1497,
+      "CRTMATK": 1497
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Necrosis_Lv4",
+     "stats": {
+      "STR": 177,
+      "INT": 177,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "CRTATK": 1497,
+      "CRTMATK": 1497
+     }
+    }
+   ]
   },
   {
    "item": "MAC04_129_5",
@@ -1796,14 +6069,64 @@
     "41212": 1,
     "41202": 1,
     "41211": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "MNA": 149,
+      "ALLSTAT": 0,
+      "MSP": 990,
+      "RSP": 490
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "MNA": 163,
+      "ALLSTAT": 16,
+      "MSP": 1089,
+      "RSP": 539
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "MNA": 179,
+      "ALLSTAT": 32,
+      "MSP": 1197,
+      "RSP": 593
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Ilgesys_Lv4",
+     "stats": {
+      "MNA": 179,
+      "ALLSTAT": 32,
+      "MSP": 1331,
+      "RSP": 593
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_118_1",
    "jobId": 4016,
    "key": "Outrage",
    "name": {
-    "ja": "バイボラグレートメイス－震怒",
+    "ja": "バイボラ秘伝 - 震怒",
     "ko": "바이보라 비전 - 진노"
    },
    "weapon": "Mace",
@@ -1813,7 +6136,61 @@
    },
    "levelUps": {
     "41407": 3
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 147,
+      "INT": 147,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "ADD_IRON": 992
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 161,
+      "INT": 161,
+      "ALLSTAT": 16,
+      "CRTHR": 542,
+      "ADD_IRON": 1091
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 177,
+      "INT": 177,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "ADD_IRON": 1200
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Outrage_Lv4",
+     "stats": {
+      "STR": 177,
+      "INT": 177,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "ADD_IRON": 1200
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_118_8",
@@ -1828,7 +6205,57 @@
     "ja": "絵馬\n - おみくじを発動時に[大吉：名誉]が出なかった場合、おみくじの持続時間分だけ[大吉：平和]を付与\n - [大吉：平和]：攻撃力▲2.5%\n - おみくじ発動時に[大吉：名誉]、[大吉：望み]でなかった場合おみくじのクールタイムをリセット\n \n[大吉：平和]は重複付与不可\nおみくじのクールタイムリセットは連続で適用されない",
     "ko": "에마\n - 오미쿠지 시전 시 [대길: 명예]가 나오지 않으면 오미쿠지 지속시간 만큼 [대길: 평화]를 부여\n - [대길: 평화] : 공격력 ▲2.5%\n - 오미쿠지 시전 시 [대길: 명예], [대길: 소망]이 아니라면 오미쿠지 재사용 대기시간 초기화\n \n[대길: 평화]는 중복해서 부여할 수 없음\n오미쿠지 재사용 대기시간 초기화는 연속으로 적용되지 않음"
    },
-   "levelUps": {}
+   "levelUps": {},
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 142,
+      "MNA": 142,
+      "ALLSTAT": 0,
+      "CRTMATK": 1238
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 156,
+      "MNA": 156,
+      "ALLSTAT": 16,
+      "CRTMATK": 1361
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "INT": 171,
+      "MNA": 171,
+      "ALLSTAT": 32,
+      "CRTMATK": 1497
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Ema_Lv4",
+     "stats": {
+      "INT": 171,
+      "MNA": 171,
+      "ALLSTAT": 32,
+      "CRTMATK": 1497
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_118_7",
@@ -1845,31 +6272,151 @@
    },
    "levelUps": {
     "41702": 3
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 142,
+      "INT": 142,
+      "ALLSTAT": 0,
+      "CRTATK": 1238,
+      "CRTMATK": 1238,
+      "Magic_Holy_Atk": 986,
+      "Strike": 986
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 156,
+      "INT": 156,
+      "ALLSTAT": 16,
+      "CRTATK": 1361,
+      "CRTMATK": 1361,
+      "Magic_Holy_Atk": 1084,
+      "Strike": 1084
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 171,
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTATK": 1497,
+      "CRTMATK": 1497,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "SelfImmolate_Lv4",
+     "stats": {
+      "STR": 171,
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTATK": 1497,
+      "CRTMATK": 1497,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_118_2",
    "jobId": 4020,
    "key": "Desition",
    "name": {
-    "ja": "バイボラグレートメイス - 終焉",
+    "ja": "バイボラ秘伝 - 終焉",
     "ko": "바이보라 비전 - 종언"
    },
    "weapon": "Mace",
    "desc": {
-    "ja": "- カタディカゾスキルレベル▲2\n \n終焉\n - カタディカゾを使用した位置に魔法陣を設置\n - 魔法陣の継続時間20秒\n - 魔法陣消滅時に槍を落とし範囲内の敵最大20名にダメージを与える。\n(現在レベルのカタディカゾスキル係数200%でダメージ)\n - 魔法陣の上にいるパーティーメンバーにバフを付与\n - バフ対象の[聖]、[炎]属性の魔法スキルダメージ▲20%\n - バフ対象の[聖]、[炎]属性魔法スキルを使用すると、そのたびに魔法陣の消滅時間が1秒ずつ短縮",
-    "ko": "- 카타디카조 스킬 레벨▲2\n \n종언\n - 카타디카조 시전 위치에 마법진 설치\n - 마법진 지속시간 20초\n - 마법진 소멸 시 창을 떨어뜨려 범위 내의 적 최대 20명에게 피해를 줌\n(현재 레벨의 카타디카조 스킬 계수 200%로 피해)\n - 마법진 위에 있는 파티원에게 버프 부여\n - 버프 대상 [신성], [불] 속성 마법 스킬 대미지▲20%\n - 버프 대상 [신성], [불] 속성 마법 스킬 시전 시 마다 마법진 소멸 시간 1초씩 단축"
+    "ja": "- カタディカゾスキルレベル▲2\n \n終焉\n - カタディカゾを使用した位置に魔法陣を設置\n - 魔法陣の継続時間20秒\n - 魔法陣消滅時に槍を落として範囲内の敵最大20人に4連打のダメージを与える。\n(現レベルのカタディカゾ1回の打撃につきスキル係数50%のダメージ)\n - 魔法陣の上にいるパーティーメンバーにバフを付与\n - バフ対象の[聖]、[炎]属性の魔法スキルダメージ、[打]属性物理スキルダメージ▲20%\n - バフ対象の[聖]、[炎]属性魔法スキルと[打]属性物理スキルを使用すると、そのたびに魔法陣の消滅時間が1秒ずつ短縮",
+    "ko": "- 카타디카조 스킬 레벨▲2\n \n종언\n - 카타디카조 시전 위치에 마법진 설치\n - 마법진 지속시간 20초\n - 마법진 소멸 시 창을 떨어뜨려 범위 내의 적 최대 20명에게 4연타 피해를 줌\n(현재 레벨의 카타디카조 1회 타격당 스킬 계수 50%로 피해)\n - 마법진 위에 있는 파티원에게 버프 부여\n - 버프 대상 [신성], [불] 속성 마법 스킬 대미지, [때리기] 속성 물리 스킬 대미지▲20%\n - 버프 대상 [신성], [불] 속성 마법 스킬과 [때리기] 속성 물리 스킬 시전 시 마다 마법진 소멸 시간 1초씩 단축"
    },
    "levelUps": {
     "41807": 2
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 147,
+      "INT": 147,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "CRTATK": 1238,
+      "CRTMATK": 1238
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 161,
+      "INT": 161,
+      "ALLSTAT": 16,
+      "CRTHR": 542,
+      "CRTATK": 1361,
+      "CRTMATK": 1361
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 177,
+      "INT": 177,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "CRTATK": 1497,
+      "CRTMATK": 1497
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Desition_Lv4",
+     "stats": {
+      "STR": 177,
+      "INT": 177,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "CRTATK": 1497,
+      "CRTMATK": 1497
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_118",
    "jobId": 4021,
    "key": "Convict",
    "name": {
-    "ja": "[Lv2]バイボラグレートメイス - 断罪",
+    "ja": "バイボラ秘伝 - 断罪",
     "ko": "바이보라 비전 - 단죄"
    },
    "weapon": "Mace",
@@ -1885,7 +6432,61 @@
     "41906": 1,
     "41902": 1,
     "41905": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 147,
+      "CON": 116,
+      "INT": 147,
+      "MNA": 147,
+      "DEX": 147
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 161,
+      "CON": 127,
+      "INT": 161,
+      "MNA": 161,
+      "DEX": 161
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 177,
+      "CON": 139,
+      "INT": 177,
+      "MNA": 177,
+      "DEX": 177
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Convict_Lv4",
+     "stats": {
+      "STR": 177,
+      "CON": 139,
+      "INT": 177,
+      "MNA": 177,
+      "DEX": 177
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_118_9",
@@ -1909,7 +6510,65 @@
     "42006": 1,
     "42007": 1,
     "42008": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 142,
+      "INT": 142,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "Magic_Holy_Atk": 986,
+      "Strike": 986
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 156,
+      "INT": 156,
+      "ALLSTAT": 16,
+      "CRTHR": 542,
+      "Magic_Holy_Atk": 1084,
+      "Strike": 1084
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 171,
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "StrongPower_Lv4",
+     "stats": {
+      "STR": 171,
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_119_1",
@@ -1931,7 +6590,65 @@
     "42020": 1,
     "42021": 1,
     "42022": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 142,
+      "INT": 142,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "Magic_Holy_Atk": 986,
+      "Strike": 986
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 156,
+      "INT": 156,
+      "ALLSTAT": 16,
+      "CRTHR": 542,
+      "Magic_Holy_Atk": 1084,
+      "Strike": 1084
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 171,
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "OriginalSin_Lv4",
+     "stats": {
+      "STR": 171,
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 596,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    }
+   ]
   },
   {
    "item": "TMAC04_120_1",
@@ -1953,7 +6670,65 @@
     "42103": 1,
     "42104": 1,
     "42105": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 144,
+      "INT": 144,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "Magic_Holy_Atk": 986,
+      "Strike": 986
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 156,
+      "INT": 156,
+      "ALLSTAT": 16,
+      "CRTHR": 493,
+      "Magic_Holy_Atk": 1084,
+      "Strike": 1084
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 171,
+      "INT": 171,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Sledger_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "Magic_Holy_Atk": 1192,
+      "Strike": 1192
+     }
+    }
+   ]
   },
   {
    "item": "TSW04_128_1",
@@ -1975,7 +6750,65 @@
     "42111": 1,
     "42112": 1,
     "42113": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "CRTATK": 1280,
+      "CRTMATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "CRTATK": 1408,
+      "CRTMATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "CRTATK": 1548,
+      "CRTMATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Bonemancer_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "CRTATK": 1548,
+      "CRTMATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_130_1",
@@ -1997,7 +6830,57 @@
     "42117": 1,
     "42118": 1,
     "42119": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "AetherBlader_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_131_1",
@@ -2020,7 +6903,57 @@
     "42125": 1,
     "42126": 1,
     "42127": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Hermit_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_133_1",
@@ -2043,7 +6976,57 @@
     "42132": 1,
     "42133": 1,
     "42134": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Kneller_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_137_1",
@@ -2065,7 +7048,57 @@
     "42138": 1,
     "42139": 1,
     "42140": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Shardbringer_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "DAG04_123_7",
@@ -2077,8 +7110,8 @@
    },
    "weapon": "",
    "desc": {
-    "ja": "- アサシンの全てのスキルレベル▲1\n - ピアシングハートのスキルレベル▲1\n \n絶命\n - ピアシングハートが命中すると、対象に[絶命]デバフが20秒付与\n - 1秒ごとに[絶命]デバフの対象が詠唱者だけに見える[隠密]を生成\n - 詠唱者が[隠密]を踏むごとにバフ重複が1増加\n(バフ適用中には隠身状態、移動速度▲10, 最大重複数5)\n - [絶命]デバフの対象をアサシンスキルで打撃時、デバフを解除して突属性の5連打が発動\n - [隠密]バフ重複した分だけ[絶命]連打数が増加\n - スキル係数はピアシングハートの46.5%\n - 絶命のデバフ付与クールタイム20秒\n \n絶命デバフはボスとキャラクターにだけ付与可能\nアサシンのスキルによる持続ダメージで絶命効果を発動することは不可能",
-    "ko": "- 어쌔신 모든 스킬 레벨 ▲1\n  - 타흐카브 알칼브 스킬 레벨 ▲1\n  \n절명\n - 타흐카브 알칼브 명중 시 대상에게 [절명] 디버프 20초 부여\n - [절명] 디버프 대상은 1초마다 시전자에게만 보이는 [은밀]을 생성\n - 시전자가 [은밀]을 밟을 때마다 버프 중첩 1증가\n(버프 중 은신, 이동속도 ▲10, 최대 중첩 수 5)\n - [절명] 디버프 대상을 어쌔신 스킬로 타격 시 디버프를 제거하고 찌르기 속성으로 5연타\n - [은밀] 버프 중첩 만큼 [절명] 연타 수 증가\n - 스킬 계수 타흐카브 알칼브의 46.5%\n - 절명 디버프 부여 재사용 대기시간 20초\n \n절명 디버프는 보스 및 캐릭터에게만 부여 가능\n어쌔신 스킬로 인한 지속 대미지로 절명효과 발동 불가능"
+    "ja": "- アサシンの全スキルレベル▲1\n - ピアシングハートのスキルレベル▲1\n \n絶命\n - ピアシングハートが命中すると、対象に[絶命]デバフが30秒付与\n - 1秒ごとに[絶命]デバフの対象が詠唱者だけに見える[隠密]を生成\n - 詠唱者が[隠密]を踏むごとにバフ重複が1増加\n(バフ適用中には隠身状態、移動速度▲10, 最大重複数6)\n - [絶命]デバフの対象をアサシンスキルで打撃時、デバフを解除して突属性の5連打が発動\n - [隠密]バフ重複した分だけ[絶命]連打数が増加\n - 「連打数を含むピアシングハート」係数50%を反映\n - 絶命のデバフ付与クールタイム30秒\n \n絶命デバフはボスとキャラクターにだけ付与可能\nアサシンのスキルによる持続ダメージで絶命効果を発動することは不可能",
+    "ko": "- 어쌔신 모든 스킬 레벨 ▲1\n  - 타흐카브 알칼브 스킬 레벨 ▲1\n  \n절명\n - 타흐카브 알칼브 명중 시 대상에게 [절명] 디버프 30초 부여\n - [절명] 디버프 대상은 1초마다 시전자에게만 보이는 [은밀]을 생성\n - 시전자가 [은밀]을 밟을 때마다 버프 중첩 1증가\n(버프 중 은신, 이동속도 ▲10, 최대 중첩 수 6)\n - [절명] 디버프 대상을 어쌔신 스킬로 타격 시 디버프를 제거하고 찌르기 속성으로 5연타\n - [은밀] 버프 중첩 만큼 [절명] 연타 수 증가\n - [연타수를 포함된 타흐카브 알칼브] 계수의 50%로 반영\n - 절명 디버프 부여 재사용 대기시간 30초\n \n절명 디버프는 보스 및 캐릭터에게만 부여 가능\n어쌔신 스킬로 인한 지속 대미지로 절명효과 발동 불가능"
    },
    "levelUps": {
     "50101": 1,
@@ -2087,14 +7120,64 @@
     "50104": 1,
     "50105": 2,
     "50106": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "ADD_HR": 490,
+      "CRTATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "ALLSTAT": 16,
+      "ADD_HR": 539,
+      "CRTATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "ADD_HR": 592,
+      "CRTATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "SuddenDeath_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "ADD_HR": 592,
+      "CRTATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "PST04_122_3",
    "jobId": 5003,
    "key": "Sabotage",
    "name": {
-    "ja": "バイボラピストル - サボタージュ",
+    "ja": "バイボラ秘伝 - サボタージュ",
     "ko": "바이보라 비전 - 파괴공작"
    },
    "weapon": "Gun",
@@ -2110,7 +7193,57 @@
     "50205": 1,
     "50206": 1,
     "50207": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTATK": 1280,
+      "ADD_MIDDLESIZE": 988
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 163,
+      "ALLSTAT": 16,
+      "CRTATK": 1408,
+      "ADD_MIDDLESIZE": 1086
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "CRTATK": 1548,
+      "ADD_MIDDLESIZE": 1194
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Sabotage_Lv4",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "CRTATK": 1548,
+      "ADD_MIDDLESIZE": 1194
+     }
+    }
+   ]
   },
   {
    "item": "PST04_122_4",
@@ -2125,20 +7258,70 @@
     "ja": "クリティカル・エッジ\n - ヘキセンドロッパー最小クリティカル確率▲40%\n - ヘキセンドロッパークリティカル時、最終ダメージ▲60%",
     "ko": "크리티컬 엣지\n - 헥슨 드롭퍼 최소 치명타 확률▲40%\n - 헥슨 드롭퍼 치명타 시 최종 대미지▲60%"
    },
-   "levelUps": {}
+   "levelUps": {},
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 142,
+      "DEX": 142,
+      "ALLSTAT": 0,
+      "CRTATK": 1350
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 156,
+      "DEX": 156,
+      "ALLSTAT": 16,
+      "CRTATK": 1485
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 171,
+      "DEX": 171,
+      "ALLSTAT": 32,
+      "CRTATK": 1634
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "CriticalEdge_Lv4",
+     "stats": {
+      "STR": 171,
+      "DEX": 171,
+      "ALLSTAT": 32,
+      "CRTATK": 1634
+     }
+    }
+   ]
   },
   {
    "item": "DAG04_123_1",
    "jobId": 5006,
    "key": "ShadowClone",
    "name": {
-    "ja": "バイボラダガー - 影分身",
+    "ja": "バイボラ秘伝 - 影分身",
     "ko": "바이보라 비전 - 그림자 분신"
    },
    "weapon": "",
    "desc": {
-    "ja": "- 忍法 分身の術を除外した全てのシノビスキルレベル▲1\n - 忍法 分身の術スキルレベル1以上のときに該当アイテム装着時、影分身一人召喚\n \n影分身\n - 継続時間無限\n - 一般攻撃不可、本体のシノミ攻撃スキルを真似る。\n - HP/SPが消費されない。\n - 忍法 分身の術で召喚された分身と重複可能\n - 影分身はクローキングを真似する。",
-    "ko": "- 인법 분신술을 제외한 모든 시노비 스킬 레벨▲1\n  - 인법 분신술 스킬 레벨 1이상 일 때, 장착 시 그림자 분신 1명 소환\n \n그림자 분신\n - 지속시간 무한\n - 일반 공격 불가, 본체의 시노비 공격 스킬을 따라함\n - HP/SP가 소모되지 않음\n - 인법 분신술로 소환한 분신과 중복 가능\n - 그림자 분신은 클로킹을 따라함"
+    "ja": "- 忍法 分身の術を除く全てのシノビスキルレベル▲1\n - 忍法 分身の術スキルレベル1以上のときに該当アイテム着用時、影分身を1体を召喚。\n \n影分身\n - 継続時間無限\n - 通常攻撃不可、本体のシノミ攻撃スキルを真似る。\n - HP/SPが消費されない。\n - 忍法 分身の術で召喚された分身と重複可能。\n - 影分身はクローキングを真似する。",
+    "ko": "- 인법 분신술을 제외한 모든 시노비 스킬 레벨▲1\n  - 인법 분신술 스킬 레벨 1이상 일 때, 착용 시 그림자 분신 1명 소환\n \n그림자 분신\n - 지속시간 무한\n - 일반 공격 불가, 본체의 시노비 공격 스킬을 따라함\n - HP/SP가 소모되지 않음\n - 인법 분신술로 소환한 분신과 중복 가능\n - 그림자 분신은 클로킹을 따라함"
    },
    "levelUps": {
     "50505": 1,
@@ -2146,14 +7329,64 @@
     "50504": 1,
     "50501": 1,
     "50506": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 148,
+      "ALLSTAT": 0,
+      "CRTHR": 490,
+      "CRTATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 163,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "CRTATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "CRTATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "ShadowClone_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "CRTATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "DAG04_123_8",
    "jobId": 5007,
    "key": "RapidGrowth",
    "name": {
-    "ja": "バイボラ 秘伝 - ラピッド・グロース",
+    "ja": "バイボラ秘伝 - ラピッド・グロース",
     "ko": "바이보라 비전 - 급성장"
    },
    "weapon": "",
@@ -2161,7 +7394,57 @@
     "ja": "ラピッド・グロース\n - スウェルボディバフを受けた対象に[成長]バフを12秒間付与\n - [成長]：最終ダメージ▲10%\n - スウェルボディによって大きくなる大きさ2倍アップ",
     "ko": "급성장\n - 크기 확대 버프를 받은 대상에게 [성장]버프 12초 부여\n - [성장] : 최종 대미지 ▲10%\n - 크기 확대로 커지는 크기 2배 증가"
    },
-   "levelUps": {}
+   "levelUps": {},
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "ADD_HR": 490,
+      "CRTATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 163,
+      "ALLSTAT": 16,
+      "ADD_HR": 539,
+      "CRTATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "ADD_HR": 592,
+      "CRTATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "RapidGrowth_Lv4",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "ADD_HR": 592,
+      "CRTATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "DAG04_123_10",
@@ -2183,7 +7466,57 @@
     "50801": 1,
     "50803": 1,
     "50806": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "ADD_HR": 490,
+      "BLK_BREAK": 490
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 163,
+      "ALLSTAT": 16,
+      "ADD_HR": 539,
+      "BLK_BREAK": 539
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "ADD_HR": 592,
+      "BLK_BREAK": 592
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Empowering_Lv4",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "ADD_HR": 592,
+      "BLK_BREAK": 592
+     }
+    }
+   ]
   },
   {
    "item": "DAG04_123_9",
@@ -2205,20 +7538,70 @@
     "50704": 1,
     "50708": 1,
     "50705": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTATK": 1280,
+      "BLK_BREAK": 490
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 163,
+      "ALLSTAT": 16,
+      "CRTATK": 1408,
+      "BLK_BREAK": 539
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "CRTATK": 1548,
+      "BLK_BREAK": 592
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Superstring_Lv4",
+     "stats": {
+      "STR": 179,
+      "ALLSTAT": 32,
+      "CRTATK": 1548,
+      "BLK_BREAK": 592
+     }
+    }
+   ]
   },
   {
    "item": "DAG04_123_3",
    "jobId": 5010,
    "key": "ThrowingKnife",
    "name": {
-    "ja": "バイボラダガー - 飛刀",
+    "ja": "バイボラ秘伝 - 飛刀",
     "ko": "바이보라 비전 - 비도"
    },
    "weapon": "",
    "desc": {
-    "ja": "- ローグの全てのスキルレベル▲1\n \n飛刀\n - ナイフスローイングを使用すると、次の3回の基本攻撃を短剣投擲に変更(10秒継続)\n(短剣投擲スキル係数は現在レベルのナイフスローイングの60%)\n - 3回目の短剣投擲を使用後に3秒間与えるダメージ▲30%",
-    "ko": "- 로그 모든 스킬 레벨▲1\n \n비도\n - 나이프 스로잉 시전 시 다음 3회의 기본 공격을 단검 투척으로 변경 (10초 지속)\n(단검 투척 스킬 계수 현재 레벨 나이프 스로잉의 60%)\n - 세 번째 단검 투척 후 3초 동안 주는 대미지▲30%"
+    "ja": "- ローグの全てのスキルレベル▲1\n \n飛刀\n - ナイフスローイングを使用すると、次の3回の基本攻撃を短剣投擲に変更(10秒継続)\n(短剣投擲のスキル係数は「連打数を含むナイフスローイング」係数の60%)\n - 3回目の短剣投擲を使用後に3秒間与えるダメージ▲30%",
+    "ko": "- 로그 모든 스킬 레벨▲1\n \n비도\n - 나이프 스로잉 시전 시 다음 3회의 기본 공격을 단검 투척으로 변경 (10초 지속)\n(단검 투척 스킬 계수 [연타수를 포함한 나이프 스로잉] 계수의 60%)\n - 세 번째 단검 투척 후 3초 동안 주는 대미지▲30%"
    },
    "levelUps": {
     "50902": 1,
@@ -2228,29 +7611,133 @@
     "50901": 1,
     "50903": 1,
     "50907": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 148,
+      "ALLSTAT": 0,
+      "CRTHR": 496,
+      "Aries": 996
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 163,
+      "ALLSTAT": 16,
+      "CRTHR": 546,
+      "Aries": 1096
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "Aries": 1205
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "ThrowingKnife_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 600,
+      "Aries": 1205
+     }
+    }
+   ]
   },
   {
    "item": "PST04_122_1",
    "jobId": 5011,
    "key": "RenovateTrigger",
    "name": {
-    "ja": "バイボラピストル - トリガー改造",
+    "ja": "バイボラ秘伝 - トリガー改造",
     "ko": "바이보라 비전 - 트리거 개조"
    },
    "weapon": "Gun",
    "desc": {
-    "ja": "トリガー改造\n - リマソンバフ中拳銃の基本攻撃ダメージ▲200%\n - リマソンバフ中拳銃基本攻撃速度▲40%",
-    "ko": "트리거 개조\n - 리마콘 버프 중 권총 기본 공격 대미지▲200%\n - 리마콘 버프 중 권총 기본 공격 속도▲40%"
+    "ja": "トリガー改造\n - リマソンバフ中、拳銃の基本攻撃係数▲200%\n - リマソンバフ中、拳銃の基本攻撃速度▲40%",
+    "ko": "트리거 개조\n - 리마콘 버프 중 권총 기본 공격 계수▲200%\n - 리마콘 버프 중 권총 기본 공격 속도▲40%"
    },
-   "levelUps": {}
+   "levelUps": {},
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 143,
+      "DEX": 143,
+      "ALLSTAT": 0,
+      "Add_Damage_Atk": 1500,
+      "RSP": 150
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 157,
+      "DEX": 157,
+      "ALLSTAT": 16,
+      "Add_Damage_Atk": 1650,
+      "RSP": 165
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 172,
+      "DEX": 172,
+      "ALLSTAT": 32,
+      "Add_Damage_Atk": 1815,
+      "RSP": 181
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "RenovateTrigger_Lv4",
+     "stats": {
+      "STR": 172,
+      "DEX": 172,
+      "ALLSTAT": 32,
+      "Add_Damage_Atk": 1815,
+      "RSP": 181
+     }
+    }
+   ]
   },
   {
    "item": "PST04_122",
    "jobId": 5012,
    "key": "CryoliteBullet",
    "name": {
-    "ja": "[Lv2]バイボラピストル - クリオライト弾頭",
+    "ja": "バイボラ秘伝 - クリオライト弾頭",
     "ko": "바이보라 비전 - 크리오라이트 탄두"
    },
    "weapon": "Gun",
@@ -2260,31 +7747,127 @@
    },
    "levelUps": {
     "51106": 3
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 146,
+      "DEX": 146,
+      "CRTHR": 495
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 161,
+      "DEX": 161,
+      "CRTHR": 545
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 177,
+      "DEX": 177,
+      "CRTHR": 600
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "CryoliteBullet_Lv4",
+     "stats": {
+      "STR": 177,
+      "DEX": 177,
+      "CRTHR": 600
+     }
+    }
+   ]
   },
   {
    "item": "DAG04_123_2",
    "jobId": 5013,
    "key": "CarpetBombing",
    "name": {
-    "ja": "バイボラダガー - 絨毯爆撃",
+    "ja": "バイボラ秘伝 - 絨毯爆撃",
     "ko": "바이보라 비전 - 융단폭격"
    },
    "weapon": "",
    "desc": {
-    "ja": "- グラナータスキルレベル▲3\n - グラナータスキルの広域攻撃比率▲10\n \n絨毯爆撃\n - タリオを使用すると0.25秒毎に周辺範囲に手榴弾を投擲、現在レベルのグラナータスキル係数の12.5%でダメージを与える\n - ボスキャラクターには絨毯爆撃のダメージが半分にダウン",
-    "ko": "- 그라나다 스킬 레벨▲3\n  - 그라나다 스킬 광역 공격 비율▲10\n \n융단폭격\n - 탈리오 시전 중 0.25초 마다 주변 범위에 수류탄을 투척, 현재 레벨 그라나다 스킬 계수 12.5%로 피해\n - 보스, 캐릭터에게는 융단폭격 피해 절반 감소"
+    "ja": "- グラナータスキルレベル▲3\n - グラナータスキルの広域攻撃比率▲10\n \n絨毯爆撃\n - タリオを使用すると0.25秒ごとに周辺範囲に手榴弾を投擲、「連打数を含むグラナータ」スキル係数50%のダメージを与える\n - ボスとキャラクターには絨毯爆撃のダメージが半分にダウンする。",
+    "ko": "- 그라나다 스킬 레벨▲3\n  - 그라나다 스킬 광역 공격 비율▲10\n \n융단폭격\n - 탈리오 시전 중 0.25초 마다 주변 범위에 수류탄을 투척, [연타수를 포함한 그라나다] 계수의 50%로 피해\n - 보스, 캐릭터에게는 융단폭격 피해 절반 감소"
    },
    "levelUps": {
     "51201": 3
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 148,
+      "ALLSTAT": 0,
+      "CRTATK": 1238,
+      "Strike": 996
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 163,
+      "ALLSTAT": 16,
+      "CRTATK": 1361,
+      "Strike": 1096
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTATK": 1497,
+      "Strike": 1205
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "CarpetBombing_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTATK": 1497,
+      "Strike": 1205
+     }
+    }
+   ]
   },
   {
    "item": "PST04_122_2",
    "jobId": 5014,
    "key": "SpeedLoader",
    "name": {
-    "ja": "バイボラピストル - スピードローダー",
+    "ja": "バイボラ秘伝 - スピードローダー",
     "ko": "바이보라 비전 - 스피드 로더"
    },
    "weapon": "Gun",
@@ -2299,31 +7882,128 @@
     "51304": 1,
     "51305": 1,
     "51306": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 142,
+      "ALLSTAT": 0,
+      "CRTHR": 490,
+      "CRTATK": 1350
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 156,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "CRTATK": 1485
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 172,
+      "ALLSTAT": 32,
+      "CRTHR": 598,
+      "CRTATK": 1634
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "SpeedLoader_Lv4",
+     "stats": {
+      "STR": 172,
+      "ALLSTAT": 32,
+      "CRTHR": 598,
+      "CRTATK": 1634
+     }
+    }
+   ]
   },
   {
    "item": "DAG04_123",
    "jobId": 5015,
    "key": "CurseDagger",
    "name": {
-    "ja": "[Lv2]バイボラダガー - 呪いの匕首",
+    "ja": "バイボラ秘伝 - 呪いの匕首",
     "ko": "바이보라 비전 - 저주의 비수"
    },
    "weapon": "",
    "desc": {
-    "ja": "- ルカのスキルレベル▲3\n \n呪いの短刀\n - ルカの使用時、現在レベルのケレティハンデバフを4重複で付与",
-    "ko": "- 루카 스킬 레벨▲3\n \n저주의 비수\n - 루카 사용시 현재 레벨의 케레티한 디버프 4중첩 부여"
+    "ja": "- ルカスキルレベル▲3\n - ケレティハンのスキルレベル▲2 \n \n呪いの匕首\n - ルカスキルを使用するとき、現在レベルのケレティハンデバフ4重複付与\n - ルカスキルを使用すると[呪いの匕首]デバフを付与\n - 呪いの匕首は現在レベルのルカと同一の持続ダメージを与える\n - 呪いの匕首の持続時間10秒",
+    "ko": "- 루카 스킬 레벨▲3\n  - 케레티한 스킬 레벨▲2 \n \n저주의 비수\n - 루카 시전 시 현재 레벨의 케레티한 디버프 4중첩 부여\n - 루카 시전 시 [저주의 비수] 디버프를 부여\n - 저주의 비수는 현재 레벨의 루카와 동일한 지속 피해를 줌\n - 저주의 비수 지속시간 10초"
    },
    "levelUps": {
-    "51402": 3
-   }
+    "51402": 3,
+    "51405": 2
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 148,
+      "ADD_HR": 447,
+      "ADD_DR": 475
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 163,
+      "ADD_HR": 492,
+      "ADD_DR": 523
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ADD_HR": 541,
+      "ADD_DR": 575
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "CurseDagger_Lv4",
+     "stats": {
+      "STR": 180,
+      "ADD_HR": 541,
+      "ADD_DR": 575
+     }
+    }
+   ]
   },
   {
    "item": "DAG04_123_5",
    "jobId": 5016,
    "key": "KnifeSpread",
    "name": {
-    "ja": "バイボラダガー - 月食の刃",
+    "ja": "バイボラ秘伝 - 月食の刃",
     "ko": "바이보라 비전 - 달가림 칼"
    },
    "weapon": "",
@@ -2338,7 +8018,57 @@
     "51505": 1,
     "51506": 1,
     "51503": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 490,
+      "CRTATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 163,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "CRTATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "CRTATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "KnifeSpread_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 593,
+      "CRTATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "PST04_122_5",
@@ -2360,7 +8090,57 @@
     "51602": 1,
     "51605": 1,
     "51606": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 145,
+      "DEX": 145,
+      "ALLSTAT": 0,
+      "ADD_HR": 490
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 159,
+      "DEX": 159,
+      "ALLSTAT": 16,
+      "ADD_HR": 539
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 174,
+      "DEX": 174,
+      "ALLSTAT": 32,
+      "ADD_HR": 592
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Carbine_Lv4",
+     "stats": {
+      "STR": 174,
+      "DEX": 174,
+      "ALLSTAT": 32,
+      "ADD_HR": 592
+     }
+    }
+   ]
   },
   {
    "item": "DAG04_123_11",
@@ -2383,7 +8163,57 @@
     "51705": 1,
     "51706": 1,
     "51707": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "ADD_HR": 490,
+      "CRTATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "ALLSTAT": 16,
+      "ADD_HR": 539,
+      "CRTATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "ADD_HR": 592,
+      "CRTATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "LawOfTheJungle_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "ADD_HR": 592,
+      "CRTATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "DAG04_123_12",
@@ -2395,8 +8225,8 @@
    },
    "weapon": "",
    "desc": {
-    "ja": "- デスペラードの全スキルレベル▲1\n \nルナティック\n* [衝動]：ロシアンルーレットで「ラッキー」発動時、{@st66_y}「エクリブリウム」と\n {@st66_y}「リベンジ」の内、先に使用する該当スキルのクールタイムをリセットします。\n※該当能力が再発動するまでクールタイムが20秒適用\n* [狂気]：ロシアンルーレットで「アンラッキー」発動時、50%の確率で\n {@st66_y}[ラストマン・スタンディング]のクールダウンをリセット",
-    "ko": "- 데스페라도 모든 스킬 레벨 ▲1\n \n루나틱\n* [충동] : 러시안 룰렛 럭키 발동 시 {@st66_y}[이퀼리브리엄]과\n   {@st66_y}[리벤지드]중 먼저 사용하는 해당 스킬의 쿨타임을\n    초기화 합니다.\n     단, 해당능력의 재발동까지 대기 시간이 20초 적용\n* [광기] : 러시안 룰렛 언럭키 발동 시, 50% 확률로 \n   {@st66_y}[라스트 맨 스탠딩] 쿨다운 초기화"
+    "ja": "- デスペラードの全スキルレベル▲1\n \nルナティック\n* [衝動]：ロシアンルーレットで「ラッキー」発動時、{@st66_y}「エクリブリウム」と\n {@st66_y}「リベンジ」の内、先に使用する該当スキルのクールタイムをもう一回リセットします。\n※該当能力が再発動するまでクールタイムが20秒適用\n* [狂気]：ロシアンルーレットで「アンラッキー」発動時、50%の確率で\n {@st66_y}[ラストマン・スタンディング]のクールダウンをリセット",
+    "ko": "- 데스페라도 모든 스킬 레벨 ▲1\n \n루나틱\n* [충동] : 러시안 룰렛 럭키 발동 시 {@st66_y}[이퀼리브리엄]과\n   {@st66_y}[리벤지드]중 먼저 사용하는 해당 스킬의 쿨타임을\n    한 번 더 초기화합니다.\n     단, 해당능력의 재발동까지 대기 시간이 20초 적용\n* [광기] : 러시안 룰렛 언럭키 발동 시, 50% 확률로 \n   {@st66_y}[라스트 맨 스탠딩] 쿨다운 초기화"
    },
    "levelUps": {
     "51708": 1,
@@ -2405,7 +8235,57 @@
     "51711": 1,
     "51712": 1,
     "51713": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 493,
+      "CRTATK": 1280
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 539,
+      "CRTATK": 1408
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "CRTATK": 1548
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Sunset_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 592,
+      "CRTATK": 1548
+     }
+    }
+   ]
   },
   {
    "item": "DAG04_127_1",
@@ -2420,7 +8300,57 @@
     "ja": "- 力 ▲250\n- クリティカル発生 ▲1,200\n- 物理クリティカル攻撃力 ▲3,000\n- 命中 ▲1,200\n\nプロトコル：T8CY\n※ [入力・ピュリフィケーション]スキル使用時、地面が再び爆発して最終ダメージ50%分の追加ダメージを与えます。",
     "ko": ""
    },
-   "levelUps": {}
+   "levelUps": {},
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 250,
+      "ADD_HR": 1200,
+      "CRTHR": 1200,
+      "CRTATK": 3000
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 275,
+      "ADD_HR": 1320,
+      "CRTHR": 1320,
+      "CRTATK": 3300
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 330,
+      "ADD_HR": 1584,
+      "CRTHR": 1584,
+      "CRTATK": 3960
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "ParticleAccel_Lv4",
+     "stats": {
+      "STR": 396,
+      "ADD_HR": 1900,
+      "CRTHR": 1900,
+      "CRTATK": 4752
+     }
+    }
+   ]
   },
   {
    "item": "BOW04_127_1",
@@ -2432,8 +8362,8 @@
    },
    "weapon": "",
    "desc": {
-    "ja": "- ブリッツハンターの全スキルレベル▲1\n \n{@st66d} - ボルトストライクの最終ダメージ▲30%\n{@st66d} - ボルトチェインの最終ダメージ▲30%\n{@st66d} - テンペストショットの最終ダメージ▲30%",
-    "ko": "- 블리츠 헌터 모든 스킬 레벨 ▲1\n \n{@st66d} - 볼트 스트라이크 최종 대미지 ▲30%\n{@st66d} - 볼트 체인 최종 대미지 ▲30%\n{@st66d} - 템페스트 샷 최종 대미지 ▲30%"
+    "ja": "- ブリッツハンターの全スキルレベル▲1\n \n{@st66d} - ボルトストライクの最終ダメージ▲10%\n{@st66d} - ボルトチェインの最終ダメージ▲10%\n{@st66d} - テンペストショットの最終ダメージ▲10%",
+    "ko": "- 블리츠 헌터 모든 스킬 레벨 ▲1\n \n{@st66d} - 볼트 스트라이크 최종 대미지 ▲10%\n{@st66d} - 볼트 체인 최종 대미지 ▲10%\n{@st66d} - 템페스트 샷 최종 대미지 ▲10%"
    },
    "levelUps": {
     "51722": 1,
@@ -2443,7 +8373,57 @@
     "51726": 1,
     "51727": 1,
     "51728": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "DEX": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "DEX": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "BlitzHunter_Lv4",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_130_1",
@@ -2465,7 +8445,57 @@
     "51732": 1,
     "51733": 1,
     "51734": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "AetherBlader_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_132_1",
@@ -2489,7 +8519,53 @@
     "51738": 1,
     "51739": 1,
     "51740": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Grimmark_Lv4",
+     "stats": {
+      "STR": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_133_1",
@@ -2512,7 +8588,57 @@
     "51747": 1,
     "51748": 1,
     "51749": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Kneller_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_135_1",
@@ -2535,7 +8661,57 @@
     "51754": 1,
     "51755": 1,
     "51756": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "DEX": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "DEX": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Commodore_Lv4",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   },
   {
    "item": "TSF04_137_1",
@@ -2557,7 +8733,57 @@
     "51760": 1,
     "51761": 1,
     "51762": 1
-   }
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": true,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": true,
+     "bonusOption": "Shardbringer_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
   }
  ]
 }

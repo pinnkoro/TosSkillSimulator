@@ -55,7 +55,7 @@ Tree of Savior（**jTOS / 日本サーバ**）のスキルシミュレータを 
   - `skill.tsv` / `etc.tsv` … **日本語化辞書**。IES の `Name` は**韓国語原文**なので、TSV（列: `[キー, 日本語, 韓国語]`）の**韓国語列→日本語列でジョイン**して日本語名にする。
 
 ### 生成結果（現状コミット済みの `src/data/game-data.json`）
-- **133ジョブ / 898スキル**、patch 405062。gihyeonofsoul の133ジョブと一致。
+- **135ジョブ / 910スキル**、patch 405425。
 - 5系統（warrior/wizard/archer/cleric/scout）、各27前後、base(スターター)クラス = 各系統 `Char{n}_1`（Swordman1001, Wizard2001, Archer3001, Cleric4001, Scout5001）。
 - 日本語名・スキル説明入り。
 
@@ -73,7 +73,7 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 ### 完了
 - [x] リポジトリ/アカウント/Pages/CI 構築、初回デプロイ成功
 - [x] データパイプライン確立（自前 IPF/IES 抽出 → 日本語化 → game-data.json 生成）
-- [x] `src/data/game-data.json`（133ジョブ/898スキル、特性1297件、aoeRatio/overheat）生成・コミット
+- [x] `src/data/game-data.json`（135ジョブ/910スキル、特性2037件、aoeRatio/overheat）生成・コミット
 - [x] `src/types.ts` を現行スキーマに更新
 - [x] UI骨組み: 系統選択 → ジョブ4枠(枠0=base固定) → スキルにレベル振り → 集計 → URL(hash)共有
 - [x] スキルカード: コンパクト表示（アイコン＋名前＋Lv常時）＋**ホバーで詳細ポップアップ**（factor/+攻/SP/CD・overheat/AoE・レベル別表・説明）
@@ -90,7 +90,7 @@ python tools/build_game_data.py   # -> src/data/game-data.json
   - スキル一覧は段階ごとの「段」(`.tier-block`)に分割し、各段の見出しにイヤリングのステッパを置く。ONの段は背景＋スキル枠を `--earring` 系（薄い赤）に着色して対象範囲を示す。
   - 実効Lv は maxLevel を超えられる（Lv表も超過分まで伸ばして表示）
   - 色分け: ジェム=緑 `--gem` / イヤリング=薄い赤 `--earring`（アイコンの赤い宝石に合わせている） / バイボラ=黄 `--vaivora`（ジェム付きカードは Lv 数字とスライダーも緑）
-- [x] アイコン同梱（`extract_icons.py` → `public/icons/`、スキル769＋クラス114、64px）
+- [x] アイコン同梱（`extract_icons.py` → `public/icons/`、スキル775＋クラス115、64px）
 - [x] ビルド/lint 通過・コミット・push（自動デプロイ）
 
 ### 未完了 / 今後の候補
@@ -106,7 +106,7 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 
 ```jsonc
 {
-  "meta": { "source": "jTOS client (extracted, 405062_001001.ipf)", "note": "...(c) IMCGAMES...", "jobCount": 133, "skillCount": 898 },
+  "meta": { "source": "jTOS client (extracted, 405425_001001.ipf)", "note": "...(c) IMCGAMES...", "jobCount": 135, "skillCount": 910 },
   "trees": [ { "id": "warrior", "name": "ソードマン", "baseJobId": 1001 }, ... ],   // 5系統
   "jobs": [
     { "id": 1001, "className": "Char1_1", "name": "ソードマン", "engName": "Swordman",
@@ -141,7 +141,7 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 - 固定加算 ≒ `atkAdd.base + atkAdd.perLevel*(L-1)`
 - ※攻撃スキルの係数は `#{SkillFactor}#`(=SklFactor 線形)。ヒール/バフ等は `Caption2` が参照する `#{CaptionRatioN}#` を **`script/calc_property_skill.lua` の `SCR_*` 関数から解決**する（単純な線形式のみ、`build_game_data.py:load_skill_ratios`）。ステータス(INT/MNA)依存の値は静的計算不可のため 0(非表示)。`type` も Caption2 が `SkillFactor` を使うか否かで attack/buff を判定（SklFactor>0 だけの旧判定だとベアー等のバフが attack になる）。
 - ※CoolDown/SP 等その他の `SCR_*` 式は未評価（線形近似で足りる）。
-- `attributes` は 659/898 スキルに存在（計1297件）。名前/説明は skill.tsv で日本語化済み。
+- `attributes` は 814/910 スキルに存在（計2037件）。名前/説明は skill.tsv で日本語化済み。
 
 ---
 
@@ -154,9 +154,9 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 | `tools/extract_icons.py` | アイコン抽出 → `public/icons/`（要 Pillow、ゲーム終了中に実行） |
 | `tools/build_vaivora.py` | バイボラ抽出 → `src/data/vaivora.json`（ゲーム終了中に実行） |
 | `tools/vaivora_desc.json` | 効果説明の手動上書き（任意。`{"<アイテムClassName>": {"ja","ko"}}`） |
-| `src/data/vaivora.json` | **バイボラ（123件＝123クラス）**。名前/効果/武器種/対象jobId/段階(Lv1〜4)ごとの装備Lv・ステータス |
-| `src/data/game-data.json` | **同梱データ（133ジョブ/898スキル、特性1297件）** |
-| `public/icons/{skill,class,attr}/*.png` | **同梱アイコン（スキル769/クラス114=64px、特性1243=40px）** |
+| `src/data/vaivora.json` | **バイボラ（125件＝125クラス）**。名前/効果/武器種/対象jobId/段階(Lv1〜4)ごとの装備Lv・ステータス |
+| `src/data/game-data.json` | **同梱データ（135ジョブ/910スキル、特性2037件）** |
+| `public/icons/{skill,class,attr}/*.png` | **同梱アイコン（スキル775/クラス115=64px、特性1761=40px）** |
 | `public/icons/ui/*.png` | UIトグル用アイコン48px（`skillgem_<系統>`＝`icon_item_sklgem_*`。wizard だけクライアント側の綴りが `wizerd` / `vaivora`＝`icon_item_vibora_vision`）。`extract_icons.py` の `UI_ICONS` で定義 |
 | `src/data/gameData.ts` | JSON読込＋索引（jobById/skillById 等） |
 | `src/lib/build.ts` | ビルド状態・URL(hash)エンコード/デコード・集計 |
@@ -183,7 +183,7 @@ python tools/extract_icons.py   # -> public/icons/skill,class/*.png (64px)
 - **ゲーム起動中は IPF が読めない**（排他ロック）。抽出前に `Client_tos_x64` を終了。
 - **IES の Name は韓国語**。日本語化は skill.tsv/etc.tsv の韓国語→日本語ジョインが必須。
 - **バイボラ→クラスの対応は `eliteequipdrop.ies` の `JobName`**（一覧111件・クラス英名）。item 側の `UseJob` は全部 `All`、`cabinet_weapon.ies` の `TabGroup` も全部 `VIBORA` なので使えない。ゲーム内の「バイボラ秘伝 - ○○(固有) - クラス名」表記は `item_cabinet/item_cabinet.lua` の `GET_ENABLE_EQUIP_JOB` がこの表を引いて組み立てている。
-  - **効果テキストは item から参照キーが辿れない**（`AdditionalOption_1` の値は item 表以外の全 IES に存在せず、＝サーバ側定義）。TSV(etc/item/ui/skill) 側に文面はあるので、「説明文の見出しに効果名が出る」ことを手掛かりに拾い、候補が複数なら当該クラスのスキル名との一致数で選んでいる。拾えなかった21件はゲーム内ツールチップから `tools/vaivora_desc.json` に書き起こし済みで、現状123件すべてに説明がある。
+  - **効果テキストは item から参照キーが辿れない**（`AdditionalOption_1` の値は item 表以外の全 IES に存在せず、＝サーバ側定義）。TSV(etc/item/ui/skill) 側に文面はあるので、「説明文の見出しに効果名が出る」ことを手掛かりに拾い、候補が複数なら当該クラスのスキル名との一致数で選んでいる。拾えなかった21件はゲーム内ツールチップから `tools/vaivora_desc.json` に書き起こし済みで、現状125件すべてに説明がある。
   - **TSV には旧パッチの文面が残る**（例「デュアルソード」はスキル改名前の "カーターストローク" 版を含め4版が併存）。同点の候補は**行キーの日付**（`ETC_20221011_069761` の `20221011`）が新しい方を採る。名前の索引も同様に newest-wins。
   - **段階(Lv1〜4)は `item_equip_ep12.ies` の `<ClassName>_Lv2..4`**。`AdditionalOption_1` は4段階とも同じなので `levelUps` は段階非依存。差分は `UseLv` とステータス、Lv4 の `DefaultEqpSlot: LH RH`（サブ武器スロット可）と `AdditionalOption_2`。この追加オプションは .ies 2066 表を全部パースして値検索しても item_equip 以外に定義が無く、**効果内容は取得不能**。
 - **アイコン**は IMC 著作物だが、データ本体と同じ「黙認ファンプロジェクト」の立場で同梱する方針（ユーザー了承済み）。スキルは `ui.ipf` 内の個別PNG(`icon/skill/<系統>/icon_<名前>.png`)、クラスは**アトラス** `icon/class_<系統>.tga` を `baseskinset/classicon.xml` の `imgrect` で切り出し。`extract_icons.py` が 64px に縮小して `public/icons/` へ出力。**要 Pillow**（抽出本体は標準ライブラリのみだが縮小/TGA切出しに使用）。⚠️ `job.ies` の Icon 名と classicon.xml の name は大小が食い違うので**大小無視で照合**。

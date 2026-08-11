@@ -8,20 +8,18 @@ Tree of Savior（**jTOS / 日本サーバ**）のスキルシミュレータを 
 ## 1. プロジェクト概要
 
 - **目的**: jTOS のスキルシミュレータ（スターター系統選択 → ジョブ4枠 → スキルにポイント振り分け → SP/効果集計 → URL共有）を作り、GitHub Pages で配信する。
-- **参考元**: `jtos.gihyeonofsoul.com` のプランナー（保存ページが `C:\Users\pinnk\Downloads\Gihyeon of Soul_files`）。UI/データモデルの参考。ただしスキルの実数値は同サイトのサーバから fetch する方式で、保存ファイルには含まれない。
+- **データ源**: 自分の jTOS クライアントの IPF/IES から抽出して同梱する（詳細は §3）。
 - **技術スタック**: React + TypeScript + Vite（GitHub Pages は静的配信のみのため全てクライアントサイド）。
 
 ---
 
-## 2. リポジトリ / GitHub アカウント設定
+## 2. リポジトリ / デプロイ
 
-- **ワークスペース**: `C:\Users\pinnk\Documents\TosSkillSimulator`
 - **リモート**: `https://github.com/pinnkoro/TosSkillSimulator`
 - **公開URL（GitHub Pages）**: https://pinnkoro.github.io/TosSkillSimulator/
-  - commit identity は**リポジトリローカル設定**: `pinnkoro <60339654+pinnkoro@users.noreply.github.com>`
-  - 認証は gh をリポジトリローカルの credential helper に設定（`!gh auth git-credential`）、現在 active な個人アカウントで解決。
-  - **グローバル設定（仕事用）は未変更。**
-- **デプロイ**: `.github/workflows/deploy.yml`（main push で自動ビルド＆Pages デプロイ）。Pages は「GitHub Actions」ソースで有効化済み。初回デプロイ成功済み。
+- **デプロイ**: `.github/workflows/deploy.yml`（main push で自動ビルド＆Pages デプロイ）。Pages は「GitHub Actions」ソースで有効化済み。
+- commit identity と gh の認証は**リポジトリローカル設定**（`git config --local user.name/user.email`、credential helper に `!gh auth git-credential`）。グローバル設定は使わない。
+- **PR はマージしたら squash + ブランチ削除**（`gh pr merge <N> --squash --delete-branch`）。リポジトリ側の "Automatically delete head branches" も有効。
 
 ---
 
@@ -33,7 +31,7 @@ Tree of Savior（**jTOS / 日本サーバ**）のスキルシミュレータを 
 | ソース | 判定 |
 |---|---|
 | tos.guru (rjgtav/tos-database) | ❌ 2020年3月で更新停止。84ジョブのみで新クラス欠落 |
-| gihyeonofsoul（参考元）API | ❌ 直アクセスは 403（Cloudflare）。自動取得不可 |
+| gihyeonofsoul API | ❌ 直アクセスは 403（Cloudflare）。自動取得不可 |
 | SalmanTKhan/TreeOfSaviorDB | データJSONはリポジトリに無し（各自クライアントからパーサ生成方式）。ただし**純Pythonのipf/iesリーダーがフォーマット仕様の参考**になった |
 
 ### ライセンスの前提（ユーザー了承済み）
@@ -71,7 +69,7 @@ python tools/build_game_data.py   # -> src/data/game-data.json
 ## 4. 現状（完了 / 未完了）
 
 ### 完了
-- [x] リポジトリ/アカウント/Pages/CI 構築、初回デプロイ成功
+- [x] リポジトリ/Pages/CI 構築、初回デプロイ成功
 - [x] データパイプライン確立（自前 IPF/IES 抽出 → 日本語化 → game-data.json 生成）
 - [x] `src/data/game-data.json`（135ジョブ/910スキル、特性2037件、aoeRatio/overheat）生成・コミット
 - [x] `src/types.ts` を現行スキーマに更新

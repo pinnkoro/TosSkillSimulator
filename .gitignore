@@ -20,6 +20,9 @@ __pycache__/
 # Tooling caches
 .serena/
 
+# Local agent settings (contains personal tokens)
+.claude/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

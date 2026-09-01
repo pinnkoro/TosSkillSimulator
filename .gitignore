@@ -21,7 +21,10 @@ __pycache__/
 .serena/
 
 # Local agent settings (contains personal tokens)
-.claude/
+.claude/*
+# ...ただし共有したい手順書（スキル）は追跡する（親ディレクトリを除外すると
+# 再包含できないので `.claude/` ではなく `.claude/*` にしてある）
+!.claude/skills/
 
 # Editor directories and files
 .vscode/*

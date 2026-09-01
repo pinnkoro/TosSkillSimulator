@@ -73,7 +73,18 @@ EOF
 - **既存クラスの系統違いが増えることがある**（例: エクゼキューターは Char1_32 [S] / Char5_27 [T] に加えて Char3_32 [A] が後から追加された）。
   この場合クラスアイコンは既存を流用し（`c_warrior_executor`）、スキルは `Executor_*_Archer` のような別 ID・別名で入る。
   「新クラス1つ」と思い込まず、追加された job を全部数える。
-- 新クラスには**必ず対応するバイボラが1件増える**はず。増えていなければ抽出漏れを疑う。
+- 新クラスにはたいてい**対応するバイボラが1件増える**。増えていない場合は**必ず理由を確かめる**
+  （抽出漏れなのか、元から無いクラスなのか）。上級職でもバイボラを持たないクラスは実在する
+  ——現状 パイドパイパー(3012) / アプレイサー(3013) / パードナー(4010) / スクワイア(5004) /
+  アルケミスト(2005) の5つで、いずれも非戦闘寄りの支援職。基礎職には元から無い。
+  確認は次のコマンドで、**この5つ以外が出てきたら抽出漏れ**:
+  ```bash
+  python -c "
+  import json
+  g=json.load(open('src/data/game-data.json',encoding='utf-8'))
+  v={e['jobId'] for e in json.load(open('src/data/vaivora.json',encoding='utf-8'))['entries']}
+  print([(j['id'],j['engName']) for j in g['jobs'] if not j['isBase'] and j['id'] not in v])"
+  ```
 - スキルの解放Lvは概ね 1/1/1/16/16/31 の6種構成。ここから外れていたら本当にそうか確認する。
 
 ## 3. カウントの更新
@@ -110,10 +121,34 @@ npm run lint    # oxlint（出力が無ければ OK）
 ```
 
 コミット → PR → マージ（このリポジトリの決まり: **squash + ブランチ削除**）:
+コミットメッセージと PR 本文は**ヒアドキュメントで渡す**（`git commit` を `-m`/`-F` 無しで呼ぶと
+エディタが開いて非対話シェルでは中断する。`gh pr create --body-file -` も stdin を与えないと本文が空になる）:
+
 ```bash
-git add -A && git commit    # 本文に patch 番号・追加内訳・「既存の値に変更なし」を書く
+git add -A && git commit -F - <<'EOF'
+新クラス「<クラス名>」に対応
+
+クライアントのパッチ <旧> → <新> からデータを再抽出した。
+
+- <系統> 系統 <jobId>「<クラス名>」追加（<旧>→<新>）
+- スキル<n>種（解放Lv 1/1/1/16/16/31）追加（<旧>→<新>）
+- スキル特性<n>件、バイボラ<n>件（<旧>→<新>クラス）
+- アイコン: スキル<n>・クラス<n>・特性<n>
+
+差分は追加のみで、既存クラス/スキル/バイボラの値に変更はない。
+UI 側はデータ駆動のためコード変更は不要。
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+EOF
+
 git push -u origin <branch>
-gh pr create --base main --title ... --body-file -
+
+gh pr create --base main --head <branch> --title '新クラス「<クラス名>」に対応' --body-file - <<'EOF'
+<本文。追加内訳と「既存の値に変更なし」「build/lint 通過」を書く>
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+EOF
+
 gh pr checks <N> --watch --interval 15
 gh pr merge <N> --squash --delete-branch
 git fetch --prune

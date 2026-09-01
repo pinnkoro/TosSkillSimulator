@@ -5384,6 +5384,78 @@
    ]
   },
   {
+   "item": "TSF04_139_1",
+   "jobId": 3115,
+   "key": "Executor",
+   "name": {
+    "ja": "バイボラ秘伝 - アポスタシー",
+    "ko": "바이보라 비전 - 아포스타시"
+   },
+   "weapon": "",
+   "desc": {
+    "ja": "- エクゼキューター全スキルレベル ▲1\n \n{@st66d} - デス・センテンス最終ダメージ ▲50%\n{@st66d} - アビサル・フラリー最終ダメージ ▲50%",
+    "ko": "- 엑시큐터 모든 스킬 레벨 ▲1\n \n{@st66d} - 데스 센텐스 최종 대미지 ▲50%\n{@st66d} - 어비셜 플러리 최종 대미지 ▲50%"
+   },
+   "levelUps": {
+    "32276": 1,
+    "32277": 1,
+    "32278": 1,
+    "32279": 1,
+    "32280": 1,
+    "32281": 1
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "DEX": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "DEX": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Executor_Lv4",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
+  },
+  {
    "item": "MAC04_129",
    "jobId": 4002,
    "key": "MassHealFreeze",
@@ -7171,6 +7243,78 @@
      "stats": {
       "STR": 180,
       "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
+  },
+  {
+   "item": "TSF04_140_1",
+   "jobId": 4030,
+   "key": "Fanaticus",
+   "name": {
+    "ja": "バイボラ秘伝 - ドロール",
+    "ko": "바이보라 비전 - 돌로르"
+   },
+   "weapon": "",
+   "desc": {
+    "ja": "- ファナティクスの全スキルレベル ▲1\n \n{@st66d} - コンパシオ最終ダメージ ▲50%\n{@st66d} - マーターダム最終ダメージ ▲50%",
+    "ko": "- 파나티쿠스 모든 스킬 레벨 ▲1\n \n{@st66d} - 콤파시오 최종 대미지 ▲50%\n{@st66d} - 마티어돔 최종 대미지 ▲50%"
+   },
+   "levelUps": {
+    "42141": 1,
+    "42142": 1,
+    "42143": 1,
+    "42144": 1,
+    "42145": 1,
+    "42146": 1
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "DEX": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "DEX": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Fanaticus_Lv4",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
       "ALLSTAT": 32,
       "CRTHR": 651
      }

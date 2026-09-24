@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    date: '2026-09-24',
+    items: [
+      {
+        ja: 'ジョブ選択の並び順を「ToS順（ゲーム内と同じ）」と「英語名順」で切り替えられるようにしました。既定はToS順で、選択は次回も引き継がれます。',
+        ko: '직업 선택의 정렬 순서를 "ToS순(게임 내와 동일)"과 "영문명순" 중에서 전환할 수 있게 되었습니다. 기본값은 ToS순이며, 선택은 다음에도 유지됩니다.',
+      },
+    ],
+  },
+  {
     date: '2026-09-01',
     items: [
       {

@@ -120,6 +120,16 @@ button.ghost {
 .job-slots {
   margin-bottom: 24px;
 }
+.job-slots-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.job-slots-head .section-label {
+  margin-bottom: 0;
+}
 /* minmax(0, ...): 既定の 1fr は列が中身の min-content 未満に縮まない。
    select の min-content は「一番長い選択肢」で決まるので、括弧書きの英語名の分だけ
    列が広がってしまう。閉じた表示は名前だけなので、列は中身に引きずらせない。 */

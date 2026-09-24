@@ -479,8 +479,9 @@ button.ghost {
   border-radius: 10px;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
 }
-/* 中がスクロールするポップアップだけマウスを受ける（表の閲覧用）。 */
-.skill-tip.open {
+/* ピン留め中だけマウスを受ける（中の表をスクロールするため）。ホバーで開いているだけの
+   ときは素通りさせて、下に隠れた隣のカードへそのままホバーを移せるようにする。 */
+.skill-tip.pinned {
   pointer-events: auto;
 }
 .skill-meta {

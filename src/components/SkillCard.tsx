@@ -77,24 +77,17 @@ export function SkillCard({
   const gemDisabled = !gem && (!active || gemFull);
   const [gemIconFailed, setGemIconFailed] = useState(false);
 
-  // ポップアップ: ホバーで開き（ポップアップ内に入っても消えない）、クリックでピン留め。
+  // ポップアップ: ホバーで開き、クリックでピン留め。
+  // ピン留めしていないポップアップはマウスを受けない（説明が長いと隣のカードに被るので、
+  // 上下のスキルへそのまま移れるように素通りさせる）。中をスクロールしたいときはピン留めする。
   const [hover, setHover] = useState(false);
   const [pinned, setPinned] = useState(false);
-  const hideTimer = useRef<number | undefined>(undefined);
   const cardRef = useRef<HTMLDivElement>(null);
   const open = hover || pinned;
   // 位置はカードの左端に揃えつつ、画面からはみ出す分は寄せて収める。
   const { anchorRef, tipRef } = useTipPosition<HTMLDivElement, HTMLDivElement>(open);
   // ジェムの説明（押せない理由）は別のポップアップ。
   const gemTip = useHoverTip<HTMLDivElement, HTMLSpanElement>({ align: 'center', maxHeight: 320 });
-
-  const show = () => {
-    if (hideTimer.current) clearTimeout(hideTimer.current);
-    setHover(true);
-  };
-  const hide = () => {
-    hideTimer.current = window.setTimeout(() => setHover(false), 150);
-  };
 
   // ピン中は外側クリックで解除。
   useEffect(() => {
@@ -112,7 +105,12 @@ export function SkillCard({
       ref={cardRef}
     >
       {/* 常時: アイコン＋名前＋レベル。ホバーで詳細ポップアップ、クリックでピン留め。 */}
-      <div className="skill-hover" onMouseEnter={show} onMouseLeave={hide} ref={anchorRef}>
+      <div
+        className="skill-hover"
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        ref={anchorRef}
+      >
         <div
           className={`skill-head${pinned ? ' pinned' : ''}`}
           onClick={() => setPinned((p) => !p)}
@@ -141,7 +139,10 @@ export function SkillCard({
           </span>
         </div>
 
-        <div className={`tip skill-tip${open ? ' open' : ''}`} ref={tipRef}>
+        <div
+          className={`tip skill-tip${open ? ' open' : ''}${pinned ? ' pinned' : ''}`}
+          ref={tipRef}
+        >
           <span className="tip-title">{tl(skill.name)}</span>
           <div className="skill-meta">
             <span className={`tag type-${skill.type}`}>

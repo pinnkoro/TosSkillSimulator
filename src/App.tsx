@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Job, Skill, TreeId } from './types';
-import { gameData, getJob, vaivoraOf } from './data/gameData';
+import { type ClassOrder, gameData, getJob, vaivoraOf } from './data/gameData';
 import {
   BONUS_POOL,
   EARRING_SLOTS,
@@ -36,6 +36,7 @@ import { AttrChip } from './components/AttrChip';
 import { EarringControl } from './components/EarringControl';
 import { VaivoraToggle } from './components/VaivoraToggle';
 import { classIconUrl } from './lib/icons';
+import { initialClassOrder, saveClassOrder } from './lib/classOrder';
 import { LANGS, useI18n } from './lib/i18n';
 import { REPO_URL, changelogHref } from './lib/routes';
 import './App.css';
@@ -60,6 +61,7 @@ export default function App() {
   const { ui, tl, lang, setLang } = useI18n();
   const [build, setBuild] = useState(() => decodeBuild(location.hash));
   const [copied, setCopied] = useState(false);
+  const [classOrder, setClassOrder] = useState<ClassOrder>(initialClassOrder);
   const skipHash = useRef(false);
 
   // 現在のビルドを表す hash。更新履歴へのリンクにも同じものを載せて、戻ってきたときに復元する。
@@ -89,6 +91,8 @@ export default function App() {
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
+
+  useEffect(() => saveClassOrder(classOrder), [classOrder]);
 
   const jobs = selectedJobs(build);
 
@@ -206,7 +210,27 @@ export default function App() {
       {build.tree && (
         <>
           <section className="job-slots">
-            <span className="section-label">{ui.jobsLabel}</span>
+            <div className="job-slots-head">
+              <span className="section-label">{ui.jobsLabel}</span>
+              <div className="lang-select" role="group" aria-label={ui.classOrderLabel}>
+                {(
+                  [
+                    ['tos', ui.classOrderTos],
+                    ['eng', ui.classOrderEng],
+                  ] as const
+                ).map(([id, label]) => (
+                  <button
+                    type="button"
+                    key={id}
+                    className={`lang-btn${classOrder === id ? ' selected' : ''}`}
+                    aria-pressed={classOrder === id}
+                    onClick={() => setClassOrder(id)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
             <div className="slot-row">
               {build.jobs.map((jobId, slot) => {
                 const job = getJob(jobId);
@@ -221,7 +245,7 @@ export default function App() {
                     </div>
                   );
                 }
-                const choices = jobChoicesFor(build, slot);
+                const choices = jobChoicesFor(build, slot, classOrder);
                 return (
                   <div key={slot} className={`slot${job ? ' filled' : ''}`}>
                     <span className="slot-tag">{ui.slot(slot)}</span>
@@ -240,10 +264,10 @@ export default function App() {
                           }
                         >
                           <option value="">{ui.choose}</option>
-                          {/* 並びが英語名基準なので、括弧書きで英語名も出して順番を追えるようにする。 */}
+                          {/* 英語名順のときは、括弧書きで英語名も出して順番を追えるようにする。 */}
                           {choices.map((c) => (
                             <option key={c.id} value={c.id}>
-                              {`${tl(c.name)} (${c.engName})`}
+                              {classOrder === 'eng' ? `${tl(c.name)} (${c.engName})` : tl(c.name)}
                             </option>
                           ))}
                         </select>

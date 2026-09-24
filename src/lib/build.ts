@@ -2,6 +2,7 @@
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
 import type { BuildState, Job, Skill, TreeId } from '../types';
 import {
+  type ClassOrder,
   advancedJobsOf,
   baseJobOf,
   getJob,
@@ -45,12 +46,12 @@ export function selectedJobs(build: BuildState): Job[] {
 }
 
 /** ある枠で選べる候補（同系統・非base・他枠と重複しない）。 */
-export function jobChoicesFor(build: BuildState, slot: number): Job[] {
+export function jobChoicesFor(build: BuildState, slot: number, order: ClassOrder): Job[] {
   if (!build.tree) return [];
   const taken = new Set(
     build.jobs.filter((id, i) => id != null && i !== slot) as number[],
   );
-  return advancedJobsOf(build.tree).filter((j) => !taken.has(j.id));
+  return advancedJobsOf(build.tree, order).filter((j) => !taken.has(j.id));
 }
 
 /** 選択中ジョブが持つスキルIDの集合。 */

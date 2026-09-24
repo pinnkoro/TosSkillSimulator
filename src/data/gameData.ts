@@ -43,13 +43,21 @@ export function baseJobOf(tree: TreeId): Job | undefined {
 }
 
 /**
- * 系統に属する非baseジョブ（枠1-3の選択肢）。
- * 並びは英語名基準（表示言語を切り替えても順番が変わらないように）。
+ * クラス一覧の並び順。
+ * - tos: ゲーム内と同じ（クラスID順 = 実装順）
+ * - eng: 英語名順（表示言語を切り替えても順番が変わらない）
  */
-export function advancedJobsOf(tree: TreeId): Job[] {
+export type ClassOrder = 'tos' | 'eng';
+
+/** 系統に属する非baseジョブ（枠1-3の選択肢）。 */
+export function advancedJobsOf(tree: TreeId, order: ClassOrder): Job[] {
   return gameData.jobs
     .filter((j) => j.tree === tree && !j.isBase)
-    .sort((a, b) => a.rank - b.rank || a.engName.localeCompare(b.engName, 'en'));
+    .sort(
+      (a, b) =>
+        a.rank - b.rank ||
+        (order === 'eng' ? a.engName.localeCompare(b.engName, 'en') : a.id - b.id),
+    );
 }
 
 /** レベル L における値。L<=0 は 0。 */

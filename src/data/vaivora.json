@@ -3689,6 +3689,78 @@
    ]
   },
   {
+   "item": "TSF04_141_1",
+   "jobId": 2033,
+   "key": "Officiant",
+   "name": {
+    "ja": "バイボラ秘伝 - インセンサリオ",
+    "ko": "바이보라 비전 - 인센사리오"
+   },
+   "weapon": "",
+   "desc": {
+    "ja": "- オフィシアント全スキルレベル ▲1\n \n{@st66d} - インセンス・ビーコン最終ダメージ ▲50%\n{@st66d} - ヴァーティゴ最終ダメージ ▲50%",
+    "ko": "- 오피시언트 모든 스킬 레벨 ▲1\n \n{@st66d} - 인센스 비컨 최종 대미지 ▲50%\n{@st66d} - 베르티고 최종 대미지 ▲50%"
+   },
+   "levelUps": {
+    "22707": 1,
+    "22708": 1,
+    "22709": 1,
+    "22710": 1,
+    "22711": 1,
+    "22712": 1
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Officiant_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
+  },
+  {
    "item": "TBW04_126_6",
    "jobId": 3002,
    "key": "Fancier",
@@ -7278,6 +7350,8 @@
      "bonusOption": "",
      "stats": {
       "STR": 149,
+      "INT": 149,
+      "MNA": 149,
       "DEX": 149,
       "ALLSTAT": 0,
       "CRTHR": 542
@@ -7290,6 +7364,8 @@
      "bonusOption": "",
      "stats": {
       "STR": 164,
+      "INT": 164,
+      "MNA": 164,
       "DEX": 164,
       "ALLSTAT": 16,
       "CRTHR": 592
@@ -7302,6 +7378,8 @@
      "bonusOption": "",
      "stats": {
       "STR": 180,
+      "INT": 180,
+      "MNA": 180,
       "DEX": 180,
       "ALLSTAT": 32,
       "CRTHR": 651
@@ -7314,7 +7392,81 @@
      "bonusOption": "Fanaticus_Lv4",
      "stats": {
       "STR": 180,
+      "INT": 180,
+      "MNA": 180,
       "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
+  },
+  {
+   "item": "TSF04_141_1",
+   "jobId": 4031,
+   "key": "Officiant",
+   "name": {
+    "ja": "バイボラ秘伝 - インセンサリオ",
+    "ko": "바이보라 비전 - 인센사리오"
+   },
+   "weapon": "",
+   "desc": {
+    "ja": "- オフィシアント全スキルレベル ▲1\n \n{@st66d} - インセンス・ビーコン最終ダメージ ▲50%\n{@st66d} - ヴァーティゴ最終ダメージ ▲50%",
+    "ko": "- 오피시언트 모든 스킬 레벨 ▲1\n \n{@st66d} - 인센스 비컨 최종 대미지 ▲50%\n{@st66d} - 베르티고 최종 대미지 ▲50%"
+   },
+   "levelUps": {
+    "42147": 1,
+    "42148": 1,
+    "42149": 1,
+    "42150": 1,
+    "42151": 1,
+    "42152": 1
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Officiant_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
       "ALLSTAT": 32,
       "CRTHR": 651
      }

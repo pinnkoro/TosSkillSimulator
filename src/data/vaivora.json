@@ -5528,6 +5528,78 @@
    ]
   },
   {
+   "item": "TSF04_141_1",
+   "jobId": 3116,
+   "key": "Officiant",
+   "name": {
+    "ja": "バイボラ秘伝 - インセンサリオ",
+    "ko": "바이보라 비전 - 인센사리오"
+   },
+   "weapon": "",
+   "desc": {
+    "ja": "- オフィシアント全スキルレベル ▲1\n \n{@st66d} - インセンス・ビーコン最終ダメージ ▲50%\n{@st66d} - ヴァーティゴ最終ダメージ ▲50%",
+    "ko": "- 오피시언트 모든 스킬 레벨 ▲1\n \n{@st66d} - 인센스 비컨 최종 대미지 ▲50%\n{@st66d} - 베르티고 최종 대미지 ▲50%"
+   },
+   "levelUps": {
+    "32282": 1,
+    "32283": 1,
+    "32284": 1,
+    "32285": 1,
+    "32286": 1,
+    "32287": 1
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "INT": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "INT": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Officiant_Lv4",
+     "stats": {
+      "STR": 180,
+      "INT": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
+  },
+  {
    "item": "MAC04_129",
    "jobId": 4002,
    "key": "MassHealFreeze",
@@ -9221,6 +9293,78 @@
      "useLv": 460,
      "subSlot": false,
      "bonusOption": "Executor_Lv4",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    }
+   ]
+  },
+  {
+   "item": "TSF04_142_1",
+   "jobId": 5029,
+   "key": "Picaro",
+   "name": {
+    "ja": "バイボラ秘伝 - ブラヴァド",
+    "ko": "바이보라 비전 - 브라바도"
+   },
+   "weapon": "",
+   "desc": {
+    "ja": "- ピカロの全スキルレベル ▲1\n \n{@st66d} - ナイフ・バラージ最終ダメージ ▲50%\n{@st66d} - ラクリマ最終ダメージ ▲50%",
+    "ko": "- 피카로 모든 스킬 레벨 ▲1\n \n{@st66d} - 나이프 배라지 최종 대미지 ▲50%\n{@st66d} - 라크리마 최종 대미지 ▲50%"
+   },
+   "levelUps": {
+    "51779": 1,
+    "51780": 1,
+    "51781": 1,
+    "51782": 1,
+    "51783": 1,
+    "51784": 1
+   },
+   "levels": [
+    {
+     "level": 1,
+     "useLv": 430,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 149,
+      "DEX": 149,
+      "ALLSTAT": 0,
+      "CRTHR": 542
+     }
+    },
+    {
+     "level": 2,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 164,
+      "DEX": 164,
+      "ALLSTAT": 16,
+      "CRTHR": 592
+     }
+    },
+    {
+     "level": 3,
+     "useLv": 450,
+     "subSlot": false,
+     "bonusOption": "",
+     "stats": {
+      "STR": 180,
+      "DEX": 180,
+      "ALLSTAT": 32,
+      "CRTHR": 651
+     }
+    },
+    {
+     "level": 4,
+     "useLv": 460,
+     "subSlot": false,
+     "bonusOption": "Picaro_Lv4",
      "stats": {
       "STR": 180,
       "DEX": 180,
